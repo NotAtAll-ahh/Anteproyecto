@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selector de Entradas</title>
+    <link rel="stylesheet" href="/css/SelectorEntradas.css">
+    <link rel="stylesheet" href="/css/header-footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- INICIO HEADER -->
+    <header class="main-header"><button class="skip-link"><a href="#main-content">Saltar Al Contenido</a></button>
+        <div class="header-container">
+            <!-- Logo -->
+            <a href="/index.html" class="logo-link">
+                <img src="/media/logo-white.webp" alt="Logo Aura Society">
+            </a>
+            <!-- Menú Móvil Control -->
+            <input type="checkbox" id="nav-toggle" class="nav-toggle">
+            <label for="nav-toggle" class="nav-burger" aria-label="Menú">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+            <!-- Navegación -->
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="/index.html">Inicio</a></li>
+                    <li class="dropdown">
+                        <a href="/eventos/Eventos.html">Eventos <i class="fa-solid fa-chevron-down arrow-icon"></i></a>
+                        <ul class="dropdown-content">
+                            <li><a href="/eventos/Conciertos.html">Conciertos</a></li>
+                            <li><a href="/eventos/Cine.html">Cine</a></li>
+                            <li><a href="/eventos/Conferencias.html">Conferencias</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/hazte-socio/">Hazte Socio</a></li>
+                    <li><a href="/sobre-nosotros/">Sobre Nosotros</a></li>
+                </ul>
+            </nav>
+            <!-- Herramientas de Usuario -->
+            <div class="header-tools">
+<div class="search-box">
+    <input type="text" id="search-input" placeholder="BUSCAR EVENTOS" aria-label="Buscar eventos">
+    <button class="search-btn" aria-label="Ejecutar búsqueda"><i class="fa-solid fa-magnifying-glass"></i></button>
+</div>
+                <a href="/perfil/" class="user-profile">
+                    <div class="user-info">
+                        <span class="label">Mi Cuenta</span>
+                        <span class="status">Socio Gold</span>
+                    </div>
+                    <img src="/media/yiperfil.png" alt="Usuario" class="avatar-circle">
+                </a>
+            </div>
+        </div>
+    </header>
+    <!-- FIN HEADER -->
+    <main>
+    <h1>Selector de entradas</h1>
+
+    <div class="secciones">
+      <div class="mapa-asientos">
+        <h3>Mapa de asientos:</h3>
+        <div class="foto-asientos"></div>
+      </div>
+
+      <div class="panel-entradas">
+        <h3>Elige los mejores asientos para ti</h3>
+
+        <div class="tipo-entradas">
+          <label for="normal">Entrada normal</label>
+          <input type="number" min="0" value="0" id="normal">
+        </div>
+
+        <div class="tipo-entradas">
+          <label for="joven">Carnet joven</label>
+          <input type="number" min="0" value="0" id="joven">
+        </div>
+
+        <div class="tipo-entradas">
+          <label for="mayores">Mayores 65</label>
+          <input type="number" min="0" value="0" id="mayores">
+        </div>
+
+        <div class="tipo-entradas">
+          <label for="familia-numerosa">Familia numerosa</label>
+          <input type="number" min="0" value="0" id="familia-numerosa">
+        </div>
+
+        <a href="#" class="continuar">CONTINUAR</a>
+      </div>
+    </div>
+
+    <h2>Método de Pago:</h2>
+
+    <details>
+      <summary>Opción de tarjeta regalo / código promocional</summary>
+      <div class="section">
+        <div class="promocion">
+          <label for="codigo">Código:</label>
+          <input type="text" placeholder="Introduce tu código" id="codigo">
+          <button class="añadir">AÑADIR</button>
+        </div>
+      </div>
+    </details>
+
+    <details>
+      <summary>Total</summary>
+      <div class="section">
+        <div class="total-box">
+          <div class="total-line">
+            <span>Coste total entradas:</span>
+            <span>0,00 €</span>
+          </div>
+          <button class="pagar">REALIZAR PAGO</button>
+        </div>
+      </div>
+    </details>
+  </main>
+
+    <!-- INICIO FOOTER -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <img src="/media/logo-white.webp" alt="Aura Society">
+                <div class="credits">
+                    <p>DESIGNED BY DAW</p>
+                    <p>2026 AURA SOCIETY</p><a href="/media/DOCUMENTO COPYRIGHT.pdf" class="pdf-link" target="_blank"><i class="fa-solid fa-file-pdf"></i> DOCUMENTO COPYRIGHT</a>
+                </div>
+            </div>  
+            <div class="footer-info">
+                <div class="contact-details">
+                    <p>CORREO<br><strong>info@aurasociety.com</strong></p>
+                    <p>TELEFONO<br><strong>+34 640 89 29 46</strong></p>
+                    <p>UBICACION<br><strong>Paseo Puerta del Ángel, 5</strong></p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>Síguenos</span>
+            <div class="social-links">
+                <i class="fa-brands fa-facebook-f"></i>
+                <i class="fa-brands fa-instagram"></i>
+                <i class="fa-brands fa-whatsapp"></i>
+            </div>
+        </div>
+    </footer>
+    <!-- FIN FOOTER -->
+
+
+</body>
+</html>

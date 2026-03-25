@@ -1,0 +1,277 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing de Evento</title>
+    <link rel="stylesheet" href="/css/detalles-evento.css">
+    <link rel="stylesheet" href="/css/header-footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <section class="intro">
+        <!-- INICIO HEADER -->
+        <header class="main-header"><button class="skip-link"><a href="#main-content">Saltar Al Contenido</a></button>
+            <div class="header-container">
+                <!-- Logo -->
+                <a href="/index.html" class="logo-link">
+                    <img src="/media/logo-white.webp" alt="Logo Aura Society">
+                </a>
+                <!-- Menú Móvil Control -->
+                <input type="checkbox" id="nav-toggle" class="nav-toggle">
+                <label for="nav-toggle" class="nav-burger" aria-label="Menú">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </label>
+                <!-- Navegación -->
+                <nav class="nav-menu">
+                    <ul>
+                        <li><a href="/index.html">Inicio</a></li>
+                        <li class="dropdown">
+                            <a href="/eventos/Eventos.html">Eventos <i class="fa-solid fa-chevron-down arrow-icon"></i></a>
+                            <ul class="dropdown-content">
+                                <li><a href="/eventos/Conciertos.html">Conciertos</a></li>
+                                <li><a href="/eventos/Cine.html">Cine</a></li>
+                                <li><a href="/eventos/Conferencias.html">Conferencias</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="/hazte-socio/">Hazte Socio</a></li>
+                        <li><a href="/sobre-nosotros/">Sobre Nosotros</a></li>
+                    </ul>
+                </nav>
+                <!-- Herramientas de Usuario -->
+                <div class="header-tools">
+                    <div class="search-box">
+                        <input type="text" placeholder="BUSCAR EVENTOS">
+                        <button class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </div>
+                    <a href="/perfil/" class="user-profile">
+                        <div class="user-info">
+                            <span class="label">Mi Cuenta</span>
+                            <span class="status">Socio Gold</span>
+                        </div>
+                        <img src="/media/yiperfil.png" alt="Usuario" class="avatar-circle">
+                    </a>
+                </div>
+            </div>
+        </header>
+        <!-- FIN HEADER -->
+
+        <main class="hero-section">
+            <div class="overlay"></div>
+
+            <div class="content-container">
+                
+                <div class="poster-area" aria-label="Póster promocional del concierto de Thee Sacred Souls">
+                    <div class="poster">
+                    </div>
+                </div>
+
+                <div class="info-area">
+                    <h1 class="title">Thee Sacred Souls</h1>
+                    
+                    <div class="categories">
+                        Música en directo <span class="dot">•</span> R&B <span class="dot">•</span> Soul
+                    </div>
+
+                    <div class="details-grid">
+                        <div class="description-box">
+                            <p>Thee Sacred Souls vienen a Madrid para presentar su nuevo disco, "Got a Story to Tell".</p>
+                            </div>
+
+                        <div class="cta-group">
+                            <span class="cta-label">MIRA UN ADELANTO ⤵</span>
+                            <button class="btn-teaser">TEASER</button>
+                        </div>
+                    </div>
+
+                    <div class="meta-data">
+                        <div class="meta-item">
+                            <i class="fa-regular fa-clock"></i> Duración: 2h 30m
+                        </div>
+                        <div class="meta-item">
+                            <i class="fa-regular fa-closed-captioning"></i> Subtítulos: Sí 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+
+    <section class="booking">
+        <div class="dates">
+            <p>Fecha o fechas del evento:</p>
+            <div class="date-cards">
+                <div class="card">22 jun<br>DOM</div>
+                <div class="card active">23 jun<br>LUN</div>
+                <div class="card">24 jun<br>MAR</div>
+            </div>
+        </div>
+        <div class="hours">
+            <p>Hora u Horas Disponibles:</p>
+            <div class="hour-cards">
+                <span>15:45</span>
+                <span class="active">17:15</span>
+                <span>19:30</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="details-container">
+        <aside class="sidebar">
+            <div class="blue-box">
+                <p>📍 Sala en la que se celebra</p>
+                <p>🎥 Retransmisiones en vivo</p>
+            </div>
+            <div class="blue-box">
+                <p>Complementos:</p>
+                <ul>
+                    <li>Subtítulos</li>
+                    <li>Traducción al castellano</li>
+                    <li>Traducción de signos</li>
+                    <li>Bebidas complementarias</li>
+                </ul>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="host-card">
+                <div>
+                    <h2>Thee Sacred Souls</h3><br>
+                    <p>El grupo formado orginalmente en San Diego, EEUU, en 2019 continúa su gira por Europa
+                        después de haber sido una de las sensaciones del año pasado gracias a su tercer disco de estudio "Got a Story to Tell", 
+                        un trabajo que ha sido aclamado por la crítica y que les ha llevado a actuar en algunos de los festivales más importantes del mundo.
+                    </p>
+                </div>
+            </div>
+
+            <div class="description">
+                <div class="actions">
+                    <button class="btn-gold">ANALIZAR EVENTO</button>
+                    <button class="btn-gold" onclick="window.location.href='/comprar/DetalleEntradas.html'">COMPRAR ENTRADAS</button>
+                </div>
+            </div>
+        </main>
+    </section>
+
+    <section class="events-container">
+        <h2 class="section-title">Otros eventos recomendados</h2>
+        <div class="separator"></div>
+
+        <div class="carousel-wrapper">
+            
+            <button class="nav-arrow left">&lt;</button>
+
+            <div class="cards-list">
+                
+                <article class="card">
+                    <div class="card-poster" id="card1" aria-label="Póster promocional de UniversiParty: 
+                    We Love Carnaval"></div>
+                    <div class="card-details">
+                        <h3 class="event-title">UniversiParty: We Love Carnaval</h3>
+                        <div class="event-times">
+                            <span><span class="dot orange"></span>11:30</span>
+                            <span><span class="dot orange"></span>14:45</span>
+                            <span><span class="dot red"></span>16:05</span>
+                            <span><span class="dot red"></span>18:40</span>
+                            <span>21:00</span>
+                            <span>23:15</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="card-poster" id="card2" aria-label="Póster promocional del concierto de Metrika"></div>
+                    <div class="card-details">
+                        <h3 class="event-title">Metrika</h3>
+                        <div class="event-times">
+                            <span>11:30</span>
+                            <span><span class="dot orange"></span>14:45</span>
+                            <span>16:05</span>
+                            <span><span class="dot red"></span>18:40</span>
+                            <span>21:00</span>
+                            <span>23:15</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="card-poster" id="card3" aria-label="Póster promocional del evento de Tony Robbins"></div>
+                    <div class="card-details">
+                        <h3 class="event-title">Tony Robbins</h3>
+                        <div class="event-times">
+                            <span>11:30</span>
+                            <span>14:45</span>
+                            <span><span class="dot red"></span>16:05</span>
+                            <span>18:40</span>
+                            <span>21:00</span>
+                            <span>23:15</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="card-poster" id="card4" aria-label="Póster promocional del concierto de Hans Zimmer"></div>
+                    <div class="card-details">
+                        <h3 class="event-title">Hans Zimmer</h3>
+                        <div class="event-times">
+                            <span>11:30</span>
+                            <span>14:45</span>
+                            <span>16:05</span>
+                            <span><span class="dot orange"></span>18:40</span>
+                            <span>21:00</span>
+                            <span>23:15</span>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+
+            <button class="nav-arrow right">&gt;</button>
+        </div>
+    </section>
+
+
+    <section class="live-stream">
+        <h3>Teaser:</h3>
+        <video width = "860" height="440" controls poster="/media/video/Miniatura.jpg" class="video">
+            <source src="/media/video/Easier_Said_Than_Done.mp4" type="video/mp4">
+            <source src="/media/video/Easier_Said_Than_Done.webm" type="video/webm">
+            <track src="/media/video/Easier Said Than Done.vtt" kind="subtitles" srclang="en" label="English" default></track>
+            Tu navegador no soporta el elemento de vídeo
+            </video>
+    </section>
+
+        <!-- INICIO FOOTER -->
+        <footer class="site-footer">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <img src="/media/logo-white.webp" alt="Aura Society">
+                    <div class="credits">
+                        <p>DESIGNED BY DAW</p>
+                        <p>2026 AURA SOCIETY</p><a href="/media/DOCUMENTO COPYRIGHT.pdf" class="pdf-link" target="_blank"><i class="fa-solid fa-file-pdf"></i> DOCUMENTO COPYRIGHT</a>
+                    </div>
+                </div>  
+                <div class="footer-info">
+                    <div class="contact-details">
+                        <p>CORREO<br><strong>info@aurasociety.com</strong></p>
+                        <p>TELEFONO<br><strong>+34 640 89 29 46</strong></p>
+                        <p>UBICACION<br><strong>Paseo Puerta del Ángel, 5</strong></p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>Síguenos</span>
+                <div class="social-links">
+                    <i class="fa-brands fa-facebook-f"></i>
+                    <i class="fa-brands fa-instagram"></i>
+                    <i class="fa-brands fa-whatsapp"></i>
+                </div>
+            </div>
+        </footer>
+        <!-- FIN FOOTER -->
+    </body>
+    </html>

@@ -1,0 +1,304 @@
+/* BODY */
+body {
+     margin: 0;
+    font-family: "Inter", sans-serif;
+    background: hsl(218, 86%, 5%);
+    color: hsl(0, 0%, 100%);
+
+}   
+
+/* ============================ */
+/* CSS PARA EL SUB-MENÚ DE EVENTOS */
+/* ============================ */
+.submenu-eventos {
+    width: 100%;
+    background-color: #000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 10px 0;
+}
+
+.submenu-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    /* Mismo espaciado que el header principal */
+}
+
+.submenu-container a {
+    font-family: 'Inter', sans-serif;
+    color: #a0a0a0;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    /* Mismo tamaño de fuente */
+    letter-spacing: 1.5px;
+    /* Mismo espaciado de letra */
+    font-weight: 500;
+    padding: 15px 0;
+    /* Relleno vertical para que el área de clic sea más grande */
+    transition: color 0.3s ease;
+    border-bottom: 2px solid transparent;
+    /* Borde inferior oculto */
+}
+
+/* Estilo al pasar el ratón */
+.submenu-container a:hover {
+    color: #d4af37;
+}
+
+/* Clase para el enlace de la página actual */
+.submenu-container a.activo {
+    color: #ffffff;
+    /* Color de texto blanco para el activo */
+    border-bottom: 2px solid #d4af37;
+    /* Línea dorada debajo del activo */
+}
+
+
+
+/* CONTENEDORES */
+.conferencias,
+.cine,
+.concierto {
+    display: flex;
+    max-width: 70%;
+    margin-left: 12%;
+    border-radius: 5px;
+}
+
+div {
+    padding: 7px;
+
+}
+
+/* TEXTO Y ESPACIO */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Special+Gothic+Condensed+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+
+h1 {
+    color: white;
+    font-family: "Playfair Display", serif;
+    font-weight: 100;
+}
+
+
+h2 {
+    margin-left: 5%;
+    color: rgb(255, 255, 255);
+    font-family: "Playfair Display", serif;
+    font-weight: 100;
+    font-size: 40px;
+}
+
+h3 {
+    color: rgb(255, 255, 255);
+    font-family: "Playfair Display", serif;
+    font-size: 30px;
+
+}
+
+
+
+p {
+    color: rgb(253, 253, 253);
+    font-family: "Inter", sans-serif;
+    margin-top: 10%;
+
+
+}
+
+hr {
+    border: 1px solid rgb(253, 248, 248);
+    margin: 1% 0 1% 4%;
+    width: 90%;
+
+
+}
+
+.hR {
+    width: 29px;
+    height: 7px;
+    background-color: #D9A443;
+    transition: width 1s linear 1s;
+    margin: 1% 2% 3% 0;
+    border-radius: 5px;
+}
+
+.hR:hover {
+    width: 100%;
+}
+
+
+/* PARTE IZQUIERDA */
+
+.parteIzq {
+    width: 68%;
+    justify-content: center;
+    height: 1400px;
+    border-radius: 5px;
+
+}
+
+/* TEXTO DEL DESPLEGABLE */
+.texto {
+    margin: 3% 0 0 5%;
+
+}
+
+.textoDesp {
+    margin-top: 3%;
+    color: rgb(0, 0, 0);
+    font-size: 20px;
+}
+
+
+/* DESPLEGABLE UNO */
+.desplegable summary {
+    font-weight: bold;
+    list-style: none;
+    border: 2px solid rgb(241, 235, 235);
+    border: color rgb(241, 235, 235);
+    width: 40%;
+    padding: 3px;
+    background-color: #D9A443;
+    text-align: center;
+    margin: 3% 0 3% 28%;
+    border-radius: 5px;
+}
+
+
+/* IMAGENES */
+img {
+    width: 10rem;
+    height: 14rem;
+    border-radius: 6px;
+    border: 3px solid #E3C06E;
+
+}
+
+.imagenIzq img {
+    transition: transform 1s ease;
+
+}
+
+.imagenIzq img:hover {
+    transform: scale(1.1);
+    filter: drop-shadow(7px 5px 19px #30526A);
+    box-shadow: 3px 7px 10px #E3C06E;
+
+}
+
+/* SECCION 1 Y 2 */
+.seccionIzquierda {
+    display: flex;
+    margin-left: 5%;
+}
+
+
+
+
+
+
+/*  PARTE DERECHA */
+
+.parteDcha {
+    width: 34%;
+    border-radius: 5px;
+
+}
+
+
+.seccionDerecha {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+
+
+}
+
+
+
+
+/* DESPLEGABLE DOS  */
+
+.desplegableDos summary {
+    margin-bottom: 5%;
+    font-weight: bold;
+    list-style: none;
+
+}
+
+/* TEXTO SECCION DOS */
+
+.textoSeccionDos {
+    margin-left: 5%;
+    margin-top: 19%;
+    padding: 10px 0;
+    border-bottom: 1px solid white;
+    color: white;
+}
+
+
+
+/* IMAGENES */
+
+.imgDcha img {
+    width: 8rem;
+    height: 11rem;
+    transition: transform 1s ease;
+
+
+}
+
+
+
+.card {
+    position: relative;
+    width: 8rem;
+    height: 11rem;
+
+}
+
+.card img {
+    object-fit: cover;
+
+}
+
+/* Texto oculto */
+.overlay {
+    width: 8.5rem;
+    height: 12rem;
+    margin: -6% 0 0 -1.5%;
+    position: absolute;
+    inset: 0;
+    background: rgba(63, 57, 57, 0.6);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+/* EFECTO HOVER */
+.card:hover img {
+    transform: scale(1.2);
+    filter: drop-shadow(7px 5px 19px #30526A);
+    box-shadow: 3px 7px 10px #E3C06E;
+}
+
+.card:hover .overlay {
+    height: 13rem;
+    width: 9.5rem;
+    margin: -10% 0 0 -6%;
+    border-radius: 6px;
+    opacity: 2;
+    transform: scale(1.0);
+    transition: transform 1s ease;
+
+}

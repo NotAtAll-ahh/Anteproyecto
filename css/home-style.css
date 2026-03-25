@@ -1,0 +1,486 @@
+/* 1. Reset y Variables de Color */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+        transform: none !important;
+    }
+}
+
+/* 1.1 FUENTES */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Special+Gothic+Condensed+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: "Playfair Display", serif;
+    font-weight: 100;
+}
+
+h2 {
+    font-size: 90px;
+}
+
+
+p {
+    font-family: "Inter", sans-serif;
+}
+
+body {
+    margin: 0;
+    font-family: "Inter", sans-serif;
+    background: hsl(218, 86%, 5%);
+    color: hsl(0, 0%, 100%);
+}
+
+/*BOTON SALTAR AL CONTENIDO*/
+.skip-link {
+    position: absolute;
+    top: -100px;
+    left: 20px;
+    background-color: hsl(36, 47%, 57%);
+    color: hsl(0, 0%, 0%);
+    padding: 15px 25px;
+    z-index: 2000;
+    /* Por encima de todo */
+    font-weight: bold;
+    font-family: "Inter", sans-serif;
+    border: none;
+    transition: top 0.3s ease;
+}
+
+.skip-link a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Solo se activa cuando el usuario pulsa TAB */
+.skip-link:focus {
+    top: 20px;
+    /* Baja a una posición visible */
+}
+
+/* 2. Contenedor de ancho fijo para Escritorio para que todas las secciones tengan el mismo margen*/
+.content-wrapper {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+
+/* 4. Banner Home Section */
+.banner {
+    height: 600px;
+    background: linear-gradient(hsla(0, 0%, 0%, 0.3), hsla(0, 0%, 0%, 0.3)),
+        url('/media/home//descarga.png');
+    background-size: cover;
+    display: flex;
+    align-items: center;
+}
+
+.banner h1 {
+    font-size: 90px;
+    margin-bottom: 10px;
+}
+
+.banner a {
+    text-transform: uppercase;
+    color: black;
+    text-decoration: none;
+}
+
+.subtitulo {
+    font-size: 30px;
+    margin-bottom: 30px;
+    opacity: 0.8;
+}
+
+
+/* 6. Grilla de Eventos */
+.section-eventos {
+    padding: 80px 40px;
+}
+
+.titulo-underline {
+    font-size: 42px;
+    margin-bottom: 50px;
+    border-bottom: 2px solid hsl(36, 47%, 57%);
+    display: inline-block;
+}
+
+.eventos-grid {
+    display: flex;
+    gap: 25px;
+    justify-content: center;
+    flex-wrap: wrap;
+    /* Para que sea responsivo en móviles */
+
+}
+
+.event-card {
+    width: 280px;
+    text-align: center;
+    overflow: hidden;
+    transition: 0.4s ease;
+}
+
+.event-card:hover {
+    transform: scale(1.1);
+}
+
+.img-box {
+    height: 380px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    color: #666;
+    border: 1px solid hsla(0, 0%, 100%, 0.1);
+}
+
+
+#TFOFU {
+    background: url(/media/home/The\ Feeling\ Of\ Falling\ Upwards.jpg)no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+#ConferenciaTecnológica {
+    background: url(/media/about-us/TheeSacredSouls_poster.jpg)no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+#PWMOV {
+    background: url(/media/home/PWMOV.jpg)no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+#TheDrama {
+    background: url(/media/home/The\ Dramajpg.jpg)no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+/* 7. Banner de Membresía */
+.hazte-miembro-banner {
+    background: url('/media/home/Fondo.jpg') center/cover;
+    padding: 120px 0;
+    text-align: center;
+    border: 1px solid #c59d5f;
+    margin: 50px 0;
+}
+
+.hazte-miembro-box {
+    background: hsla(0, 0%, 4%, 0.85);
+    padding: 50px;
+    width: 800px;
+    height: 350px;
+    margin: 0 auto;
+    border: 1px solid hsl(0, 0%, 20%);
+    color: hsl(36, 47%, 57%);
+}
+
+.hazte-miembro-box p {
+    color: hsl(0, 0%, 95%);
+}
+
+/* Layout en dos columnas (Texto e Imagen) */
+.section-split {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 100px 0;
+    gap: 100px;
+}
+
+.titulo-izq,
+.titulo-der {
+    font-size: 58px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ffffff;
+    display: inline-block;
+    padding-bottom: 10px;
+}
+
+
+.ai-info {
+    margin-top: 20px;
+}
+
+.ai-image {
+    width: 600px;
+    scale: 0.8;
+}
+
+.ai-info h3,
+.compañías-info h3 {
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
+}
+
+.ai-info h3,
+.ai-info p,
+.compañías-info {
+    margin: 25px 0 10px 0;
+    font-size: 28px;
+}
+
+
+
+/* Botones y Enlaces */
+
+.btn-gold {
+    background-color: hsl(36, 47%, 57%);
+    color: hsl(0, 0%, 0%);
+    border: none;
+    padding: 12px 40px;
+    font-weight: bold;
+    margin-top: 25px;
+    cursor: pointer;
+}
+
+.btn-gold:hover {
+    background-color: hsl(42, 68%, 66%);
+}
+
+.btn-outline {
+    background: transparent;
+    border: 1.5px solid hsl(0, 0%, 100%);
+    color: hsl(0, 0%, 100%);
+    padding: 8px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.btn-outline-pequeño {
+    background: transparent;
+    border: 1px solid hsl(0, 0%, 100%);
+    color: hsl(0, 0%, 100%);
+    padding: 5px 20px;
+    border-radius: 15px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.btn-outline:hover,
+.btn-outline-pequeño:hover {
+    background-color: hsl(0, 0%, 95%);
+    color: hsl(0, 0%, 0%);
+
+}
+
+.btn-azul {
+    background-color: hsl(210, 29%, 24%);
+    color: hsl(0, 0%, 100%);
+    border: none;
+    padding: 15px 40px;
+    font-weight: bold;
+    margin-top: 25px;
+    cursor: pointer;
+}
+
+.promo-link {
+    display: block;
+    margin-top: 20px;
+    font-size: 24px;
+    opacity: 0.8;
+}
+
+/* Comentarios de Empresa */
+
+.comentarios {
+    background: linear-gradient(to right, hsl(210, 29%, 24%), hsl(0, 0%, 0%));
+    padding: 30px;
+    width: 350px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+
+/* Banner Reserva (Fondo Estrellado/Espacial) */
+.salas-banner {
+    background: url('/media/home/image.png') center/cover;
+    padding: 120px 0;
+    text-align: center;
+}
+
+.salas-box {
+    background: hsla(0, 0%, 4%, 0.85);
+    padding: 50px;
+    width: 800px;
+    margin: 0 auto;
+    border: 1px solid #333;
+}
+
+
+
+/* 8. Footer */
+.footer {
+    background: hsl(0, 0%, 0%);
+    padding: 60px 0;
+    font-size: 14px;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid hsl(0, 0%, 20%);
+    padding-top: 40px;
+}
+
+.footer-links a {
+    color: hsl(0, 0%, 100%);
+}
+/* 9. Responsive */
+@media (max-width: 1200px) {
+    .content-wrapper {
+        width: min(100%, 1100px);
+        padding: 0 24px;
+    }
+
+    .hazte-miembro-box,
+    .salas-box {
+        width: min(100%, 760px);
+    }
+}
+
+@media (max-width: 992px) {
+    h2 {
+        font-size: 64px;
+    }
+
+    .banner {
+        height: 520px;
+        background-position: center;
+    }
+
+    .banner h1 {
+        font-size: 72px;
+    }
+
+    .section-eventos {
+        padding: 60px 20px;
+    }
+
+    .section-split {
+        gap: 60px;
+        padding: 80px 0;
+    }
+
+    .ai-image {
+        width: 520px;
+    }
+
+    .hazte-miembro-box,
+    .salas-box {
+        height: auto;
+        padding: 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    h2 {
+        font-size: 48px;
+    }
+
+    .banner {
+        height: 460px;
+    }
+
+    .banner h1 {
+        font-size: 54px;
+    }
+
+    .subtitulo {
+        font-size: 22px;
+    }
+
+    .section-split {
+        flex-direction: column;
+        text-align: center;
+        gap: 40px;
+        padding: 60px 0;
+    }
+
+    .titulo-izq,
+    .titulo-der {
+        font-size: 40px;
+    }
+
+    .ai-image {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .ai-info h3,
+    .ai-info p,
+    .compañías-info {
+        font-size: 22px;
+    }
+
+    .hazte-miembro-banner,
+    .salas-banner {
+        padding: 80px 0;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        gap: 30px;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    h2 {
+        font-size: 36px;
+    }
+
+    .banner {
+        height: 380px;
+    }
+
+    .banner h1 {
+        font-size: 40px;
+    }
+
+    .subtitulo {
+        font-size: 18px;
+    }
+
+    .titulo-underline {
+        font-size: 28px;
+    }
+
+    .event-card {
+        width: 100%;
+        max-width: 320px;
+    }
+
+    .img-box {
+        height: 300px;
+    }
+
+    .hazte-miembro-box,
+    .salas-box {
+        padding: 28px;
+    }
+
+    .btn-gold,
+    .btn-azul {
+        width: 100%;
+        padding: 12px 20px;
+    }
+}
+

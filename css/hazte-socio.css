@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@400;600&display=swap');
+
+body {
+    background-color: #000000;
+}
+
+.aura-section {
+    width: 100%;
+    max-width: 800px;
+    margin: 80px auto;
+    padding: 0 20px;
+    font-family: 'Inter', Arial, sans-serif;
+}
+
+.aura-title {
+    text-align: center;
+    color: #deb655;
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    margin-bottom: 15px;
+    font-weight: normal;
+}
+
+.aura-subtitle {
+    text-align: center;
+    color: #8c939c;
+    margin-bottom: 50px;
+    font-size: 16px;
+}
+
+.form-row {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 25px;
+}
+
+.form-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-col.full {
+    margin-bottom: 30px;
+}
+
+.aura-form label {
+    color: #deb655;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+}
+
+.aura-form input[type="text"],
+.aura-form input[type="email"],
+.aura-form input[type="tel"],
+.aura-form select,
+.aura-form textarea {
+    background-color: #16191f;
+    border: 1px solid #2c3036;
+    padding: 15px;
+    color: #a0a6ad;
+    font-size: 14px;
+    width: 100%;
+    outline: none;
+    font-family: Arial, sans-serif;
+}
+
+.aura-form textarea {
+    height: 80px;
+    resize: none;
+}
+
+.aura-form input:focus, 
+.aura-form select:focus, 
+.aura-form textarea:focus {
+    border-color: #555;
+}
+
+.check-area {
+    display: flex;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.check-area input {
+    margin-right: 15px;
+    width: 20px;
+    height: 20px;
+    accent-color: #fff;
+    cursor: pointer;
+}
+
+.check-area label {
+    color: #8c939c;
+    text-transform: none;
+    font-size: 14px;
+    margin-bottom: 0;
+    cursor: pointer;
+    font-weight: normal;
+}
+
+.aura-btn {
+    display: block;
+    margin: 0 auto;
+    background-color: #dcb453;
+    color: #ffffff;
+    border: none;
+    padding: 16px 40px;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    letter-spacing: 1px;
+}
+
+.aura-btn:hover {
+    opacity: 0.9;
+}
+
+@media (max-width: 600px) {
+    .form-row {
+        flex-direction: column;
+        gap: 25px;
+    }
+}

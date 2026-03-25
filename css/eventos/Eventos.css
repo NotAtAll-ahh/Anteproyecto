@@ -1,0 +1,158 @@
+/*BODY */
+body {
+    margin: 0;
+    font-family: "Inter", sans-serif;
+    background: hsl(218, 86%, 5%);
+    color: hsl(0, 0%, 100%);
+
+}
+
+/* ============================ */
+/* CSS PARA EL SUB-MENÚ DE EVENTOS */
+/* ============================ */
+.submenu-eventos {
+    width: 100%;
+    background-color: #000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 10px 0;
+}
+
+.submenu-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    /* Mismo espaciado que el header principal */
+}
+
+.submenu-container a {
+    font-family: 'Inter', sans-serif;
+    color: #a0a0a0;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    /* Mismo tamaño de fuente */
+    letter-spacing: 1.5px;
+    /* Mismo espaciado de letra */
+    font-weight: 500;
+    padding: 15px 0;
+    /* Relleno vertical para que el área de clic sea más grande */
+    transition: color 0.3s ease;
+    border-bottom: 2px solid transparent;
+    /* Borde inferior oculto */
+}
+
+/* Estilo al pasar el ratón */
+.submenu-container a:hover {
+    color: #d4af37;
+}
+
+/* Clase para el enlace de la página actual */
+.submenu-container a.activo {
+    color: #ffffff;
+    /* Color de texto blanco para el activo */
+    border-bottom: 2px solid #d4af37;
+    /* Línea dorada debajo del activo */
+}
+
+
+
+
+/* LETRAS Y ESPACIOS*/
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Special+Gothic+Condensed+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+
+h1 {
+    color: white;
+    font-family: "Playfair Display", serif;
+    font-weight: 100;
+}
+
+h2 {
+    margin-left: 5%;
+    margin-bottom: 2%;
+    color: white;
+    font-family: "Playfair Display", serif;
+    font-weight: 100;
+    font-size: 40px;
+    padding: 10px 0;
+    border-bottom: 2px solid white;
+    width: 87%;
+}
+
+p {
+    color: white;
+    font-family: "Inter", sans-serif;
+    margin-top: 5%;
+}
+
+
+hr {
+    border: 1px solid rgb(253, 248, 248);
+    margin: 1% 0 1% 4%;
+    width: 90%;
+
+}
+
+/* CLASES Y EFECTOS*/
+
+.populares,
+.conferencias,
+.conciertos,
+.cine {
+    margin: 0 5% 0 0;
+    display: flex;
+    justify-content: center;
+}
+
+.populares div, .conferencias div, .conciertos div, .cine div  {
+    margin-left: 2%;
+}
+
+
+/* IMAGENES */
+img {
+    width: 12rem;
+    height: 16rem;
+    border-radius: 6px;
+}
+
+
+.fotoEnlaceCategoria img {
+    transition: transform 1s ease;
+}
+
+.fotoEnlaceCategoria img:hover {
+    transform: scale(1.1);
+    filter: drop-shadow(7px 5px 19px #E3C06E);
+    box-shadow: 3px 7px 12px #30526A;
+}
+
+
+/* DESPLEGABLE */
+.desplegable summary {
+    cursor: pointer;
+    font-weight: bold;
+    list-style: none;
+    position: relative;
+}
+
+.desplegable summary .flecha {
+    position: absolute;
+    right: 170px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: solid rgb(216, 209, 209);
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 5px;
+    transform: translateY(-50%) rotate(45deg);
+    transition: transform 0.3s;
+}
+
+.desplegable[open] summary .flecha {
+    transform: translateY(-20%) rotate(-135deg);
+
+}

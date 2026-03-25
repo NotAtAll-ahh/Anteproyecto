@@ -1,0 +1,64 @@
+/* 1. Reset y Variables de Color */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 1.1 FUENTES */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Special+Gothic+Condensed+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+
+
+/* 2. Contenedor de ancho fijo para Escritorio para que todas las secciones tengan el mismo margen*/
+.content-wrapper {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+
+/* 4. Banner Home Section */
+.banner {
+    height: 600px;
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+        url('/media/eventos/EVENTOS/fondo-eventos.jpg');
+        background-position: 0px 50px;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+}
+
+.banner h1 {
+    font-size: 90px;
+    margin-bottom: 10px;
+}
+
+.subtitulo {
+    font-size: 30px;
+    margin-bottom: 30px;
+    opacity: 0.8;
+}
+
+
+
+/* Botones y Enlaces */
+
+.btn-gold {
+    background-color: #c59d5f;
+    color: black;
+    border: none;
+    padding: 12px 40px;
+    font-weight: bold;
+    margin-top: 25px;
+    cursor: pointer;
+}
+
+.btn-outline {
+    background: transparent;
+    border: 1.5px solid white;
+    color: white;
+    padding: 8px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+}

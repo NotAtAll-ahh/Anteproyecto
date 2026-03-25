@@ -1,0 +1,259 @@
+/* --- ESTILOS GENERALES Y RESET --- */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Special+Gothic+Condensed+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+h1, h2, h3, h4 {
+    font-family: "Playfair Display", serif;
+    font-weight: 100;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #0d0d0d;
+    font-family: 'Inter', sans-serif;
+    color: #ffffff;
+    overflow-x: hidden; /* Seguridad extra contra scroll horizontal */
+    width: 100%;
+}
+
+/* --- SECCIÓN INTRO --- */
+.intro {
+    position: relative;
+    width: 100%;
+    min-height: 100vh; /* Ocupa toda la pantalla inicialmente */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;   
+}
+
+.intro::before {
+    content: "";
+    position: fixed; /* Cambiado de fixed a absolute para que no siga al bajar */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/media/about-us/grupo.jpeg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.5;
+    z-index: -1; 
+}
+
+.introContent {
+    padding: 0 7%;
+    margin-top: 10%; /* Ajustado para que no dependa de márgenes negativos */
+}
+
+.introContent > h1 {
+    font-size: clamp(3rem, 8vw, 120px); /* Tamaño fluido */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.introContent > hr {
+    width: 35%;
+    height: 3px;
+    background-color: white;
+    border: none;
+    margin: 20px 0; /* Eliminado el margen negativo que causaba error */
+}
+
+.introContent > p {
+    font-size: clamp(1.2rem, 2vw, 30px);
+    opacity: 0.8;
+    max-width: 1000px;
+}
+
+/* --- SECCIÓN PURPOSE (CORRECCIÓN CLAVE) --- */
+.purpose {
+    background-color: #0d0d0d;
+    width: 100%;
+}
+
+.pContainer {
+    display: flex;
+    flex-direction: row; /* Texto izquierda, Imagen derecha */
+    align-items: center;
+    justify-content: center;
+    gap: 2rem; /* Separación entre texto e imagen */
+    max-width: 1200px; /* Limita el ancho para que esté centrado */
+    margin: 0 auto; /* Centra el contenedor */
+    width: 100%;
+}
+
+.pText {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Alinea texto a la izquierda */
+    text-align: left; /* Asegura que el texto no esté centrado */
+    flex: 1 1 65%; /* Texto más ancho: ocupa ~65% del contenedor en pantallas grandes */
+    min-width: 250px;
+}
+
+.pImgs {
+    flex: 20% 0 35%; /* Imagen ahora ocupa el ~35% restante */
+    max-width: 420px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pImgs img {
+    width: 1000px;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+.pText > h2 {
+    font-size: clamp(2rem, 5vw, 5rem);
+    margin-bottom: 10px;
+}
+
+.pText > hr {
+    width: 150px;
+    height: 3px;
+    background-color: white;
+    border: none;
+    margin-bottom: 20px;
+}
+
+.pText > h3 {
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #aaa;
+}
+
+.pText > p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    border-left: 3px solid rgba(255, 255, 255, 0.3); /* Cambiado de recuadro a línea lateral para elegancia */
+    padding-left: 20px;
+    max-width: 100%;
+    overflow-wrap: break-word; /* Evita desbordes por palabras muy largas */
+}
+
+/* Equipo */
+.team-header {
+    margin: 0;
+    padding: 60px 0; 
+    text-align: center;
+    font-size: 40px;
+    background-color: #0d0d0d;
+}
+.team-header p {
+    margin-top: 10px;
+    font-size: 2rem;
+    opacity: 0.8;
+}
+.member-row {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    border-bottom: 1px solid #333;
+    height: 400px;
+}
+.member-row.reverse {
+    flex-direction: row-reverse;
+    text-align: right;
+}
+.member-img {
+    height: 400px;
+    width: 400px;
+    flex-shrink: 0;
+    object-fit: cover;
+}
+.member-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.member-info h3 {
+    display: inline-block;
+    font-size: 50px;
+}
+.member-info span {
+    font-size: 30px;
+    opacity: 0.7;
+}
+
+#member1 {
+    background: linear-gradient(240deg, #0d0d0d 0%, #192346 100%); 
+}
+#member2 {
+    background: linear-gradient(130deg, #0d0d0d 0%, #192d50 100%); 
+}
+
+#member3 {
+    background: linear-gradient(240deg, #0d0d0d 0%, #30526a 100%); 
+}
+
+#member4 {
+    background: linear-gradient(130deg, #0d0d0d 0%, #e3c06e 100%); 
+}
+
+#member5 {
+    background: linear-gradient(240deg, #0d0d0d 0%, #d9a443 100%); 
+}
+
+/* 8. Footer */
+.footer {
+    background: black;
+    padding: 60px 0;
+    font-size: 14px;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid #333;
+    padding-top: 40px;
+}
+.footer-links a{
+    color: white;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 900px) {
+    .pContainer {
+        flex-direction: column; 
+        text-align: center; 
+    }
+    .pText {
+        align-items: center;
+        text-align: center;
+    }
+    .pImgs {
+        width: 100%;
+        margin-top: 20px;
+    }
+    .member-row {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        height: auto;
+        padding: 20px 0;
+    }
+    .member-row.reverse {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        height: auto;
+        padding: 20px 0;
+    }
+    .member-img {
+        flex: 0 0 auto;
+        width: 50%;
+    }
+    .introContent > h1 {
+        font-size: 3.5rem;
+    }
+}

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles de Entrada</title>
+    <link rel="stylesheet" href="/css/DetalleEntradas.css">
+    <link rel="stylesheet" href="/css/header-footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body aria-label="Fondo de pantalla de La La Land.">
+    <!-- INICIO HEADER -->
+    <header class="main-header"><button class="skip-link"><a href="#main-content">Saltar Al Contenido</a></button>
+        <div class="header-container">
+            <!-- Logo -->
+            <a href="/index.html" class="logo-link">
+                <img src="/media/logo-white.webp" alt="Logo Aura Society">
+            </a>
+            <!-- Menú Móvil Control -->
+            <input type="checkbox" id="nav-toggle" class="nav-toggle">
+            <label for="nav-toggle" class="nav-burger" aria-label="Menú">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+            <!-- Navegación -->
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="/index.html">Inicio</a></li>
+                    <li class="dropdown">
+                        <a href="/eventos/Eventos.html">Eventos <i class="fa-solid fa-chevron-down arrow-icon"></i></a>
+                        <ul class="dropdown-content">
+                            <li><a href="/eventos/Conciertos.html">Conciertos</a></li>
+                            <li><a href="/eventos/Cine.html">Cine</a></li>
+                            <li><a href="/eventos/Conferencias.html">Conferencias</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/hazte-socio/">Hazte Socio</a></li>
+                    <li><a href="/sobre-nosotros/">Sobre Nosotros</a></li>
+                </ul>
+            </nav>
+            <!-- Herramientas de Usuario -->
+            <div class="header-tools">
+<div class="search-box">
+    <input type="text" id="search-input" placeholder="BUSCAR EVENTOS" aria-label="Buscar eventos">
+    <button class="search-btn" aria-label="Ejecutar búsqueda"><i class="fa-solid fa-magnifying-glass"></i></button>
+</div>
+                <a href="/perfil/" class="user-profile">
+                    <div class="user-info">
+                        <span class="label">Mi Cuenta</span>
+                        <span class="status">Socio Gold</span>
+                    </div>
+                    <img src="/media/yiperfil.png" alt="Usuario" class="avatar-circle">
+                </a>
+            </div>
+        </div>
+    </header>
+    <!-- FIN HEADER -->
+  <main>
+    <div class="contenedor-evento">
+        <div class="foto-evento" aria-label="Portada: La La Land"></div>
+        <div class="info-evento">
+            <h1>Thee Sacred Souls</h1>
+                <div class="categorias">
+                    <span>Música en directo</span>
+                    <span>R&B</span>
+                    <span>Soul</span>
+                </div>
+        <div class="detalles">
+          <span>🎬 2h 30m</span>
+          <span>💬 Subtítulos</span>
+        </div>
+        <details>
+            <summary>⚠️ Información importante:</summary>
+                <div class="informacion-recinto">
+                    <p><strong>Menores de edad:</strong> Generalmente, los menores de 16 años deben acceder acompañados de un adulto responsable y presentar una autorización firmada. <br><br>
+                        <strong>Entradas:</strong> Todos los asistentes deben tener su entrada, independientemente de la edad. Se recomienda llevarla descargada o impresa, con el QR visible. <br><br>
+                        <strong>Objetos prohibidos:</strong> Suele estar prohibida la entrada con botellas de vidrio, latas, pancartas grandes, punteros láser, mochilas grandes, cámaras profesionales o armas. <br><br>
+                        <strong>Accesibilidad:</strong> La mayoría de recintos cuenta con accesos para personas con movilidad reducida, ascensores y aseos adaptados. <br><br>
+                        <strong>Horarios y accesos:</strong> Es recomendable llegar con antelación para pasar los controles de seguridad. <br><br>
+                        <strong>Objetos permitidos:</strong> Se recomienda llevar identificación oficial, dinero y elementos de seguridad. 
+                    </p>
+                </div>
+                <div class="informacion-devolucion">
+                    <p> <strong>Cancelación del Evento:</strong> Es el único motivo que garantiza la devolución del importe. <br><br>
+                        <strong>Plazos de Reembolso:</strong> Si el evento se cancela, se suele disponer de un plazo, a veces establecido en 14-15 días desde el anuncio de la suspensión, aunque varía según la normativa local. <br><br>
+                        <strong>Métodos de devolución:</strong> <br><br>
+                        <strong>Online/Teléfono:</strong> Reembolso automático a la misma tarjeta de compra en un plazo que suele oscilar entre 3 a 15 días hábiles. <br><br>
+                        <strong>Taquilla:</strong> Presencialmente en el lugar de compra, presentando el documento de identidad o copia de la entrada. <br><br>
+                        <strong>Derecho de Desistimiento:</strong> La compra de entradas está generalmente excluida del derecho de desistimiento de 14 días al ser servicios de esparcimiento en fechas específicas. <br><br>
+                        <strong>Casos Especiales:</strong> En situaciones de fuerza mayor, algunos promotores pueden permitir la devolución o ofrecer un vale, pero no es una obligación legal en todos los casos personales. 
+                    </p>
+                </div>
+        </details>
+        <div class="confirmacion">
+          <label>
+                <input type="checkbox" required>
+                ACEPTO QUE HE LEÍDO ESTA INFORMACIÓN
+          </label>
+        </div>
+        <a href="DatosFacturacion.html" class="continuar">CONTINUAR COMPRANDO</a>
+      </div>
+    </div>
+  </main>
+
+    <!-- INICIO FOOTER -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <img src="/media/logo-white.webp" alt="Aura Society">
+                <div class="credits">
+                    <p>DESIGNED BY DAW</p>
+                    <p>2026 AURA SOCIETY</p><a href="/media/DOCUMENTO COPYRIGHT.pdf" class="pdf-link" target="_blank"><i class="fa-solid fa-file-pdf"></i> DOCUMENTO COPYRIGHT</a>
+                </div>
+            </div>  
+            <div class="footer-info">
+                <div class="contact-details">
+                    <p>CORREO<br><strong>info@aurasociety.com</strong></p>
+                    <p>TELEFONO<br><strong>+34 640 89 29 46</strong></p>
+                    <p>UBICACION<br><strong>Paseo Puerta del Ángel, 5</strong></p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>Síguenos</span>
+            <div class="social-links">
+                <i class="fa-brands fa-facebook-f"></i>
+                <i class="fa-brands fa-instagram"></i>
+                <i class="fa-brands fa-whatsapp"></i>
+            </div>
+        </div>
+    </footer>
+    <!-- FIN FOOTER -->
+
+</body>
+</html>
