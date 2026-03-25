@@ -1,11 +1,175 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Aura Society - Desktop Only</title>
+    <link rel="stylesheet" href="css/home-style.css">
+    <link rel="stylesheet" href="css/nav.css">
+    <link rel="stylesheet" href="css/header-footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 </head>
+
 <body>
-    
+
+    <!-- INICIO HEADER -->
+    <header class="main-header">
+        <button class="skip-link"><a href="#main-content">Saltar Al Contenido</a></button>
+        <div class="header-container">
+            <!-- Logo -->
+            <a href="/index.html" class="logo-link">
+                <img src="/media/logo-white.webp" alt="Logo Aura Society">
+            </a>
+            <!-- Menú Móvil Control -->
+            <input type="checkbox" id="nav-toggle" class="nav-toggle">
+            <label for="nav-toggle" class="nav-burger" aria-label="Menú">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+            <!-- Navegación -->
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="/index.html">Inicio</a></li>
+                    <li class="dropdown">
+                        <a href="/eventos/Eventos.html">Eventos</a>
+                        <ul class="dropdown-content">
+                            <li><a href="/eventos/Conciertos.html">Conciertos</a></li>
+                            <li><a href="/eventos/Cine.html">Cine</a></li>
+                            <li><a href="/eventos/Conferencias.html">Conferencias</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/hazte-socio/">Hazte Socio</a></li>
+                    <li><a href="/sobre-nosotros/">Sobre Nosotros</a></li>
+                </ul>
+            </nav>
+            <!-- Herramientas de Usuario -->
+            <div class="header-tools">
+<div class="search-box">
+    <input type="text" id="search-input" placeholder="BUSCAR EVENTOS" aria-label="Buscar eventos">
+    <button class="search-btn" aria-label="Ejecutar búsqueda"><i class="fa-solid fa-magnifying-glass"></i></button>
+</div>
+                <a href="/perfil/" class="user-profile">
+                    <div class="user-info">
+                        <span class="label">Mi Cuenta</span>
+                        <span class="status">Socio Gold</span>
+                    </div>
+                    <img src="/media/yiperfil.png" alt="Usuario" class="avatar-circle">
+                </a>
+            </div>
+        </div>
+    </header>
+    <!-- FIN HEADER -->
+
+    <section class="banner" aria-label="Aura Society home banner">
+        <div class="content-wrapper">
+            <h1>[Aura] Society - Home Page</h1>
+            <p class="subtitulo">Un espacio donde la creatividad, la tecnología y la cultura se encuentran</p>
+            <button class="btn-gold" onclick="window.location.href='/hazte-socio/'">HAZTE SOCIO</button>
+            
+        </div>
+    </section>
+
+    <main id="main-content">
+    <section class="section-eventos">
+        <div class="content-wrapper">
+            <h2 class="titulo-underline">Ultimos Eventos</h2>
+            <div class="eventos-grid">
+                <div class="event-card">
+                    <div class="img-box" id="TheDrama" aria-label="The Drama thumbnail"></div>
+                    <button class="btn-outline" onclick="window.location.href='/detalles-evento/'">COMPRAR ENTRADAS</button>
+                </div>
+                <div class="event-card">
+                    <div class="img-box" id="PWMOV" aria-label="People We Meet on Vacation thumbnail"></div>
+                    <button class="btn-outline" onclick="window.location.href='/detalles-evento/'">COMPRAR ENTRADAS</button>
+                </div>
+                <div class="event-card">
+                    <div class="img-box" id="TFOFU" aria-label="The Feeling of Falling Upwards event thumbnail"></div>
+                    <button class="btn-outline" onclick="window.location.href='/detalles-evento/'">COMPRAR ENTRADAS</button>
+                </div>
+                <div class="event-card">
+                    <div class="img-box" id="ConferenciaTecnológica" aria-label="Conferencia Tecnológica thumbnail"></div>
+                    <button class="btn-outline" onclick="window.location.href='/detalles-evento/'">COMPRAR ENTRADAS</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="hazte-miembro-banner">
+        <div class="hazte-miembro-box">
+            <h2>Hazte Miembro</h2>
+            <br>
+            <p>Únete a una comunidad vibrante donde podrás disfrutar de ventajas exclusivas, acceso prioritario a eventos, descuentos especiales y experiencias diseñadas para inspirarte. Forma parte de Aura Society y vive la cultura desde dentro.</p>
+            <button class="btn-gold" onclick="window.location.href='/hazte-socio/'"s>ÚNETE AL CLUB</button>
+        </div>
+    </section>
+    <section class="section-split content-wrapper">
+        <div>
+            <h2 class="titulo-izq">Salas Automatizadas con IA</h2>
+            <button class="btn-outline-pequeño">Descubre cómo nuestras salas transforman tu evento</button>
+            <div class="ai-info">
+                <h3><strong>Información sobre nuestras salas automatizadas y personalizables</strong></h3>
+                
+                <p class="promo-link">Nuestras salas equipadas con inteligencia artificial se adaptan a tus necesidades: iluminación dinámica, sonido envolvente, configuraciones temáticas y herramientas interactivas para eventos, reuniones o experiencias creativas. Todo controlado de forma intuitiva y en tiempo real.</p>
+            </div>
+        </div>
+        <div class="ai-image">
+            <img src="/media/home/image2.png.png" alt="Representación sala IA">
+        </div>
+    </section>
+
+    <section class="section-split content-wrapper">
+        <div class="compañías-info">
+            
+            <div class="comentarios">“Una experiencia impecable. La tecnología y el ambiente superaron nuestras expectativas.”</div>
+            <div class="comentarios">“Aura Society es el lugar perfecto para eventos creativos y corporativos.”</div>
+        </div>
+        <div class="compañías-info">
+            <h2 class="titulo-der">Empresas que confían en nosotros</h2>
+            <h3><strong>Conoce a nuestros colaboradores</strong></h3>
+            <span class="promo-link">Colaboramos con empresas líderes que han confiado en nuestras instalaciones para organizar eventos, presentaciones y experiencias corporativas. Su apoyo impulsa nuestra misión de ofrecer espacios innovadores y de alta calidad.</span>
+        </div>
+    </section>
+
+    <section class="salas-banner">
+        <div class="salas-box">
+            <h2>Reserva de Salas</h2>
+            <p>¿Buscas un espacio único para tu evento? Nuestras salas están diseñadas para adaptarse a cualquier ocasión: reuniones privadas, presentaciones, grabaciones, talleres o experiencias inmersivas. Reserva fácilmente y personaliza cada detalle.</p>
+            <button class="btn-azul">RESERVA AHORA TU SALA</button>
+        </div>
+    </section>
+    </main>
+
+    <!-- INICIO FOOTER -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <img src="/media/logo-white.webp" alt="Aura Society">
+                <div class="credits">
+                    <p>DESIGNED BY DAW</p>
+                    <p>2026 AURA SOCIETY</p><a href="/media/DOCUMENTO COPYRIGHT.pdf" class="pdf-link" target="_blank"><i class="fa-solid fa-file-pdf"></i> DOCUMENTO COPYRIGHT</a>
+                </div>
+            </div>  
+            <div class="footer-info">
+                <div class="contact-details">
+                    <p>CORREO<br><strong>info@aurasociety.com</strong></p>
+                    <p>TELEFONO<br><strong>+34 640 89 29 46</strong></p>
+                    <p>UBICACION<br><strong>Paseo Puerta del Ángel, 5</strong></p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>Síguenos</span>
+            <div class="social-links">
+                <i class="fa-brands fa-facebook-f"></i>
+                <i class="fa-brands fa-instagram"></i>
+                <i class="fa-brands fa-whatsapp"></i>
+            </div>
+        </div>
+    </footer>
+    <!-- FIN FOOTER -->
+
 </body>
+
 </html>
