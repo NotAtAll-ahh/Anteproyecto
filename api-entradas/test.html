@@ -15,6 +15,14 @@
         <button type="button" onclick="registrarUsuario()">Registrar</button>
     </form>
 
+    <form >
+        <input type="email" id="emailU" placeholder="Email">
+        <input type="password" id="passwordU" placeholder="Password">
+        <button type="button" onclick="iniciarSesionUsuario()">Iniciar Sesion</button>
+    </form>
+
+    <pre id="resultadoUsuario"></pre>
+
     <script>
         function registrarUsuario(){
             const data = {
@@ -36,6 +44,33 @@
             }).then(datos => {
                     console.log(datos);
             }).catch(error => console.error("Error ", error));
+        }
+
+        function iniciarSesionUsuario() {
+            const data = {
+                email: document.getElementById("emailU").value,
+                password: document.getElementById("passwordU").value
+            };
+
+            fetch("http://localhost/api-entradas/public/api/login", {
+                method: "POST",
+                headers: { 'Content-Type': 'application/json; charset=UTF-8' },
+                body: JSON.stringify(data)
+            })
+            .then((respuesta) => {
+                if (respuesta.ok) return respuesta.json();
+                return respuesta.json().then((error) => {
+                    throw new Error(error.error || 'Error en el login');
+                });
+            })
+            .then((loginData) => {
+                console.log(loginData);
+                document.getElementById("resultadoUsuario").textContent = JSON.stringify(loginData.usuario, null, 2);
+            })
+            .catch(error => {
+                console.error("Error ", error);
+                document.getElementById("resultadoUsuario").textContent = error.message;
+            });
         }
         
     </script>

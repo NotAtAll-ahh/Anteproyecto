@@ -36,6 +36,12 @@ class UsuarioController {
 
         $data = json_decode(file_get_contents("php://input"), true);
 
+        if (!isset($data["email"]) || !isset($data["password"])) {
+            http_response_code(400);
+            echo json_encode(["error" => "Email y contraseña son obligatorios"]);
+            return;
+        }
+
         $usuario = Usuario::findByEmail($pdo, $data["email"]);
 
         if (!$usuario || !password_verify($data["password"], $usuario["password"])) {
@@ -44,14 +50,10 @@ class UsuarioController {
             return;
         }
 
-        // Aquí podrías generar un token JWT manual si quieres
         echo json_encode([
             "status" => "success",
             "message" => "Login correcto",
-            "usuario" => [
-                "id" => $usuario["id"],
-                "email" => $usuario["email"]
-            ]
+            "usuario" => $usuario
         ]);
     }
 
