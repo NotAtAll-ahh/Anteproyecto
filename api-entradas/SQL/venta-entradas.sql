@@ -28,12 +28,12 @@ CREATE TABLE eventos (
 -- CREAR TABLA DE RESERVAS
 CREATE TABLE reservas (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    id_usuario INT UNSIGNED,
-    id_evento INT UNSIGNED,
+    usuario_id INT UNSIGNED,
+    evento_id INT UNSIGNED,
     cantidad INT UNSIGNED,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (id_usuario) REFERENCES usuarios(id) ON DELETE CASCADE,
-    FOREIGN KEY (id_evento) REFERENCES eventos(id) ON DELETE CASCADE
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE,
+    FOREIGN KEY (evento_id) REFERENCES eventos(id) ON DELETE CASCADE
 );
 --INSERTAR DATOS DE PRUEBA
 INSERT INTO usuarios (email, password, nombre) VALUES
