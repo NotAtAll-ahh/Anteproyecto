@@ -45,7 +45,7 @@ INSERT INTO eventos (nombre, descripcion, ubicacion, fecha, entradas_totales, en
 ('AC/DC / METALLICA', 'Concierto conjunto de las legendarias bandas de rock AC/DC y Metallica.', 'Moscow', '2024-11-15 18:00:00', 500, 500),
 ('COLDPLAY', 'Coldplay regresa a España en 2025 con su gira mundial "Music of the Spheres".', 'Barcelona', '2025-06-20 21:00:00', 2000, 2000);
 
-INSERT INTO reservas (id_usuario, id_evento, cantidad) VALUES
+INSERT INTO reservas (usuario_id, evento_id, cantidad) VALUES
 (1, 1, 2),
 (2, 1, 3),
 (1, 2, 1);
