@@ -1,7 +1,11 @@
 <?php
 //Obtener la URL y el método HTTP
-
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+// Normalizar ruta (para pode accedes desde el navegador desde /public)
+$basePath = '/api-entradas/public';
+$uri = str_replace($basePath, '', $uri);
+
 $method = $_SERVER['REQUEST_METHOD'];
 
 //Incluir los controladores
@@ -16,6 +20,7 @@ switch (true) {
     case $uri === '/api/eventos' && $method === 'GET':
         EventoController::index();
         break;
+        
     //Muestra un evento específico
     case preg_match('#^/api/eventos/(\d+)$#', $uri, $matches) && $method === 'GET':
         EventoController::show($matches[1]);
