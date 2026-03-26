@@ -12,6 +12,7 @@ class Usuario {
         $stmt->execute([
             $data["email"],
             $data["password"],
+            //si no se envía el nombre, se pone null 
             $data["nombre"] ?? null
         ]);
     }
@@ -48,4 +49,7 @@ class Usuario {
         $stmt = $pdo->prepare($sql);
         $stmt->execute($values);
     }
+
+
+
 }
