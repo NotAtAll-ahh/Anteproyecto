@@ -7,25 +7,37 @@
 </head>
 <body>
     <h2>Test Registro de Usuario</h2>
+    <form >
+        <input type="text" id="nombre" placeholder="Nombre">
+        <input type="email" id="email" placeholder="Email">
+        <input type="password" id="password" placeholder="Password">
+        <input type="file" id="foto_perfil" placeholder="Foto de Perfil">
+        <button type="button" onclick="registrarUsuario()">Registrar</button>
+    </form>
 
     <script>
-         <script>
-        const producto = { ref: "A1", precio: 25 };
-        fetch( "http://localhost/api-entradas/public/api/usuarios", {
-            method: "POST",
-            headers: { 'Content-Type': 'application/json; charset=UTF-8' },
-            body: JSON.stringify(producto)
-        })
-        .then((respuesta) => {
-                if (respuesta.ok) return respuesta.text();
-                throw new Error('Error en la red');
+        function registrarUsuario(){
+            const data = {
+                nombre: document.getElementById("nombre").value,
+                email: document.getElementById("email").value,
+                password: document.getElementById("password").value,
+                foto_perfil: document.getElementById("foto_perfil").files[0]
+            };
 
-        }).then(datos => {
-                console.log(datos);
-        }).catch(error => console.error("Error ", error));
+            fetch( "http://localhost/api-entradas/public/api/usuarios", {
+                method: "POST",
+                headers: { 'Content-Type': 'application/json; charset=UTF-8' },
+                body: JSON.stringify(data)
+            })
+            .then((respuesta) => {
+                    if (respuesta.ok) return respuesta.json();
+                    throw new Error('Error en la red');
 
-        //ver respuesta en Network
-    </script>
+            }).then(datos => {
+                    console.log(datos);
+            }).catch(error => console.error("Error ", error));
+        }
+        
     </script>
 </body>
 </html>
