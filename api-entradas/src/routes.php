@@ -42,6 +42,12 @@ switch (true) {
         EventoController::update($matches[1]);
         break;
 
+    //añadir imagen a un evento
+    case preg_match('#^/api/eventos/(\d+)/imagen$#', $uri, $matches) && $method === 'POST':
+        UsuarioController::requireAdmin(); // solo admin
+        EventoController::uploadImagen($matches[1]);
+        break;
+
     // USUARIOS
     //Registro de usuario
     case $uri === '/api/usuarios' && $method === 'POST':

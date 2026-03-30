@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear Evento</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            padding: 40px;
+        }
+
+        .contenedor {
+            max-width: 500px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 8px;
+            margin-bottom: 15px;
+        }
+
+        button {
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        #soloAdmin {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="contenedor">
+    <h2>Crear Evento</h2>
+
+    <p id="mensajeRol" style="color:red;"></p>
+
+    <div id="soloAdmin">
+        <label>Nombre del evento</label>
+        <input type="text" id="nombre">
+
+        <label>Descripción</label>
+        <textarea id="descripcion"></textarea>
+
+        <label>Ubicación</label>
+        <input type="text" id="ubicacion">
+
+        <label>Fecha</label>
+        <input type="date" id="fecha">
+
+        <label>Entradas totales</label>
+        <input type="number" id="entradas_totales">
+
+        <button onclick="crearEvento()">Crear evento</button>
+
+        <p id="resultado"></p>
+    </div>
+</div>
+
+<script>
+let usuarioId = null;
+let usuarioRol = null;
+
+// 1. Comprobar sesión
+fetch("http://localhost/api-entradas/public/api/sesion", {
+    method: "GET",
+    credentials: "include"
+})
+.then(res => res.json())
+.then(data => {
+    if (!data.logueado) {
+        document.getElementById("mensajeRol").textContent =
+            "Debes iniciar sesión para crear eventos.";
+        return;
+    }
+
+    usuarioId = data.usuario_id;
+    usuarioRol = data.rol;
+
+    if (usuarioRol === "admin") {
+        document.getElementById("soloAdmin").style.display = "block";
+    } else {
+        document.getElementById("mensajeRol").textContent =
+            "No tienes permisos para crear eventos (solo administradores).";
+    }
+});
+
+// 2. Crear evento
+function crearEvento() {
+    const data = {
+        nombre: document.getElementById("nombre").value,
+        descripcion: document.getElementById("descripcion").value,
+        ubicacion: document.getElementById("ubicacion").value,
+        fecha: document.getElementById("fecha").value,
+        entradas_totales: document.getElementById("entradas_totales").value
+    };
+
+    fetch("http://localhost/api-entradas/public/api/eventos", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(res => res.json())
+    .then(data => {
+        document.getElementById("resultado").textContent =
+            JSON.stringify(data, null, 2);
+    });
+}
+</script>
+
+</body>
+</html>
