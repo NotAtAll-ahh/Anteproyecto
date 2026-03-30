@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Evento</title>
+    <style>
+        body { font-family: Arial; background: #f4f4f4; padding: 40px; }
+        .contenedor {
+            max-width: 500px; margin: auto; background: white; padding: 20px;
+            border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        input, textarea { width: 100%; padding: 10px; margin-top: 8px; margin-bottom: 15px; }
+        button { padding: 10px 20px; cursor: pointer; }
+        img { width: 100%; border-radius: 10px; margin-bottom: 15px; }
+    </style>
+</head>
+<body>
+
+<div class="contenedor">
+    <h2>Editar Evento</h2>
+
+    <p id="mensajeRol" style="color:red;"></p>
+
+    <div id="soloAdmin" style="display:none;">
+        <img id="imagenActual" src="" alt="Imagen del evento">
+        <hr>
+
+        <label>Nombre</label>
+        <input type="text" id="nombre">
+
+        <label>Descripción</label>
+        <textarea id="descripcion"></textarea>
+
+        <label>Ubicación</label>
+        <input type="text" id="ubicacion">
+
+        <label>Fecha</label>
+        <input type="date" id="fecha">
+
+        <label>Entradas totales</label>
+        <input type="number" id="entradas_totales">
+
+        <label>Entradas disponibles</label>
+        <input type="number" id="entradas_disponibles">
+
+        <button onclick="guardarCambios()">Guardar cambios</button>
+
+        <hr>
+
+        <h3>Subir nueva imagen</h3>
+        <input type="file" id="nuevaImagen">
+        <button onclick="subirImagen()">Subir imagen</button>
+
+        <p id="resultado"></p>
+    </div>
+</div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const eventoId = params.get("id");
+
+let usuarioRol = null;
+
+// 1. Comprobar sesión
+fetch("http://localhost/api-entradas/public/api/sesion", {
+    method: "GET",
+    credentials: "include"
+})
+.then(res => res.json())
+.then(data => {
+    if (!data.logueado) {
+        document.getElementById("mensajeRol").textContent =
+            "Debes iniciar sesión.";
+        return;
+    }
+
+    usuarioRol = data.rol;
+
+    if (usuarioRol === "admin") {
+        document.getElementById("soloAdmin").style.display = "block";
+        cargarEvento();
+    } else {
+        document.getElementById("mensajeRol").textContent =
+            "No tienes permisos para editar eventos.";
+    }
+});
+
+// 2. Cargar datos del evento
+function cargarEvento() {
+    fetch(`http://localhost/api-entradas/public/api/eventos/${eventoId}`)
+    .then(res => res.json())
+    .then(data => {
+        const e = data.data;
+
+        document.getElementById("nombre").value = e.nombre;
+        document.getElementById("descripcion").value = e.descripcion;
+        document.getElementById("ubicacion").value = e.ubicacion;
+        document.getElementById("fecha").value = e.fecha;
+        document.getElementById("entradas_totales").value = e.entradas_totales;
+        document.getElementById("entradas_disponibles").value = e.entradas_disponibles;
+
+        if (e.imagen) {
+            document.getElementById("imagenActual").src =
+                "http://localhost/api-entradas/public" + e.imagen;
+        }
+    });
+}
+
+// 3. Guardar cambios del evento
+function guardarCambios() {
+    const data = {
+        nombre: document.getElementById("nombre").value,
+        descripcion: document.getElementById("descripcion").value,
+        ubicacion: document.getElementById("ubicacion").value,
+        fecha: document.getElementById("fecha").value,
+        entradas_totales: document.getElementById("entradas_totales").value,
+        entradas_disponibles: document.getElementById("entradas_disponibles").value
+    };
+
+    fetch(`http://localhost/api-entradas/public/api/eventos/${eventoId}`, {
+        method: "PUT",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(res => res.json())
+    .then(data => {
+        document.getElementById("resultado").textContent =
+            JSON.stringify(data, null, 2);
+    });
+}
+
+// 4. Subir imagen del evento
+function subirImagen() {
+    const archivo = document.getElementById("nuevaImagen").files[0];
+    if (!archivo) {
+        alert("Selecciona una imagen");
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append("imagen", archivo);
+
+    fetch(`http://localhost/api-entradas/public/api/eventos/${eventoId}/imagen`, {
+        method: "POST",
+        credentials: "include",
+        body: formData
+    })
+    .then(res => res.json())
+    .then(data => {
+        alert("Imagen actualizada");
+        cargarEvento();
+    });
+}
+</script>
+
+</body>
+</html>

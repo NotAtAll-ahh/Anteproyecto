@@ -49,30 +49,37 @@ class EventoController
         ]);
     }
     // CREAR NUEVO EVENTO
-    public static function store()
-    {
-        global $pdo;
+    public static function store() {
+    global $pdo;
 
-        $data = json_decode(file_get_contents("php://input"), true);
+    $data = json_decode(file_get_contents("php://input"), true);
 
-        // Validación mínima
-        $required = ["nombre", "descripcion", "ubicacion", "fecha", "entradas_totales"];
+    // Validación mínima
+    $required = ["nombre", "descripcion", "ubicacion", "fecha", "entradas_totales"];
 
-        foreach ($required as $campo) {
-            if (!isset($data[$campo]) || empty($data[$campo])) {
-                http_response_code(400);
-                echo json_encode(["error" => "El campo '$campo' es obligatorio"]);
-                return;
-            }
+    foreach ($required as $campo) {
+        if (!isset($data[$campo]) || empty($data[$campo])) {
+            http_response_code(400);
+            echo json_encode(["error" => "El campo '$campo' es obligatorio"]);
+            return;
         }
-
-        // Las entradas disponibles deben empezar igual que las totales
-        $data["entradas_disponibles"] = $data["entradas_totales"];
-
-        Evento::create($pdo, $data);
-
-        echo json_encode(["status" => "success", "message" => "Evento creado"]);
     }
+
+    // Entradas disponibles = totales al inicio
+    $data["entradas_disponibles"] = $data["entradas_totales"];
+
+    Evento::create($pdo, $data);
+
+    // Obtener ID del último evento creado
+    $id = $pdo->lastInsertId();
+
+    echo json_encode([
+        "status" => "success",
+        "message" => "Evento creado",
+        "id" => $id
+    ]);
+}
+
 
 
     // ACTUALIZAR EVENTO
@@ -83,6 +90,7 @@ class EventoController
 
         $data = json_decode(file_get_contents("php://input"), true);
 
+        // Validación básica
         if (isset($data["entradas_totales"]) && isset($data["entradas_disponibles"])) {
             if ($data["entradas_disponibles"] > $data["entradas_totales"]) {
                 http_response_code(400);
@@ -96,6 +104,7 @@ class EventoController
         echo json_encode(["status" => "success", "message" => "Evento actualizado"]);
     }
 
+
     //SUBIR IMAGEN DE EVENTO
     public static function uploadImagen($id)
     {
@@ -108,6 +117,7 @@ class EventoController
 
             move_uploaded_file($_FILES['imagen']['tmp_name'], $rutaDestino);
 
+            // Guardar ruta en BD
             $rutaBD = '/uploads/eventos/' . $nombreArchivo;
 
             $stmt = $pdo->prepare("UPDATE eventos SET imagen = ? WHERE id = ?");
@@ -116,5 +126,8 @@ class EventoController
             echo json_encode(["status" => "success", "imagen" => $rutaBD]);
             exit;
         }
+
+        http_response_code(400);
+        echo json_encode(["error" => "No se envió ninguna imagen"]);
     }
 }

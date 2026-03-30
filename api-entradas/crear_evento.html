@@ -59,6 +59,11 @@
         <label>Entradas totales</label>
         <input type="number" id="entradas_totales">
 
+        <hr>
+
+        <h3>Imagen del evento</h3>
+        <input type="file" id="imagen">
+
         <button onclick="crearEvento()">Crear evento</button>
 
         <p id="resultado"></p>
@@ -66,7 +71,6 @@
 </div>
 
 <script>
-let usuarioId = null;
 let usuarioRol = null;
 
 // 1. Comprobar sesión
@@ -82,7 +86,6 @@ fetch("http://localhost/api-entradas/public/api/sesion", {
         return;
     }
 
-    usuarioId = data.usuario_id;
     usuarioRol = data.rol;
 
     if (usuarioRol === "admin") {
@@ -112,9 +115,41 @@ function crearEvento() {
         body: JSON.stringify(data)
     })
     .then(res => res.json())
+    .then(async data => {
+        if (data.id) {
+            document.getElementById("resultado").textContent =
+                "Evento creado con ID: " + data.id;
+
+            // Subir imagen si existe
+            const archivo = document.getElementById("imagen").files[0];
+            if (archivo) {
+                await subirImagen(data.id);
+            }
+
+            alert("Evento creado correctamente");
+        } else {
+            document.getElementById("resultado").textContent =
+                JSON.stringify(data, null, 2);
+        }
+    });
+}
+
+// 3. Subir imagen del evento
+function subirImagen(eventoId) {
+    const archivo = document.getElementById("imagen").files[0];
+    if (!archivo) return;
+
+    const formData = new FormData();
+    formData.append("imagen", archivo);
+
+    return fetch(`http://localhost/api-entradas/public/api/eventos/${eventoId}/imagen`, {
+        method: "POST",
+        credentials: "include",
+        body: formData
+    })
+    .then(res => res.json())
     .then(data => {
-        document.getElementById("resultado").textContent =
-            JSON.stringify(data, null, 2);
+        console.log("Imagen subida:", data);
     });
 }
 </script>
