@@ -47,6 +47,7 @@
 
     <script>
         let usuarioRol = null;
+        let usuarioId = null;
 
         // 1. Comprobar sesión para saber si es admin o cliente
         fetch("http://localhost/api-entradas/public/api/sesion", {
@@ -57,6 +58,7 @@
             .then(data => {
                 if (data.logueado) {
                     usuarioRol = data.rol;
+                    usuarioId = data.usuario_id;
                 }
 
                 cargarEventos();
@@ -121,7 +123,7 @@
         }
 
         function reservar(id) {
-            alert("Función reservar pendiente");
+            window.location.href = "reservar.html?evento_id=" + encodeURIComponent(id);
         }
     </script>
 

@@ -1,9 +1,9 @@
---CREAR BASE DE DATOS
+-- CREAR BASE DE DATOS
 CREATE DATABASE IF NOT EXISTS venta_entradas CHARACTER SET utf8mb4;
 USE venta_entradas;
 
---CREAR TABLAS
---CREAR TABLA DE USUARIOS
+-- CREAR TABLAS
+-- CREAR TABLA DE USUARIOS
 CREATE TABLE usuarios (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     email VARCHAR(255) NOT NULL UNIQUE,
@@ -13,7 +13,7 @@ CREATE TABLE usuarios (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
---CREAR TABLA DE EVENTOS
+-- CREAR TABLA DE EVENTOS
 CREATE TABLE eventos (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(255) NOT NULL,
@@ -35,7 +35,7 @@ CREATE TABLE reservas (
     FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE,
     FOREIGN KEY (evento_id) REFERENCES eventos(id) ON DELETE CASCADE
 );
---INSERTAR DATOS DE PRUEBA
+-- INSERTAR DATOS DE PRUEBA
 INSERT INTO usuarios (email, password, nombre) VALUES
 ('user1@ejemplo.com', 'password1', 'User Admin'),
 ('user2@ejemplo.com', 'password2', 'User Normal');

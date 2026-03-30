@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservar entradas</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f1f3f5;
+            color: #1f2937;
+        }
+
+        .contenedor {
+            max-width: 760px;
+            margin: 40px auto;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            padding: 28px;
+        }
+
+        h1 {
+            margin-top: 0;
+            margin-bottom: 8px;
+        }
+
+        .resumen {
+            background: #f8fafc;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 14px;
+            margin: 18px 0 24px;
+        }
+
+        form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        .campo-completo {
+            grid-column: span 2;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        input {
+            width: 100%;
+            box-sizing: border-box;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            padding: 10px 12px;
+            font-size: 14px;
+        }
+
+        .acciones {
+            grid-column: span 2;
+            display: flex;
+            gap: 10px;
+            margin-top: 8px;
+        }
+
+        button,
+        .volver {
+            border: none;
+            border-radius: 8px;
+            padding: 10px 14px;
+            cursor: pointer;
+            font-weight: 700;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        button {
+            background: #1d4ed8;
+            color: white;
+        }
+
+        .volver {
+            background: #e5e7eb;
+            color: #1f2937;
+        }
+
+        .mensaje {
+            margin-top: 14px;
+            font-size: 14px;
+            min-height: 20px;
+        }
+
+        .error {
+            color: #b91c1c;
+        }
+
+        .ok {
+            color: #166534;
+        }
+
+        @media (max-width: 640px) {
+            .contenedor {
+                margin: 16px;
+                padding: 18px;
+            }
+
+            form {
+                grid-template-columns: 1fr;
+            }
+
+            .campo-completo,
+            .acciones {
+                grid-column: span 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="contenedor">
+        <h1>Formulario de reserva</h1>
+        <p>Completa tus datos para confirmar la reserva.</p>
+
+        <div class="resumen" id="resumenEvento">Cargando datos del evento...</div>
+
+        <form id="formReserva">
+            <div>
+                <label for="nombre">Nombre</label>
+                <input id="nombre" name="nombre" type="text" required>
+            </div>
+
+            <div>
+                <label for="apellidos">Apellidos</label>
+                <input id="apellidos" name="apellidos" type="text" required>
+            </div>
+
+            <div class="campo-completo">
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" required>
+            </div>
+
+            <div>
+                <label for="telefono">Telefono</label>
+                <input id="telefono" name="telefono" type="tel" required>
+            </div>
+
+            <div>
+                <label for="cantidad">Cantidad de entradas</label>
+                <input id="cantidad" name="cantidad" type="number" min="1" value="1" required>
+            </div>
+
+            <div class="acciones">
+                <button type="submit">Confirmar reserva</button>
+                <a class="volver" href="eventos.html">Volver</a>
+            </div>
+        </form>
+
+        <div class="mensaje" id="mensaje"></div>
+    </div>
+
+    <script>
+        const formReserva = document.getElementById("formReserva");
+        const mensaje = document.getElementById("mensaje");
+        const resumenEvento = document.getElementById("resumenEvento");
+        const params = new URLSearchParams(window.location.search);
+        const eventoId = params.get("evento_id");
+
+        let usuarioId = null;
+
+        async function leerJsonSeguro(res) {
+            const texto = await res.text();
+            try {
+                return JSON.parse(texto);
+            } catch (e) {
+                throw new Error("El servidor devolvio una respuesta invalida. Revisa el backend.");
+            }
+        }
+
+        function mostrarMensaje(texto, tipo) {
+            mensaje.className = "mensaje " + tipo;
+            mensaje.textContent = texto;
+        }
+
+        if (!eventoId) {
+            mostrarMensaje("Falta el id del evento.", "error");
+            formReserva.style.display = "none";
+        } else {
+            Promise.all([
+                fetch("http://localhost/api-entradas/public/api/sesion", {
+                    method: "GET",
+                    credentials: "include"
+                }).then(leerJsonSeguro),
+                fetch("http://localhost/api-entradas/public/api/eventos/" + encodeURIComponent(eventoId))
+                    .then(leerJsonSeguro)
+            ])
+                .then(([sesion, eventoRes]) => {
+                    if (!sesion.logueado) {
+                        throw new Error("Debes iniciar sesion para reservar.");
+                    }
+
+                    usuarioId = sesion.usuario_id;
+
+                    if (!eventoRes.data) {
+                        throw new Error(eventoRes.error || "No se pudo cargar el evento.");
+                    }
+
+                    const evento = eventoRes.data;
+
+                    resumenEvento.innerHTML =
+                        "<strong>Evento:</strong> " + evento.nombre + "<br>" +
+                        "<strong>Fecha:</strong> " + evento.fecha + "<br>" +
+                        "<strong>Ubicacion:</strong> " + evento.ubicacion + "<br>" +
+                        "<strong>Disponibles:</strong> " + evento.entradas_disponibles;
+
+                    if (sesion.email) {
+                        document.getElementById("email").value = sesion.email;
+                    }
+                })
+                .catch(err => {
+                    mostrarMensaje(err.message, "error");
+                    formReserva.style.display = "none";
+                });
+        }
+
+        formReserva.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            if (!usuarioId) {
+                mostrarMensaje("Sesion no valida. Inicia sesion de nuevo.", "error");
+                return;
+            }
+
+            const cantidad = parseInt(document.getElementById("cantidad").value, 10);
+
+            if (!Number.isInteger(cantidad) || cantidad <= 0) {
+                mostrarMensaje("La cantidad debe ser un numero mayor que 0.", "error");
+                return;
+            }
+
+            fetch("http://localhost/api-entradas/public/api/reservas", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                credentials: "include",
+                body: JSON.stringify({
+                    usuario_id: usuarioId,
+                    evento_id: parseInt(eventoId, 10),
+                    cantidad: cantidad
+                })
+            })
+                .then(async res => {
+                    const data = await leerJsonSeguro(res);
+
+                    if (!res.ok) {
+                        throw new Error(data.error || "No se pudo realizar la reserva.");
+                    }
+
+                    return data;
+                })
+                .then(data => {
+                    mostrarMensaje(data.message || "Reserva realizada correctamente.", "ok");
+                    setTimeout(() => {
+                        window.location.href = "eventos.html";
+                    }, 1200);
+                })
+                .catch(err => {
+                    mostrarMensaje(err.message, "error");
+                });
+        });
+    </script>
+</body>
+
+</html>

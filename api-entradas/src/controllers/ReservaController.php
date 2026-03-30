@@ -10,7 +10,8 @@ class ReservaController {
     public static function store() {
         global $pdo;
 
-        $data = json_decode(file_get_contents("php://input"), true);
+        try {
+            $data = json_decode(file_get_contents("php://input"), true);
 
         // Validación mínima
         if (!isset($data["usuario_id"]) || !isset($data["evento_id"]) || !isset($data["cantidad"])) {
@@ -38,11 +39,15 @@ class ReservaController {
         Reserva::create($pdo, $data);
 
         // Actualizar disponibilidad
-        Evento::update($pdo, $evento["id"], [
-            "entradas_disponibles" => $evento["entradas_disponibles"] - $data["cantidad"]
-        ]);
+        $nuevasDisponibles = $evento["entradas_disponibles"] - $data["cantidad"];
+        $stmt = $pdo->prepare("UPDATE eventos SET entradas_disponibles = ? WHERE id = ?");
+        $stmt->execute([$nuevasDisponibles, $evento["id"]]);
 
-        echo json_encode(["status" => "success", "message" => "Reserva realizada"]);
+            echo json_encode(["status" => "success", "message" => "Reserva realizada"]);
+        } catch (Exception $e) {
+            http_response_code(500);
+            echo json_encode(["error" => "Error interno al crear la reserva"]);
+        }
     }
 
 
