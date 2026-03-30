@@ -50,6 +50,20 @@ class ReservaController {
         }
     }
 
+    // LISTAR RESERVAS DEL USUARIO LOGUEADO
+    public static function misReservas() {
+        global $pdo;
+
+        if (!isset($_SESSION["usuario_id"])) {
+            http_response_code(401);
+            echo json_encode(["error" => "Debes iniciar sesion"]);
+            return;
+        }
+
+        $reservas = Reserva::findByUser($pdo, $_SESSION["usuario_id"]);
+        echo json_encode(["status" => "success", "data" => $reservas]);
+    }
+
 
     // LISTAR RESERVAS DE UN USUARIO
     public static function reservasUsuario($usuario_id) {

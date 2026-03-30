@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis reservas</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            color: #1f2937;
+            padding: 24px;
+        }
+
+        .contenedor {
+            max-width: 920px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            padding: 24px;
+        }
+
+        h1 {
+            margin-top: 0;
+        }
+
+        .acciones {
+            margin-bottom: 16px;
+        }
+
+        .acciones a {
+            display: inline-block;
+            padding: 8px 12px;
+            border-radius: 8px;
+            background: #e5e7eb;
+            color: #111827;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 10px;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 14px;
+        }
+
+        th {
+            background: #f8fafc;
+        }
+
+        .mensaje {
+            margin-top: 10px;
+            font-size: 14px;
+            min-height: 20px;
+        }
+
+        .error {
+            color: #b91c1c;
+        }
+
+        .vacio {
+            padding: 18px;
+            background: #f8fafc;
+            border: 1px dashed #cbd5e1;
+            border-radius: 8px;
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 12px;
+            }
+
+            .contenedor {
+                padding: 14px;
+            }
+
+            th,
+            td {
+                font-size: 12px;
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="contenedor">
+        <h1>Mis reservas</h1>
+        <div class="acciones">
+            <a href="eventos.html">Volver a eventos</a>
+        </div>
+
+        <div id="contenido"></div>
+        <div class="mensaje" id="mensaje"></div>
+    </div>
+
+    <script>
+        const contenido = document.getElementById("contenido");
+        const mensaje = document.getElementById("mensaje");
+
+        async function leerJsonSeguro(res) {
+            const texto = await res.text();
+            try {
+                return JSON.parse(texto);
+            } catch (e) {
+                throw new Error("El servidor devolvio una respuesta invalida.");
+            }
+        }
+
+        function mostrarError(texto) {
+            mensaje.className = "mensaje error";
+            mensaje.textContent = texto;
+        }
+
+        function formatearFecha(valor) {
+            if (!valor) {
+                return "-";
+            }
+            const fecha = new Date(valor);
+            if (Number.isNaN(fecha.getTime())) {
+                return valor;
+            }
+            return fecha.toLocaleString("es-ES");
+        }
+
+        fetch("http://localhost/api-entradas/public/api/mis-reservas", {
+            method: "GET",
+            credentials: "include"
+        })
+            .then(async res => {
+                const data = await leerJsonSeguro(res);
+                if (!res.ok) {
+                    throw new Error(data.error || "No se pudieron cargar las reservas.");
+                }
+                return data;
+            })
+            .then(data => {
+                const reservas = data.data || [];
+
+                if (reservas.length === 0) {
+                    contenido.innerHTML = '<div class="vacio">Aun no tienes reservas.</div>';
+                    return;
+                }
+
+                let filas = "";
+                reservas.forEach((reserva) => {
+                    filas += `
+                        <tr>
+                            <td>${reserva.id}</td>
+                            <td>${reserva.evento_nombre || "-"}</td>
+                            <td>${reserva.cantidad}</td>
+                            <td>${formatearFecha(reserva.evento_fecha)}</td>
+                            <td>${formatearFecha(reserva.fecha_reserva)}</td>
+                        </tr>
+                    `;
+                });
+
+                contenido.innerHTML = `
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Evento</th>
+                                <th>Cantidad</th>
+                                <th>Fecha evento</th>
+                                <th>Fecha reserva</th>
+                            </tr>
+                        </thead>
+                        <tbody>${filas}</tbody>
+                    </table>
+                `;
+            })
+            .catch(err => {
+                mostrarError(err.message);
+            });
+    </script>
+</body>
+
+</html>

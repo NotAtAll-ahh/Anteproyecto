@@ -42,6 +42,7 @@
 <body>
 
     <h1>Eventos disponibles</h1>
+    <div id="accionesUsuario"></div>
 
     <div id="listaEventos"></div>
 
@@ -59,6 +60,9 @@
                 if (data.logueado) {
                     usuarioRol = data.rol;
                     usuarioId = data.usuario_id;
+
+                    const acciones = document.getElementById("accionesUsuario");
+                    acciones.innerHTML = `<button onclick="verMisReservas()">Ver mis reservas</button>`;
                 }
 
                 cargarEventos();
@@ -124,6 +128,10 @@
 
         function reservar(id) {
             window.location.href = "reservar.html?evento_id=" + encodeURIComponent(id);
+        }
+
+        function verMisReservas() {
+            window.location.href = "mis_reservas.html";
         }
     </script>
 

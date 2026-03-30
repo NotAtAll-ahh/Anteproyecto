@@ -87,6 +87,10 @@ switch (true) {
     case $uri === '/api/reservas' && $method === 'POST':
         ReservaController::store();
         break;
+    //Listar reservas del usuario logueado
+    case $uri === '/api/mis-reservas' && $method === 'GET':
+        ReservaController::misReservas();
+        break;
     //Caso por defecto (ruta no encontrada)
     default:
         http_response_code(404);
