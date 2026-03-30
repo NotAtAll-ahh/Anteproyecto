@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Eventos</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #f4f4f4;
+            padding: 40px;
+        }
+
+        .evento {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .evento img {
+            width: 100%;
+            max-height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .botones {
+            margin-top: 10px;
+        }
+
+        button {
+            padding: 8px 15px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Eventos disponibles</h1>
+
+    <div id="listaEventos"></div>
+
+    <script>
+        let usuarioRol = null;
+
+        // 1. Comprobar sesión para saber si es admin o cliente
+        fetch("http://localhost/api-entradas/public/api/sesion", {
+            method: "GET",
+            credentials: "include"
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.logueado) {
+                    usuarioRol = data.rol;
+                }
+
+                cargarEventos();
+            });
+
+        // 2. Cargar todos los eventos
+        function cargarEventos() {
+            fetch("http://localhost/api-entradas/public/api/eventos")
+                .then(res => res.json())
+                .then(data => {
+                    const lista = document.getElementById("listaEventos");
+                    lista.innerHTML = "";
+
+                    data.data.forEach(evento => {
+                        const div = document.createElement("div");
+                        div.className = "evento";
+
+                        // Imagen del evento
+                        let imagen = evento.imagen
+                            ? "http://localhost/api-entradas/public" + evento.imagen
+                            : "https://via.placeholder.com/600x300?text=Sin+imagen";
+
+                        div.innerHTML = `
+                <img src="${imagen}" alt="Imagen del evento">
+
+                <h2>${evento.nombre}</h2>
+                <p><strong>Descripción:</strong> ${evento.descripcion}</p>
+                <p><strong>Ubicación:</strong> ${evento.ubicacion}</p>
+                <p><strong>Fecha:</strong> ${evento.fecha}</p>
+                <p><strong>Entradas disponibles:</strong> ${evento.entradas_disponibles} / ${evento.entradas_totales}</p>
+
+                <div class="botones" id="botones-${evento.id}"></div>
+            `;
+
+                        lista.appendChild(div);
+
+                        // 3. Añadir botones según el rol
+                        const contenedorBotones = document.getElementById(`botones-${evento.id}`);
+
+                        if (usuarioRol === "admin") {
+                            contenedorBotones.innerHTML += `
+                    <button onclick="editar(${evento.id})">Editar</button>
+                    <button onclick="eliminar(${evento.id})">Eliminar</button>
+                    <button onclick="reservar(${evento.id})">Reservar</button>
+                `;
+                        } else {
+                            contenedorBotones.innerHTML += `
+                    <button onclick="reservar(${evento.id})">Reservar</button>
+                `;
+                        }
+                    });
+                });
+        }
+
+        // 4. Funciones vacías (las implementaremos después)
+        function editar(id) {
+            window.location.href = "editar_evento.html?id=" + id;
+        }
+
+        function eliminar(id) {
+            alert("Función eliminar pendiente");
+        }
+
+        function reservar(id) {
+            alert("Función reservar pendiente");
+        }
+    </script>
+
+</body>
+
+</html>
