@@ -20,7 +20,7 @@ switch (true) {
     case $uri === '/api/eventos' && $method === 'GET':
         EventoController::index();
         break;
-        
+
     //Muestra un evento específico
     case preg_match('#^/api/eventos/(\d+)$#', $uri, $matches) && $method === 'GET':
         EventoController::show($matches[1]);
@@ -31,11 +31,14 @@ switch (true) {
         break;
     //Crea un nuevo evento
     case $uri === '/api/eventos' && $method === 'POST':
+        UsuarioController::requireAdmin(); //solo admins pueden crear eventos
         EventoController::store();
+
         break;
 
     //Actualiza un evento existente
     case preg_match('#^/api/eventos/(\d+)$#', $uri, $matches) && $method === 'PUT':
+        UsuarioController::requireAdmin(); //solo admins pueden actualizar eventos
         EventoController::update($matches[1]);
         break;
 
@@ -48,6 +51,30 @@ switch (true) {
     case $uri === '/api/login' && $method === 'POST':
         UsuarioController::login();
         break;
+
+    //ruta para ver si hay sesión activa
+    case $uri === '/api/sesion' && $method === 'GET':
+        UsuarioController::sesion();
+        break;
+
+    //Logout de usuario
+    case $uri === '/api/logout' && $method === 'POST':
+        UsuarioController::logout();
+        break;
+
+    //Mostrar perfil de usuario
+    case preg_match('#^/api/usuarios/(\d+)$#', $uri, $matches) && $method === 'GET':
+        UsuarioController::show($matches[1]);
+        break;
+    //subir foto de perfil
+    case preg_match('#^/api/usuarios/(\d+)/foto$#', $uri, $matches) && $method === 'POST':
+        UsuarioController::uploadFotoDePerfil($matches[1]);
+        break;
+    //Actualizar perfil de usuario
+    case preg_match('#^/api/usuarios/(\d+)$#', $uri, $matches) && $method === 'PUT':
+        UsuarioController::update($matches[1]);
+        break;
+
 
     // RESERVAS
     //Crear una reserva

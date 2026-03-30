@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Panel de Usuario</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            padding: 40px;
+        }
+
+        .panel {
+            max-width: 400px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .foto-perfil {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #ddd;
+            margin-bottom: 15px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        input[type="file"] {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="panel">
+        <h2>Mi Perfil</h2>
+
+        <img id="foto" class="foto-perfil" src="" alt="Foto de perfil">
+
+        <h3 id="nombre"></h3>
+        <p id="email"></p>
+        <p id="rol"></p>
+
+        <hr>
+
+        <h4>Editar mis datos</h4>
+
+        <input type="text" id="editNombre" placeholder="Nuevo nombre"><br><br>
+        <input type="email" id="editEmail" placeholder="Nuevo email"><br><br>
+        <input type="password" id="editPassword" placeholder="Nueva contraseña (opcional)"><br><br>
+
+        <button onclick="actualizarPerfil()">Guardar cambios</button>
+
+
+        <h4>Cambiar foto de perfil</h4>
+        <input type="file" id="nuevaFoto">
+        <button onclick="subirFoto()">Subir nueva foto</button>
+
+        <hr>
+
+        <div id="adminPanel" style="display:none;">
+            <h3>Panel de administrador</h3>
+            <a href="crear_evento.html">Crear evento</a>
+        </div>
+
+
+        <button onclick="logout()">Cerrar sesión</button>
+    </div>
+
+    <script>
+        let usuarioId = null;
+
+        // 1. Comprobar si hay sesión activa
+        fetch("http://localhost/api-entradas/public/api/sesion", {
+            method: "GET",
+            credentials: "include"
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (!data.logueado) {
+                    alert("Debes iniciar sesión");
+                    window.location.href = "test.html";
+                    return;
+                }
+
+                usuarioId = data.usuario_id;
+                cargarPerfil();
+            });
+
+        // 2. Cargar datos del usuario
+        function cargarPerfil() {
+            fetch(`http://localhost/api-entradas/public/api/usuarios/${usuarioId}`, {
+                method: "GET",
+                credentials: "include"
+            })
+                .then(res => res.json())
+                .then(data => {
+                    const usuario = data.data;
+
+                    document.getElementById("nombre").textContent = usuario.nombre ?? "Sin nombre";
+                    document.getElementById("email").textContent = usuario.email;
+                    document.getElementById("rol").textContent = "Rol: " + usuario.rol;
+
+
+                    //editar datos
+                    document.getElementById("editNombre").value = usuario.nombre ?? "";
+                    document.getElementById("editEmail").value = usuario.email ?? "";
+
+                    // Foto de perfil
+                    if (usuario.foto_perfil) {
+                        document.getElementById("foto").src = "http://localhost/api-entradas/public" + usuario.foto_perfil;
+                    } else {
+                        document.getElementById("foto").src = "https://via.placeholder.com/150";
+                    }
+
+                    // Mostrar panel admin si el rol es admin
+                    if (usuario.rol === "admin") {
+                        document.getElementById("adminPanel").style.display = "block";
+                    }
+                });
+        }
+
+        // 3. Subir nueva foto
+        function subirFoto() {
+            const archivo = document.getElementById("nuevaFoto").files[0];
+            if (!archivo) {
+                alert("Selecciona una imagen");
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append("imagen", archivo);
+
+            fetch(`http://localhost/api-entradas/public/api/usuarios/${usuarioId}/foto`, {
+                method: "POST",
+                credentials: "include",
+                body: formData
+            })
+                .then(res => res.json())
+                .then(data => {
+                    alert("Foto actualizada");
+                    cargarPerfil();
+                });
+        }
+
+        // 4. Logout
+        function logout() {
+            fetch("http://localhost/api-entradas/public/api/logout", {
+                method: "POST",
+                credentials: "include"
+            })
+                .then(() => {
+                    alert("Sesión cerrada");
+                    window.location.href = "test.html";
+                });
+        }
+
+        // 5. Actualizar perfil
+        function actualizarPerfil() {
+            const nombre = document.getElementById("editNombre").value;
+            const email = document.getElementById("editEmail").value;
+            const password = document.getElementById("editPassword").value;
+
+            const data = {};
+
+            if (nombre.trim() !== "") data.nombre = nombre;
+            if (email.trim() !== "") data.email = email;
+            if (password.trim() !== "") data.password = password;
+
+            fetch(`http://localhost/api-entradas/public/api/usuarios/${usuarioId}`, {
+                method: "PUT",
+                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            })
+                .then(res => res.json())
+                .then(data => {
+                    alert("Perfil actualizado");
+                    cargarPerfil(); // Recargar datos actualizados
+                });
+        }
+
+    </script>
+
+</body>
+
+</html>

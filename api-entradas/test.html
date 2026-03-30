@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Test API</title>
 </head>
+
 <body>
     <h2>Test Registro de Usuario</h2>
-    <form >
+    <form>
         <input type="text" id="nombre" placeholder="Nombre">
         <input type="email" id="email" placeholder="Email">
         <input type="password" id="password" placeholder="Password">
@@ -15,16 +17,26 @@
         <button type="button" onclick="registrarUsuario()">Registrar</button>
     </form>
 
-    <form >
+    <h2>Test Login de Usuario </h2>
+    <form>
         <input type="email" id="emailU" placeholder="Email">
         <input type="password" id="passwordU" placeholder="Password">
         <button type="button" onclick="iniciarSesionUsuario()">Iniciar Sesion</button>
+        <button type="button" onclick="window.location.href='panel.html'">Ir al Panel</button>
     </form>
 
     <pre id="resultadoUsuario"></pre>
 
+    <h2>Acciones</h2>
+    <button onclick="verSesion()">Ver sesión</button>
+    <button onclick="logout()">Cerrar sesión</button>
+
+    <pre id="resultado"></pre>
+
+
+
     <script>
-        function registrarUsuario(){
+        function registrarUsuario() {
             const data = {
                 nombre: document.getElementById("nombre").value,
                 email: document.getElementById("email").value,
@@ -32,18 +44,18 @@
                 foto_perfil: document.getElementById("foto_perfil").files[0]
             };
 
-            fetch( "http://localhost/api-entradas/public/api/usuarios", {
+            fetch("http://localhost/api-entradas/public/api/usuarios", {
                 method: "POST",
                 headers: { 'Content-Type': 'application/json; charset=UTF-8' },
                 body: JSON.stringify(data)
             })
-            .then((respuesta) => {
+                .then((respuesta) => {
                     if (respuesta.ok) return respuesta.json();
                     throw new Error('Error en la red');
 
-            }).then(datos => {
+                }).then(datos => {
                     console.log(datos);
-            }).catch(error => console.error("Error ", error));
+                }).catch(error => console.error("Error ", error));
         }
 
         function iniciarSesionUsuario() {
@@ -55,24 +67,49 @@
             fetch("http://localhost/api-entradas/public/api/login", {
                 method: "POST",
                 headers: { 'Content-Type': 'application/json; charset=UTF-8' },
+                credentials: "include", // IMPORTANTE: permite enviar cookies de sesión
                 body: JSON.stringify(data)
             })
-            .then((respuesta) => {
-                if (respuesta.ok) return respuesta.json();
-                return respuesta.json().then((error) => {
-                    throw new Error(error.error || 'Error en el login');
+                .then((respuesta) => {
+                    if (respuesta.ok) return respuesta.json();
+                    return respuesta.json().then((error) => {
+                        throw new Error(error.error || 'Error en el login');
+                    });
+                })
+                .then((loginData) => {
+                    console.log(loginData);
+                    document.getElementById("resultadoUsuario").textContent = JSON.stringify(loginData.usuario, null, 2);
+                })
+                .catch(error => {
+                    console.error("Error ", error);
+                    document.getElementById("resultadoUsuario").textContent = error.message;
                 });
-            })
-            .then((loginData) => {
-                console.log(loginData);
-                document.getElementById("resultadoUsuario").textContent = JSON.stringify(loginData.usuario, null, 2);
-            })
-            .catch(error => {
-                console.error("Error ", error);
-                document.getElementById("resultadoUsuario").textContent = error.message;
-            });
         }
-        
+        function verSesion() {
+            fetch("http://localhost/api-entradas/public/api/sesion", {
+                method: "GET",
+                credentials: "include"
+            })
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById("resultadoUsuario").textContent = JSON.stringify(data, null, 2);
+                });
+        }
+
+        function logout() {
+            fetch("http://localhost/api-entradas/public/api/logout", {
+                method: "POST",
+                credentials: "include"
+            })
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById("resultado").textContent = JSON.stringify(data, null, 2);
+                });
+        }
+
+
+
     </script>
 </body>
+
 </html>

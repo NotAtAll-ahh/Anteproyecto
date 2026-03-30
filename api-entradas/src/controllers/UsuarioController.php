@@ -3,10 +3,12 @@
 require_once __DIR__ . '/../database/connection.php';
 require_once __DIR__ . '/../models/Usuario.php';
 
-class UsuarioController {
+class UsuarioController
+{
 
     // REGISTRO DE USUARIO
-    public static function store() {
+    public static function store()
+    {
         //usa la conexión global a la base de datos
         global $pdo;
 
@@ -19,6 +21,15 @@ class UsuarioController {
             echo json_encode(["error" => "Email y contraseña son obligatorios"]);
             return;
         }
+        // Comprobar si el email ya existe
+        $existe = Usuario::findByEmail($pdo, $data["email"]);
+
+        if ($existe) {
+            http_response_code(409); // 409 = conflicto
+            echo json_encode(["error" => "El email ya está registrado"]);
+            return;
+        }
+
 
         // Encriptar contraseña
         $data["password"] = password_hash($data["password"], PASSWORD_DEFAULT);
@@ -31,16 +42,11 @@ class UsuarioController {
 
 
     // LOGIN
-    public static function login() {
+    public static function login()
+    {
         global $pdo;
 
         $data = json_decode(file_get_contents("php://input"), true);
-
-        if (!isset($data["email"]) || !isset($data["password"])) {
-            http_response_code(400);
-            echo json_encode(["error" => "Email y contraseña son obligatorios"]);
-            return;
-        }
 
         $usuario = Usuario::findByEmail($pdo, $data["email"]);
 
@@ -49,17 +55,49 @@ class UsuarioController {
             echo json_encode(["error" => "Credenciales incorrectas"]);
             return;
         }
+        //crear sesión para el usuario
+        $_SESSION["usuario_id"] = $usuario["id"];
+        $_SESSION["usuario_email"] = $usuario["email"];
+        $_SESSION["usuario_rol"] = $usuario["rol"];
 
         echo json_encode([
             "status" => "success",
             "message" => "Login correcto",
-            "usuario" => $usuario
+            "usuario" => [
+                "id" => $usuario["id"],
+                "email" => $usuario["email"],
+                "rol" => $usuario["rol"]
+
+            ]
         ]);
+    }
+    // VER SI HAY SESIÓN ACTIVA
+    public static function sesion()
+    {
+        if (!isset($_SESSION["usuario_id"])) {
+            echo json_encode(["logueado" => false]);
+            return;
+        }
+
+        echo json_encode([
+            "logueado" => true,
+            "usuario_id" => $_SESSION["usuario_id"],
+            "email" => $_SESSION["usuario_email"],
+            "rol" => $_SESSION["usuario_rol"]
+        ]);
+    }
+
+    // LOGOUT
+    public static function logout()
+    {
+        session_destroy();
+        echo json_encode(["status" => "success", "message" => "Logout correcto"]);
     }
 
 
     // VER PERFIL
-    public static function show($id) {
+    public static function show($id)
+    {
         global $pdo;
 
         $usuario = Usuario::find($pdo, $id);
@@ -77,10 +115,22 @@ class UsuarioController {
 
 
     // ACTUALIZAR PERFIL
-    public static function update($id) {
+    public static function update($id)
+    {
         global $pdo;
 
         $data = json_decode(file_get_contents("php://input"), true);
+
+        // Si intenta cambiar el email, comprobar duplicado
+        if (isset($data["email"])) {
+            $existe = Usuario::findByEmail($pdo, $data["email"]);
+
+            if ($existe && $existe["id"] != $id) {
+                http_response_code(409);
+                echo json_encode(["error" => "Ese email ya está en uso por otro usuario"]);
+                return;
+            }
+        }
 
         if (isset($data["password"])) {
             $data["password"] = password_hash($data["password"], PASSWORD_DEFAULT);
@@ -92,27 +142,35 @@ class UsuarioController {
     }
 
     //Subir foto de perfil 
-    public static function uploadFotoDePerfil($id){
+    public static function uploadFotoDePerfil($id)
+    {
         global $pdo;
 
         if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === 0) {
 
-        $nombreArchivo = 'usuario_' . $id . '_' . time() . '.jpg';
-        $rutaDestino = __DIR__ . '/../../public/uploads/usuarios/' . $nombreArchivo;
+            $nombreArchivo = 'usuario_' . $id . '_' . time() . '.jpg';
+            $rutaDestino = __DIR__ . '/../../public/uploads/usuarios/' . $nombreArchivo;
 
-        move_uploaded_file($_FILES['imagen']['tmp_name'], $rutaDestino);
+            move_uploaded_file($_FILES['imagen']['tmp_name'], $rutaDestino);
 
-        // Guardar la ruta en la base de datos
-        $rutaBD = '/uploads/usuarios/' . $nombreArchivo;
+            // Guardar la ruta en la base de datos
+            $rutaBD = '/uploads/usuarios/' . $nombreArchivo;
 
-        $stmt = $pdo->prepare("UPDATE usuarios SET foto_perfil = ? WHERE id = ?");
-        $stmt->execute([$rutaBD, $id]);
+            $stmt = $pdo->prepare("UPDATE usuarios SET foto_perfil = ? WHERE id = ?");
+            $stmt->execute([$rutaBD, $id]);
 
-        echo json_encode(["status" => "success", "foto" => $rutaBD]);
-        exit;
+            echo json_encode(["status" => "success", "foto" => $rutaBD]);
+            exit;
+        }
     }
 
-
-
+    //Comprobar si el usuario es admin
+    public static function requireAdmin()
+    {
+        if (!isset($_SESSION["usuario_rol"]) || $_SESSION["usuario_rol"] !== 'admin') {
+            http_response_code(403);
+            echo json_encode(["error" => "Acceso denegado. Solo administradores."]);
+            exit;
+        }
     }
 }

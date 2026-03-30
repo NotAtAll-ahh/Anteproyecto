@@ -1,9 +1,11 @@
 <?php
 
-class Usuario {
+class Usuario
+{
 
     // Crear usuario nuevo
-    public static function create($pdo, $data) {
+    public static function create($pdo, $data)
+    {
         $stmt = $pdo->prepare("
             INSERT INTO usuarios (email, password, nombre)
             VALUES (?, ?, ?)
@@ -18,21 +20,24 @@ class Usuario {
     }
 
     // Buscar usuario por ID
-    public static function find($pdo, $id) {
+    public static function find($pdo, $id)
+    {
         $stmt = $pdo->prepare("SELECT * FROM usuarios WHERE id = ?");
         $stmt->execute([$id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     // Buscar usuario por email (para login)
-    public static function findByEmail($pdo, $email) {
+    public static function findByEmail($pdo, $email)
+    {
         $stmt = $pdo->prepare("SELECT * FROM usuarios WHERE email = ?");
         $stmt->execute([$email]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     // Actualizar usuario
-    public static function update($pdo, $id, $data) {
+    public static function update($pdo, $id, $data)
+    {
         // Construir consulta dinámica según los campos enviados
         $fields = [];
         $values = [];
@@ -50,6 +55,10 @@ class Usuario {
         $stmt->execute($values);
     }
 
-
-
+    //Subir foto de perfil
+    public static function uploadFotoDePerfil($pdo, $id, $ruta)
+    {
+        $stmt = $pdo->prepare("UPDATE usuarios SET foto_perfil = ? WHERE id = ?");
+        $stmt->execute([$ruta, $id]);
+    }
 }
