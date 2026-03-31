@@ -48,6 +48,13 @@ switch (true) {
         EventoController::uploadImagen($matches[1]);
         break;
 
+    // Eliminar un evento
+    case preg_match('#^/api/eventos/(\d+)$#', $uri, $matches) && $method === 'DELETE':
+        UsuarioController::requireAdmin(); // solo admin
+        EventoController::destroy($matches[1]);
+        break;
+
+
     // USUARIOS
     //Registro de usuario
     case $uri === '/api/usuarios' && $method === 'POST':

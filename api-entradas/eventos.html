@@ -117,14 +117,31 @@
                 });
         }
 
-        // 4. Funciones vacías (las implementaremos después)
+        // 4. Funciones
         function editar(id) {
             window.location.href = "editar_evento.html?id=" + id;
         }
 
         function eliminar(id) {
-            alert("Función eliminar pendiente");
+    if (!confirm("¿Seguro que deseas eliminar este evento? Esta acción no se puede deshacer.")) {
+        return;
+    }
+
+    fetch(`http://localhost/api-entradas/public/api/eventos/${id}`, {
+        method: "DELETE",
+        credentials: "include"
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.error) {
+            alert("Error: " + data.error);
+        } else {
+            alert("Evento eliminado correctamente");
+            cargarEventos(); // refrescar lista
         }
+    });
+}
+
 
         function reservar(id) {
             window.location.href = "reservar.html?evento_id=" + encodeURIComponent(id);
