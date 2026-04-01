@@ -17,6 +17,8 @@ class Usuario
             //si no se envía el nombre, se pone null 
             $data["nombre"] ?? null
         ]);
+
+        return $pdo->lastInsertId();
     }
 
     // Buscar usuario por ID

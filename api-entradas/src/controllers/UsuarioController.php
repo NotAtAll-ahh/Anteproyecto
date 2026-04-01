@@ -35,9 +35,9 @@ class UsuarioController
         $data["password"] = password_hash($data["password"], PASSWORD_DEFAULT);
 
         // Crear usuario
-        Usuario::create($pdo, $data);
+        $nuevoId = Usuario::create($pdo, $data);
 
-        echo json_encode(["status" => "success", "message" => "Usuario registrado"]);
+        echo json_encode(["status" => "success", "message" => "Usuario registrado", "id" => $nuevoId]);
     }
 
 
@@ -146,22 +146,35 @@ class UsuarioController
     {
         global $pdo;
 
-        if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === 0) {
-
-            $nombreArchivo = 'usuario_' . $id . '_' . time() . '.jpg';
-            $rutaDestino = __DIR__ . '/../../public/uploads/usuarios/' . $nombreArchivo;
-
-            move_uploaded_file($_FILES['imagen']['tmp_name'], $rutaDestino);
-
-            // Guardar la ruta en la base de datos
-            $rutaBD = '/uploads/usuarios/' . $nombreArchivo;
-
-            $stmt = $pdo->prepare("UPDATE usuarios SET foto_perfil = ? WHERE id = ?");
-            $stmt->execute([$rutaBD, $id]);
-
-            echo json_encode(["status" => "success", "foto" => $rutaBD]);
-            exit;
+        if (!isset($_FILES['imagen']) || $_FILES['imagen']['error'] !== 0) {
+            http_response_code(400);
+            echo json_encode(["error" => "No se recibió ninguna imagen o hubo un error en la subida"]);
+            return;
         }
+
+        $dirDestino = __DIR__ . '/../../public/uploads/usuarios/';
+
+        // Crear el directorio si no existe
+        if (!is_dir($dirDestino)) {
+            mkdir($dirDestino, 0755, true);
+        }
+
+        $nombreArchivo = 'usuario_' . $id . '_' . time() . '.jpg';
+        $rutaDestino = $dirDestino . $nombreArchivo;
+
+        if (!move_uploaded_file($_FILES['imagen']['tmp_name'], $rutaDestino)) {
+            http_response_code(500);
+            echo json_encode(["error" => "No se pudo guardar la imagen en el servidor"]);
+            return;
+        }
+
+        // Guardar la ruta en la base de datos
+        $rutaBD = '/uploads/usuarios/' . $nombreArchivo;
+
+        $stmt = $pdo->prepare("UPDATE usuarios SET foto_perfil = ? WHERE id = ?");
+        $stmt->execute([$rutaBD, $id]);
+
+        echo json_encode(["status" => "success", "foto" => $rutaBD]);
     }
 
     //Comprobar si el usuario es admin
