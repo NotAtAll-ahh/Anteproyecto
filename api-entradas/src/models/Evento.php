@@ -38,4 +38,11 @@ class Evento {
             $id
         ]);
     }
+//ELIMINAR EVENTO
+    public static function delete($pdo, $id)
+{
+    $stmt = $pdo->prepare("DELETE FROM eventos WHERE id = ?");
+    $stmt->execute([$id]);
+}
+
 }
