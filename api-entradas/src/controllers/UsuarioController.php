@@ -16,20 +16,30 @@ class UsuarioController
         $data = json_decode(file_get_contents("php://input"), true);
 
         // Validación mínima
-        if (!isset($data["email"]) || !isset($data["password"])) {
+        if (
+            !isset($data["email"]) || empty(trim($data["email"])) ||
+            !isset($data["password"]) || empty(trim($data["password"])) ||
+            !isset($data["nombre"]) || empty(trim($data["nombre"]))
+        ) {
             http_response_code(400);
-            echo json_encode(["error" => "Email y contraseña son obligatorios"]);
+            echo json_encode(["error" => "Nombre, email y contraseña son obligatorios"]);
             return;
         }
+
+        // Validar email
+        if (!filter_var($data["email"], FILTER_VALIDATE_EMAIL)) {
+            http_response_code(400);
+            echo json_encode(["error" => "El email no es válido"]);
+            return;
+        }
+
         // Comprobar si el email ya existe
         $existe = Usuario::findByEmail($pdo, $data["email"]);
-
         if ($existe) {
-            http_response_code(409); // 409 = conflicto
+            http_response_code(409);
             echo json_encode(["error" => "El email ya está registrado"]);
             return;
         }
-
 
         // Encriptar contraseña
         $data["password"] = password_hash($data["password"], PASSWORD_DEFAULT);
@@ -37,8 +47,13 @@ class UsuarioController
         // Crear usuario
         $nuevoId = Usuario::create($pdo, $data);
 
-        echo json_encode(["status" => "success", "message" => "Usuario registrado", "id" => $nuevoId]);
+        echo json_encode([
+            "status" => "success",
+            "message" => "Usuario registrado",
+            "id" => $nuevoId
+        ]);
     }
+
 
 
     // LOGIN
