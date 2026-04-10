@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styleHome.css">
+    <!--iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Resultados de Búsqueda</title>
+</head>
+
+<body>
+    <section class="concerts-section content-container">
+        <div class="section-header-line">
+            <h2>Resultados de Búsqueda</h2>
+            <div class="expand-control">
+                <span>DESPLIEGA LA SECCIÓN</span>
+                <i class="fas fa-chevron-down" onclick="displayEventos(); cargarEventos();"></i>
+            </div>
+        </div>
+
+        <div class="lista-eventos" id="conciertos">
+
+        </div>
+
+    </section>
+    <script>
+
+        //Leer parámetros de la URL
+        window.onload = function () {
+            const params = new URLSearchParams(window.location.search);
+
+            const nombre = params.get("nombre") || "";
+            const fecha = params.get("fecha") || "todas";
+
+            buscarEventos(nombre, fecha);
+        };
+
+        //Buscar eventos por nombre y fecha
+function buscarEventos(nombre, fechaFiltro) {
+
+    let url = "http://localhost/api-entradas/public/api/eventos/buscar?";
+
+    // Añadir nombre si existe
+    if (nombre.trim() !== "") {
+        url += "nombre=" + encodeURIComponent(nombre);
+    }
+
+    // Procesar filtro de fecha
+    if (fechaFiltro && fechaFiltro !== "todas") {
+
+        let fechaReal = null;
+        const hoy = new Date();
+
+        // FILTRO: HOY
+        if (fechaFiltro === "hoy") {
+            fechaReal = hoy.toISOString().split("T")[0];
+        }
+
+        // FILTRO: FIN DE SEMANA (sábado más cercano)
+        if (fechaFiltro === "fin-de-semana") {
+            const dia = hoy.getDay(); // 0=domingo, 6=sábado
+            const sabado = new Date(hoy);
+            sabado.setDate(hoy.getDate() + (6 - dia));
+            fechaReal = sabado.toISOString().split("T")[0];
+        }
+
+        // FILTRO: ESTE MES (primer día del mes)
+        if (fechaFiltro === "mes") {
+            const año = hoy.getFullYear();
+            const mes = String(hoy.getMonth() + 1).padStart(2, "0");
+            fechaReal = `${año}-${mes}-01`;
+        }
+
+        // Si se generó una fecha válida, añadirla a la URL
+        if (fechaReal) {
+            if (url.includes("=")) url += "&";
+            url += "fecha=" + encodeURIComponent(fechaReal);
+        }
+    }
+
+    console.log("URL generada:", url);
+
+    // Petición a la API
+    fetch(url)
+        .then(res => res.json())
+        .then(data => {
+            const listaEventos = document.getElementById("conciertos");
+            listaEventos.innerHTML = "";
+
+            if (!data.data || data.data.length === 0) {
+                listaEventos.innerHTML = "<p>No se encontraron eventos.</p>";
+                return;
+            }
+
+            data.data.forEach(evento => {
+                const div = document.createElement("div");
+                div.className = "event-card";
+
+                const img = document.createElement("img");
+                img.src = evento.imagen
+                    ? "http://localhost/api-entradas/public" + evento.imagen
+                    : "https://via.placeholder.com/600x300?text=Sin+imagen";
+
+                const titulo = document.createElement("h3");
+                titulo.textContent = evento.nombre;
+
+                const fecha = document.createElement("p");
+                fecha.textContent = "Fecha: " + evento.fecha;
+
+                div.appendChild(img);
+                div.appendChild(titulo);
+                div.appendChild(fecha);
+
+                listaEventos.appendChild(div);
+            });
+        });
+}
+
+
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,328 @@
+/* --- Global Styles (Reuse from previous page) --- */
+body {
+    background-color: #000;
+    color: white;
+    font-family: sans-serif;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+/* Header*/
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+}
+
+.logo-box {
+    border: 1px solid white;
+    padding: 5px 15px;
+    font-size: 0.8rem;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid white;
+    width: 400px;
+}
+
+.search-bar input {
+    background: transparent;
+    border: none;
+    color: white;
+    padding: 5px;
+    width: 100%;
+}
+
+.search-bar input::placeholder {
+    color: white;
+    opacity: 0.7;
+}
+
+.user-icon-circle {
+    width: 40px;
+    height: 40px;
+    background-color: #3b6182;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+}
+
+/* Layout Container */
+.content-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+/* --- Banner--- */
+.banner {
+    height: 70vh;
+    background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1514525253361-bee8718a7439?q=80&w=1964&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding-left: 80px;
+}
+
+.banner-contenido{
+    max-width: 700px;
+}
+
+.banner-titulo {
+    font-size: 4rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+    line-height: 1;
+}
+
+.banner-texto{
+    border: 1px solid white;
+    padding: 10px 20px;
+    display: inline-block;
+    font-size: 0.9rem;
+    margin-bottom: 30px;
+}
+
+.banner-comprar-btn {
+    display: block;
+    background: rgba(255, 255, 255, 0.3);
+    border: none;
+    color: white;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    backdrop-filter: blur(5px);
+}
+
+.carrusel-flecha {
+    position: absolute;
+    right: 40px;
+    font-size: 3rem;
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+/* --- Filtros Section --- */
+.filtros-section {
+    background-color: #1a2a3a;
+    padding: 30px 0;
+    color: white;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.filtro-label {
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+}
+
+/* Formulario búsqueda */
+.search-filtro-bar {
+    border: 1px solid white;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    padding: 5px 10px 5px 30px;
+    margin-bottom: 20px;
+}
+
+.filtro-item {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.date-wrapper {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    width: 100%;
+}
+
+.calendar-icon {
+    font-size: 1.8rem;
+    margin-right: 15px;
+}
+
+.filtro-texto {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.main-label {
+    font-weight: bold;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+}
+
+/* Filtro Fecha*/
+.select-fecha, #nombre-input {
+    background: transparent;
+    border: none;
+    color: white;
+    outline: none;
+    font-size: 0.85rem;
+    width: 100%;
+    appearance: none; /* Removes default browser arrow */
+    cursor: pointer;
+}
+
+.select-fecha option {
+    background-color: #1a2a3a;
+    color: white;
+}
+
+.filtro-divider {
+    width: 1px;
+    height: 35px;
+    background: rgba(255, 255, 255, 0.3);
+    margin: 0 20px;
+}
+
+/*Buscar Botón */
+.search-submit-btn {
+    background-color: #ff3366; /* Example brand color, change as needed */
+    color: white;
+    border: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-submit-btn:hover {
+    transform: scale(1.05);
+    background-color: #ff5588;
+}
+
+.small-arrow {
+    font-size: 0.6rem;
+    margin-left: 5px;
+}
+
+
+/* --- Conciertos --- */
+.concerts-section {
+    padding: 50px 20px;
+}
+
+.section-header-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+    padding: 15px 0;
+    margin-bottom: 30px;
+}
+
+.section-header-line h2 {
+    font-weight: 300;
+    letter-spacing: 2px;
+}
+
+.expand-control {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 0.7rem;
+}
+
+.expand-control i {
+    font-size: 1.5rem;
+    rotate: 180deg;
+    transition: 400ms ease;
+    cursor: pointer;
+}
+
+.conciertos {
+    display: none;
+}
+
+.lista-eventos{
+    display: none;
+    gap: 20px;
+    overflow-x: auto;
+    padding-bottom: 20px;
+    
+}
+.lista-eventos::-webkit-scrollbar {
+    width: 30%;
+    height: 10px;
+    
+   
+}
+.lista-eventos::-webkit-scrollbar-track{
+    background: transparent;
+    border: 1px solid white;
+    border-radius: 10px;
+    margin-top: 40px;
+    overflow: hidden;
+    
+}
+
+.lista-eventos::-webkit-scrollbar-thumb {
+    background: linear-gradient(90deg, #4b6cb7, #9b59b6);
+    border-radius: 10px;
+    height: 10px;
+}
+
+
+.event-card {
+    min-width: 280px;
+}
+
+.card-img {
+    background-color: #444;
+    background-size: cover;
+    background-position: center;
+    aspect-ratio: 2/3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.7rem;
+    color: #ccc;
+    margin-bottom: 15px;
+}
+
+.event-card h3 {
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
+.event-card p {
+    font-size: 0.7rem;
+    opacity: 0.7;
+}
+
+/* Progress bar at bottom */
+.scroll-progress-bg {
+    width: 100%;
+    height: 6px;
+    border: 1px solid white;
+    border-radius: 10px;
+    margin-top: 40px;
+    overflow: hidden;
+}
+
+.scroll-progress-fill {
+    width: 30%; /* Mockup shows it partially filled */
+    height: 100%;
+    background: linear-gradient(90deg, #4b6cb7, #9b59b6);
+}

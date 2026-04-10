@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page - Conciertos</title>
+    <link rel="stylesheet" href="styleHome.css">
+    <!--iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!--Header-->
+    <header class="main-header">
+        <div class="header-left">
+            <div class="logo-box">LOGO</div>
+        </div>
+        <div class="header-center">
+            <div class="search-bar">
+                <input type="text" placeholder="BARRA DE BÚSQUEDA">
+                <i class="fas fa-search"></i>
+            </div>
+        </div>
+        <div class="header-right">
+            <a href="perfil.html" class="user-icon-circle">
+                <i class="fas fa-user"></i>
+            </a>
+        </div>
+    </header>
+
+    <!--Banner-->
+    <section class="banner content-container">
+        <div class="banner-contenido">
+            <h1 class="banner-titulo">EVENTOS</h1>
+            <div class="banner-texto">
+                TEXTO MARKETEABLE QUE INCITE A HACER CLICK
+            </div>
+            <button class="banner-comprar-btn">Comprar entradas</button>
+        </div>
+        <!-- Flecha Carrusel-->
+        <div class="carrusel-flecha">
+            <i class="fas fa-chevron-right"></i>
+        </div>
+    </section>
+
+    <!-- Filtro y Buscar -->
+    <section class="filtros-section">
+        <div class="container">
+            <p class="filtro-label">Encuentra tu evento</p>
+
+            <!--Form Buscar-->
+            <form action="resultados.html" method="GET" class="search-filtro-bar">
+
+
+
+                <!-- Filtro Fecha-->
+                <div class="filtro-item">
+                    <label for="fecha-input" class="date-wrapper">
+                        <i class="far fa-calendar-alt calendar-icon"></i>
+                        <div class="filtro-texto">
+                            <span class="main-label">FECHAS <i class="fas fa-chevron-down small-arrow"></i></span>
+                            <select name="fecha" id="fecha-input" class="select-fecha">
+                                <option value="todas">Todas las fechas</option>
+                                <option value="hoy">Hoy</option>
+                                <option value="fin-de-semana">Este fin de semana</option>
+                                <option value="mes">Este mes</option>
+                            </select>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="filtro-divider"></div>
+
+                <!-- Buscar por Nombre-->
+                <div class="filtro-item">
+                    <div class="filtro-texto">
+                        <span class="main-label">BUSCAR</span>
+                        <input id="nombre-input" type="text" name="nombre" placeholder="Artista, Evento o Recinto">
+
+                    </div>
+
+                    <!-- Submit -->
+                    <button type="submit" class="search-submit-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Conciertos-->
+    <section class="concerts-section content-container">
+        <div class="section-header-line">
+            <h2>CONCIERTOS</h2>
+            <div class="expand-control">
+                <span>DESPLIEGA LA SECCIÓN</span>
+                <i class="fas fa-chevron-down" onclick="displayEventos(); cargarEventos();"></i>
+            </div>
+        </div>
+
+        <div class="lista-eventos" id="conciertos">
+
+        </div>
+
+    </section>
+    <!--Script-->
+    <script>
+        let conciertos = document.getElementById("conciertos");
+        let control = document.getElementsByClassName("expand-control")[0].getElementsByTagName("i")[0];
+        window.onload = function () {
+            conciertos.style.display = "none"; // Oculta la sección al cargar la página
+            control.style.transform = "rotate(180deg)"; // Rota el icono al cargar la página
+        };
+        function prueba() {
+            const div = document.createElement("div");
+            div.style.width = "200px";
+            div.style.height = "300px";
+            div.style.backgroundColor = "red";
+            document.getElementById("conciertos").appendChild(div);
+
+
+        }
+        function displayEventos() {
+
+            //al hacer click en el control, se muestra u oculta la sección de conciertos y se rota el icono
+            if (conciertos.style.display === "none") {
+                conciertos.style.display = "flex";
+                control.style.transform = "rotate(0deg)";
+            } else {
+                conciertos.style.display = "none";
+                control.style.transform = "rotate(180deg)";
+            }
+        }
+
+        //cargar todos los eventos
+        function cargarEventos() {
+            fetch("http://localhost/api-entradas/public/api/eventos")
+                .then(res => res.json())
+                .then(data => {
+                    const listaEventos = document.getElementById("conciertos");
+                    listaEventos.innerHTML = "";
+
+                    data.data.forEach(evento => {
+                        const div = document.createElement("div");
+                        div.className = "event-card";
+
+                        // Imagen
+                        const cardImg = document.createElement("div");
+                        cardImg.className = "card-img";
+
+                        const img = document.createElement("img");
+                        img.src = evento.imagen
+                            ? "http://localhost/api-entradas/public" + evento.imagen
+                            : "https://via.placeholder.com/600x300?text=Sin+imagen";
+                        img.alt = "Imagen del evento";
+
+                        cardImg.appendChild(img);
+
+                        // Título
+                        const titulo = document.createElement("h3");
+                        titulo.textContent = evento.nombre;
+
+                        // Fecha
+                        const fecha = document.createElement("p");
+                        fecha.textContent = "Fecha: " + evento.fecha;
+
+                        // Agragar elementos al div
+                        div.appendChild(cardImg);
+                        div.appendChild(titulo);
+                        div.appendChild(fecha);
+
+                        listaEventos.appendChild(div);
+                    });
+                });
+
+
+        };
+
+    </script>
+</body>
+
+
+</html>
