@@ -123,24 +123,24 @@
         }
 
         function eliminar(id) {
-    if (!confirm("¿Seguro que deseas eliminar este evento? Esta acción no se puede deshacer.")) {
-        return;
-    }
+            if (!confirm("¿Seguro que deseas eliminar este evento? Esta acción no se puede deshacer.")) {
+                return;
+            }
 
-    fetch(`http://localhost/api-entradas/public/api/eventos/${id}`, {
-        method: "DELETE",
-        credentials: "include"
-    })
-    .then(res => res.json())
-    .then(data => {
-        if (data.error) {
-            alert("Error: " + data.error);
-        } else {
-            alert("Evento eliminado correctamente");
-            cargarEventos(); // refrescar lista
+            fetch(`http://localhost/api-entradas/public/api/eventos/${id}`, {
+                method: "DELETE",
+                credentials: "include"
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.error) {
+                        alert("Error: " + data.error);
+                    } else {
+                        alert("Evento eliminado correctamente");
+                        cargarEventos(); // refrescar lista
+                    }
+                });
         }
-    });
-}
 
 
         function reservar(id) {
