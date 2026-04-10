@@ -1,7 +1,7 @@
 
 @font-face {
   font-family: 'Kabel';
-  src: url('./public/uploads/fonts/Semplicita\ Light.otf');
+  src: url("../uploads/fonts/Semplicita\ Light.otf");
   font-weight: normal;
   font-style: normal;
 }
@@ -72,7 +72,7 @@ body {
 /* --- Banner--- */
 .banner {
     height: 70vh;
-    background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url("./public/uploads/imgsHTML/image.png");
+    background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url("../uploads/imgsHTML/image.png");
     background-size: cover;
     background-position: center;
     position: relative;
