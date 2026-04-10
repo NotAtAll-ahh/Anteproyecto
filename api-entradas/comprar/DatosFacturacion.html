@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datos de Facturación - Aura Society</title>
+    <link rel="stylesheet" href="../css/header-footer.css">
+    <link rel="stylesheet" href="../css/nav.css">
+    <link rel="stylesheet" href="../css/DatosFacturacion.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- INICIO HEADER -->
+    <header class="main-header"><button class="skip-link"><a href="#main-content">Saltar Al Contenido</a></button>
+        <div class="header-container">
+            <!-- Logo -->
+            <a href="/index.html" class="logo-link">
+                <img src="/media/logo-white.webp" alt="Logo Aura Society">
+            </a>
+            <!-- Menú Móvil Control -->
+            <input type="checkbox" id="nav-toggle" class="nav-toggle">
+            <label for="nav-toggle" class="nav-burger" aria-label="Menú">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+            <!-- Navegación -->
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="/index.html">Inicio</a></li>
+                    <li class="dropdown">
+                        <a href="/eventos/Eventos.html">Eventos <i class="fa-solid fa-chevron-down arrow-icon"></i></a>
+                        <ul class="dropdown-content">
+                            <li><a href="/eventos/Conciertos.html">Conciertos</a></li>
+                            <li><a href="/eventos/Cine.html">Cine</a></li>
+                            <li><a href="/eventos/Conferencias.html">Conferencias</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/hazte-socio/">Hazte Socio</a></li>
+                    <li><a href="/sobre-nosotros/">Sobre Nosotros</a></li>
+                </ul>
+            </nav>
+            <!-- Herramientas de Usuario -->
+            <div class="header-tools">
+<div class="search-box">
+    <input type="text" id="search-input" placeholder="BUSCAR EVENTOS" aria-label="Buscar eventos">
+    <button class="search-btn" aria-label="Ejecutar búsqueda"><i class="fa-solid fa-magnifying-glass"></i></button>
+</div>
+                <a href="/perfil/" class="user-profile">
+                    <div class="user-info">
+                        <span class="label">Mi Cuenta</span>
+                        <span class="status">Socio Gold</span>
+                    </div>
+                    <img src="/media/yiperfil.png" alt="Usuario" class="avatar-circle">
+                </a>
+            </div>
+        </div>
+    </header>
+    <!-- FIN HEADER -->
+     
+    <main id="main-content">
+        <section class="billing-section">
+            <h1>DATOS DE FACTURACIÓN</h1>
+            
+            <div class="billing-container">
+                <div class="billing-left-column">
+                    <!-- Sección Izquierda: Datos del Comprador -->
+                    <div class="buyer-data">
+                        <h2>DATOS DEL COMPRADOR</h2>
+                        
+                        <div class="form-group">
+                            <label for="nombre">Nombre</label>
+                            <input type="text" id="nombre" name="nombre" placeholder="Nombre">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="apellidos">Apellidos</label>
+                            <input type="text" id="apellidos" name="apellidos" placeholder="Primer y Segundo Apellido">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" placeholder="danieltatagata@gmail.com">
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="descuento">Descuento</label>
+                                <input type="text" id="descuento" name="descuento" placeholder="0000 0000 0000 XXXX">
+                            </div>
+                            <div class="form-group">
+                                <label for="telefono">Número de Teléfono</label>
+                                <input type="tel" id="telefono" name="telefono" placeholder="+34">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sección Método de Pago -->
+                    <div class="payment-method-section">
+                        <h2>MÉTODO DE PAGO</h2>
+                        
+                        <div class="payment-options">
+                            <label class="payment-option">
+                                <input type="radio" name="payment" value="card" checked>
+                                <div class="option-content">
+                                    <i class="fas fa-credit-card"></i>
+                                    <span>Tarjeta</span>
+                                </div>
+                            </label>
+                            <label class="payment-option">
+                                <input type="radio" name="payment" value="wallet">
+                                <div class="option-content">
+                                    <i class="fas fa-wallet"></i>
+                                    <span>Wallet</span>
+                                </div>
+                            </label>
+                            <label class="payment-option">
+                                <input type="radio" name="payment" value="applepay">
+                                <div class="option-content">
+                                    <i class="fab fa-apple"></i>
+                                    <span>Apple Pay</span>
+                                </div>
+                            </label>
+                        </div>
+
+                        <div class="payment-form">
+                            <div class="form-group">
+                                <label for="card-name">Nombre</label>
+                                <input type="text" id="card-name" name="card-name" placeholder="Nombre y apellidos">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="card-number">Número de Tarjeta</label>
+                                <input type="text" id="card-number" name="card-number" placeholder="0000 0000 0000 0000">
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="expiry-month">Fecha Caducidad</label>
+                                    <select id="expiry-month" name="expiry-month">
+                                        <option value="">MM</option>
+                                        <option value="01">01</option>
+                                        <option value="02">02</option>
+                                        <option value="03">03</option>
+                                        <option value="04">04</option>
+                                        <option value="05">05</option>
+                                        <option value="06">06</option>
+                                        <option value="07">07</option>
+                                        <option value="08">08</option>
+                                        <option value="09">09</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group no-label-align">
+                                    <select id="expiry-year" name="expiry-year">
+                                        <option value="">YYYY</option>
+                                        <option value="2025">2025</option>
+                                        <option value="2026">2026</option>
+                                        <option value="2027">2027</option>
+                                        <option value="2028">2028</option>
+                                        <option value="2029">2029</option>
+                                        <option value="2030">2030</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="cvv">CVV</label>
+                                    <input type="text" id="cvv" name="cvv" placeholder="CVV" maxlength="3">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sección Derecha: Resumen de Compra -->
+                <div class="purchase-summary">
+                    <h2>RESUMEN DE COMPRA</h2>
+                    
+                    <div class="event-info">
+                        <img src="/media/logo-white.webp" alt="Evento" class="event-icon">
+                        <div>
+                            <p class="event-name">Nombre del evento</p>
+                            <p class="event-description">Pequeña descripción del evento.</p>
+                        </div>
+                    </div>
+
+                    <div class="summary-details">
+                        <div class="summary-row">
+                            <span>Subtotal</span>
+                            <span class="amount">120.00 €</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>IVA</span>
+                            <span class="amount">3.00 €</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Descuento</span>
+                            <span class="amount">0.00 €</span>
+                        </div>
+                        <div class="summary-row total">
+                            <span>Total</span>
+                            <span class="amount">123 €</span>
+                        </div>
+                    </div>
+
+                    <button class="pay-button">PAGAR</button>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <!-- INICIO FOOTER -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <img src="/media/logo-white.webp" alt="Aura Society">
+                <div class="credits">
+                    <p>DESIGNED BY DAW</p>
+                    <p>2026 AURA SOCIETY</p><a href="/media/DOCUMENTO COPYRIGHT.pdf" class="pdf-link" target="_blank"><i class="fa-solid fa-file-pdf"></i> DOCUMENTO COPYRIGHT</a>
+                </div>
+            </div>  
+            <div class="footer-info">
+                <div class="contact-details">
+                    <p>CORREO<br><strong>info@aurasociety.com</strong></p>
+                    <p>TELEFONO<br><strong>+34 640 89 29 46</strong></p>
+                    <p>UBICACION<br><strong>Paseo Puerta del Ángel, 5</strong></p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>Síguenos</span>
+            <div class="social-links">
+                <i class="fa-brands fa-facebook-f"></i>
+                <i class="fa-brands fa-instagram"></i>
+                <i class="fa-brands fa-whatsapp"></i>
+            </div>
+        </div>
+    </footer>
+    <!-- FIN FOOTER -->
+
+</body>
+</html>

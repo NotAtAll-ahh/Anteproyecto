@@ -1,166 +1,288 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>Crear Evento</title>
+    <!-- Incluimos Font Awesome para los iconos como en el ejemplo anterior -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+        @font-face {
+            font-family: 'Kabel';
+            src: url("./public/uploads/fonts/Semplicita\ Light.otf");
+            font-weight: normal;
+            font-style: normal;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background: #f4f4f4;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("./public/uploads/imgsHTML/declan-sun-rCQ4LlLzqFk-unsplash.jpg");
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            color: white;
             padding: 40px;
+            margin: 0;
         }
 
         .contenedor {
-            max-width: 500px;
+            max-width: 600px;
             margin: auto;
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            background: #ffffff11;
+            padding: 40px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
-        input, textarea {
+        h2,
+        h3 {
+            font-family: "Kabel";
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: bold;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            margin-top: 20px;
+            margin-left: 15px;
+            margin-bottom: 5px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="date"],
+        textarea {
             width: 100%;
-            padding: 10px;
-            margin-top: 8px;
-            margin-bottom: 15px;
+            padding: 12px 20px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            background: transparent;
+            border: 1px solid white;
+            border-radius: 50px;
+            color: white;
+            outline: none;
+            font-size: 0.9rem;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            border-radius: 20px;
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #ffffff;
+            box-shadow: 0 0 10px #ffffff;
+            color: #ffffff;
+        }
+
+
+        input[type="file"] {
+            margin: 15px 0;
+            font-size: 0.8rem;
         }
 
         button {
-            padding: 10px 20px;
+            font-family: "Kabel";
+            width: 100%;
+            padding: 15px;
+            margin-top: 25px;
+            border: 1px solid white;
+            background-color: transparent;
+            color: #ffffff;
+            border-radius: 50px;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        button:hover {
+            background-color: white;
+            color: #1a2a3a;
+            transform: translateY(-2px);
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.2);
+            margin: 30px 0;
+        }
+
+        #mensajeRol {
+            text-align: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        #resultado {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 0.8rem;
+        }
+
+        /* Ajuste para que el input de fecha se vea bien en navegadores */
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+            /* Hace el icono del calendario blanco */
             cursor: pointer;
         }
 
         #soloAdmin {
             display: none;
+            /* Se mantiene oculto por defecto */
         }
     </style>
 </head>
+
 <body>
 
-<div class="contenedor">
-    <h2>Crear Evento</h2>
+    <div class="contenedor">
+        <h2><i class="fas fa-plus-circle"></i> Crear Evento</h2>
 
-    <p id="mensajeRol" style="color:red;"></p>
+        <p id="mensajeRol" style="color:#ff3366;"></p>
 
-    <div id="soloAdmin">
-        <label>Nombre del evento</label>
-        <input type="text" id="nombre">
+        <div id="soloAdmin">
+            <label><i class="fas fa-tag"></i> Nombre del evento</label>
+            <input type="text" id="nombre" placeholder="Ej: Concierto de Rock">
 
-        <label>Descripción</label>
-        <textarea id="descripcion"></textarea>
+            <label><i class="fas fa-align-left"></i> Descripción</label>
+            <textarea id="descripcion" placeholder="Escribe los detalles del evento..."></textarea>
 
-        <label>Ubicación</label>
-        <input type="text" id="ubicacion">
+            <label><i class="fas fa-map-marker-alt"></i> Ubicación</label>
+            <input type="text" id="ubicacion" placeholder="Estadio o Recinto">
 
-        <label>Fecha</label>
-        <input type="date" id="fecha">
+            <label><i class="fas fa-calendar-alt"></i> Fecha</label>
+            <input type="date" id="fecha">
 
-        <label>Entradas totales (máximo 155)</label>
-        <input type="number" id="entradas_totales" min="1" max="155" required>
+            <label><i class="fas fa-ticket-alt"></i> Entradas totales (máximo 155)</label>
+            <input type="number" id="entradas_totales" min="1" max="155" required placeholder="0">
 
-        <hr>
+            <hr>
 
-        <h3>Imagen del evento</h3>
-        <input type="file" id="imagen">
+            <h3><i class="fas fa-image"></i> Imagen del evento</h3>
+            <input type="file" id="imagen">
 
-        <button onclick="crearEvento()">Crear evento</button>
+            <button onclick="crearEvento()">Crear evento</button>
 
-        <p id="resultado"></p>
+            <p id="resultado"></p>
+        </div>
     </div>
-</div>
 
-<script>
-let usuarioRol = null;
+    <script>
+        // Esta función es solo para que puedas visualizar el formulario en esta demo
+        // En tu app real, tu lógica de permisos se encargará de esto
+        window.onload = function () {
+            document.getElementById('soloAdmin').style.display = 'block';
+        }
+    </script>
 
-// 1. Comprobar sesión
-fetch("http://localhost/api-entradas/public/api/sesion", {
-    method: "GET",
-    credentials: "include"
-})
-.then(res => res.json())
-.then(data => {
-    if (!data.logueado) {
-        document.getElementById("mensajeRol").textContent =
-            "Debes iniciar sesión para crear eventos.";
-        return;
-    }
+    <script>
+        let usuarioRol = null;
 
-    usuarioRol = data.rol;
+        // 1. Comprobar sesión
+        fetch("http://localhost/api-entradas/public/api/sesion", {
+            method: "GET",
+            credentials: "include"
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (!data.logueado) {
+                    document.getElementById("mensajeRol").textContent =
+                        "Debes iniciar sesión para crear eventos.";
+                    return;
+                }
 
-    if (usuarioRol === "admin") {
-        document.getElementById("soloAdmin").style.display = "block";
-    } else {
-        document.getElementById("mensajeRol").textContent =
-            "No tienes permisos para crear eventos (solo administradores).";
-    }
-});
+                usuarioRol = data.rol;
 
-// 2. Crear evento
-function crearEvento() {
-    const entradasTotales = Number(document.getElementById("entradas_totales").value);
+                if (usuarioRol === "admin") {
+                    document.getElementById("soloAdmin").style.display = "block";
+                } else {
+                    document.getElementById("mensajeRol").textContent =
+                        "No tienes permisos para crear eventos (solo administradores).";
+                }
+            });
 
-    if (!Number.isInteger(entradasTotales) || entradasTotales < 1 || entradasTotales > 155) {
-        document.getElementById("resultado").textContent =
-            "Las entradas totales deben estar entre 1 y 155.";
-        return;
-    }
+        // 2. Crear evento
+        function crearEvento() {
+            const entradasTotales = Number(document.getElementById("entradas_totales").value);
 
-    const data = {
-        nombre: document.getElementById("nombre").value,
-        descripcion: document.getElementById("descripcion").value,
-        ubicacion: document.getElementById("ubicacion").value,
-        fecha: document.getElementById("fecha").value,
-        entradas_totales: entradasTotales
-    };
-
-    fetch("http://localhost/api-entradas/public/api/eventos", {
-        method: "POST",
-        credentials: "include",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-    })
-    .then(res => res.json())
-    .then(async data => {
-        if (data.id) {
-            document.getElementById("resultado").textContent =
-                "Evento creado con ID: " + data.id;
-
-            // Subir imagen si existe
-            const archivo = document.getElementById("imagen").files[0];
-            if (archivo) {
-                await subirImagen(data.id);
+            if (!Number.isInteger(entradasTotales) || entradasTotales < 1 || entradasTotales > 155) {
+                document.getElementById("resultado").textContent =
+                    "Las entradas totales deben estar entre 1 y 155.";
+                return;
             }
 
-            alert("Evento creado correctamente");
-        } else {
-            document.getElementById("resultado").textContent =
-                JSON.stringify(data, null, 2);
+            const data = {
+                nombre: document.getElementById("nombre").value,
+                descripcion: document.getElementById("descripcion").value,
+                ubicacion: document.getElementById("ubicacion").value,
+                fecha: document.getElementById("fecha").value,
+                entradas_totales: entradasTotales
+            };
+
+            fetch("http://localhost/api-entradas/public/api/eventos", {
+                method: "POST",
+                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            })
+                .then(res => res.json())
+                .then(async data => {
+                    if (data.id) {
+                        document.getElementById("resultado").textContent =
+                            "Evento creado con ID: " + data.id;
+
+                        // Subir imagen si existe
+                        const archivo = document.getElementById("imagen").files[0];
+                        if (archivo) {
+                            await subirImagen(data.id);
+                        }
+
+                        alert("Evento creado correctamente");
+                    } else {
+                        document.getElementById("resultado").textContent =
+                            JSON.stringify(data, null, 2);
+                    }
+                });
         }
-    });
-}
 
-// 3. Subir imagen del evento
-function subirImagen(eventoId) {
-    const archivo = document.getElementById("imagen").files[0];
-    if (!archivo) return;
+        // 3. Subir imagen del evento
+        function subirImagen(eventoId) {
+            const archivo = document.getElementById("imagen").files[0];
+            if (!archivo) return;
 
-    const formData = new FormData();
-    formData.append("imagen", archivo);
+            const formData = new FormData();
+            formData.append("imagen", archivo);
 
-    return fetch(`http://localhost/api-entradas/public/api/eventos/${eventoId}/imagen`, {
-        method: "POST",
-        credentials: "include",
-        body: formData
-    })
-    .then(res => res.json())
-    .then(data => {
-        console.log("Imagen subida:", data);
-    });
-}
-</script>
+            return fetch(`http://localhost/api-entradas/public/api/eventos/${eventoId}/imagen`, {
+                method: "POST",
+                credentials: "include",
+                body: formData
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log("Imagen subida:", data);
+                });
+        }
+    </script>
 
 </body>
+
 </html>

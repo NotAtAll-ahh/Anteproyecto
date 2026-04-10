@@ -118,8 +118,6 @@
                     listaEventos.innerHTML = "";
 
                     data.data.forEach(evento => {
-
-                        // Tarjeta principal
                         const div = document.createElement("div");
                         div.className = "event-card";
 
@@ -143,7 +141,7 @@
                         const fecha = document.createElement("p");
                         fecha.textContent = "Fecha: " + evento.fecha;
 
-                        // CONTENEDOR DE BOTONES
+                        // Contenedor de Botones
                         const contenedorBotones = document.createElement("div");
                         contenedorBotones.className = "botones-evento";
 
@@ -168,18 +166,18 @@
                             contenedorBotones.appendChild(btnEliminar);
                         }
 
-                        // Añadir todo a la tarjeta
+                        // Agragar elementos al div
                         div.appendChild(cardImg);
                         div.appendChild(titulo);
                         div.appendChild(fecha);
                         div.appendChild(contenedorBotones);
 
-                        // Añadir tarjeta al contenedor principal
                         listaEventos.appendChild(div);
                     });
                 });
-        };
 
+
+        };
 
     </script>
 </body>
