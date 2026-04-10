@@ -56,8 +56,8 @@
         <label>Fecha</label>
         <input type="date" id="fecha">
 
-        <label>Entradas totales</label>
-        <input type="number" id="entradas_totales">
+        <label>Entradas totales (máximo 155)</label>
+        <input type="number" id="entradas_totales" min="1" max="155" required>
 
         <hr>
 
@@ -98,12 +98,20 @@ fetch("http://localhost/api-entradas/public/api/sesion", {
 
 // 2. Crear evento
 function crearEvento() {
+    const entradasTotales = Number(document.getElementById("entradas_totales").value);
+
+    if (!Number.isInteger(entradasTotales) || entradasTotales < 1 || entradasTotales > 155) {
+        document.getElementById("resultado").textContent =
+            "Las entradas totales deben estar entre 1 y 155.";
+        return;
+    }
+
     const data = {
         nombre: document.getElementById("nombre").value,
         descripcion: document.getElementById("descripcion").value,
         ubicacion: document.getElementById("ubicacion").value,
         fecha: document.getElementById("fecha").value,
-        entradas_totales: document.getElementById("entradas_totales").value
+        entradas_totales: entradasTotales
     };
 
     fetch("http://localhost/api-entradas/public/api/eventos", {

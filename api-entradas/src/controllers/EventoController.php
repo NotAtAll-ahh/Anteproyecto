@@ -66,6 +66,15 @@ class EventoController
             }
         }
 
+        $entradasTotales = filter_var($data["entradas_totales"], FILTER_VALIDATE_INT);
+        if ($entradasTotales === false || $entradasTotales < 1 || $entradasTotales > 155) {
+            http_response_code(400);
+            echo json_encode(["error" => "Las entradas totales deben estar entre 1 y 155"]);
+            return;
+        }
+
+        $data["entradas_totales"] = $entradasTotales;
+
         // Entradas disponibles = totales al inicio
         $data["entradas_disponibles"] = $data["entradas_totales"];
 
