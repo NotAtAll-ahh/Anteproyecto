@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil de Usuario</title>
+    <link rel="stylesheet" href="stylePerfil.css">
+    <!-- iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+</head>
+
+<body>
+
+    <header class="main-header">
+        <div class="header-left">
+            <div class="logo-box">LOGO</div>
+        </div>
+        <div class="header-center">
+            <div class="search-bar">
+                <input type="text" placeholder="BARRA DE BÚSQUEDA">
+                <i class="fas fa-search"></i>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="user-icon-circle">
+                <i class="fas fa-user"></i>
+            </div>
+        </div>
+    </header>
+
+    <main class="content-container">
+        <h1 class="page-title">PERFIL DE USUARIO</h1>
+
+        <!--Datos Personales-->
+        <section class="collapsible-section">
+            <div class="section-header">
+                <h2>DATOS PERSONALES</h2>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+
+            <div class="personal-data-grid">
+                <div class="form-inputs">
+                    <input id="nombre" type="text" class="custom-input">
+                    <input id="email" type="text" class="custom-input">
+                    <input id="rol" type="text" class="custom-input">
+                </div>
+                <div class="">
+                    <div class="perfil-img">
+                        <img src="" alt="foto-perfil">
+                        <div class="editar-icon"><i class="fas fa-pencil-alt"></i></div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="extra-info">
+                <p>OTRAS CONFIGURACIONES</p>
+                <p>MÁS INFORMACIÓN IMPORTANTE</p>
+            </div>
+            <button class="modificar-btn">MODIFICAR DATOS</button>
+        </section>
+
+        <!-- Mis Entradas -->
+        <section class="entradas">
+            <div class="section-header">
+                <h2>MIS ENTRADAS</h2>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+
+            <div class="ticket-list">
+                <!-- Ticket 1 -->
+                <div class="ticket">
+                    <div class="ticket-img">FOTO EVENTO</div>
+                    <div class="ticket-info">
+                        <h3>Nombre del evento</h3>
+                        <p>Texto relevante que va a ir aquí.</p>
+                    </div>
+                    <i class="fas fa-chevron-down ticket-arrow"></i>
+                </div>
+
+                <!-- Ticket 2 (abierto) -->
+                <div class="ticket">
+                    <div class="ticket-img">FOTO EVENTO</div>
+                    <div class="ticket-info">
+                        <h3>Nombre del evento</h3>
+                        <p>Texto relevante que va a ir aquí.</p>
+                    </div>
+                    <i class="fas fa-chevron-down ticket-arrow"></i>
+                </div>
+
+                <div class="ticket-details-box">
+                    DETALLES SOBRE LAS ENTRADAS AQUÍ
+                </div>
+
+                <!-- Ticket 3 -->
+                <div class="ticket">
+                    <div class="ticket-img">FOTO EVENTO</div>
+                    <div class="ticket-info">
+                        <h3>Nombre del evento</h3>
+                        <p>Texto relevante que va a ir aquí.</p>
+                    </div>
+                    <!--Es la flecha para desplegar detalles-->
+                    <i class="fas fa-chevron-down ticket-arrow"></i>
+                </div>
+            </div>
+
+            <div>
+                <button onclick="logout()" class="modificar-btn">Cerrar sesión</button>
+                <pre id="resultadoUsuario"></pre>
+            </div>
+        </section>
+    </main>
+
+
+    <script>
+        let usuarioId = null;
+
+        // 1. Comprobar si hay sesión activa
+        fetch("http://localhost/api-entradas/public/api/sesion", {
+            method: "GET",
+            credentials: "include"
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (!data.logueado) {
+                    alert("Debes iniciar sesión");
+                    window.location.href = "login.html";
+                    return;
+                }
+
+                usuarioId = data.usuario_id;
+                cargarPerfil();
+            });
+
+        // 2. Cargar datos del usuario
+        function cargarPerfil() {
+            fetch(`http://localhost/api-entradas/public/api/usuarios/${usuarioId}`, {
+                method: "GET",
+                credentials: "include"
+            })
+                .then(res => res.json())
+                .then(data => {
+                    const usuario = data.data;
+
+                    document.getElementById("nombre").textContent = usuario.nombre ?? "Sin nombre";
+                    document.getElementById("email").textContent = usuario.email;
+                    document.getElementById("rol").textContent = "Rol: " + usuario.rol;
+
+
+                    //editar datos
+                    document.getElementById("editNombre").value = usuario.nombre ?? "";
+                    document.getElementById("editEmail").value = usuario.email ?? "";
+
+                    // Foto de perfil
+                    if (usuario.foto_perfil) {
+                        document.getElementById("foto").src = "http://localhost/api-entradas/public" + usuario.foto_perfil;
+                    } else {
+                        document.getElementById("foto").src = "https://via.placeholder.com/150";
+                    }
+
+                    // Mostrar panel admin si el rol es admin
+                    if (usuario.rol === "admin") {
+                        document.getElementById("adminPanel").style.display = "block";
+                    }
+                });
+        }
+
+        // 3. Subir nueva foto
+        function subirFoto() {
+            const archivo = document.getElementById("nuevaFoto").files[0];
+            if (!archivo) {
+                alert("Selecciona una imagen");
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append("imagen", archivo);
+
+            fetch(`http://localhost/api-entradas/public/api/usuarios/${usuarioId}/foto`, {
+                method: "POST",
+                credentials: "include",
+                body: formData
+            })
+                .then(res => res.json())
+                .then(data => {
+                    alert("Foto actualizada");
+                    cargarPerfil();
+                });
+        }
+
+        // 4. Logout
+        function logout() {
+            fetch("http://localhost/api-entradas/public/api/logout", {
+                method: "POST",
+                credentials: "include"
+            })
+                .then(() => {
+                    alert("Sesión cerrada");
+                    window.location.href = "test.html";
+                });
+        }
+
+        // 5. Actualizar perfil
+        function actualizarPerfil() {
+            const nombre = document.getElementById("editNombre").value;
+            const email = document.getElementById("editEmail").value;
+            const password = document.getElementById("editPassword").value;
+
+            const data = {};
+
+            if (nombre.trim() !== "") data.nombre = nombre;
+            if (email.trim() !== "") data.email = email;
+            if (password.trim() !== "") data.password = password;
+
+            fetch(`http://localhost/api-entradas/public/api/usuarios/${usuarioId}`, {
+                method: "PUT",
+                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            })
+                .then(res => res.json())
+                .then(data => {
+                    alert("Perfil actualizado");
+                    cargarPerfil(); // Recargar datos actualizados
+                });
+        }
+
+        function logout() {
+            fetch("http://localhost/api-entradas/public/api/logout", {
+                method: "POST",
+                credentials: "include"
+            })
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById("resultado").textContent = JSON.stringify(data, null, 2);
+                    setTimeout(() => {
+                        window.location.href = "Home-Page.html";
+                    }, 1200);
+                });
+        }
+
+    </script>
+
+</body>
+
+</html>

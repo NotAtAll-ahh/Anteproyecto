@@ -171,4 +171,15 @@ class EventoController
             "message" => "Evento eliminado correctamente"
         ]);
     }
+    //BUSCAR EVENTOS POR NOMBRE
+    public static function searchByName($nombre)
+    {
+        global $pdo;
+        $eventos = Evento::searchByName($pdo, $nombre);
+        echo json_encode(["status" => "success", "data" => $eventos]);
+    }
+
+
 }
+
+

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil de Usuario</title>
+    <link rel="stylesheet" href="styleLogin.css">
+    <!-- iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+</head>
+
+<body>
+
+    <header class="main-header">
+        <div class="header-left">
+            <div class="logo-box">LOGO</div>
+        </div>
+        <div class="header-center">
+            <div class="search-bar">
+                <input type="text" placeholder="BARRA DE BÚSQUEDA">
+                <i class="fas fa-search"></i>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="user-icon-circle">
+                <i class="fas fa-user"></i>
+            </div>
+        </div>
+    </header>
+
+    <main class="content-container">
+        <h1 class="page-title">REGISTRO</h1>
+
+        <!--Datos Personales-->
+        <section class="collapsible-section">
+
+            <div class="section-header">
+                <h2>DATOS PERSONALES</h2>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <form>
+                <div class="personal-data-grid">
+                    <div class="form-inputs">
+                        <input id="nombre" type="text" class="custom-input" placeholder="Nombre">
+                        <input id="email" type="text" class="custom-input" placeholder="Email">
+                        <input id="password" type="password" class="custom-input" placeholder="Contraseña">
+                        <input id="foto_perfil" type="file" class="subir-archivo" placeholder="Foto de Perfil">
+                    </div>
+                    <div class="">
+                        <div class="perfil-img">
+                            <img id="foto-perfil" src="" alt="foto-perfil">
+                        </div>
+                    </div>
+                    <button type="button" onclick="registrarUsuario()" class="modificar-btn">Registrar</button>
+                    <pre id="resultadoUsuario"></pre>
+                </div>
+            </form>
+
+
+            <script>
+                function registrarUsuario() {
+                    const archivoFoto = document.getElementById("foto_perfil").files[0];
+
+                    const data = {
+                        nombre: document.getElementById("nombre").value,
+                        email: document.getElementById("email").value,
+                        password: document.getElementById("password").value
+                    };
+
+                    const resultado = document.getElementById("resultadoUsuario");
+
+                    // Paso 1: registrar el usuario
+                    fetch("http://localhost/api-entradas/public/api/usuarios", {
+                        method: "POST",
+                        headers: { 'Content-Type': 'application/json; charset=UTF-8' },
+                        credentials: "include",
+                        body: JSON.stringify(data)
+                    })
+                        .then((respuesta) => {
+                            if (respuesta.ok) return respuesta.json();
+                            throw new Error('Error en el registro');
+                        })
+                        .then(datos => {
+                            console.log(datos);
+
+                            resultado.textContent = "Usuario registrado correctamente";
+
+                            setTimeout(() => {
+                                window.location.href = "login.html";
+                            }, 2200);
+
+                            // Paso 2: si se seleccionó una foto, subirla
+                            if (archivoFoto && datos.id) {
+                                const formData = new FormData();
+                                formData.append("imagen", archivoFoto);
+
+                                return fetch(`http://localhost/api-entradas/public/api/usuarios/${datos.id}/foto`, {
+                                    method: "POST",
+                                    credentials: "include",
+                                    body: formData
+                                })
+                                    .then(res => res.json())
+                                    .then(fotoData => {
+                                        console.log("Foto subida:", fotoData);
+
+                                        resultado.textContent = "Usuario registrado correctamente. Foto subida.";
+                                        setTimeout(() => {
+                                            window.location.href = "login.html";
+                                        }, 2200);
+                                    });
+                            }
+                        })
+                        .catch(error => {
+                            console.error("Error ", error);
+                            resultado.textContent = "Error al registrar usuario";
+                        });
+                }
+
+
+                //subir foto de perfil
+                document.getElementById("foto_perfil").addEventListener("change", function () {
+                    const archivo = this.files[0];
+                    if (archivo) {
+                        const urlTemporal = URL.createObjectURL(archivo);
+                        document.getElementById("foto-perfil").src = urlTemporal;
+                    }
+                });
+
+
+            </script>
+
+</body>
+
+</html>

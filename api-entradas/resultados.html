@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styleHome.css">
+    <!--iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Resultados de Búsqueda</title>
+</head>
+
+<body>
+    <section class="concerts-section content-container">
+        <div class="section-header-line">
+            <h2>Resultados de Búsqueda</h2>
+            <div class="expand-control">
+                <span>DESPLIEGA LA SECCIÓN</span>
+                <i class="fas fa-chevron-down" onclick="displayEventos()"></i>
+            </div>
+        </div>
+
+        <div class="lista-eventos" id="conciertos">
+    
+        </div>
+
+
+
+    </section>
+    <script>
+
+        function displayEventos() {
+
+            //al hacer click en el control, se muestra u oculta la sección de conciertos y se rota el icono
+            if (conciertos.style.display === "none") {
+                conciertos.style.display = "flex";
+                control.style.transform = "rotate(0deg)";
+            } else {
+                conciertos.style.display = "none";
+                control.style.transform = "rotate(180deg)";
+            }
+        }
+
+    
+        //Leer parámetros de la URL
+        window.onload = function () {
+            const params = new URLSearchParams(window.location.search);
+
+            const nombre = params.get("nombre") || "";
+
+            buscarEventos(nombre);
+        };
+
+        //Buscar eventos por nombre
+        function buscarEventos(nombre) {
+
+            let url = "http://localhost/api-entradas/public/api/eventos/buscar/";
+            console.log("Parámetro recibido:", nombre);
+
+            // Añadir nombre si existe
+            if (nombre.trim() !== "") {
+                url += "nombre/" + encodeURIComponent(nombre);
+            }
+
+
+            console.log("URL generada:", url);
+
+            // Petición a la API
+            fetch(url)
+                .then(res => res.json())
+                .then(data => {
+                    const listaEventos = document.getElementById("conciertos");
+                    listaEventos.innerHTML = "";
+
+                    if (!data.data || data.data.length === 0) {
+                        listaEventos.innerHTML = "<p>No se encontraron eventos.</p>";
+                        return;
+                    }
+
+                    data.data.forEach(evento => {
+                        const div = document.createElement("div");
+                        div.className = "event-card";
+
+                        const img = document.createElement("img");
+                        img.src = evento.imagen
+                            ? "http://localhost/api-entradas/public" + evento.imagen
+                            : "https://via.placeholder.com/600x300?text=Sin+imagen";
+
+                        const titulo = document.createElement("h3");
+                        titulo.textContent = evento.nombre;
+
+                        const fecha = document.createElement("p");
+                        fecha.textContent = "Fecha: " + evento.fecha;
+
+                        div.appendChild(img);
+                        div.appendChild(titulo);
+                        div.appendChild(fecha);
+
+                        listaEventos.appendChild(div);
+                    });
+                });
+        }
+
+
+
+    </script>
+
+</body>
+
+</html>

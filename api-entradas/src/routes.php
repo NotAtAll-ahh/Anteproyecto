@@ -20,6 +20,10 @@ switch (true) {
     case $uri === '/api/eventos' && $method === 'GET':
         EventoController::index();
         break;
+    // Buscar eventos por nombre
+    case preg_match('#^/api/eventos/buscar/nombre/(.+)$#', $uri, $matches) && $method === 'GET':
+        EventoController::searchByName($matches[1]);
+        break;
 
     //Muestra un evento específico
     case preg_match('#^/api/eventos/(\d+)$#', $uri, $matches) && $method === 'GET':
