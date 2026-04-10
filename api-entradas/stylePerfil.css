@@ -207,51 +207,19 @@ body {
     text-align: center;
     font-size: 0.9rem;
 }
-
-/* Footer */
-.main-footer {
-    background-color: black;
-    padding: 40px 50px;
-    text-align: center;
-}
-
-.footer-info {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 30px;
-    font-size: 0.8rem;
-}
-
-.footer-info span { font-weight: bold; margin-bottom: 5px; display: block; }
-
-.footer-links {
-    border-top: 1px solid white;
-    padding: 20px 0;
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-}
-
-.footer-links a {
+.modificar-btn {
+    width: 100%;
+    background: transparent;
+    border: 1px solid white;
     color: white;
-    text-decoration: none;
-    font-size: 0.9rem;
+    padding: 10px;
+    cursor: pointer;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 200ms ease;
 }
 
-.social-section {
-    margin: 20px 0;
-}
-
-.social-icons {
-    font-size: 2rem;
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    margin-top: 15px;
-}
-
-.copyright {
-    font-size: 0.7rem;
-    margin-top: 30px;
-    opacity: 0.7;
+.modificar-btn:hover {
+    background: white;
+    color: black;
 }

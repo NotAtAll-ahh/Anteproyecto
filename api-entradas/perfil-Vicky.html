@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
 </head>
+
 <body>
 
     <header class="main-header">
@@ -37,7 +39,7 @@
                 <h2>DATOS PERSONALES</h2>
                 <i class="fas fa-chevron-down"></i>
             </div>
-            
+
             <div class="personal-data-grid">
                 <div class="form-inputs">
                     <input id="nombre" type="text" class="custom-input">
@@ -48,7 +50,7 @@
                     <div class="perfil-img">
                         <img src="" alt="foto-perfil">
                         <div class="editar-icon"><i class="fas fa-pencil-alt"></i></div>
-                        
+
                     </div>
                 </div>
             </div>
@@ -87,7 +89,7 @@
                     </div>
                     <i class="fas fa-chevron-down ticket-arrow"></i>
                 </div>
-                
+
                 <div class="ticket-details-box">
                     DETALLES SOBRE LAS ENTRADAS AQUÍ
                 </div>
@@ -103,47 +105,15 @@
                     <i class="fas fa-chevron-down ticket-arrow"></i>
                 </div>
             </div>
+
+            <div>
+                <button onclick="logout()" class="modificar-btn">Cerrar sesión</button>
+                <pre id="resultadoUsuario"></pre>
+            </div>
         </section>
     </main>
 
-    <!-- Footer -->
 
-    <footer class="main-footer">
-        <div class="footer-info">
-            <div>
-                <span>CORREO</span>
-                <p>info@logo.com</p>
-            </div>
-            <div>
-                <span>NUMERO DE TELEFONO</span>
-                <p>+34 640 89 29 46</p>
-            </div>
-            <div>
-                <span>UBICACION</span>
-                <p>Reina Victoria, 15 28280 Madrid</p>
-            </div>
-        </div>
-
-        <nav class="footer-links">
-            <a href="#">ENLACE</a>
-            <a href="#">ENLACE</a>
-            <a href="#">ENLACE</a>
-            <a href="#">ENLACE</a>
-            <a href="#">ENLACE</a>
-        </nav>
-
-        <div class="social-section">
-            <h3>Síguenos</h3>
-            <div class="social-icons">
-                <i class="fab fa-facebook"></i>
-                <i class="fab fa-whatsapp"></i>
-            </div>
-        </div>
-
-        <div class="copyright">
-            <p>&copy; DESIGNED BY <strong>DAW</strong> 2025 . Todos los derechos reservados</p>
-        </div>
-    </footer>
     <script>
         let usuarioId = null;
 
@@ -156,7 +126,7 @@
             .then(data => {
                 if (!data.logueado) {
                     alert("Debes iniciar sesión");
-                    window.location.href = "test.html";
+                    window.location.href = "login.html";
                     return;
                 }
 
@@ -259,7 +229,22 @@
                 });
         }
 
+        function logout() {
+            fetch("http://localhost/api-entradas/public/api/logout", {
+                method: "POST",
+                credentials: "include"
+            })
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById("resultado").textContent = JSON.stringify(data, null, 2);
+                    setTimeout(() => {
+                        window.location.href = "Home-Page.html";
+                    }, 1200);
+                });
+        }
+
     </script>
 
 </body>
+
 </html>
