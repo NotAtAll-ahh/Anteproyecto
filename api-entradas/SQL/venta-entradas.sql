@@ -38,8 +38,8 @@ CREATE TABLE reservas (
 -- INSERTAR DATOS DE PRUEBA
 
 INSERT INTO eventos (nombre, descripcion, ubicacion, fecha, entradas_totales, entradas_disponibles) VALUES
-('EVERYONE`S A STAR - 5SOS - TOUR', '5 Seconds of Summer volverán a España en 2026 con dos únicos conciertos: el 30 de abril en el Palacio Vistalegre de Madrid', 'Madrid', '2024-12-01 20:00:00', 1000, 1000),
-('AC/DC / METALLICA', 'Concierto conjunto de las legendarias bandas de rock AC/DC y Metallica.', 'Moscow', '2024-11-15 18:00:00', 500, 500),
-('COLDPLAY', 'Coldplay regresa a España en 2025 con su gira mundial "Music of the Spheres".', 'Barcelona', '2025-06-20 21:00:00', 2000, 2000);
+('EVERYONE`S A STAR - 5SOS - TOUR', '5 Seconds of Summer volverán a España en 2026 con dos únicos conciertos: el 30 de abril en el Palacio Vistalegre de Madrid', 'Madrid', '2024-12-01 20:00:00', 155, 155),
+('AC/DC / METALLICA', 'Concierto conjunto de las legendarias bandas de rock AC/DC y Metallica.', 'Moscow', '2024-11-15 18:00:00', 155, 155),
+('COLDPLAY', 'Coldplay regresa a España en 2025 con su gira mundial "Music of the Spheres".', 'Barcelona', '2025-06-20 21:00:00', 155, 155);
 
 

@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Datos de Facturación</title>
-    <link rel="stylesheet" href="/css/DatosFacturacion.css">
-    <link rel="stylesheet" href="/css/header-footer.css">
+    <title>Datos de Facturación - Aura Society</title>
+    <link rel="stylesheet" href="../css/header-footer.css">
+    <link rel="stylesheet" href="../css/nav.css">
+    <link rel="stylesheet" href="../css/DatosFacturacion.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
@@ -56,63 +57,161 @@
         </div>
     </header>
     <!-- FIN HEADER -->
-    <main>
-    <h1>Datos de facturación</h1>
-    <details open>
-      <summary>Datos del comprador</summary>
-      <div class="contenido">
-        <div class="formulario-compra">
-          <label for="nombre">Nombre:</label>
-          <input type="text" id="nombre" name="nombre" required>
-        </div>
-        <div class="formulario-compra">
-          <label for="apellido">Apellido:</label>
-          <input type="text" id="apellido" name="apellido" required>
-        </div>
-        <div class="formulario-compra">
-          <label for="email">Email:</label>
-          <input type="email" id="email" name="email" required>
-        </div>
-        <div class="formulario-compra">
-          <label for="telefono">Teléfono:</label>
-          <input type="tel" id="telefono" name="telefono" required>
-        </div>
-      </div>
-    </details>
-    <details>
-      <summary>Extras</summary>
-      <div class="contenido">
-        <div class="extras">
-          <div class="opciones-extras">
-            <input type="checkbox" id="comida">
-            <label for="comida">Servicios de comida</label>
-          </div>
-          <div class="opciones-extras">
-            <input type="checkbox" id="merch">
-            <label for="merch">Merchandising</label>
-          </div>
-          <div class="opciones-extras">
-            <input type="checkbox" id="visuales">
-            <label for="visuales">Experiencias visuales</label>
-          </div>
-        </div>
-      </div>
-    </details>
-    <details>
-      <summary>Condiciones de compra</summary>
-      <div class="contenido">
-        <div class="condiciones">
-          <p>Descripción de las condiciones de compra.</p>
-          <div class="eguro">
-            <input type="checkbox" id="seguro">
-            <label for="seguro">🔒 Añadir seguro</label>
-          </div>
-        </div>
-      </div>
-    </details>
+     
+    <main id="main-content">
+        <section class="billing-section">
+            <h1>DATOS DE FACTURACIÓN</h1>
+            
+            <div class="billing-container">
+                <div class="billing-left-column">
+                    <!-- Sección Izquierda: Datos del Comprador -->
+                    <div class="buyer-data">
+                        <h2>DATOS DEL COMPRADOR</h2>
+                        
+                        <div class="form-group">
+                            <label for="nombre">Nombre</label>
+                            <input type="text" id="nombre" name="nombre" placeholder="Nombre">
+                        </div>
 
-    <a href="SelectorEntradas.html" class="continuar">CONTINUAR</a>
-  </main>
+                        <div class="form-group">
+                            <label for="apellidos">Apellidos</label>
+                            <input type="text" id="apellidos" name="apellidos" placeholder="Primer y Segundo Apellido">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" placeholder="danieltatagata@gmail.com">
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="descuento">Descuento</label>
+                                <input type="text" id="descuento" name="descuento" placeholder="0000 0000 0000 XXXX">
+                            </div>
+                            <div class="form-group">
+                                <label for="telefono">Número de Teléfono</label>
+                                <input type="tel" id="telefono" name="telefono" placeholder="+34">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sección Método de Pago -->
+                    <div class="payment-method-section">
+                        <h2>MÉTODO DE PAGO</h2>
+                        
+                        <div class="payment-options">
+                            <label class="payment-option">
+                                <input type="radio" name="payment" value="card" checked>
+                                <div class="option-content">
+                                    <i class="fas fa-credit-card"></i>
+                                    <span>Tarjeta</span>
+                                </div>
+                            </label>
+                            <label class="payment-option">
+                                <input type="radio" name="payment" value="wallet">
+                                <div class="option-content">
+                                    <i class="fas fa-wallet"></i>
+                                    <span>Wallet</span>
+                                </div>
+                            </label>
+                            <label class="payment-option">
+                                <input type="radio" name="payment" value="applepay">
+                                <div class="option-content">
+                                    <i class="fab fa-apple"></i>
+                                    <span>Apple Pay</span>
+                                </div>
+                            </label>
+                        </div>
+
+                        <div class="payment-form">
+                            <div class="form-group">
+                                <label for="card-name">Nombre</label>
+                                <input type="text" id="card-name" name="card-name" placeholder="Nombre y apellidos">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="card-number">Número de Tarjeta</label>
+                                <input type="text" id="card-number" name="card-number" placeholder="0000 0000 0000 0000">
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="expiry-month">Fecha Caducidad</label>
+                                    <select id="expiry-month" name="expiry-month">
+                                        <option value="">MM</option>
+                                        <option value="01">01</option>
+                                        <option value="02">02</option>
+                                        <option value="03">03</option>
+                                        <option value="04">04</option>
+                                        <option value="05">05</option>
+                                        <option value="06">06</option>
+                                        <option value="07">07</option>
+                                        <option value="08">08</option>
+                                        <option value="09">09</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group no-label-align">
+                                    <select id="expiry-year" name="expiry-year">
+                                        <option value="">YYYY</option>
+                                        <option value="2025">2025</option>
+                                        <option value="2026">2026</option>
+                                        <option value="2027">2027</option>
+                                        <option value="2028">2028</option>
+                                        <option value="2029">2029</option>
+                                        <option value="2030">2030</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="cvv">CVV</label>
+                                    <input type="text" id="cvv" name="cvv" placeholder="CVV" maxlength="3">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sección Derecha: Resumen de Compra -->
+                <div class="purchase-summary">
+                    <h2>RESUMEN DE COMPRA</h2>
+                    
+                    <div class="event-info">
+                        <img src="/media/logo-white.webp" alt="Evento" class="event-icon">
+                        <div>
+                            <p class="event-name">Nombre del evento</p>
+                            <p class="event-description">Pequeña descripción del evento.</p>
+                        </div>
+                    </div>
+
+                    <div class="summary-details">
+                        <div class="summary-row">
+                            <span>Subtotal</span>
+                            <span class="amount">120.00 €</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>IVA</span>
+                            <span class="amount">3.00 €</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Descuento</span>
+                            <span class="amount">0.00 €</span>
+                        </div>
+                        <div class="summary-row total">
+                            <span>Total</span>
+                            <span class="amount">123 €</span>
+                        </div>
+                    </div>
+
+                    <button class="pay-button">PAGAR</button>
+                </div>
+            </div>
+
+        </section>
+    </main>
 
     <!-- INICIO FOOTER -->
     <footer class="site-footer">

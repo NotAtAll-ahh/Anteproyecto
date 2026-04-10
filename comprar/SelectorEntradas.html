@@ -3,14 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Selector de Entradas</title>
-    <link rel="stylesheet" href="/css/SelectorEntradas.css">
-    <link rel="stylesheet" href="/css/header-footer.css">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/home-style.css">
+    <link rel="stylesheet" href="../css/nav.css">
+    <link rel="stylesheet" href="../css/header-footer.css">
+    <link rel="stylesheet" href="../css/SelectorEntradas.css">
+    <script src="SelectorEntradas.js" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    
     <!-- INICIO HEADER -->
-    <header class="main-header"><button class="skip-link"><a href="#main-content">Saltar Al Contenido</a></button>
+    <header class="main-header">
+        <button class="skip-link"><a href="#main-content">Saltar Al Contenido</a></button>
         <div class="header-container">
             <!-- Logo -->
             <a href="/index.html" class="logo-link">
@@ -28,7 +33,7 @@
                 <ul>
                     <li><a href="/index.html">Inicio</a></li>
                     <li class="dropdown">
-                        <a href="/eventos/Eventos.html">Eventos <i class="fa-solid fa-chevron-down arrow-icon"></i></a>
+                        <a href="/eventos/Eventos.html">Eventos</a>
                         <ul class="dropdown-content">
                             <li><a href="/eventos/Conciertos.html">Conciertos</a></li>
                             <li><a href="/eventos/Cine.html">Cine</a></li>
@@ -56,68 +61,162 @@
         </div>
     </header>
     <!-- FIN HEADER -->
-    <main>
-    <h1>Selector de entradas</h1>
 
-    <div class="secciones">
-      <div class="mapa-asientos">
-        <h3>Mapa de asientos:</h3>
-        <div class="foto-asientos"></div>
-      </div>
 
-      <div class="panel-entradas">
-        <h3>Elige los mejores asientos para ti</h3>
+    <main class="selector-layout">
 
-        <div class="tipo-entradas">
-          <label for="normal">Entrada normal</label>
-          <input type="number" min="0" value="0" id="normal">
-        </div>
+        <section class="derecha">
+            <div class="infoGeneral">
+                <h4>Nombre del Evento</h4>
+                <div class="infoAdicional">
+                    <p>18+</p>
+                    <span>|</span>
+                    <p>1H 45min</p>
+                    <span>|</span>
+                    <p>Géneros</p>
+                    <span>|</span>
+                    <p>Fecha Evento</p>
+                </div>
+            </div>
+            <div class="descrip">
+                INFORMACIÓN IMPORTANTE SOBRE LA VENTA DE ENTRADAS
+            </div>
+            <form class="detalles">
+                <div class="cuest">
+                    <label for="fecha">Fecha</label>
+                    <select id="fecha" name="fecha">
+                        <option value="general">General</option>
+                        <option value="vip">VIP</option>
+                        <option value="balcon">Balcón</option>
+                    </select>
+                </div>
+                <div class="cuest">
+                    <label for="hora">Hora</label>
+                    <select id="hora" name="hora">
+                        <option value="general">General</option>
+                        <option value="vip">VIP</option>
+                        <option value="balcon">Balcón</option>
+                    </select>
+                </div>
+                <div class="tipos">
+                    <img src="../media/asientos/Disponible.png" class="icon">
+                    <p>Disponible</p>
+                    <img src="../media/asientos/Seleccion.png" class="icon">
+                    <p>Seleccionados</p>
+                    <img src="../media/asientos/Reducida.png" class="icon">
+                    <p>Movilidad Reducida</p>
+                    <img src="../media/asientos/NoDisponible.png" class="icon">
+                    <p>Sold Out</p>
 
-        <div class="tipo-entradas">
-          <label for="joven">Carnet joven</label>
-          <input type="number" min="0" value="0" id="joven">
-        </div>
+                </div>
+            </form>
+            <div>
+                <div class="type">
+                    <p>Tipo de entrada 1</p>
+                    <div class="ticket-stepper">
+                        <p>Precio entrada</p>
+                        <div class="selector-cantidad">
+                            <button type="button"><</button>
+                            <span>0</span>
+                            <button type="button">></button>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="type">
+                    <p>Tipo de entrada 2</p>
+                    <div class="ticket-stepper">
+                        <p>Precio entrada</p>
+                        <div class="selector-cantidad">
+                            <button type="button"><</button>
+                            <span>0</span>
+                            <button type="button">></button>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="type">
+                    <p>Tipo de entrada 3</p>
+                    <div class="ticket-stepper">
+                        <p>Precio entrada</p>
+                        <div class="selector-cantidad">
+                            <button type="button"><</button>
+                            <span>0</span>
+                            <button type="button">></button>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
 
-        <div class="tipo-entradas">
-          <label for="mayores">Mayores 65</label>
-          <input type="number" min="0" value="0" id="mayores">
-        </div>
+            <div class="descrip">
+                ESCENARIO
+            </div>
+            <div class="container">
+                <div class="front-screen">
+                    <div class="screen"></div>
+                    <div class="overlay"></div>
+                </div>
+                <div class="escenario">
+                    <div class="front-row-first-front-row">
+                        
+                    </div>
+                    <div class="front-row-second-front-row">
+                        
+                    </div>
+                    <div class="middle-row">
+                        
+                    </div>
+                    <div class="front-row-third-last-row">
+                        
+                    </div>
+                    <div class="front-row-second-last-row">
+                        
+                    </div>
+                    <div class="front-row-first-last-row">
+                        
+                    </div>
+                </div>
+            </div>
+            
 
-        <div class="tipo-entradas">
-          <label for="familia-numerosa">Familia numerosa</label>
-          <input type="number" min="0" value="0" id="familia-numerosa">
-        </div>
+            
+        </section>
 
-        <a href="#" class="continuar">CONTINUAR</a>
-      </div>
-    </div>
+        <section class="izquierda">
+            <div class="imagen">
+                <img src="../media/eventos/CINE/Seccion1/Img1.jpg" alt="Imagen del Evento">
+                <button class="trailer-btn">Ver teaser</button>
+            </div>
+            <div class="precioT">
+                <div class="resumen-head">
+                    <span>TICKETS SELECCIONADOS</span>
+                    <span>PRECIO</span>
+                </div>
+                <div class="resumen-linea">
+                    <span>Fila C Asiento 23</span>
+                    <span>41 €</span>
+                </div>
+                <div class="resumen-linea">
+                    <span>Fila C Asiento 24</span>
+                    <span>41 €</span>
+                </div>
+                <div class="resumen-linea">
+                    <span>Fila C Asiento 25</span>
+                    <span>41 €</span>
+                </div>
+                <div class="resumen-total">
+                    <span>Total</span>
+                    <span>123 €</span>
+                </div>
+            </div>
+            <button class="buy-btn">Comprar Tickets</button>
+        </section>
 
-    <h2>Método de Pago:</h2>
+    </main>
 
-    <details>
-      <summary>Opción de tarjeta regalo / código promocional</summary>
-      <div class="section">
-        <div class="promocion">
-          <label for="codigo">Código:</label>
-          <input type="text" placeholder="Introduce tu código" id="codigo">
-          <button class="añadir">AÑADIR</button>
-        </div>
-      </div>
-    </details>
 
-    <details>
-      <summary>Total</summary>
-      <div class="section">
-        <div class="total-box">
-          <div class="total-line">
-            <span>Coste total entradas:</span>
-            <span>0,00 €</span>
-          </div>
-          <button class="pagar">REALIZAR PAGO</button>
-        </div>
-      </div>
-    </details>
-  </main>
+
 
     <!-- INICIO FOOTER -->
     <footer class="site-footer">
@@ -147,7 +246,5 @@
         </div>
     </footer>
     <!-- FIN FOOTER -->
-
-
 </body>
 </html>
