@@ -1,4 +1,14 @@
-/* --- Global Styles (Reuse from previous page) --- */
+
+@font-face {
+  font-family: 'Kabel';
+  src: url('./public/uploads/fonts/Semplicita\ Light.otf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+
+
 body {
     background-color: #000;
     color: white;
@@ -62,7 +72,7 @@ body {
 /* --- Banner--- */
 .banner {
     height: 70vh;
-    background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1514525253361-bee8718a7439?q=80&w=1964&auto=format&fit=crop');
+    background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url("./public/uploads/imgsHTML/image.png");
     background-size: cover;
     background-position: center;
     position: relative;
@@ -76,6 +86,8 @@ body {
 }
 
 .banner-titulo {
+    font-family: "Kabel";
+    letter-spacing: 20px;
     font-size: 4rem;
     font-weight: 800;
     margin-bottom: 20px;
