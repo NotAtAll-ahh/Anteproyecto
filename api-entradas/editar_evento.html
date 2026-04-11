@@ -1,158 +1,310 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>Editar Evento</title>
+    <!-- Incluimos Font Awesome para los iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body { font-family: Arial; background: #f4f4f4; padding: 40px; }
-        .contenedor {
-            max-width: 500px; margin: auto; background: white; padding: 20px;
-            border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        @font-face {
+            font-family: 'Kabel';
+            src: url("./public/uploads/fonts/Semplicita\ Light.otf");
+            font-weight: normal;
+            font-style: normal;
         }
-        input, textarea { width: 100%; padding: 10px; margin-top: 8px; margin-bottom: 15px; }
-        button { padding: 10px 20px; cursor: pointer; }
-        img { width: 100%; border-radius: 10px; margin-bottom: 15px; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("./public/uploads/imgsHTML/declan-sun-rCQ4LlLzqFk-unsplash.jpg");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
+            color: white;
+            padding: 40px;
+            margin: 0;
+        }
+
+        .contenedor {
+            max-width: 600px;
+            margin: auto;
+            background: #ffffff11;
+            padding: 40px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        h2, h3 {
+            font-family: "Kabel";
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: bold;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        #imagenActual {
+            width: 100%;
+            border-radius: 20px;
+            margin-bottom: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            display: block;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            margin-top: 20px;
+            margin-left: 15px;
+            margin-bottom: 5px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="date"],
+        textarea {
+            width: 100%;
+            padding: 12px 20px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            background: transparent;
+            border: 1px solid white;
+            border-radius: 50px;
+            color: white;
+            outline: none;
+            font-size: 0.9rem;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            border-radius: 20px;
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #ffffff;
+            box-shadow: 0 0 10px #ffffff;
+        }
+
+        input[type="file"] {
+            margin: 15px 0;
+            font-size: 0.8rem;
+        }
+
+        button {
+            font-family: "Kabel";
+            width: 100%;
+            padding: 15px;
+            margin-top: 15px;
+            border: 1px solid white;
+            background-color: transparent;
+            color: #ffffff;
+            border-radius: 50px;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        button:hover {
+            background-color: white;
+            color: #1a2a3a;
+            transform: translateY(-2px);
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.2);
+            margin: 30px 0;
+        }
+
+        #mensajeRol {
+            text-align: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        #resultado {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 0.8rem;
+            word-break: break-all;
+        }
+
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+            cursor: pointer;
+        }
+
+        #soloAdmin {
+            display: none;
+        }
     </style>
 </head>
+
 <body>
 
-<div class="contenedor">
-    <h2>Editar Evento</h2>
-
-    <p id="mensajeRol" style="color:red;"></p>
-
-    <div id="soloAdmin" style="display:none;">
-        <img id="imagenActual" src="" alt="Imagen del evento">
-        <hr>
-
-        <label>Nombre</label>
-        <input type="text" id="nombre">
-
-        <label>Descripción</label>
-        <textarea id="descripcion"></textarea>
-
-        <label>Ubicación</label>
-        <input type="text" id="ubicacion">
-
-        <label>Fecha</label>
-        <input type="date" id="fecha">
-
-        <label>Entradas totales</label>
-        <input type="number" id="entradas_totales">
-
-        <label>Entradas disponibles</label>
-        <input type="number" id="entradas_disponibles">
-
-        <button onclick="guardarCambios()">Guardar cambios</button>
-
-        <hr>
-
-        <h3>Subir nueva imagen</h3>
-        <input type="file" id="nuevaImagen">
-        <button onclick="subirImagen()">Subir imagen</button>
-
-        <p id="resultado"></p>
-    </div>
-</div>
-
-<script>
-const params = new URLSearchParams(window.location.search);
-const eventoId = params.get("id");
-
-let usuarioRol = null;
-
-// 1. Comprobar sesión
-fetch("http://localhost/api-entradas/public/api/sesion", {
-    method: "GET",
-    credentials: "include"
-})
-.then(res => res.json())
-.then(data => {
-    if (!data.logueado) {
-        document.getElementById("mensajeRol").textContent =
-            "Debes iniciar sesión.";
-        return;
-    }
-
-    usuarioRol = data.rol;
-
-    if (usuarioRol === "admin") {
-        document.getElementById("soloAdmin").style.display = "block";
-        cargarEvento();
-    } else {
-        document.getElementById("mensajeRol").textContent =
-            "No tienes permisos para editar eventos.";
-    }
-});
-
-// 2. Cargar datos del evento
-function cargarEvento() {
-    fetch(`http://localhost/api-entradas/public/api/eventos/${eventoId}`)
-    .then(res => res.json())
-    .then(data => {
-        const e = data.data;
-
-        document.getElementById("nombre").value = e.nombre;
-        document.getElementById("descripcion").value = e.descripcion;
-        document.getElementById("ubicacion").value = e.ubicacion;
-        document.getElementById("fecha").value = e.fecha;
-        document.getElementById("entradas_totales").value = e.entradas_totales;
-        document.getElementById("entradas_disponibles").value = e.entradas_disponibles;
-
-        if (e.imagen) {
-            document.getElementById("imagenActual").src =
-                "http://localhost/api-entradas/public" + e.imagen;
+    
+    <script>
+        // Esta función es solo para que puedas visualizar el formulario en esta demo
+        window.onload = function () {
+            document.getElementById('soloAdmin').style.display = 'block';
         }
-    });
-}
+    </script>
 
-// 3. Guardar cambios del evento
-function guardarCambios() {
-    const data = {
-        nombre: document.getElementById("nombre").value,
-        descripcion: document.getElementById("descripcion").value,
-        ubicacion: document.getElementById("ubicacion").value,
-        fecha: document.getElementById("fecha").value,
-        entradas_totales: document.getElementById("entradas_totales").value,
-        entradas_disponibles: document.getElementById("entradas_disponibles").value
-    };
+    <div class="contenedor">
+        <h2><i class="fas fa-edit"></i> Editar Evento</h2>
 
-    fetch(`http://localhost/api-entradas/public/api/eventos/${eventoId}`, {
-        method: "PUT",
-        credentials: "include",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
-    })
-    .then(res => res.json())
-    .then(data => {
-        document.getElementById("resultado").textContent =
-            JSON.stringify(data, null, 2);
-    });
-}
+        <p id="mensajeRol" style="color:#ff3366;"></p>
 
-// 4. Subir imagen del evento
-function subirImagen() {
-    const archivo = document.getElementById("nuevaImagen").files[0];
-    if (!archivo) {
-        alert("Selecciona una imagen");
-        return;
-    }
+        <div id="soloAdmin">
+            <img id="imagenActual" src="" alt="Imagen del evento">
+            <hr>
 
-    const formData = new FormData();
-    formData.append("imagen", archivo);
+            <label><i class="fas fa-tag"></i> Nombre</label>
+            <input type="text" id="nombre">
 
-    fetch(`http://localhost/api-entradas/public/api/eventos/${eventoId}/imagen`, {
-        method: "POST",
-        credentials: "include",
-        body: formData
-    })
-    .then(res => res.json())
-    .then(data => {
-        alert("Imagen actualizada");
-        cargarEvento();
-    });
-}
-</script>
+            <label><i class="fas fa-align-left"></i> Descripción</label>
+            <textarea id="descripcion"></textarea>
+
+            <label><i class="fas fa-map-marker-alt"></i> Ubicación</label>
+            <input type="text" id="ubicacion">
+
+            <label><i class="fas fa-calendar-alt"></i> Fecha</label>
+            <input type="date" id="fecha">
+
+            <label><i class="fas fa-ticket-alt"></i> Entradas totales</label>
+            <input type="number" id="entradas_totales">
+
+            <label><i class="fas fa-users"></i> Entradas disponibles</label>
+            <input type="number" id="entradas_disponibles">
+
+            <button onclick="guardarCambios()">Guardar cambios</button>
+
+            <hr>
+
+            <h3><i class="fas fa-image"></i> Subir nueva imagen</h3>
+            <input type="file" id="nuevaImagen">
+            <button onclick="subirImagen()">Actualizar Imagen</button>
+
+            <p id="resultado"></p>
+        </div>
+    </div>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const eventoId = params.get("id");
+
+        let usuarioRol = null;
+
+        // 1. Comprobar sesión
+        fetch("http://localhost/api-entradas/public/api/sesion", {
+            method: "GET",
+            credentials: "include"
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (!data.logueado) {
+                    document.getElementById("mensajeRol").textContent =
+                        "Debes iniciar sesión.";
+                    return;
+                }
+
+                usuarioRol = data.rol;
+
+                if (usuarioRol === "admin") {
+                    document.getElementById("soloAdmin").style.display = "block";
+                    cargarEvento();
+                } else {
+                    document.getElementById("mensajeRol").textContent =
+                        "No tienes permisos para editar eventos.";
+                }
+            });
+
+        // 2. Cargar datos del evento
+        function cargarEvento() {
+            fetch(`http://localhost/api-entradas/public/api/eventos/${eventoId}`)
+                .then(res => res.json())
+                .then(data => {
+                    const e = data.data;
+
+                    document.getElementById("nombre").value = e.nombre;
+                    document.getElementById("descripcion").value = e.descripcion;
+                    document.getElementById("ubicacion").value = e.ubicacion;
+                    document.getElementById("fecha").value = e.fecha;
+                    document.getElementById("entradas_totales").value = e.entradas_totales;
+                    document.getElementById("entradas_disponibles").value = e.entradas_disponibles;
+
+                    if (e.imagen) {
+                        document.getElementById("imagenActual").src =
+                            "http://localhost/api-entradas/public" + e.imagen;
+                    }
+                });
+        }
+
+        // 3. Guardar cambios del evento
+        function guardarCambios() {
+            const data = {
+                nombre: document.getElementById("nombre").value,
+                descripcion: document.getElementById("descripcion").value,
+                ubicacion: document.getElementById("ubicacion").value,
+                fecha: document.getElementById("fecha").value,
+                entradas_totales: document.getElementById("entradas_totales").value,
+                entradas_disponibles: document.getElementById("entradas_disponibles").value
+            };
+
+            fetch(`http://localhost/api-entradas/public/api/eventos/${eventoId}`, {
+                method: "PUT",
+                credentials: "include",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data)
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.id || data.success || !data.error) {
+                        alert("Cambios guardados con éxito");
+                    }
+                    document.getElementById("resultado").textContent =
+                        JSON.stringify(data, null, 2);
+                });
+        }
+
+        // 4. Subir imagen del evento
+        function subirImagen() {
+            const archivo = document.getElementById("nuevaImagen").files[0];
+            if (!archivo) {
+                alert("Selecciona una imagen");
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append("imagen", archivo);
+
+            fetch(`http://localhost/api-entradas/public/api/eventos/${eventoId}/imagen`, {
+                method: "POST",
+                credentials: "include",
+                body: formData
+            })
+                .then(res => res.json())
+                .then(data => {
+                    alert("Imagen actualizada correctamente");
+                    cargarEvento();
+                });
+        }
+    </script>
 
 </body>
+
 </html>

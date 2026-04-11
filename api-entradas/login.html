@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil de Usuario</title>
+    <link rel="stylesheet" href="styleLogin.css">
+    <!-- iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+</head>
+
+<body>
+
+    <header class="main-header">
+        <div class="header-left">
+            <div class="logo-box"><a href="Home-Page.html">LOGO</a></div>
+        </div>
+        <div class="header-center">
+            <div class="search-bar">
+                <input type="text" placeholder="BARRA DE BÚSQUEDA">
+                <i class="fas fa-search"></i>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="user-icon-circle">
+                <i class="fas fa-user"></i>
+            </div>
+        </div>
+    </header>
+
+    <main class="content-container">
+        <h1 class="page-title">LOGIN</h1>
+
+        <!--Datos Personales-->
+        <section class="collapsible-section">
+
+            <div class="section-header">
+                <h2>DATOS PERSONALES</h2>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <form>
+                <div class="personal-data-grid">
+                    <div class="form-inputs">
+                        <input id="emailU" type="email" class="custom-input" placeholder="Email">
+                        <input id="passwordU" type="password" class="custom-input" placeholder="Contraseña">
+                    </div>
+                    <div class="botones">
+                        <button type="button" onclick="iniciarSesionUsuario()" class="modificar-btn">Iniciar
+                            Sesión</button>
+                        <button type="button" class="modificar-btn" onclick="verSesion()">Ver sesión</button>
+
+                    </div>
+
+                    <pre id="resultadoUsuario"></pre>
+                </div>
+            </form>
+            <div class="section-header">
+                <h2>¿NO ESTÁS REGISTRADO?</h2>
+            </div>
+
+            <button type="button" class="modificar-btn"><a href="registro.html">REGISTRATE</a></button>
+
+            <script>
+
+                function iniciarSesionUsuario() {
+                    const data = {
+                        email: document.getElementById("emailU").value,
+                        password: document.getElementById("passwordU").value
+                    };
+
+                    fetch("http://localhost/api-entradas/public/api/login", {
+                        method: "POST",
+                        headers: { 'Content-Type': 'application/json; charset=UTF-8' },
+                        credentials: "include", // IMPORTANTE: permite enviar cookies de sesión
+                        body: JSON.stringify(data)
+                    })
+                        .then((respuesta) => {
+                            if (respuesta.ok) return respuesta.json();
+                            return respuesta.json().then((error) => {
+                                throw new Error(error.error || 'Error en el login');
+                            });
+                        })
+                        .then((loginData) => {
+                            console.log(loginData);
+                            document.getElementById("resultadoUsuario").textContent = JSON.stringify(loginData.usuario, null, 2);
+                            setTimeout(() => {
+                                window.location.href = "perfil.html";
+                            }, 2200);
+                        })
+                        .catch(error => {
+                            console.error("Error ", error);
+                            document.getElementById("resultadoUsuario").textContent = error.message;
+                        });
+                }
+                function verSesion() {
+                    fetch("http://localhost/api-entradas/public/api/sesion", {
+                        method: "GET",
+                        credentials: "include"
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            document.getElementById("resultadoUsuario").textContent = JSON.stringify(data, null, 2);
+                        });
+                }
+
+
+
+            </script>
+
+</body>
+
+</html>

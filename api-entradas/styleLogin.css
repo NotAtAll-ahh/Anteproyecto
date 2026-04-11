@@ -183,3 +183,12 @@ input::placeholder {
     background: white;
     color: black;
 }
+
+.modificar-btn a:hover, .modificar-btn:hover > a{
+    color:black;
+}
+
+a{
+    color: white;
+    text-decoration: none;
+}
