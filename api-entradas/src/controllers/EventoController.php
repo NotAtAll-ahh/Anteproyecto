@@ -121,11 +121,26 @@ class EventoController
         global $pdo;
 
         if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === 0) {
+            $directorioDestino = __DIR__ . '/../../public/uploads/eventos/';
+            if (!is_dir($directorioDestino) && !mkdir($directorioDestino, 0777, true) && !is_dir($directorioDestino)) {
+                http_response_code(500);
+                echo json_encode(["error" => "No se pudo crear el directorio de imagenes"]);
+                return;
+            }
 
-            $nombreArchivo = 'evento_' . $id . '_' . time() . '.jpg';
-            $rutaDestino = __DIR__ . '/../../public/uploads/eventos/' . $nombreArchivo;
+            $extension = strtolower(pathinfo($_FILES['imagen']['name'], PATHINFO_EXTENSION));
+            if ($extension === '') {
+                $extension = 'jpg';
+            }
 
-            move_uploaded_file($_FILES['imagen']['tmp_name'], $rutaDestino);
+            $nombreArchivo = 'evento_' . $id . '_' . time() . '.' . $extension;
+            $rutaDestino = $directorioDestino . $nombreArchivo;
+
+            if (!move_uploaded_file($_FILES['imagen']['tmp_name'], $rutaDestino)) {
+                http_response_code(500);
+                echo json_encode(["error" => "No se pudo guardar la imagen del evento"]);
+                return;
+            }
 
             // Guardar ruta en BD
             $rutaBD = '/uploads/eventos/' . $nombreArchivo;

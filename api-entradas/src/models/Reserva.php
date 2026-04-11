@@ -46,8 +46,8 @@ class Reserva {
         $fechaSelect = $fechaColumn !== null ? "r.$fechaColumn AS fecha_reserva" : "NULL AS fecha_reserva";
         $orderByFecha = $fechaColumn !== null ? "r.$fechaColumn DESC" : "r.id DESC";
 
-        $stmt = $pdo->prepare("
-            SELECT r.*, $fechaSelect, e.nombre AS evento_nombre, e.fecha AS evento_fecha
+        $stmt = $pdo->prepare(" 
+            SELECT r.*, $fechaSelect, e.nombre AS evento_nombre, e.fecha AS evento_fecha, e.imagen AS evento_imagen
             FROM reservas r
             JOIN eventos e ON r.evento_id = e.id
             WHERE r.usuario_id = ?

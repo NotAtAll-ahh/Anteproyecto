@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil de Usuario</title>
-    <link rel="stylesheet" href="stylePerfil.css">
+    <link rel="stylesheet" href="../../stylePerfil.css">
     <!-- iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
@@ -34,7 +34,7 @@
         <h1 class="page-title">PERFIL DE USUARIO</h1>
 
         <!--Datos Personales-->
-        <section class="collapsible-section">
+        <section id="seccionPerfil" class="collapsible-section">
             <div class="section-header">
                 <h2>DATOS PERSONALES</h2>
                 <i class="fas fa-chevron-down"></i>
@@ -42,16 +42,19 @@
 
             <div class="personal-data-grid">
                 <div class="form-inputs">
-                    <input id="nombre" type="text" class="custom-input">
-                    <input id="email" type="text" class="custom-input">
-                    <input id="rol" type="text" class="custom-input">
+                    <input id="nombre" type="text" class="custom-input" readonly>
+                    <input id="email" type="text" class="custom-input" readonly>
+                    <input id="rol" type="text" class="custom-input" readonly>
                 </div>
-                <div class="">
+                <div class="perfil-container">
                     <div class="perfil-img">
-                        <img src="" alt="foto-perfil">
-                        <div class="editar-icon"><i class="fas fa-pencil-alt"></i></div>
-
+                        <img id="foto" src="" alt="foto de perfil">
+                        <div class="foto-fallback" id="fotoFallback" style="display: none;"><i class="fas fa-user"></i></div>
                     </div>
+                    <button type="button" class="editar-foto-btn" onclick="document.getElementById('inputFoto').click()" title="Editar foto de perfil">
+                        <i class="fas fa-camera"></i> Cambiar foto
+                    </button>
+                    <input type="file" id="inputFoto" accept="image/*" style="display: none;" onchange="subirFoto(event)">
                 </div>
             </div>
 
@@ -59,7 +62,9 @@
                 <p>OTRAS CONFIGURACIONES</p>
                 <p>MÁS INFORMACIÓN IMPORTANTE</p>
             </div>
-            <button class="modificar-btn">MODIFICAR DATOS</button>
+            <p id="estadoEdicion" style="display: none; margin-bottom: 10px;">Modo edicion activado: ahora puedes cambiar nombre y email.</p>
+            <button id="btnEditar" class="modificar-btn" onclick="toggleEditarDatos()">MODIFICAR DATOS</button>
+            <button id="btnCancelar" class="modificar-btn" onclick="cancelarEdicion()" style="display: none; margin-top: 10px;">CANCELAR</button>
         </section>
 
         <!-- Mis Entradas -->
@@ -69,41 +74,8 @@
                 <i class="fas fa-chevron-down"></i>
             </div>
 
-            <div class="ticket-list">
-                <!-- Ticket 1 -->
-                <div class="ticket">
-                    <div class="ticket-img">FOTO EVENTO</div>
-                    <div class="ticket-info">
-                        <h3>Nombre del evento</h3>
-                        <p>Texto relevante que va a ir aquí.</p>
-                    </div>
-                    <i class="fas fa-chevron-down ticket-arrow"></i>
-                </div>
-
-                <!-- Ticket 2 (abierto) -->
-                <div class="ticket">
-                    <div class="ticket-img">FOTO EVENTO</div>
-                    <div class="ticket-info">
-                        <h3>Nombre del evento</h3>
-                        <p>Texto relevante que va a ir aquí.</p>
-                    </div>
-                    <i class="fas fa-chevron-down ticket-arrow"></i>
-                </div>
-
-                <div class="ticket-details-box">
-                    DETALLES SOBRE LAS ENTRADAS AQUÍ
-                </div>
-
-                <!-- Ticket 3 -->
-                <div class="ticket">
-                    <div class="ticket-img">FOTO EVENTO</div>
-                    <div class="ticket-info">
-                        <h3>Nombre del evento</h3>
-                        <p>Texto relevante que va a ir aquí.</p>
-                    </div>
-                    <!--Es la flecha para desplegar detalles-->
-                    <i class="fas fa-chevron-down ticket-arrow"></i>
-                </div>
+            <div id="ticketsContainer" class="ticket-list">
+                <div class="ticket-empty">Cargando tus entradas...</div>
             </div>
 
             <div>
@@ -116,6 +88,9 @@
 
     <script>
         let usuarioId = null;
+        let modoEdicion = false;
+        let nombreOriginal = "";
+        let emailOriginal = "";
 
         // 1. Comprobar si hay sesión activa
         fetch("http://localhost/api-entradas/public/api/sesion", {
@@ -144,32 +119,257 @@
                 .then(data => {
                     const usuario = data.data;
 
-                    document.getElementById("nombre").textContent = usuario.nombre ?? "Sin nombre";
-                    document.getElementById("email").textContent = usuario.email;
-                    document.getElementById("rol").textContent = "Rol: " + usuario.rol;
-
-
-                    //editar datos
-                    document.getElementById("editNombre").value = usuario.nombre ?? "";
-                    document.getElementById("editEmail").value = usuario.email ?? "";
+                    document.getElementById("nombre").value = usuario.nombre ?? "";
+                    document.getElementById("email").value = usuario.email ?? "";
+                    document.getElementById("rol").value = usuario.rol ?? "";
+                    nombreOriginal = usuario.nombre ?? "";
+                    emailOriginal = usuario.email ?? "";
 
                     // Foto de perfil
+                    const imgElement = document.getElementById("foto");
+                    const fallbackElement = document.getElementById("fotoFallback");
                     if (usuario.foto_perfil) {
-                        document.getElementById("foto").src = "http://localhost/api-entradas/public" + usuario.foto_perfil;
+                        imgElement.src = "http://localhost/api-entradas/public" + usuario.foto_perfil;
+                        imgElement.style.display = "block";
+                        fallbackElement.style.display = "none";
                     } else {
-                        document.getElementById("foto").src = "https://via.placeholder.com/150";
+                        imgElement.style.display = "none";
+                        fallbackElement.style.display = "flex";
                     }
+                    imgElement.onerror = () => {
+                        imgElement.style.display = "none";
+                        fallbackElement.style.display = "flex";
+                    };
 
                     // Mostrar panel admin si el rol es admin
                     if (usuario.rol === "admin") {
-                        document.getElementById("adminPanel").style.display = "block";
+                        const adminPanel = document.getElementById("adminPanel");
+                        if (adminPanel) {
+                            adminPanel.style.display = "block";
+                        }
                     }
+
+                    cargarReservas();
                 });
         }
 
+        function leerJsonSeguro(respuesta) {
+            return respuesta.text().then(texto => {
+                if (!texto) {
+                    return {};
+                }
+
+                try {
+                    return JSON.parse(texto);
+                } catch (error) {
+                    return {};
+                }
+            });
+        }
+
+        function escaparHtml(valor) {
+            return String(valor ?? "")
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/\"/g, "&quot;")
+                .replace(/'/g, "&#39;");
+        }
+
+        function formatearFecha(valor) {
+            if (!valor) {
+                return "-";
+            }
+
+            const fecha = new Date(valor);
+            if (Number.isNaN(fecha.getTime())) {
+                return valor;
+            }
+
+            return fecha.toLocaleString("es-ES");
+        }
+
+        function crearHtmlDetalleEvento(evento, reserva) {
+            const imagenEvento = evento.imagen
+                ? `http://localhost/api-entradas/public${evento.imagen}`
+                : "https://via.placeholder.com/140x140?text=Evento";
+
+            return `
+                <div class="ticket-details-content">
+                    <img class="ticket-details-image" src="${imagenEvento}" alt="${escaparHtml(evento.nombre || reserva.evento_nombre || "Evento")}">
+                    <div class="ticket-details-info">
+                        <p><strong>Evento:</strong> ${escaparHtml(evento.nombre || reserva.evento_nombre || "-")}</p>
+                        <p><strong>Descripcion:</strong> ${escaparHtml(evento.descripcion || "Sin descripcion")}</p>
+                        <p><strong>Ubicacion:</strong> ${escaparHtml(evento.ubicacion || "Sin ubicacion")}</p>
+                        <p><strong>Fecha del evento:</strong> ${escaparHtml(formatearFecha(evento.fecha || reserva.evento_fecha))}</p>
+                        <p><strong>Entradas reservadas:</strong> ${escaparHtml(reserva.cantidad)}</p>
+                        <p><strong>Fecha de reserva:</strong> ${escaparHtml(formatearFecha(reserva.fecha_reserva))}</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderReservas(reservas) {
+            const ticketsContainer = document.getElementById("ticketsContainer");
+
+            if (!reservas.length) {
+                ticketsContainer.innerHTML = '<div class="ticket-empty">Aun no tienes entradas reservadas.</div>';
+                return;
+            }
+
+            ticketsContainer.innerHTML = reservas.map((reserva) => `
+                <div class="ticket-card" data-reserva-id="${reserva.id}" data-evento-id="${reserva.evento_id}">
+                    <div class="ticket">
+                        <div class="ticket-img">
+                            ${reserva.evento_imagen
+                                ? `<img src="http://localhost/api-entradas/public${escaparHtml(reserva.evento_imagen)}" alt="${escaparHtml(reserva.evento_nombre || "Evento")}">`
+                                : `<span>${escaparHtml((reserva.evento_nombre || "Evento").slice(0, 18))}</span>`}
+                        </div>
+                        <div class="ticket-info">
+                            <h3>${escaparHtml(reserva.evento_nombre || "Evento sin nombre")}</h3>
+                            <p>${escaparHtml(formatearFecha(reserva.evento_fecha))} · ${escaparHtml(reserva.cantidad)} entrada(s)</p>
+                        </div>
+                        <button type="button" class="ticket-toggle" data-reserva-id="${reserva.id}" aria-expanded="false" aria-label="Ver detalles del evento">
+                            <i class="fas fa-chevron-down ticket-arrow"></i>
+                        </button>
+                    </div>
+                    <div id="ticket-details-${reserva.id}" class="ticket-details-box" hidden></div>
+                </div>
+            `).join("");
+
+            ticketsContainer.querySelectorAll(".ticket-toggle").forEach((boton) => {
+                boton.addEventListener("click", () => toggleDetalleReserva(boton, reservas));
+            });
+        }
+
+        function cargarReservas() {
+            const ticketsContainer = document.getElementById("ticketsContainer");
+            ticketsContainer.innerHTML = '<div class="ticket-empty">Cargando tus entradas...</div>';
+
+            fetch("http://localhost/api-entradas/public/api/mis-reservas", {
+                method: "GET",
+                credentials: "include"
+            })
+                .then(async respuesta => {
+                    const data = await leerJsonSeguro(respuesta);
+                    if (!respuesta.ok) {
+                        throw new Error(data.error || "No se pudieron cargar las reservas.");
+                    }
+                    return data;
+                })
+                .then(data => {
+                    renderReservas(data.data || []);
+                })
+                .catch(error => {
+                    ticketsContainer.innerHTML = `<div class="ticket-empty">${escaparHtml(error.message)}</div>`;
+                });
+        }
+
+        function toggleDetalleReserva(boton, reservas) {
+            const reservaId = boton.dataset.reservaId;
+            const detalle = document.getElementById(`ticket-details-${reservaId}`);
+            const icono = boton.querySelector(".ticket-arrow");
+            const estaAbierto = !detalle.hasAttribute("hidden");
+
+            document.querySelectorAll(".ticket-details-box").forEach((caja) => {
+                caja.hidden = true;
+                caja.innerHTML = caja.innerHTML;
+            });
+
+            document.querySelectorAll(".ticket-toggle").forEach((toggle) => {
+                toggle.setAttribute("aria-expanded", "false");
+                const flecha = toggle.querySelector(".ticket-arrow");
+                if (flecha) {
+                    flecha.classList.remove("open");
+                }
+            });
+
+            if (estaAbierto) {
+                return;
+            }
+
+            boton.setAttribute("aria-expanded", "true");
+            icono.classList.add("open");
+            detalle.hidden = false;
+
+            if (detalle.dataset.loaded === "true") {
+                return;
+            }
+
+            detalle.innerHTML = 'Cargando detalles del evento...';
+
+            const reserva = reservas.find((item) => String(item.id) === String(reservaId));
+            if (!reserva) {
+                detalle.innerHTML = 'No se encontro la reserva.';
+                return;
+            }
+
+            fetch(`http://localhost/api-entradas/public/api/eventos/${reserva.evento_id}`, {
+                method: "GET",
+                credentials: "include"
+            })
+                .then(async respuesta => {
+                    const data = await leerJsonSeguro(respuesta);
+                    if (!respuesta.ok) {
+                        throw new Error(data.error || "No se pudieron cargar los detalles del evento.");
+                    }
+                    return data;
+                })
+                .then(data => {
+                    detalle.innerHTML = crearHtmlDetalleEvento(data.data || {}, reserva);
+                    detalle.dataset.loaded = "true";
+                })
+                .catch(error => {
+                    detalle.innerHTML = escaparHtml(error.message);
+                });
+        }
+
+        function toggleEditarDatos() {
+            const nombreInput = document.getElementById("nombre");
+            const emailInput = document.getElementById("email");
+            const boton = document.getElementById("btnEditar");
+            const botonCancelar = document.getElementById("btnCancelar");
+            const estadoEdicion = document.getElementById("estadoEdicion");
+            const seccionPerfil = document.getElementById("seccionPerfil");
+
+            if (!modoEdicion) {
+                nombreOriginal = nombreInput.value;
+                emailOriginal = emailInput.value;
+                nombreInput.readOnly = false;
+                emailInput.readOnly = false;
+                boton.textContent = "GUARDAR CAMBIOS";
+                botonCancelar.style.display = "block";
+                estadoEdicion.style.display = "block";
+                seccionPerfil.classList.add("editing");
+                modoEdicion = true;
+                return;
+            }
+
+            actualizarPerfil();
+        }
+
+        function cancelarEdicion() {
+            const nombreInput = document.getElementById("nombre");
+            const emailInput = document.getElementById("email");
+            const boton = document.getElementById("btnEditar");
+            const botonCancelar = document.getElementById("btnCancelar");
+            const estadoEdicion = document.getElementById("estadoEdicion");
+            const seccionPerfil = document.getElementById("seccionPerfil");
+
+            nombreInput.value = nombreOriginal;
+            emailInput.value = emailOriginal;
+            nombreInput.readOnly = true;
+            emailInput.readOnly = true;
+            boton.textContent = "MODIFICAR DATOS";
+            botonCancelar.style.display = "none";
+            estadoEdicion.style.display = "none";
+            seccionPerfil.classList.remove("editing");
+            modoEdicion = false;
+        }
+
         // 3. Subir nueva foto
-        function subirFoto() {
-            const archivo = document.getElementById("nuevaFoto").files[0];
+        function subirFoto(event) {
+            const archivo = event ? event.target.files[0] : document.getElementById("inputFoto").files[0];
             if (!archivo) {
                 alert("Selecciona una imagen");
                 return;
@@ -185,8 +385,15 @@
             })
                 .then(res => res.json())
                 .then(data => {
-                    alert("Foto actualizada");
-                    cargarPerfil();
+                    if (data.error) {
+                        alert("Error: " + data.error);
+                    } else {
+                        alert("Foto actualizada");
+                        cargarPerfil();
+                    }
+                })
+                .catch(error => {
+                    alert("Error al subir la foto: " + error.message);
                 });
         }
 
@@ -204,15 +411,13 @@
 
         // 5. Actualizar perfil
         function actualizarPerfil() {
-            const nombre = document.getElementById("editNombre").value;
-            const email = document.getElementById("editEmail").value;
-            const password = document.getElementById("editPassword").value;
+            const nombre = document.getElementById("nombre").value;
+            const email = document.getElementById("email").value;
 
             const data = {};
 
             if (nombre.trim() !== "") data.nombre = nombre;
             if (email.trim() !== "") data.email = email;
-            if (password.trim() !== "") data.password = password;
 
             fetch(`http://localhost/api-entradas/public/api/usuarios/${usuarioId}`, {
                 method: "PUT",
@@ -225,21 +430,14 @@
                 .then(res => res.json())
                 .then(data => {
                     alert("Perfil actualizado");
+                    document.getElementById("nombre").readOnly = true;
+                    document.getElementById("email").readOnly = true;
+                    document.getElementById("btnEditar").textContent = "MODIFICAR DATOS";
+                    document.getElementById("btnCancelar").style.display = "none";
+                    document.getElementById("estadoEdicion").style.display = "none";
+                    document.getElementById("seccionPerfil").classList.remove("editing");
+                    modoEdicion = false;
                     cargarPerfil();
-                });
-        }
-
-        function logout() {
-            fetch("http://localhost/api-entradas/public/api/logout", {
-                method: "POST",
-                credentials: "include"
-            })
-                .then(res => res.json())
-                .then(data => {
-                    document.getElementById("resultado").textContent = JSON.stringify(data, null, 2);
-                    setTimeout(() => {
-                        window.location.href = "Home-Page.html";
-                    }, 1200);
                 });
         }
 

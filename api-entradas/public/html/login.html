@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil de Usuario</title>
-    <link rel="stylesheet" href="styleLogin.css">
+    <link rel="stylesheet" href="../../styleLogin.css">
     <!-- iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
@@ -59,6 +59,45 @@
 
 
             <script>
+                function registrarUsuario() {
+                    const archivoFoto = document.getElementById("foto_perfil").files[0];
+
+                    const data = {
+                        nombre: document.getElementById("nombre").value,
+                        email: document.getElementById("email").value,
+                        password: document.getElementById("password").value
+                    };
+
+                    // Paso 1: registrar el usuario con JSON
+                    fetch("http://localhost/api-entradas/public/api/usuarios", {
+                        method: "POST",
+                        headers: { 'Content-Type': 'application/json; charset=UTF-8' },
+                        credentials: "include",
+                        body: JSON.stringify(data)
+                    })
+                        .then((respuesta) => {
+                            if (respuesta.ok) return respuesta.json();
+                            throw new Error('Error en la red');
+                        })
+                        .then(datos => {
+                            console.log(datos);
+
+                            // Paso 2: si se seleccionó una foto, subirla ahora que tenemos el ID
+                            if (archivoFoto && datos.id) {
+                                const formData = new FormData();
+                                formData.append("imagen", archivoFoto);
+
+                                return fetch(`http://localhost/api-entradas/public/api/usuarios/${datos.id}/foto`, {
+                                    method: "POST",
+                                    credentials: "include",
+                                    body: formData
+                                }).then(res => res.json()).then(fotoData => {
+                                    console.log("Foto subida:", fotoData);
+                                });
+                            }
+                        })
+                        .catch(error => console.error("Error ", error));
+                }
 
                 function iniciarSesionUsuario() {
                     const data = {
@@ -79,11 +118,8 @@
                             });
                         })
                         .then((loginData) => {
-                            console.log(loginData);
-                            document.getElementById("resultadoUsuario").textContent = JSON.stringify(loginData.usuario, null, 2);
-                            setTimeout(() => {
-                                            window.location.href = "perfil-Vicky.html";
-                                        }, 2200);
+                               console.log(loginData);
+                               window.location.href = "perfil.html";
                         })
                         .catch(error => {
                             console.error("Error ", error);
@@ -98,6 +134,17 @@
                         .then(res => res.json())
                         .then(data => {
                             document.getElementById("resultadoUsuario").textContent = JSON.stringify(data, null, 2);
+                        });
+                }
+
+                function logout() {
+                    fetch("http://localhost/api-entradas/public/api/logout", {
+                        method: "POST",
+                        credentials: "include"
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            document.getElementById("resultado").textContent = JSON.stringify(data, null, 2);
                         });
                 }
 

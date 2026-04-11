@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil de Usuario</title>
-    <link rel="stylesheet" href="styleLogin.css">
+    <link rel="stylesheet" href="../../styleLogin.css">
     <!-- iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
@@ -69,9 +69,7 @@
                         password: document.getElementById("password").value
                     };
 
-                    const resultado = document.getElementById("resultadoUsuario");
-
-                    // Paso 1: registrar el usuario
+                    // Paso 1: registrar el usuario con JSON
                     fetch("http://localhost/api-entradas/public/api/usuarios", {
                         method: "POST",
                         headers: { 'Content-Type': 'application/json; charset=UTF-8' },
@@ -80,18 +78,14 @@
                     })
                         .then((respuesta) => {
                             if (respuesta.ok) return respuesta.json();
-                            throw new Error('Error en el registro');
+                            return respuesta.json().then(err => {
+                                throw new Error(err.error || err.message || 'Error al registrar');
+                            });
                         })
                         .then(datos => {
                             console.log(datos);
 
-                            resultado.textContent = "Usuario registrado correctamente";
-
-                            setTimeout(() => {
-                                window.location.href = "login.html";
-                            }, 2200);
-
-                            // Paso 2: si se seleccionó una foto, subirla
+                            // Paso 2: si se seleccionó una foto, subirla ahora que tenemos el ID
                             if (archivoFoto && datos.id) {
                                 const formData = new FormData();
                                 formData.append("imagen", archivoFoto);
@@ -100,34 +94,19 @@
                                     method: "POST",
                                     credentials: "include",
                                     body: formData
-                                })
-                                    .then(res => res.json())
-                                    .then(fotoData => {
-                                        console.log("Foto subida:", fotoData);
-
-                                        resultado.textContent = "Usuario registrado correctamente. Foto subida.";
-                                        setTimeout(() => {
-                                            window.location.href = "login.html";
-                                        }, 2200);
-                                    });
+                                }).then(res => res.json()).then(fotoData => {
+                                    console.log("Foto subida:", fotoData);
+                                });
                             }
+                        })
+                        .then(() => {
+                            window.location.href = "login.html";
                         })
                         .catch(error => {
                             console.error("Error ", error);
-                            resultado.textContent = "Error al registrar usuario";
+                            document.getElementById("resultadoUsuario").textContent = error.message;
                         });
                 }
-
-
-                //subir foto de perfil
-                document.getElementById("foto_perfil").addEventListener("change", function () {
-                    const archivo = this.files[0];
-                    if (archivo) {
-                        const urlTemporal = URL.createObjectURL(archivo);
-                        document.getElementById("foto-perfil").src = urlTemporal;
-                    }
-                });
-
 
             </script>
 
