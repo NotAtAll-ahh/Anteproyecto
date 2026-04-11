@@ -108,6 +108,23 @@ body {
     display: flex;
     flex-direction: column;
     gap: 15px;
+    color: #ffffff;
+}
+
+.form-inputs input {
+    color: white;
+    font-weight: 400;
+}
+
+.form-inputs input:focus {
+    outline: none;
+    border-color: #ffffff;
+    box-shadow: 0 0 10px #ffffff;
+    color: #ffffff;
+}
+
+.form-inputs input[readonly] {
+    opacity: 1;
 }
 
 .custom-input {
@@ -116,6 +133,49 @@ body {
     border-radius: 15px;
     height: 35px;
     width: 100%;
+    padding: 20px;
+    color: #ffffff;
+    font-weight: 400;
+    text-transform: none;
+    -webkit-text-fill-color: #ffffff;
+}
+
+.form-inputs .custom-input[readonly] {
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+    opacity: 1;
+    cursor: not-allowed;
+}
+
+#seccionPerfil.editing .custom-input:not([readonly]) {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: #ffd27a;
+    box-shadow: 0 0 0 2px rgba(255, 210, 122, 0.28);
+    cursor: text;
+}
+
+#estadoEdicion {
+    font-size: 0.85rem;
+    color: #ffe4b3;
+    text-transform: none;
+    letter-spacing: 0.2px;
+}
+
+.form-inputs .custom-input:-webkit-autofill,
+.form-inputs .custom-input:-webkit-autofill:hover,
+.form-inputs .custom-input:-webkit-autofill:focus {
+    -webkit-text-fill-color: #ffffff !important;
+    -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+    transition: background-color 9999s ease-out 0s;
+}
+
+
+
+.perfil-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
 }
 
 .perfil-img {
@@ -125,6 +185,10 @@ body {
     overflow: hidden;
     position: relative;
     border: 2px solid white;
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .perfil-img img {
@@ -133,19 +197,34 @@ body {
     object-fit: cover;
 }
 
-.editar-icon {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    background: white;
-    color: black;
-    width: 25px;
-    height: 25px;
-    border-radius: 5px;
+.foto-fallback {
+    font-size: 3rem;
+    color: rgba(255, 255, 255, 0.5);
     display: flex;
-    justify-content: center;
     align-items: center;
-    font-size: 0.8rem;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.editar-foto-btn {
+    background: transparent;
+    border: 1px solid white;
+    color: white;
+    padding: 10px 20px;
+    cursor: pointer;
+    text-transform: uppercase;
+    border-radius: 5px;
+    font-size: 0.85rem;
+    transition: 200ms ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.editar-foto-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: #ffd27a;
 }
 
 .extra-info {
@@ -173,6 +252,10 @@ body {
     border-bottom: 1px solid rgba(255, 255, 255, 0.4);
 }
 
+.ticket-card {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+}
+
 .ticket-img{
     width: 100px;
     height: 100px;
@@ -183,6 +266,17 @@ body {
     text-align: center;
     font-size: 0.7rem;
     margin-right: 20px;
+    overflow: hidden;
+}
+
+.ticket-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.ticket-img span {
+    padding: 8px;
 }
 
 .ticket-info h3 {
@@ -197,15 +291,79 @@ body {
 }
 
 .ticket-arrow {
+    transition: transform 200ms ease;
+}
+
+.ticket-arrow.open {
+    transform: rotate(180deg);
+}
+
+.ticket-toggle {
     margin-left: auto;
+    appearance: none;
+    -webkit-appearance: none;
+    background: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 0;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    box-shadow: none;
+}
+
+.ticket-toggle:focus {
+    outline: 1px solid rgba(255, 255, 255, 0.7);
+    outline-offset: 3px;
+}
+
+.ticket-toggle:hover {
+    opacity: 0.8;
 }
 
 .ticket-details-box {
     border: 1px solid white;
     margin: 20px 0;
-    padding: 60px;
-    text-align: center;
+    padding: 24px;
     font-size: 0.9rem;
+    text-transform: none;
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.ticket-details-content {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 20px;
+    align-items: start;
+}
+
+.ticket-details-image {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border: 1px solid white;
+}
+
+.ticket-details-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.ticket-details-info p {
+    margin: 0;
+}
+
+.ticket-empty {
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    padding: 24px;
+    text-align: center;
+    text-transform: none;
+    color: rgba(255, 255, 255, 0.9);
 }
 .modificar-btn {
     width: 100%;
@@ -222,4 +380,15 @@ body {
 .modificar-btn:hover {
     background: white;
     color: black;
+}
+
+@media (max-width: 768px) {
+    .ticket-details-content {
+        grid-template-columns: 1fr;
+    }
+
+    .ticket-details-image {
+        width: 100%;
+        height: 200px;
+    }
 }
