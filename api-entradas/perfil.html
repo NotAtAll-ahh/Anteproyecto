@@ -220,10 +220,8 @@
             ticketsContainer.innerHTML = reservas.map((reserva) => `
                 <div class="ticket-card" data-reserva-id="${reserva.id}" data-evento-id="${reserva.evento_id}">
                     <div class="ticket">
-                        <div class="ticket-img">
-                            ${reserva.evento_imagen
-                                ? `<img src="http://localhost/api-entradas/public${escaparHtml(reserva.evento_imagen)}" alt="${escaparHtml(reserva.evento_nombre || "Evento")}">`
-                                : `<span>${escaparHtml((reserva.evento_nombre || "Evento").slice(0, 18))}</span>`}
+                        <div class="ticket-img" id="ticket-img-${reserva.id}">
+                            <span>${escaparHtml((reserva.evento_nombre || "Evento").slice(0, 18))}</span>
                         </div>
                         <div class="ticket-info">
                             <h3>${escaparHtml(reserva.evento_nombre || "Evento sin nombre")}</h3>
@@ -236,6 +234,22 @@
                     <div id="ticket-details-${reserva.id}" class="ticket-details-box" hidden></div>
                 </div>
             `).join("");
+
+            // Cargar imagen de cada evento
+            reservas.forEach((reserva) => {
+                const ticketImgDiv = document.getElementById(`ticket-img-${reserva.id}`);
+                if (ticketImgDiv && reserva.evento_id) {
+                    fetch(`http://localhost/api-entradas/public/api/eventos/${encodeURIComponent(reserva.evento_id)}`)
+                        .then(res => res.json())
+                        .then(data => {
+                            const evento = data.data ?? data;
+                            if (evento && evento.imagen) {
+                                ticketImgDiv.innerHTML = `<img src="http://localhost/api-entradas/public${escaparHtml(evento.imagen)}" alt="${escaparHtml(evento.nombre || "Evento")}" style="width:100%; height:100%; object-fit:cover;">`;
+                            }
+                        })
+                        .catch(() => {});
+                }
+            });
 
             ticketsContainer.querySelectorAll(".ticket-toggle").forEach((boton) => {
                 boton.addEventListener("click", () => toggleDetalleReserva(boton, reservas));

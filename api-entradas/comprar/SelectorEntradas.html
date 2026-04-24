@@ -34,7 +34,7 @@
 
         <section class="derecha">
             <div class="infoGeneral">
-                <h4>Nombre del Evento</h4>
+                <h4 id="eventoNombre">Nombre del Evento</h4>
                 <div class="infoAdicional">
                     <p>18+</p>
                     <span>|</span>
@@ -42,7 +42,7 @@
                     <span>|</span>
                     <p>Géneros</p>
                     <span>|</span>
-                    <p>Fecha Evento</p>
+                    <p id="fechaEvento">Fecha Evento</p>
                 </div>
             </div>
             <div class="descrip">
@@ -79,39 +79,14 @@
             </form>
             <div>
                 <div class="type">
-                    <p>Tipo de entrada 1</p>
-                    <div class="ticket-stepper">
-                        <p>Precio entrada</p>
+                    <p id="tipoEntradaLabel">Tipo de entrada 1</p>
+                    <div class="ticket-stepper" id="stepper-1">
+                        <p>40 €</p>
                         <div class="selector-cantidad">
-                            <button type="button"><</button>
-                            <span>0</span>
-                            <button type="button">></button>
+                            <button type="button" class="btn-decrease"><</button>
+                            <span class="cantidad">0</span>
+                            <button type="button" class="btn-increase">></button>
                         </div>
-                        
-                    </div>
-                </div>
-                <div class="type">
-                    <p>Tipo de entrada 2</p>
-                    <div class="ticket-stepper">
-                        <p>Precio entrada</p>
-                        <div class="selector-cantidad">
-                            <button type="button"><</button>
-                            <span>0</span>
-                            <button type="button">></button>
-                        </div>
-                        
-                    </div>
-                </div>
-                <div class="type">
-                    <p>Tipo de entrada 3</p>
-                    <div class="ticket-stepper">
-                        <p>Precio entrada</p>
-                        <div class="selector-cantidad">
-                            <button type="button"><</button>
-                            <span>0</span>
-                            <button type="button">></button>
-                        </div>
-                        
                     </div>
                 </div>
             </div>
@@ -153,28 +128,17 @@
         <section class="izquierda">
             <div class="imagen">
                 <img src="https://via.placeholder.com/300x450?text=Sin+imagen" alt="Imagen del Evento">
-                <button class="trailer-btn">Ver teaser</button>
             </div>
             <div class="precioT">
                 <div class="resumen-head">
                     <span>TICKETS SELECCIONADOS</span>
                     <span>PRECIO</span>
                 </div>
-                <div class="resumen-linea">
-                    <span>Fila C Asiento 23</span>
-                    <span>41 €</span>
-                </div>
-                <div class="resumen-linea">
-                    <span>Fila C Asiento 24</span>
-                    <span>41 €</span>
-                </div>
-                <div class="resumen-linea">
-                    <span>Fila C Asiento 25</span>
-                    <span>41 €</span>
+                <div id="resumenLineasContainer">
                 </div>
                 <div class="resumen-total">
                     <span>Total</span>
-                    <span>123 €</span>
+                    <span>0 €</span>
                 </div>
             </div>
             <button class="buy-btn">Comprar Tickets</button>
