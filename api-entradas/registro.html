@@ -71,27 +71,43 @@
 
                     const resultado = document.getElementById("resultadoUsuario");
 
-                    // Paso 1: registrar el usuario
                     fetch("http://localhost/api-entradas/public/api/usuarios", {
                         method: "POST",
                         headers: { 'Content-Type': 'application/json; charset=UTF-8' },
                         credentials: "include",
                         body: JSON.stringify(data)
                     })
-                        .then((respuesta) => {
-                            if (respuesta.ok) return respuesta.json();
-                            throw new Error('Error en el registro');
+                        .then(async respuesta => {
+
+                            // Gestión de errores
+                            if (!respuesta.ok) {
+                                let mensaje = "Error en el registro";
+
+                                if (respuesta.status === 400) mensaje = "Datos inválidos enviados al servidor";
+                                if (respuesta.status === 401) mensaje = "No autorizado";
+                                if (respuesta.status === 409) mensaje = "El email ya está registrado";
+                                if (respuesta.status === 500) mensaje = "Error interno del servidor";
+
+                                // Intentar leer el JSON del servidor si existe
+                                let errorData;
+                                try {
+                                    errorData = await respuesta.json();
+                                    if (errorData.error) mensaje += ": " + errorData.error;
+                                } catch (e) { }
+
+                                throw new Error(mensaje);
+                            }
+
+                            return respuesta.json();
                         })
                         .then(datos => {
                             console.log(datos);
-
                             resultado.textContent = "Usuario registrado correctamente";
 
                             setTimeout(() => {
                                 window.location.href = "login.html";
                             }, 2200);
 
-                            // Paso 2: si se seleccionó una foto, subirla
                             if (archivoFoto && datos.id) {
                                 const formData = new FormData();
                                 formData.append("imagen", archivoFoto);
@@ -114,9 +130,17 @@
                         })
                         .catch(error => {
                             console.error("Error ", error);
-                            resultado.textContent = "Error al registrar usuario";
+
+                            if (error instanceof TypeError) {
+                                resultado.textContent = "Error de red: no se pudo conectar con el servidor.";
+                                return;
+                            }
+
+                            resultado.textContent = error.message || "Error al registrar usuario";
                         });
+
                 }
+
 
 
                 //subir foto de perfil
