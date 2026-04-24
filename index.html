@@ -3,173 +3,238 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Aura Society - Desktop Only</title>
-    <link rel="stylesheet" href="css/home-style.css">
-    <link rel="stylesheet" href="css/nav.css">
-    <link rel="stylesheet" href="css/header-footer.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page - Conciertos</title>
+    <link rel="stylesheet" href="api-entradas/styleHome.css">
+    <!--iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 
 <body>
 
-    <!-- INICIO HEADER -->
+    <!--Header-->
     <header class="main-header">
-        <button class="skip-link"><a href="#main-content">Saltar Al Contenido</a></button>
-        <div class="header-container">
-            <!-- Logo -->
-            <a href="/index.html" class="logo-link">
-                <img src="/media/logo-white.webp" alt="Logo Aura Society">
-            </a>
-            <!-- Menú Móvil Control -->
-            <input type="checkbox" id="nav-toggle" class="nav-toggle">
-            <label for="nav-toggle" class="nav-burger" aria-label="Menú">
-                <span></span>
-                <span></span>
-                <span></span>
-            </label>
-            <!-- Navegación -->
-            <nav class="nav-menu">
-                <ul>
-                    <li><a href="/index.html">Inicio</a></li>
-                    <li class="dropdown">
-                        <a href="/eventos/Eventos.html">Eventos</a>
-                        <ul class="dropdown-content">
-                            <li><a href="/eventos/Conciertos.html">Conciertos</a></li>
-                            <li><a href="/eventos/Cine.html">Cine</a></li>
-                            <li><a href="/eventos/Conferencias.html">Conferencias</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="/hazte-socio/">Hazte Socio</a></li>
-                    <li><a href="/sobre-nosotros/">Sobre Nosotros</a></li>
-                </ul>
-            </nav>
-            <!-- Herramientas de Usuario -->
-            <div class="header-tools">
-<div class="search-box">
-    <input type="text" id="search-input" placeholder="BUSCAR EVENTOS" aria-label="Buscar eventos">
-    <button class="search-btn" aria-label="Ejecutar búsqueda"><i class="fa-solid fa-magnifying-glass"></i></button>
-</div>
-                <a href="/perfil/" class="user-profile">
-                    <div class="user-info">
-                        <span class="label">Mi Cuenta</span>
-                        <span class="status">Socio Gold</span>
-                    </div>
-                    <img src="/media/yiperfil.png" alt="Usuario" class="avatar-circle">
-                </a>
+        <div class="header-left">
+            <div class="logo-box">LOGO</div>
+        </div>
+        <div class="header-center">
+            <div class="search-bar">
+                <input type="text" placeholder="BARRA DE BÚSQUEDA">
+                <i class="fas fa-search"></i>
             </div>
+        </div>
+        <div class="header-right">
+            <a href="api-entradas/perfil.html" class="user-icon-circle">
+                <i class="fas fa-user"></i>
+            </a>
         </div>
     </header>
-    <!-- FIN HEADER -->
 
-    <section class="banner" aria-label="Aura Society home banner">
-        <div class="content-wrapper">
-            <h1>[Aura] Society - Home Page</h1>
-            <p class="subtitulo">Un espacio donde la creatividad, la tecnología y la cultura se encuentran</p>
-            <button class="btn-gold" onclick="window.location.href='/hazte-socio/'">HAZTE SOCIO</button>
-            
+    <!--Banner-->
+    <section class="banner content-container">
+        <div class="banner-contenido">
+            <h1 class="banner-titulo">EVENTOS</h1>
+            <div class="banner-texto">
+                TEXTO MARKETEABLE QUE INCITE A HACER CLICK
+            </div>
+            <button class="banner-comprar-btn">Comprar entradas</button>
+        </div>
+        <!-- Flecha Carrusel-->
+        <div class="carrusel-flecha">
+            <i class="fas fa-chevron-right"></i>
         </div>
     </section>
 
-    <main id="main-content">
-    <section class="section-eventos">
-        <div class="content-wrapper">
-            <h2 class="titulo-underline">Ultimos Eventos</h2>
-            <div class="eventos-grid">
-                <div class="event-card">
-                    <div class="img-box" id="TheDrama" aria-label="The Drama thumbnail"></div>
-                    <button class="btn-outline" onclick="window.location.href='/detalles-evento/'">COMPRAR ENTRADAS</button>
-                </div>
-                <div class="event-card">
-                    <div class="img-box" id="PWMOV" aria-label="People We Meet on Vacation thumbnail"></div>
-                    <button class="btn-outline" onclick="window.location.href='/detalles-evento/'">COMPRAR ENTRADAS</button>
-                </div>
-                <div class="event-card">
-                    <div class="img-box" id="TFOFU" aria-label="The Feeling of Falling Upwards event thumbnail"></div>
-                    <button class="btn-outline" onclick="window.location.href='/detalles-evento/'">COMPRAR ENTRADAS</button>
-                </div>
-                <div class="event-card">
-                    <div class="img-box" id="ConferenciaTecnológica" aria-label="Conferencia Tecnológica thumbnail"></div>
-                    <button class="btn-outline" onclick="window.location.href='/detalles-evento/'">COMPRAR ENTRADAS</button>
-                </div>
+    <!-- Filtro y Buscar -->
+    <section class="filtros-section">
+        <div class="container">
+            <p class="filtro-label">Encuentra tu evento</p>
+
+            <!--Form Buscar-->
+            <form action="api-entradas/resultados.html" method="GET" class="search-filtro-bar">
+
+                <!-- Buscar por Nombre-->
+                <div class="filtro-item">
+                    <div class="filtro-texto">
+                        <span class="main-label">BUSCAR</span>
+                        <input id="nombre-input" type="text" name="nombre" placeholder="Artista, Evento o Recinto">
+
+                    </div>
+
+                    <!-- Submit -->
+                    <button type="submit" class="search-submit-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Conciertos-->
+    <section class="concerts-section content-container">
+        <div class="section-header-line">
+            <h2>CONCIERTOS</h2>
+            <div class="expand-control">
+                <span>DESPLIEGA LA SECCIÓN</span>
+                <i class="fas fa-chevron-down" onclick="displayEventos(); cargarEventos();"></i>
             </div>
         </div>
+
+        <div class="lista-eventos" id="conciertos">
+
+        </div>
+
+        <section class="solo-admin">
+        <button type="button" id="crear-evento" class="crear-evento"><a href="api-entradas/crear_evento.html">Crear Evento</a></button>
     </section>
 
-    <section class="hazte-miembro-banner">
-        <div class="hazte-miembro-box">
-            <h2>Hazte Miembro</h2>
-            <br>
-            <p>Únete a una comunidad vibrante donde podrás disfrutar de ventajas exclusivas, acceso prioritario a eventos, descuentos especiales y experiencias diseñadas para inspirarte. Forma parte de Aura Society y vive la cultura desde dentro.</p>
-            <button class="btn-gold" onclick="window.location.href='/hazte-socio/'"s>ÚNETE AL CLUB</button>
-        </div>
     </section>
-    <section class="section-split content-wrapper">
-        <div>
-            <h2 class="titulo-izq">Salas Automatizadas con IA</h2>
-            <button class="btn-outline-pequeño">Descubre cómo nuestras salas transforman tu evento</button>
-            <div class="ai-info">
-                <h3><strong>Información sobre nuestras salas automatizadas y personalizables</strong></h3>
-                
-                <p class="promo-link">Nuestras salas equipadas con inteligencia artificial se adaptan a tus necesidades: iluminación dinámica, sonido envolvente, configuraciones temáticas y herramientas interactivas para eventos, reuniones o experiencias creativas. Todo controlado de forma intuitiva y en tiempo real.</p>
-            </div>
-        </div>
-        <div class="ai-image">
-            <img src="/media/home/image2.png.png" alt="Representación sala IA">
-        </div>
-    </section>
+    <!-- Botones solo admin -->
+    
 
-    <section class="section-split content-wrapper">
-        <div class="compañías-info">
-            
-            <div class="comentarios">“Una experiencia impecable. La tecnología y el ambiente superaron nuestras expectativas.”</div>
-            <div class="comentarios">“Aura Society es el lugar perfecto para eventos creativos y corporativos.”</div>
-        </div>
-        <div class="compañías-info">
-            <h2 class="titulo-der">Empresas que confían en nosotros</h2>
-            <h3><strong>Conoce a nuestros colaboradores</strong></h3>
-            <span class="promo-link">Colaboramos con empresas líderes que han confiado en nuestras instalaciones para organizar eventos, presentaciones y experiencias corporativas. Su apoyo impulsa nuestra misión de ofrecer espacios innovadores y de alta calidad.</span>
-        </div>
-    </section>
+    <!--Script-->
+    <script>
 
-    <section class="salas-banner">
-        <div class="salas-box">
-            <h2>Reserva de Salas</h2>
-            <p>¿Buscas un espacio único para tu evento? Nuestras salas están diseñadas para adaptarse a cualquier ocasión: reuniones privadas, presentaciones, grabaciones, talleres o experiencias inmersivas. Reserva fácilmente y personaliza cada detalle.</p>
-            <button class="btn-azul">RESERVA AHORA TU SALA</button>
-        </div>
-    </section>
-    </main>
+        let usuarioRol = null;
+        let usuarioId = null;
+        let conciertos = document.getElementById("conciertos");
+        let control = document.getElementsByClassName("expand-control")[0].getElementsByTagName("i")[0];
+        window.onload = function () {
+            conciertos.style.display = "none"; // Oculta la sección al cargar la página
+            control.style.transform = "rotate(180deg)"; // Rota el icono al cargar la página
+        };
+        function displayEventos() {
 
-    <!-- INICIO FOOTER -->
-    <footer class="site-footer">
-        <div class="footer-content">
-            <div class="footer-brand">
-                <img src="/media/logo-white.webp" alt="Aura Society">
-                <div class="credits">
-                    <p>DESIGNED BY DAW</p>
-                    <p>2026 AURA SOCIETY</p><a href="/media/DOCUMENTO COPYRIGHT.pdf" class="pdf-link" target="_blank"><i class="fa-solid fa-file-pdf"></i> DOCUMENTO COPYRIGHT</a>
-                </div>
-            </div>  
-            <div class="footer-info">
-                <div class="contact-details">
-                    <p>CORREO<br><strong>info@aurasociety.com</strong></p>
-                    <p>TELEFONO<br><strong>+34 640 89 29 46</strong></p>
-                    <p>UBICACION<br><strong>Paseo Puerta del Ángel, 5</strong></p>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <span>Síguenos</span>
-            <div class="social-links">
-                <i class="fa-brands fa-facebook-f"></i>
-                <i class="fa-brands fa-instagram"></i>
-                <i class="fa-brands fa-whatsapp"></i>
-            </div>
-        </div>
-    </footer>
-    <!-- FIN FOOTER -->
+            //al hacer click en el control, se muestra u oculta la sección de conciertos y se rota el icono
+            if (conciertos.style.display === "none") {
+                conciertos.style.display = "flex";
+                control.style.transform = "rotate(0deg)";
+            } else {
+                conciertos.style.display = "none";
+                control.style.transform = "rotate(180deg)";
+            }
+        }
 
+        //cargar todos los eventos
+        function cargarEventos() {
+            fetch("http://localhost/api-entradas/public/api/eventos")
+                .then(res => res.json())
+                .then(data => {
+                    const listaEventos = document.getElementById("conciertos");
+                    listaEventos.innerHTML = "";
+
+                    data.data.forEach(evento => {
+                        const div = document.createElement("div");
+                        div.className = "event-card";
+
+                        // Imagen
+                        const cardImg = document.createElement("div");
+                        cardImg.className = "card-img";
+
+                        const img = document.createElement("img");
+                        img.src = evento.imagen
+                            ? "http://localhost/api-entradas/public" + evento.imagen
+                            : "https://via.placeholder.com/600x300?text=Sin+imagen";
+                        img.alt = "Imagen del evento";
+
+                        cardImg.appendChild(img);
+
+                        // Título
+                        const titulo = document.createElement("h3");
+                        titulo.textContent = evento.nombre;
+
+                        // Fecha
+                        const fecha = document.createElement("p");
+                        fecha.textContent = "Fecha: " + evento.fecha;
+
+                        // Contenedor de Botones
+                        const contenedorBotones = document.createElement("div");
+                        contenedorBotones.className = "botones-evento";
+
+                        // Botón Reservar (siempre visible)
+                        const btnReservar = document.createElement("button");
+                        btnReservar.textContent = "Reservar";
+                        btnReservar.onclick = () => reservar(evento.id);
+                        btnReservar.className = "reservar";
+                        contenedorBotones.appendChild(btnReservar);
+
+
+                        //comprobar rol del usuario
+                        fetch("http://localhost/api-entradas/public/api/sesion", {
+                            method: "GET",
+                            credentials: "include"
+                        })
+                            .then(res => res.json())
+                            .then(data => {
+                                if (data.logueado) {
+                                    usuarioRol = data.rol;
+                                    usuarioId = data.usuario_id;
+
+                                    // Botones solo para admin
+                                    if (usuarioRol === "admin") {
+
+                                        const btnEditar = document.createElement("button");
+                                        btnEditar.textContent = "Editar";
+                                        btnEditar.className = "editar";
+                                        btnEditar.onclick = () => editar(evento.id);
+
+                                        const btnEliminar = document.createElement("button");
+                                        btnEliminar.textContent = "Eliminar";
+                                        btnEliminar.className = "eliminar";
+                                        btnEliminar.onclick = () => eliminar(evento.id);
+
+                                        contenedorBotones.appendChild(btnEditar);
+                                        contenedorBotones.appendChild(btnEliminar);
+                                    }
+
+
+                                }
+
+
+                            });
+
+                        // Agragar elementos al div
+                        div.appendChild(cardImg);
+                        div.appendChild(titulo);
+                        div.appendChild(fecha);
+                        div.appendChild(contenedorBotones);
+
+                        listaEventos.appendChild(div);
+                    });
+                });
+            //Funciones usuario
+            function editar(id) {
+                window.location.href = "api-entradas/editar_evento.html?id=" + id;
+            }
+
+            function eliminar(id) {
+                if (!confirm("¿Seguro que deseas eliminar este evento? Esta acción no se puede deshacer.")) {
+                    return;
+                }
+
+                fetch(`http://localhost/api-entradas/public/api/eventos/${id}`, {
+                    method: "DELETE",
+                    credentials: "include"
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.error) {
+                            alert("Error: " + data.error);
+                        } else {
+                            alert("Evento eliminado correctamente");
+                            cargarEventos(); // refrescar lista
+                        }
+                    });
+            }
+
+
+            function reservar(id) {
+                window.location.href = "api-entradas/comprar/SelectorEntradas.html?evento_id=" + encodeURIComponent(id);
+            }
+
+        };
+
+    </script>
 </body>
+
 
 </html>
