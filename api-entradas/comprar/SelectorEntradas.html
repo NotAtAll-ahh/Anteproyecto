@@ -4,63 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../css/home-style.css">
-    <link rel="stylesheet" href="../css/nav.css">
-    <link rel="stylesheet" href="../css/header-footer.css">
-    <link rel="stylesheet" href="../css/SelectorEntradas.css">
+    <link rel="stylesheet" href="../styleHome.css">
+    <link rel="stylesheet" href="../../css/SelectorEntradas.css">
     <script src="SelectorEntradas.js" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     
-    <!-- INICIO HEADER -->
+    <!--Header-->
     <header class="main-header">
-        <button class="skip-link"><a href="#main-content">Saltar Al Contenido</a></button>
-        <div class="header-container">
-            <!-- Logo -->
-            <a href="/index.html" class="logo-link">
-                <img src="/media/logo-white.webp" alt="Logo Aura Society">
-            </a>
-            <!-- Menú Móvil Control -->
-            <input type="checkbox" id="nav-toggle" class="nav-toggle">
-            <label for="nav-toggle" class="nav-burger" aria-label="Menú">
-                <span></span>
-                <span></span>
-                <span></span>
-            </label>
-            <!-- Navegación -->
-            <nav class="nav-menu">
-                <ul>
-                    <li><a href="/index.html">Inicio</a></li>
-                    <li class="dropdown">
-                        <a href="/eventos/Eventos.html">Eventos</a>
-                        <ul class="dropdown-content">
-                            <li><a href="/eventos/Conciertos.html">Conciertos</a></li>
-                            <li><a href="/eventos/Cine.html">Cine</a></li>
-                            <li><a href="/eventos/Conferencias.html">Conferencias</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="/hazte-socio/">Hazte Socio</a></li>
-                    <li><a href="/sobre-nosotros/">Sobre Nosotros</a></li>
-                </ul>
-            </nav>
-            <!-- Herramientas de Usuario -->
-            <div class="header-tools">
-<div class="search-box">
-    <input type="text" id="search-input" placeholder="BUSCAR EVENTOS" aria-label="Buscar eventos">
-    <button class="search-btn" aria-label="Ejecutar búsqueda"><i class="fa-solid fa-magnifying-glass"></i></button>
-</div>
-                <a href="/perfil/" class="user-profile">
-                    <div class="user-info">
-                        <span class="label">Mi Cuenta</span>
-                        <span class="status">Socio Gold</span>
-                    </div>
-                    <img src="/media/yiperfil.png" alt="Usuario" class="avatar-circle">
-                </a>
+        <div class="header-left">
+            <div class="logo-box">LOGO</div>
+        </div>
+        <div class="header-center">
+            <div class="search-bar">
+                <input type="text" placeholder="BARRA DE BÚSQUEDA">
+                <i class="fas fa-search"></i>
             </div>
         </div>
+        <div class="header-right">
+            <a href="../perfil.html" class="user-icon-circle">
+                <i class="fas fa-user"></i>
+            </a>
+        </div>
     </header>
-    <!-- FIN HEADER -->
 
 
     <main class="selector-layout">
@@ -99,13 +66,13 @@
                     </select>
                 </div>
                 <div class="tipos">
-                    <img src="../media/asientos/Disponible.png" class="icon">
+                    <img src="../../media/asientos/Disponible.png" class="icon">
                     <p>Disponible</p>
-                    <img src="../media/asientos/Seleccion.png" class="icon">
+                    <img src="../../media/asientos/Seleccion.png" class="icon">
                     <p>Seleccionados</p>
-                    <img src="../media/asientos/Reducida.png" class="icon">
+                    <img src="../../media/asientos/Reducida.png" class="icon">
                     <p>Movilidad Reducida</p>
-                    <img src="../media/asientos/NoDisponible.png" class="icon">
+                    <img src="../../media/asientos/NoDisponible.png" class="icon">
                     <p>Sold Out</p>
 
                 </div>
@@ -185,7 +152,7 @@
 
         <section class="izquierda">
             <div class="imagen">
-                <img src="../media/eventos/CINE/Seccion1/Img1.jpg" alt="Imagen del Evento">
+                <img src="https://via.placeholder.com/300x450?text=Sin+imagen" alt="Imagen del Evento">
                 <button class="trailer-btn">Ver teaser</button>
             </div>
             <div class="precioT">
@@ -215,36 +182,5 @@
 
     </main>
 
-
-
-
-    <!-- INICIO FOOTER -->
-    <footer class="site-footer">
-        <div class="footer-content">
-            <div class="footer-brand">
-                <img src="/media/logo-white.webp" alt="Aura Society">
-                <div class="credits">
-                    <p>DESIGNED BY DAW</p>
-                    <p>2026 AURA SOCIETY</p><a href="/media/DOCUMENTO COPYRIGHT.pdf" class="pdf-link" target="_blank"><i class="fa-solid fa-file-pdf"></i> DOCUMENTO COPYRIGHT</a>
-                </div>
-            </div>  
-            <div class="footer-info">
-                <div class="contact-details">
-                    <p>CORREO<br><strong>info@aurasociety.com</strong></p>
-                    <p>TELEFONO<br><strong>+34 640 89 29 46</strong></p>
-                    <p>UBICACION<br><strong>Paseo Puerta del Ángel, 5</strong></p>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <span>Síguenos</span>
-            <div class="social-links">
-                <i class="fa-brands fa-facebook-f"></i>
-                <i class="fa-brands fa-instagram"></i>
-                <i class="fa-brands fa-whatsapp"></i>
-            </div>
-        </div>
-    </footer>
-    <!-- FIN FOOTER -->
 </body>
 </html>

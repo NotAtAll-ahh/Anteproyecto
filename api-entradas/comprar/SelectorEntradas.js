@@ -1,6 +1,6 @@
-const AVAILABLE_SEAT_IMG = '../media/asientos/Disponible.png';
-const SELECTED_SEAT_IMG = '../media/asientos/Seleccion.png';
-const UNAVAILABLE_SEAT_IMG = '../media/asientos/NoDisponible.png';
+const AVAILABLE_SEAT_IMG = '../../media/asientos/Disponible.png';
+const SELECTED_SEAT_IMG = '../../media/asientos/Seleccion.png';
+const UNAVAILABLE_SEAT_IMG = '../../media/asientos/NoDisponible.png';
 
 function setRandomUnavailableSeats(numSeats) {
     const seats = document.querySelectorAll('.seat');
@@ -67,4 +67,25 @@ window.addEventListener('DOMContentLoaded', () => {
     appendSeats(9, "front-row-first-last-row");
     selectSeats();
     setRandomUnavailableSeats(50);
+
+    // Cargar imagen del evento desde la URL
+    const params = new URLSearchParams(window.location.search);
+    const eventoId = params.get('evento_id');
+    const img = document.querySelector('.imagen img');
+    if (eventoId) {
+        fetch(`http://localhost/api-entradas/public/api/eventos/${encodeURIComponent(eventoId)}`)
+            .then(res => res.json())
+            .then(data => {
+                const evento = data.data ?? data;
+                if (img) {
+                    img.src = evento && evento.imagen
+                        ? 'http://localhost/api-entradas/public' + evento.imagen
+                        : 'https://via.placeholder.com/300x450?text=Sin+imagen';
+                    img.alt = (evento && evento.nombre) || 'Imagen del Evento';
+                }
+            })
+            .catch(() => {
+                if (img) img.src = 'https://via.placeholder.com/300x450?text=Sin+imagen';
+            });
+    }
 });
