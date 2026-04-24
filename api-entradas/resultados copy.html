@@ -40,7 +40,7 @@
         //Buscar eventos por nombre y fecha
 function buscarEventos(nombre, fechaFiltro) {
 
-    let url = "http://localhost/api-entradas/public/api/eventos/buscar?";
+    let url = "https://TU_BACKEND_RAILWAY.up.railway.app/api/eventos/buscar?";
 
     // Añadir nombre si existe
     if (nombre.trim() !== "") {
@@ -100,7 +100,7 @@ function buscarEventos(nombre, fechaFiltro) {
 
                 const img = document.createElement("img");
                 img.src = evento.imagen
-                    ? "http://localhost/api-entradas/public" + evento.imagen
+                    ? "https://TU_BACKEND_RAILWAY.up.railway.app" + evento.imagen
                     : "https://via.placeholder.com/600x300?text=Sin+imagen";
 
                 const titulo = document.createElement("h3");

@@ -223,7 +223,7 @@
                         return;
                     }
 
-                    fetch("http://localhost/api-entradas/public/api/sesion", {
+                    fetch("https://TU_BACKEND_RAILWAY.up.railway.app/api/sesion", {
                         method: "GET",
                         credentials: "include"
                     })
@@ -233,7 +233,7 @@
                                 throw new Error("Debes iniciar sesión para completar la compra.");
                             }
 
-                            return fetch("http://localhost/api-entradas/public/api/reservas", {
+                            return fetch("https://TU_BACKEND_RAILWAY.up.railway.app/api/reservas", {
                                 method: "POST",
                                 headers: {
                                     "Content-Type": "application/json"
@@ -265,7 +265,7 @@
                 return;
             }
 
-            fetch(`http://localhost/api-entradas/public/api/eventos/${encodeURIComponent(eventoId)}`)
+            fetch(`https://TU_BACKEND_RAILWAY.up.railway.app/api/eventos/${encodeURIComponent(eventoId)}`)
                 .then(res => res.json())
                 .then(data => {
                     const evento = data.data ?? data;
@@ -276,7 +276,7 @@
                         descriptionElement.textContent = evento.descripcion;
                     }
                     if (evento && evento.imagen) {
-                        imageElement.src = "http://localhost/api-entradas/public" + evento.imagen;
+                        imageElement.src = "https://TU_BACKEND_RAILWAY.up.railway.app" + evento.imagen;
                     }
                 })
                 .catch(() => {

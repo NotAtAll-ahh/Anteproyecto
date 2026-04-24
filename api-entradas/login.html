@@ -70,7 +70,7 @@
                         password: document.getElementById("passwordU").value
                     };
 
-                    fetch("http://localhost/api-entradas/public/api/login", {
+                    fetch("https://TU_BACKEND_RAILWAY.up.railway.app/api/login", {
                         method: "POST",
                         headers: { 'Content-Type': 'application/json; charset=UTF-8' },
                         credentials: "include", // IMPORTANTE: permite enviar cookies de sesión
@@ -95,7 +95,7 @@
                         });
                 }
                 function verSesion() {
-                    fetch("http://localhost/api-entradas/public/api/sesion", {
+                    fetch("https://TU_BACKEND_RAILWAY.up.railway.app/api/sesion", {
                         method: "GET",
                         credentials: "include"
                     })

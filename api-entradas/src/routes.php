@@ -2,9 +2,18 @@
 //Obtener la URL y el método HTTP
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-// Normalizar ruta (para pode accedes desde el navegador desde /public)
-$basePath = '/api-entradas/public';
-$uri = str_replace($basePath, '', $uri);
+// Normalizar ruta para soportar local (/api-entradas/public) y Railway (/ o /public).
+$basePaths = ['/api-entradas/public', '/public'];
+foreach ($basePaths as $basePath) {
+    if (strpos($uri, $basePath) === 0) {
+        $uri = substr($uri, strlen($basePath));
+        break;
+    }
+}
+
+if ($uri === '' || $uri === false) {
+    $uri = '/';
+}
 
 $method = $_SERVER['REQUEST_METHOD'];
 

@@ -191,11 +191,11 @@
             formReserva.style.display = "none";
         } else {
             Promise.all([
-                fetch("http://localhost/api-entradas/public/api/sesion", {
+                fetch("https://TU_BACKEND_RAILWAY.up.railway.app/api/sesion", {
                     method: "GET",
                     credentials: "include"
                 }).then(leerJsonSeguro),
-                fetch("http://localhost/api-entradas/public/api/eventos/" + encodeURIComponent(eventoId))
+                fetch("https://TU_BACKEND_RAILWAY.up.railway.app/api/eventos/" + encodeURIComponent(eventoId))
                     .then(leerJsonSeguro)
             ])
                 .then(([sesion, eventoRes]) => {
@@ -242,7 +242,7 @@
                 return;
             }
 
-            fetch("http://localhost/api-entradas/public/api/reservas", {
+            fetch("https://TU_BACKEND_RAILWAY.up.railway.app/api/reservas", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
