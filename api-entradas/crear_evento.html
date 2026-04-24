@@ -243,7 +243,10 @@
                 },
                 body: JSON.stringify(data)
             })
+            
+
                 .then(res => res.json())
+                
                 .then(async data => {
                     if (data.id) {
                         document.getElementById("resultado").textContent =
