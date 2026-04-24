@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura Society | Perfil</title>
+    <!-- Iconos y Fuentes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/header-footer.css">
+    <link rel="stylesheet" href="/css/perfil.css">
+</head>
+<body>
+
+    <!-- INICIO HEADER -->
+    <header class="main-header"><button class="skip-link"><a href="#main-content">Saltar Al Contenido</a></button>
+        <div class="header-container">
+            <!-- Logo -->
+            <a href="/index.html" class="logo-link">
+                <img src="/media/logo-white.webp" alt="Logo Aura Society">
+            </a>
+            <!-- Menú Móvil Control -->
+            <input type="checkbox" id="nav-toggle" class="nav-toggle">
+            <label for="nav-toggle" class="nav-burger" aria-label="Menú">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+            <!-- Navegación -->
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="/index.html">Inicio</a></li>
+                    <li class="dropdown">
+                        <a href="/eventos/Eventos.html">Eventos <i class="fa-solid fa-chevron-down arrow-icon"></i></a>
+                        <ul class="dropdown-content">
+                            <li><a href="/eventos/Conciertos.html">Conciertos</a></li>
+                            <li><a href="/eventos/Cine.html">Cine</a></li>
+                            <li><a href="/eventos/Conferencias.html">Conferencias</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/hazte-socio/">Hazte Socio</a></li>
+                    <li><a href="/sobre-nosotros/">Sobre Nosotros</a></li>
+                </ul>
+            </nav>
+            <!-- Herramientas de Usuario -->
+            <div class="header-tools">
+<div class="search-box">
+    <input type="text" id="search-input" placeholder="BUSCAR EVENTOS" aria-label="Buscar eventos">
+    <button class="search-btn" aria-label="Ejecutar búsqueda"><i class="fa-solid fa-magnifying-glass"></i></button>
+</div>
+                <a href="/perfil/" class="user-profile">
+                    <div class="user-info">
+                        <span class="label">Mi Cuenta</span>
+                        <span class="status">Socio Gold</span>
+                    </div>
+                    <img src="/media/yiperfil.png" alt="Usuario" class="avatar-circle">
+                </a>
+            </div>
+        </div>
+    </header>
+    <!-- FIN HEADER -->
+
+    <main>
+        <!-- SECCIÓN 1: DATOS Y CALENDARIO -->
+        <section class="top-section">
+            <article class="profile-card">
+                <div class="profile-header">
+                    <div class="profile-pic-container">
+                        <img src="/media/yiperfil.png" alt="Foto de perfil de Yihua" class="profile-pic">
+                        <div class="edit-btn" aria-label="Editar foto"><i class="fa-solid fa-pen"></i></div>
+                    </div>
+                    <div>
+                        <h2 style="border:none; margin:0; font-size:1.5rem;">Datos Personales</h2>
+                        <p style="color:var(--gold); font-size:0.8rem;">SOCIO GOLD</p>
+                    </div>
+                </div>
+
+                <div class="data-rows">
+                    <div>Gorka Velázquez Arrizabalaga <span>Nombre</span></div>
+                    <div>itsGorkaYT@aurasociety.com <span>Email</span></div>
+                    <div>+34 600 000 000 <span>Móvil</span></div>
+                </div>
+
+                <div class="actions">
+                    <button class="btn-small">Modificar Datos</button>
+                    <button class="btn-small">Métodos de Pago</button>
+                </div>
+            </article>
+
+            <!-- Calendario -->
+            <aside class="calendar-widget" aria-label="Calendario de eventos">
+                <div class="cal-header">ENERO 2025</div>
+                <div class="cal-grid">
+                    <div class="day-name">D</div><div class="day-name">L</div><div class="day-name">M</div><div class="day-name">X</div><div class="day-name">J</div><div class="day-name">V</div><div class="day-name">S</div>
+                    
+                    <div class="day empty"></div><div class="day empty"></div><div class="day empty"></div>
+                    <div class="day">1</div><div class="day">2</div><div class="day">3</div><div class="day">4</div>
+                    <div class="day">5</div><div class="day">6</div><div class="day">7</div><div class="day">8</div>
+                    <div class="day">9</div><div class="day">10</div><div class="day">11</div><div class="day">12</div>
+                    <div class="day">13</div><div class="day">14</div><div class="day">15</div><div class="day">16</div>
+                    <div class="day">17</div><div class="day">18</div><div class="day">19</div><div class="day">20</div>
+                    <div class="day">21</div><div class="day">22</div><div class="day active" aria-label="Evento el día 23">23</div><div class="day">24</div>
+                    <div class="day">25</div><div class="day">26</div><div class="day">27</div><div class="day">28</div>
+                    <div class="day">29</div><div class="day">30</div><div class="day">31</div>
+                </div>
+            </aside>
+        </section>
+
+        <!-- MIS ENTRADAS -->
+        <section>
+            <h2><span>Mis Entradas</span></h2>
+            <div class="grid-tickets">
+                <article class="card">
+                    <img src="https://images.unsplash.com/photo-1540039155733-5bb30b53aa14" alt="Concierto de Rock" class="card-img">
+                    <div class="card-info">
+                        <div>
+                            <div class="card-title">Neon Nights</div>
+                            <div class="card-meta">2 Entradas</div>
+                        </div>
+                        <i class="fa-solid fa-qrcode qr-icon" aria-label="Ver código QR"></i>
+                    </div>
+                </article>
+                <article class="card">
+                    <img src="https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec" alt="Festival Techno" class="card-img">
+                    <div class="card-info">
+                        <div>
+                            <div class="card-title">Techno Rave</div>
+                            <div class="card-meta">4 Entradas</div>
+                        </div>
+                        <i class="fa-solid fa-qrcode qr-icon" aria-label="Ver código QR"></i>
+                    </div>
+                </article>
+                 <article class="card">
+                    <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30" alt="Exposición de Arte" class="card-img">
+                    <div class="card-info">
+                        <div>
+                            <div class="card-title">Art Gallery</div>
+                            <div class="card-meta">2 Entradas</div>
+                        </div>
+                        <i class="fa-solid fa-qrcode qr-icon" aria-label="Ver código QR"></i>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- RECOMENDADOS -->
+        <section>
+            <h2><span>Eventos Recomendados</span> <i class="fa-solid fa-chevron-down" style="font-size:1rem;"></i></h2>
+            <div class="scroller">
+                <article class="reco-item card">
+                    <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7" alt="Evento Comedia" class="card-img">
+                    <div class="card-title">Comedy Night</div>
+                    <div class="card-meta">14 Feb | 20:00</div>
+                </article>
+                <article class="reco-item card">
+                    <img src="https://images.unsplash.com/photo-1501281668745-f7f57925c3b4" alt="Fiesta Privada" class="card-img">
+                    <div class="card-title">Private Party</div>
+                    <div class="card-meta">20 Feb | 23:00</div>
+                </article>
+                <article class="reco-item card">
+                    <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745" alt="DJ Set Live" class="card-img">
+                    <div class="card-title">DJ Set Live</div>
+                    <div class="card-meta">22 Feb | 00:00</div>
+                </article>
+            </div>
+        </section>
+
+
+        <section class="ia-box">
+            <h3><i style="color:var(--gold);"></i> Pídele a nuestra IA</h3>
+            <div class="search-wrapper">
+
+                <input type="text" class="ia-input" placeholder="Recomiéndame algo para este finde..." >
+
+                <button class="ia-btn" aria-label="Buscar con IA"><i class="fa-solid fa-wand-magic-sparkles"></i></button>
+            </div>
+        </section>
+
+        <!-- CONFIG -->
+        <section style="margin-bottom: 40px; border-bottom: 1px solid #333; padding-bottom: 20px; cursor: pointer;">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+                <h2 style="border:none; margin:0; font-size: 1.5rem;">Configuración y Preferencias</h2>
+                <i class="fa-solid fa-chevron-down"></i>
+            </div>
+        </section>
+    </main>
+
+    <!-- INICIO FOOTER -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <img src="/media/logo-white.webp" alt="Aura Society">
+                <div class="credits">
+                    <p>DESIGNED BY DAW</p>
+                    <p>2026 AURA SOCIETY</p><a href="/media/DOCUMENTO COPYRIGHT.pdf" class="pdf-link" target="_blank"><i class="fa-solid fa-file-pdf"></i> DOCUMENTO COPYRIGHT</a>
+                </div>
+            </div>  
+            <div class="footer-info">
+                <div class="contact-details">
+                    <p>CORREO<br><strong>info@aurasociety.com</strong></p>
+                    <p>TELEFONO<br><strong>+34 640 89 29 46</strong></p>
+                    <p>UBICACION<br><strong>Paseo Puerta del Ángel, 5</strong></p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>Síguenos</span>
+            <div class="social-links">
+                <i class="fa-brands fa-facebook-f"></i>
+                <i class="fa-brands fa-instagram"></i>
+                <i class="fa-brands fa-whatsapp"></i>
+            </div>
+        </div>
+    </footer>
+    <!-- FIN FOOTER -->
+
+</body>
+</html>

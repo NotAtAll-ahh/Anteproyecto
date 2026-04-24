@@ -210,7 +210,7 @@
         let usuarioRol = null;
 
         // 1. Comprobar sesión
-        fetch("https://TU_BACKEND_RAILWAY.up.railway.app/api/sesion", {
+        fetch("http://localhost/api-entradas/public/api/sesion", {
             method: "GET",
             credentials: "include"
         })
@@ -235,7 +235,7 @@
 
         // 2. Cargar datos del evento
         function cargarEvento() {
-            fetch(`https://TU_BACKEND_RAILWAY.up.railway.app/api/eventos/${eventoId}`)
+            fetch(`http://localhost/api-entradas/public/api/eventos/${eventoId}`)
                 .then(res => res.json())
                 .then(data => {
                     const e = data.data;
@@ -249,7 +249,7 @@
 
                     if (e.imagen) {
                         document.getElementById("imagenActual").src =
-                            "https://TU_BACKEND_RAILWAY.up.railway.app" + e.imagen;
+                            "http://localhost/api-entradas/public" + e.imagen;
                     }
                 });
         }
@@ -265,7 +265,7 @@
                 entradas_disponibles: document.getElementById("entradas_disponibles").value
             };
 
-            fetch(`https://TU_BACKEND_RAILWAY.up.railway.app/api/eventos/${eventoId}`, {
+            fetch(`http://localhost/api-entradas/public/api/eventos/${eventoId}`, {
                 method: "PUT",
                 credentials: "include",
                 headers: { "Content-Type": "application/json" },
@@ -292,7 +292,7 @@
             const formData = new FormData();
             formData.append("imagen", archivo);
 
-            fetch(`https://TU_BACKEND_RAILWAY.up.railway.app/api/eventos/${eventoId}/imagen`, {
+            fetch(`http://localhost/api-entradas/public/api/eventos/${eventoId}/imagen`, {
                 method: "POST",
                 credentials: "include",
                 body: formData

@@ -55,7 +55,7 @@
         //Buscar eventos por nombre
         function buscarEventos(nombre) {
 
-            let url = "https://TU_BACKEND_RAILWAY.up.railway.app/api/eventos/buscar/";
+            let url = "http://localhost/api-entradas/public/api/eventos/buscar/";
             console.log("Parámetro recibido:", nombre);
 
             // Añadir nombre si existe
@@ -88,7 +88,7 @@
 
                         const img = document.createElement("img");
                         img.src = evento.imagen
-                            ? "https://TU_BACKEND_RAILWAY.up.railway.app" + evento.imagen
+                            ? "http://localhost/api-entradas/public" + evento.imagen
                             : "https://via.placeholder.com/600x300?text=Sin+imagen";
                         img.alt = "Imagen del evento";
 

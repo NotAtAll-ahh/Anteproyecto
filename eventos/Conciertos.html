@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AuraSociety - Conciertos</title>
+    <link rel="stylesheet" href="/css/eventos/CatEventos.css">
+    <link rel="stylesheet" href="/css/eventos/nav.css">
+    <link rel="stylesheet" href="/css/eventos/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link rel="stylesheet" href="/css/header-footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair+Display:ital,wght@1,400..900&display=swap"
+        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,700&family=Playfair+Display:wght@400..900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- INICIO HEADER -->
+    <header class="main-header"><button class="skip-link"><a href="#main-content">Saltar Al Contenido</a></button>
+        <div class="header-container">
+            <!-- Logo -->
+            <a href="/index.html" class="logo-link">
+                <img src="/media/logo-white.webp" alt="Logo Aura Society">
+            </a>
+            <!-- Menú Móvil Control -->
+            <input type="checkbox" id="nav-toggle" class="nav-toggle">
+            <label for="nav-toggle" class="nav-burger" aria-label="Menú">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+            <!-- Navegación -->
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="/index.html">Inicio</a></li>
+                    <li class="dropdown">
+                        <a href="/eventos/Eventos.html">Eventos <i class="fa-solid fa-chevron-down arrow-icon"></i></a>
+                        <ul class="dropdown-content">
+                            <li><a href="/eventos/Conciertos.html">Conciertos</a></li>
+                            <li><a href="/eventos/Cine.html">Cine</a></li>
+                            <li><a href="/eventos/Conferencias.html">Conferencias</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/hazte-socio/">Hazte Socio</a></li>
+                    <li><a href="/sobre-nosotros/">Sobre Nosotros</a></li>
+                </ul>
+            </nav>
+            <!-- Herramientas de Usuario -->
+            <div class="header-tools">
+<div class="search-box">
+    <input type="text" id="search-input" placeholder="BUSCAR EVENTOS" aria-label="Buscar eventos">
+    <button class="search-btn" aria-label="Ejecutar búsqueda"><i class="fa-solid fa-magnifying-glass"></i></button>
+</div>
+                <a href="/perfil/" class="user-profile">
+                    <div class="user-info">
+                        <span class="label">Mi Cuenta</span>
+                        <span class="status">Socio Gold</span>
+                    </div>
+                    <img src="/media/yiperfil.png" alt="Usuario" class="avatar-circle">
+                </a>
+            </div>
+        </div>
+    </header>
+    <!-- FIN HEADER -->
+
+    <section class="banner" aria-label="Aura Society home banner featuring creative and technological culture">
+        <div class="content-wrapper">
+            <h1>[Aura] Society - Conciertos</h1>
+            <p class="subtitulo">Un espacio donde la creatividad, la tecnología y la cultura se encuentran</p>
+            <button class="btn-gold" onclick="window.location.href='/hazte-socio/'">HAZTE SOCIO</button>
+        </div>
+    </section>
+
+    <!-- INICIO SUB-MENÚ EVENTOS -->
+    <nav class="submenu-eventos">
+        <div class="submenu-container">
+            <a href="Eventos.html">Eventos</a>
+            <a href="Conferencias.html">Conferencias</a>
+            <a href="Cine.html">Cine</a>
+            <a href="Conciertos.html" class="activo">Conciertos</a>
+        </div>
+    </nav>
+    <!-- FIN SUB-MENÚ EVENTOS -->
+
+    <h2> Conciertos</h2>
+    <hr>
+    <div class="concierto">
+        <div class="parteIzq">
+            <div class="texto">
+                <h3>Estrenos de esta semana</h3>
+                <hr class="hR">
+            </div>
+
+            <div class="seccionIzquierda">
+
+                <div>
+                    <a class="imagenIzq" href="/detalles-evento/"><img
+                            src="/media/eventos/CONCIERTOS/Seccion1/Img1.jpg"
+                            alt="Portada del concierto Tiempo Cosecha"></a>
+                    <p><b>Tiempo Cosecha 25 feb</b><br>10:00 11:20 16:40 22:20</p>
+                </div>
+
+                <div>
+                    <a class="imagenIzq" href="/detalles-evento/"><img
+                            src="/media/eventos/CONCIERTOS/Seccion1/Img2.jpg"
+                            alt="Portada del concierto Echo"></a>
+                    <p><b>Echo 12 sep</b><br>11:30 13.40 17:30 20:10</p>
+                </div>
+
+                <div>
+                    <a class="imagenIzq" href="/detalles-evento/"><img
+                            src="/media/eventos/CONCIERTOS/Seccion1/Img3.jpg"
+                            alt="Portada del concierto Quinta Poder"></a>
+                    <p><b>Quinta Poder 2 jun</b><br>9:30 12:50 16:30 23:20</p>
+                </div>
+
+                <div>
+                    <a class="imagenIzq" href="/detalles-evento/"><img
+                            src="/media/eventos/CONCIERTOS/Seccion1/Img4.jpg"
+                            alt="Portada del concierto Kendrick Lamar"></a>
+                    <p><b>Kendrick Lamar 7 mar</b><br>13:20 15:50 18:10 21:30</p>
+                </div>
+            </div>
+
+
+            <div class="texto">
+                <h3> Cartelera</h3>
+                <hr class="hR">
+            </div>
+            <div class="seccionIzquierda">
+
+                <div>
+                    <a class="imagenIzq" href="/detalles-evento/"><img
+                            src="/media/eventos/CONCIERTOS/Seccion2/Img1.jpg"
+                            alt="Portada del concierto">
+                    </a>
+                    <p><b>Noche Karaoke 25 feb</b><br>10:00 11:20 16:40 22:20</p>
+                </div>
+
+                <div>
+                    <a class="imagenIzq" href="/detalles-evento/"><img
+                            src="/media/eventos/CONCIERTOS/Seccion2/Img2.jpg"
+                            alt="Portada del concierto"></a>
+                    <p><b>Zion 12 sep</b><br>11:30 13.40 17:30 20:10</p>
+                </div>
+
+                <div>
+                    <a class="imagenIzq" href="/detalles-evento/"><img
+                            src="/media/eventos/CONCIERTOS/Seccion2/Img3.jpg"
+                            alt="Portada del concierto"></a>
+                    <p><b>Gruvin fest 2 jun</b><br>9:30 12:50 16:30 23:20</p>
+                </div>
+
+                <div>
+                    <a class="imagenIzq" href="/detalles-evento/"><img
+                            src="/media/eventos/CONCIERTOS/Seccion2/Img4.jpg"
+                            alt="Portada del concierto"></a>
+                    <p><b>Matric 7 mar</b><br>13:20 15:50 18:10 21:30</p>
+                </div>
+
+            </div>
+
+
+            <details class="desplegable">
+
+                <summary>
+                        <h3 class="textoDesp"> Todos los estrenos de esta semana</h3><span class="flecha"></span>
+                    
+                </summary>
+
+                <div class="seccionIzquierda">
+
+                    <div>
+                        <a class="imagenIzq" href="/detalles-evento/"><img
+                                src="/media/eventos/CONCIERTOS/Seccion3/Img1.jpg"
+                                alt="Portada del concierto"></a>
+                        <p><b>Acoustic night 25 feb</b><br>10:00 11:20 16:40 22:20</p>
+                    </div>
+
+                    <div>
+                        <a class="imagenIzq" href="/detalles-evento/"><img
+                                src="/media/eventos/CONCIERTOS/Seccion3/Img2.jpg"
+                                alt="Portada del concierto"></a>
+                        <p><b>Symphony 12 sep</b><br>11:30 13.40 17:30 20:10</p>
+                    </div>
+
+                    <div>
+                        <a class="imagenIzq" href="/detalles-evento/"><img
+                                src="/media/eventos/CONCIERTOS/Seccion3/Img3.jpg"
+                                alt="Portada del concierto"></a>
+                        <p><b>Nodal 2 jun</b><br>9:30 12:50 16:30 23:20</p>
+                    </div>
+
+                    <div>
+                        <a class="imagenIzq" href="/detalles-evento/"><img
+                                src="/media/eventos/CONCIERTOS/Seccion3/Img4.jpg"
+                                alt="Portada del concierto"></a>
+                        <p><b>Encuentro 7 mar</b><br>13:20 15:50 18:10 21:30</p>
+                    </div>
+
+                </div>
+
+            </details>
+
+        </div>
+
+
+
+
+
+
+
+
+        <div class="parteDcha">
+
+            <article>
+                <div class="texto">
+                    <h3> Los estrenos más esperados</h3>
+                    <hr class="hR">
+                </div>
+
+                <div class="seccionDerecha">
+
+                    <div class="card">
+                        <a class="imgDcha" href="/detalles-evento/"><img
+                                src="/media/eventos/CONCIERTOS/Seccion4/Img1.jpg"
+                                alt="Portada de la película"></a>
+                        <p> <b>Arijit</b></p>
+                        <div class="overlay">Proximamente</div>
+
+                    </div>
+
+                </div>
+
+
+                <details class="desplegableDos">
+
+                    <summary>
+                        <h4 class="textoSeccionDos"> Nino Paid</h4>
+                    </summary>
+
+                    <div class="seccionDerecha">
+
+                        <div class="card">
+                            <a class="imgDcha" href="/detalles-evento/"><img
+                                    src="/media/eventos/CONCIERTOS/Seccion4/Img2.jpg"
+                                    alt="Portada de la película"></a>
+                            <div class="overlay">Proximamente</div>
+
+                        </div>
+
+                    </div>
+
+                </details>
+
+
+
+                <details class="desplegableDos">
+
+                    <summary>
+                        <h4 class="textoSeccionDos"> Post Malone</h4>
+                    </summary>
+
+                    <div class="seccionDerecha">
+
+                        <div class="card">
+                            <a class="imgDcha" href="/detalles-evento/"><img
+                                    src="/media/eventos/CONCIERTOS/Seccion4/Img3.jpg"
+                                    alt="Portada de la película"></a>
+
+                            <div class="overlay">Proximamente</div>
+
+                        </div>
+
+                    </div>
+
+                </details>
+
+
+
+
+                <details class="desplegableDos">
+
+                    <summary>
+                        <h4 class="textoSeccionDos"> Dagrangto</h4>
+                    </summary>
+
+                    <div class="seccionDerecha">
+
+                        <div class="card">
+                            <a class="imgDcha" href="/detalles-evento/"><img
+                                    src="/media/eventos/CONCIERTOS/Seccion4/Img4.jpg"
+                                    alt="Portada de la película"></a>
+                          
+                            <div class="overlay">Proximamente</div>
+
+                        </div>
+
+                    </div>
+
+                </details>
+
+            </article>
+        </div>
+    </div>
+
+    <!-- INICIO FOOTER -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <img src="/media/logo-white.webp" alt="Aura Society">
+                <div class="credits">
+                    <p>DESIGNED BY DAW</p>
+                    <p>2026 AURA SOCIETY</p><a href="/media/DOCUMENTO COPYRIGHT.pdf" class="pdf-link" target="_blank"><i class="fa-solid fa-file-pdf"></i> DOCUMENTO COPYRIGHT</a>
+                </div>
+            </div>  
+            <div class="footer-info">
+                <div class="contact-details">
+                    <p>CORREO<br><strong>info@aurasociety.com</strong></p>
+                    <p>TELEFONO<br><strong>+34 640 89 29 46</strong></p>
+                    <p>UBICACION<br><strong>Paseo Puerta del Ángel, 5</strong></p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>Síguenos</span>
+            <div class="social-links">
+                <i class="fa-brands fa-facebook-f"></i>
+                <i class="fa-brands fa-instagram"></i>
+                <i class="fa-brands fa-whatsapp"></i>
+            </div>
+        </div>
+    </footer>
+    <!-- FIN FOOTER -->
+
+</body>
+
+</html>

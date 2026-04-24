@@ -71,7 +71,7 @@
 
                     const resultado = document.getElementById("resultadoUsuario");
 
-                    fetch("https://TU_BACKEND_RAILWAY.up.railway.app/api/usuarios", {
+                    fetch("http://localhost/api-entradas/public/api/usuarios", {
                         method: "POST",
                         headers: { 'Content-Type': 'application/json; charset=UTF-8' },
                         credentials: "include",
@@ -112,7 +112,7 @@
                                 const formData = new FormData();
                                 formData.append("imagen", archivoFoto);
 
-                                return fetch(`https://TU_BACKEND_RAILWAY.up.railway.app/api/usuarios/${datos.id}/foto`, {
+                                return fetch(`http://localhost/api-entradas/public/api/usuarios/${datos.id}/foto`, {
                                     method: "POST",
                                     credentials: "include",
                                     body: formData
