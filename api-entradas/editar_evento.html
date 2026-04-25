@@ -210,7 +210,7 @@
         let usuarioRol = null;
 
         // 1. Comprobar sesión
-        fetch("http://localhost/api-entradas/public/api/sesion", {
+        fetch("https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/sesion", {
             method: "GET",
             credentials: "include"
         })
@@ -235,7 +235,7 @@
 
         // 2. Cargar datos del evento
         function cargarEvento() {
-            fetch(`http://localhost/api-entradas/public/api/eventos/${eventoId}`)
+            fetch(`https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/eventos/${eventoId}`)
                 .then(res => res.json())
                 .then(data => {
                     const e = data.data;
@@ -249,7 +249,7 @@
 
                     if (e.imagen) {
                         document.getElementById("imagenActual").src =
-                            "http://localhost/api-entradas/public" + e.imagen;
+                            "https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public" + e.imagen;
                     }
                 });
         }
@@ -265,7 +265,7 @@
                 entradas_disponibles: document.getElementById("entradas_disponibles").value
             };
 
-            fetch(`http://localhost/api-entradas/public/api/eventos/${eventoId}`, {
+            fetch(`https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/eventos/${eventoId}`, {
                 method: "PUT",
                 credentials: "include",
                 headers: { "Content-Type": "application/json" },
@@ -292,7 +292,7 @@
             const formData = new FormData();
             formData.append("imagen", archivo);
 
-            fetch(`http://localhost/api-entradas/public/api/eventos/${eventoId}/imagen`, {
+            fetch(`https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/eventos/${eventoId}/imagen`, {
                 method: "POST",
                 credentials: "include",
                 body: formData

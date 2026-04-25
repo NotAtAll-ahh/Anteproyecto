@@ -69,7 +69,7 @@
                     };
 
                     // Paso 1: registrar el usuario con JSON
-                    fetch("http://localhost/api-entradas/public/api/usuarios", {
+                    fetch("https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/usuarios", {
                         method: "POST",
                         headers: { 'Content-Type': 'application/json; charset=UTF-8' },
                         credentials: "include",
@@ -87,7 +87,7 @@
                                 const formData = new FormData();
                                 formData.append("imagen", archivoFoto);
 
-                                return fetch(`http://localhost/api-entradas/public/api/usuarios/${datos.id}/foto`, {
+                                return fetch(`https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/usuarios/${datos.id}/foto`, {
                                     method: "POST",
                                     credentials: "include",
                                     body: formData
@@ -105,7 +105,7 @@
                         password: document.getElementById("passwordU").value
                     };
 
-                    fetch("http://localhost/api-entradas/public/api/login", {
+                    fetch("https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/login", {
                         method: "POST",
                         headers: { 'Content-Type': 'application/json; charset=UTF-8' },
                         credentials: "include", // IMPORTANTE: permite enviar cookies de sesión
@@ -127,7 +127,7 @@
                         });
                 }
                 function verSesion() {
-                    fetch("http://localhost/api-entradas/public/api/sesion", {
+                    fetch("https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/sesion", {
                         method: "GET",
                         credentials: "include"
                     })
@@ -138,7 +138,7 @@
                 }
 
                 function logout() {
-                    fetch("http://localhost/api-entradas/public/api/logout", {
+                    fetch("https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/logout", {
                         method: "POST",
                         credentials: "include"
                     })

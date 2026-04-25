@@ -195,7 +195,7 @@
         let usuarioRol = null;
 
         // 1. Comprobar sesión
-        fetch("http://localhost/api-entradas/public/api/sesion", {
+        fetch("https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/sesion", {
             method: "GET",
             credentials: "include"
         })
@@ -235,7 +235,7 @@
                 entradas_totales: entradasTotales
             };
 
-            fetch("http://localhost/api-entradas/public/api/eventos", {
+            fetch("https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/eventos", {
                 method: "POST",
                 credentials: "include",
                 headers: {
@@ -274,7 +274,7 @@
             const formData = new FormData();
             formData.append("imagen", archivo);
 
-            return fetch(`http://localhost/api-entradas/public/api/eventos/${eventoId}/imagen`, {
+            return fetch(`https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/eventos/${eventoId}/imagen`, {
                 method: "POST",
                 credentials: "include",
                 body: formData

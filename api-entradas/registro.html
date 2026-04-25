@@ -71,7 +71,7 @@
 
                     const resultado = document.getElementById("resultadoUsuario");
 
-                    fetch("http://localhost/api-entradas/public/api/usuarios", {
+                    fetch("https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/usuarios", {
                         method: "POST",
                         headers: { 'Content-Type': 'application/json; charset=UTF-8' },
                         credentials: "include",
@@ -112,7 +112,7 @@
                                 const formData = new FormData();
                                 formData.append("imagen", archivoFoto);
 
-                                return fetch(`http://localhost/api-entradas/public/api/usuarios/${datos.id}/foto`, {
+                                return fetch(`https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/usuarios/${datos.id}/foto`, {
                                     method: "POST",
                                     credentials: "include",
                                     body: formData

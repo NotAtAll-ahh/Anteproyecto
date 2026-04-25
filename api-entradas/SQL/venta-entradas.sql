@@ -37,6 +37,11 @@ CREATE TABLE reservas (
 );
 -- INSERTAR DATOS DE PRUEBA
 
+ALTER TABLE usuarios ADD COLUMN rol ENUM('admin', 'cliente') DEFAULT 'cliente';
+UPDATE usuarios SET rol = 'admin' WHERE id = 1;
+ALTER TABLE eventos ADD COLUMN imagen VARCHAR(255) NULL;
+
+
 INSERT INTO eventos (nombre, descripcion, ubicacion, fecha, entradas_totales, entradas_disponibles) VALUES
 ('EVERYONE`S A STAR - 5SOS - TOUR', '5 Seconds of Summer volverán a España en 2026 con dos únicos conciertos: el 30 de abril en el Palacio Vistalegre de Madrid', 'Madrid', '2024-12-01 20:00:00', 155, 155),
 ('AC/DC / METALLICA', 'Concierto conjunto de las legendarias bandas de rock AC/DC y Metallica.', 'Moscow', '2024-11-15 18:00:00', 155, 155),

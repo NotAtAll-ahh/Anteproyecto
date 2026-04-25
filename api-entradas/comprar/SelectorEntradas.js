@@ -221,13 +221,13 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     if (eventoId) {
-        fetch(`http://localhost/api-entradas/public/api/eventos/${encodeURIComponent(eventoId)}`)
+        fetch(`https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/eventos/${encodeURIComponent(eventoId)}`)
             .then(res => res.json())
             .then(data => {
                 const evento = data.data ?? data;
                 if (img) {
                     img.src = evento && evento.imagen
-                        ? 'http://localhost/api-entradas/public' + evento.imagen
+                        ? 'https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public' + evento.imagen
                         : 'https://via.placeholder.com/300x450?text=Sin+imagen';
                     img.alt = (evento && evento.nombre) || 'Imagen del Evento';
                 }

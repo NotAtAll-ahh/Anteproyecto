@@ -54,7 +54,7 @@
         //Buscar eventos por nombre
         function buscarEventos(nombre) {
 
-            let url = "http://localhost/api-entradas/public/api/eventos/buscar/";
+            let url = "https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/eventos/buscar/";
             console.log("Parámetro recibido:", nombre);
 
             // Añadir nombre si existe
@@ -83,7 +83,7 @@
 
                         const img = document.createElement("img");
                         img.src = evento.imagen
-                            ? "http://localhost/api-entradas/public" + evento.imagen
+                            ? "https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public" + evento.imagen
                             : "https://via.placeholder.com/600x300?text=Sin+imagen";
 
                         const titulo = document.createElement("h3");
