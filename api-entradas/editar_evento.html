@@ -22,13 +22,61 @@
             background-attachment: fixed;
             position: relative;
             color: white;
-            padding: 40px;
             margin: 0;
+        }
+
+        .main-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+        }
+
+        .header-left a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .logo-box {
+            border: 1px solid white;
+            padding: 5px 15px;
+            font-size: 0.8rem;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid white;
+            width: 400px;
+        }
+
+        .search-bar input {
+            background: transparent;
+            border: none;
+            color: white;
+            padding: 5px;
+            width: 100%;
+        }
+
+        .search-bar input::placeholder {
+            color: white;
+            opacity: 0.7;
+        }
+
+        .user-icon-circle {
+            width: 40px;
+            height: 40px;
+            background-color: #3b6182;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
         }
 
         .contenedor {
             max-width: 600px;
-            margin: auto;
+            margin: 20px auto 40px;
             background: #ffffff11;
             padding: 40px;
             border-radius: 30px;
@@ -164,6 +212,25 @@
         }
     </script>
 
+    <header class="main-header">
+        <div class="header-left">
+            <a href="../index.html">
+                <div class="logo-box">LOGO</div>
+            </a>
+        </div>
+        <div class="header-center">
+            <div class="search-bar">
+                <input type="text" placeholder="BARRA DE BÚSQUEDA">
+                <i class="fas fa-search"></i>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="user-icon-circle">
+                <i class="fas fa-user"></i>
+            </div>
+        </div>
+    </header>
+
     <div class="contenedor">
         <h2><i class="fas fa-edit"></i> Editar Evento</h2>
 
@@ -210,7 +277,7 @@
         let usuarioRol = null;
 
         // 1. Comprobar sesión
-        fetch("http://localhost/api-entradas/public/api/sesion", {
+        fetch("https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/sesion", {
             method: "GET",
             credentials: "include"
         })
@@ -235,7 +302,7 @@
 
         // 2. Cargar datos del evento
         function cargarEvento() {
-            fetch(`http://localhost/api-entradas/public/api/eventos/${eventoId}`)
+            fetch(`https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/eventos/${eventoId}`)
                 .then(res => res.json())
                 .then(data => {
                     const e = data.data;
@@ -249,7 +316,7 @@
 
                     if (e.imagen) {
                         document.getElementById("imagenActual").src =
-                            "http://localhost/api-entradas/public" + e.imagen;
+                            "https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public" + e.imagen;
                     }
                 });
         }
@@ -265,7 +332,7 @@
                 entradas_disponibles: document.getElementById("entradas_disponibles").value
             };
 
-            fetch(`http://localhost/api-entradas/public/api/eventos/${eventoId}`, {
+            fetch(`https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/eventos/${eventoId}`, {
                 method: "PUT",
                 credentials: "include",
                 headers: { "Content-Type": "application/json" },
@@ -292,7 +359,7 @@
             const formData = new FormData();
             formData.append("imagen", archivo);
 
-            fetch(`http://localhost/api-entradas/public/api/eventos/${eventoId}/imagen`, {
+            fetch(`https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/eventos/${eventoId}/imagen`, {
                 method: "POST",
                 credentials: "include",
                 body: formData

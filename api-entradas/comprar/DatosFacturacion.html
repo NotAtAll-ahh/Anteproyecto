@@ -12,7 +12,9 @@
     <!--Header-->
     <header class="main-header">
         <div class="header-left">
-            <div class="logo-box">LOGO</div>
+            <a href="../../index.html">
+                <div class="logo-box">LOGO</div>
+            </a>
         </div>
         <div class="header-center">
             <div class="search-bar">
@@ -223,7 +225,7 @@
                         return;
                     }
 
-                    fetch("http://localhost/api-entradas/public/api/sesion", {
+                    fetch("https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/sesion", {
                         method: "GET",
                         credentials: "include"
                     })
@@ -233,7 +235,7 @@
                                 throw new Error("Debes iniciar sesión para completar la compra.");
                             }
 
-                            return fetch("http://localhost/api-entradas/public/api/reservas", {
+                            return fetch("https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/reservas", {
                                 method: "POST",
                                 headers: {
                                     "Content-Type": "application/json"
@@ -265,7 +267,7 @@
                 return;
             }
 
-            fetch(`http://localhost/api-entradas/public/api/eventos/${encodeURIComponent(eventoId)}`)
+            fetch(`https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/eventos/${encodeURIComponent(eventoId)}`)
                 .then(res => res.json())
                 .then(data => {
                     const evento = data.data ?? data;
@@ -276,7 +278,7 @@
                         descriptionElement.textContent = evento.descripcion;
                     }
                     if (evento && evento.imagen) {
-                        imageElement.src = "http://localhost/api-entradas/public" + evento.imagen;
+                        imageElement.src = "https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public" + evento.imagen;
                     }
                 })
                 .catch(() => {

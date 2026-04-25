@@ -17,7 +17,9 @@
     <!--Header-->
     <header class="main-header">
         <div class="header-left">
-            <div class="logo-box">LOGO</div>
+            <a href="index.html">
+                <div class="logo-box">LOGO</div>
+            </a>
         </div>
         <div class="header-center">
             <div class="search-bar">
@@ -118,7 +120,7 @@
 
         //cargar todos los eventos
         function cargarEventos() {
-            fetch("http://localhost/api-entradas/public/api/eventos")
+            fetch("https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/eventos")
                 .then(res => res.json())
                 .then(data => {
                     const listaEventos = document.getElementById("conciertos");
@@ -134,7 +136,7 @@
 
                         const img = document.createElement("img");
                         img.src = evento.imagen
-                            ? "http://localhost/api-entradas/public" + evento.imagen
+                            ? "https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public" + evento.imagen
                             : "https://via.placeholder.com/600x300?text=Sin+imagen";
                         img.alt = "Imagen del evento";
 
@@ -161,7 +163,7 @@
 
 
                         //comprobar rol del usuario
-                        fetch("http://localhost/api-entradas/public/api/sesion", {
+                        fetch("https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/sesion", {
                             method: "GET",
                             credentials: "include"
                         })
@@ -213,7 +215,7 @@
                     return;
                 }
 
-                fetch(`http://localhost/api-entradas/public/api/eventos/${id}`, {
+                fetch(`https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/eventos/${id}`, {
                     method: "DELETE",
                     credentials: "include"
                 })

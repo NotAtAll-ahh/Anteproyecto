@@ -92,7 +92,7 @@
         let usuarioId = null;
 
         // 1. Comprobar si hay sesión activa
-        fetch("http://localhost/api-entradas/public/api/sesion", {
+        fetch("https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/sesion", {
             method: "GET",
             credentials: "include"
         })
@@ -110,7 +110,7 @@
 
         // 2. Cargar datos del usuario
         function cargarPerfil() {
-            fetch(`http://localhost/api-entradas/public/api/usuarios/${usuarioId}`, {
+            fetch(`https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/usuarios/${usuarioId}`, {
                 method: "GET",
                 credentials: "include"
             })
@@ -129,7 +129,7 @@
 
                     // Foto de perfil
                     if (usuario.foto_perfil) {
-                        document.getElementById("foto").src = "http://localhost/api-entradas/public" + usuario.foto_perfil;
+                        document.getElementById("foto").src = "https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public" + usuario.foto_perfil;
                     } else {
                         document.getElementById("foto").src = "https://via.placeholder.com/150";
                     }
@@ -152,7 +152,7 @@
             const formData = new FormData();
             formData.append("imagen", archivo);
 
-            fetch(`http://localhost/api-entradas/public/api/usuarios/${usuarioId}/foto`, {
+            fetch(`https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/usuarios/${usuarioId}/foto`, {
                 method: "POST",
                 credentials: "include",
                 body: formData
@@ -166,13 +166,13 @@
 
         // 4. Logout
         function logout() {
-            fetch("http://localhost/api-entradas/public/api/logout", {
+            fetch("https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/logout", {
                 method: "POST",
                 credentials: "include"
             })
                 .then(() => {
                     alert("Sesión cerrada");
-                    window.location.href = "test.html";
+                    window.location.href = "login.html";
                 });
         }
 
@@ -188,7 +188,7 @@
             if (email.trim() !== "") data.email = email;
             if (password.trim() !== "") data.password = password;
 
-            fetch(`http://localhost/api-entradas/public/api/usuarios/${usuarioId}`, {
+            fetch(`https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/usuarios/${usuarioId}`, {
                 method: "PUT",
                 credentials: "include",
                 headers: {

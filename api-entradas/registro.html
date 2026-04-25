@@ -16,7 +16,9 @@
 
     <header class="main-header">
         <div class="header-left">
-            <div class="logo-box">LOGO</div>
+            <a href="../index.html">
+                <div class="logo-box">LOGO</div>
+            </a>
         </div>
         <div class="header-center">
             <div class="search-bar">
@@ -25,9 +27,9 @@
             </div>
         </div>
         <div class="header-right">
-            <div class="user-icon-circle">
+            <a href="../perfil.html" class="user-icon-circle">
                 <i class="fas fa-user"></i>
-            </div>
+            </a>
         </div>
     </header>
 
@@ -72,7 +74,7 @@
 
                     const resultado = document.getElementById("resultadoUsuario");
 
-                    fetch("http://localhost/api-entradas/public/api/usuarios", {
+                    fetch("https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/usuarios", {
                         method: "POST",
                         headers: { 'Content-Type': 'application/json; charset=UTF-8' },
                         credentials: "include",
@@ -113,7 +115,7 @@
                                 const formData = new FormData();
                                 formData.append("imagen", archivoFoto);
 
-                                return fetch(`http://localhost/api-entradas/public/api/usuarios/${datos.id}/foto`, {
+                                return fetch(`https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/usuarios/${datos.id}/foto`, {
                                     method: "POST",
                                     credentials: "include",
                                     body: formData
