@@ -87,6 +87,16 @@
             </div>
         </section>
     </main>
+    <footer>
+        <div class="footer-content content-container">
+            <p>&copy; 2026 Venta de Entradas. Todos los derechos reservados.</p>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
 
 
     <script>
@@ -130,6 +140,7 @@
 
                     // Foto de perfil
                     const imgElement = document.getElementById("foto");
+                    imgElement.alt = usuario.nombre ? `Foto de perfil de ${usuario.nombre}` : "Foto de perfil";
                     const fallbackElement = document.getElementById("fotoFallback");
                     if (usuario.foto_perfil) {
                         imgElement.src = "https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public" + usuario.foto_perfil;
