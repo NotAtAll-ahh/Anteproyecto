@@ -15,7 +15,9 @@
 
     <header class="main-header">
         <div class="header-left">
-            <div class="logo-box">LOGO</div>
+            <a href="../../../index.html">
+                <div class="logo-box">LOGO</div>
+            </a>
         </div>
         <div class="header-center">
             <div class="search-bar">
@@ -24,9 +26,9 @@
             </div>
         </div>
         <div class="header-right">
-            <div class="user-icon-circle">
+            <a href="../perfil.html" class="user-icon-circle">
                 <i class="fas fa-user"></i>
-            </div>
+            </a>
         </div>
     </header>
 
@@ -100,7 +102,7 @@
                             }
                         })
                         .then(() => {
-                            window.location.href = "login.html";
+                            window.location.href = "../../login.html";
                         })
                         .catch(error => {
                             console.error("Error ", error);

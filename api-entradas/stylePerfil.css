@@ -24,6 +24,11 @@ body {
     padding: 20px 50px;
 }
 
+.header-left a {
+    color: inherit;
+    text-decoration: none;
+}
+
 .logo-box {
     border: 1px solid white;
     padding: 5px 15px;
