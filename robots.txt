@@ -1,0 +1,38 @@
+User-agent: *
+
+# Páginas públicas permitidas
+Allow: /$
+Allow: /eventos/
+Allow: /detalles-evento/
+Allow: /sobre-nosotros/
+Allow: /hazte-socio/
+Allow: /css/
+Allow: /media/
+Allow: /fonts/
+
+# Panel de administración y gestión de eventos
+Disallow: /api-entradas/panel.html
+Disallow: /api-entradas/crear_evento.html
+Disallow: /api-entradas/crear-evento.html
+Disallow: /api-entradas/editar_evento.html
+Disallow: /api-entradas/eventos.html
+Disallow: /api-entradas/mis_reservas.html
+Disallow: /api-entradas/reservar.html
+
+# Autenticación y registro
+Disallow: /api-entradas/login.html
+Disallow: /api-entradas/registro.html
+Disallow: /api-entradas/perfil.html
+
+# Proceso de compra
+Disallow: /api-entradas/comprar/
+
+# Resultados de búsqueda
+Disallow: /api-entradas/resultados
+
+# Backend y API
+Disallow: /api-entradas/public/
+Disallow: /api-entradas/src/
+Disallow: /api-entradas/SQL/
+
+Sitemap: https://tarea-proyecto-seo-victoria-dani.free.nf/sitemap.xml
