@@ -18,7 +18,7 @@
 
     <header class="main-header">
         <div class="header-left">
-            <div class="logo-box"><a href="Home-Page.html">LOGO</a></div>
+            <div class="logo-box"><a href="../">LOGO</a></div>
         </div>
         <div class="header-center">
             <div class="search-bar">
@@ -63,7 +63,7 @@
                 <h2>¿NO ESTÁS REGISTRADO?</h2>
             </div>
 
-            <button type="button" class="modificar-btn" onclick="window.location.href='registro.html'">REGISTRATE</button>
+            <button type="button" class="modificar-btn" onclick="window.location.href='registro'">REGISTRATE</button>
 
             <script>
 
@@ -89,7 +89,7 @@
                             console.log(loginData);
                             document.getElementById("resultadoUsuario").textContent = JSON.stringify(loginData.usuario, null, 2);
                             setTimeout(() => {
-                                window.location.href = "perfil.html";
+                                window.location.href = "perfil";
                             }, 2200);
                         })
                         .catch(error => {

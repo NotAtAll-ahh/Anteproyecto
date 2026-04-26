@@ -1,0 +1,13 @@
+RewriteEngine On
+
+# 1) Redirige /archivo.html -> /archivo (URL canonica)
+RewriteCond %{THE_REQUEST} \s/+(.+?)\.html[\s?] [NC]
+RewriteRule ^ %1 [R=301,L]
+
+# 2) Sirve internamente /archivo -> /archivo.html si existe
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.+?)/?$ $1.html [L]
+
+# 3) Home
+RewriteRule ^$ index.html [L]
