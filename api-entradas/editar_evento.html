@@ -85,7 +85,8 @@
             backdrop-filter: blur(10px);
         }
 
-        h2, h3 {
+        h2,
+        h3 {
             font-family: "Kabel";
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -204,7 +205,7 @@
 
 <body>
 
-    
+
     <script>
         // Esta función es solo para que puedas visualizar el formulario en esta demo
         window.onload = function () {
@@ -220,158 +221,169 @@
         </div>
         <div class="header-center">
             <div class="search-bar">
-                <input type="text" placeholder="BARRA DE BÚSQUEDA">
+                <input type="text" placeholder="BARRA DE BÚSQUEDA" aria-label="Buscar eventos">
                 <i class="fas fa-search"></i>
             </div>
         </div>
         <div class="header-right">
-            <div class="user-icon-circle">
+            <div class="user-icon-circle" aria-label="Perfil">
                 <i class="fas fa-user"></i>
             </div>
         </div>
     </header>
+    <main>
+        <div class="contenedor">
+            <h2><i class="fas fa-edit"></i> Editar Evento</h2>
 
-    <div class="contenedor">
-        <h2><i class="fas fa-edit"></i> Editar Evento</h2>
+            <p id="mensajeRol" style="color:#ff3366;"></p>
 
-        <p id="mensajeRol" style="color:#ff3366;"></p>
+            <div id="soloAdmin">
+                <img id="imagenActual" src="/api-entradas/public/uploads/imgsHTML/Fondo-Evento-Placeholder.webp"
+                    alt="Imagen del evento">
+                <hr>
 
-        <div id="soloAdmin">
-            <img id="imagenActual" src="/api-entradas/public/uploads/imgsHTML/Fondo-Evento-Placeholder.webp" alt="Imagen del evento">
-            <hr>
+                <label><i class="fas fa-tag"></i> Nombre</label>
+                <input type="text" id="nombre" aria-label="Nombre del evento">
 
-            <label><i class="fas fa-tag"></i> Nombre</label>
-            <input type="text" id="nombre">
+                <label><i class="fas fa-align-left"></i> Descripción</label>
+                <textarea id="descripcion" aria-label="Descripción del evento"></textarea>
 
-            <label><i class="fas fa-align-left"></i> Descripción</label>
-            <textarea id="descripcion"></textarea>
+                <label><i class="fas fa-map-marker-alt"></i> Ubicación</label>
+                <input type="text" id="ubicacion" aria-label="Ubicación del evento">
 
-            <label><i class="fas fa-map-marker-alt"></i> Ubicación</label>
-            <input type="text" id="ubicacion">
+                <label><i class="fas fa-calendar-alt"></i> Fecha</label>
+                <input type="date" id="fecha" aria-label="Fecha del evento">
 
-            <label><i class="fas fa-calendar-alt"></i> Fecha</label>
-            <input type="date" id="fecha">
+                <label><i class="fas fa-ticket-alt"></i> Entradas totales</label>
+                <input type="number" id="entradas_totales" aria-label="Entradas totales">
 
-            <label><i class="fas fa-ticket-alt"></i> Entradas totales</label>
-            <input type="number" id="entradas_totales">
+                <label><i class="fas fa-users"></i> Entradas disponibles</label>
+                <input type="number" id="entradas_disponibles" aria-label="Entradas disponibles">
 
-            <label><i class="fas fa-users"></i> Entradas disponibles</label>
-            <input type="number" id="entradas_disponibles">
+                <button onclick="guardarCambios()">Guardar cambios</button>
 
-            <button onclick="guardarCambios()">Guardar cambios</button>
+                <hr>
 
-            <hr>
+                <h3><i class="fas fa-image"></i> Subir nueva imagen</h3>
+                <input type="file" id="nuevaImagen" aria-label="Seleccionar nueva imagen del evento">
+                <button onclick="subirImagen()">Actualizar Imagen</button>
 
-            <h3><i class="fas fa-image"></i> Subir nueva imagen</h3>
-            <input type="file" id="nuevaImagen">
-            <button onclick="subirImagen()">Actualizar Imagen</button>
-
-            <p id="resultado"></p>
+                <p id="resultado"></p>
+            </div>
         </div>
-    </div>
 
-    <script>
-        const params = new URLSearchParams(window.location.search);
-        const eventoId = params.get("id");
+        <script>
+            const params = new URLSearchParams(window.location.search);
+            const eventoId = params.get("id");
 
-        let usuarioRol = null;
+            let usuarioRol = null;
 
-        // 1. Comprobar sesión
-        fetch("https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/sesion", {
-            method: "GET",
-            credentials: "include"
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (!data.logueado) {
-                    document.getElementById("mensajeRol").textContent =
-                        "Debes iniciar sesión.";
+            // 1. Comprobar sesión
+            fetch("https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/sesion", {
+                method: "GET",
+                credentials: "include"
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (!data.logueado) {
+                        document.getElementById("mensajeRol").textContent =
+                            "Debes iniciar sesión.";
+                        return;
+                    }
+
+                    usuarioRol = data.rol;
+
+                    if (usuarioRol === "admin") {
+                        document.getElementById("soloAdmin").style.display = "block";
+                        cargarEvento();
+                    } else {
+                        document.getElementById("mensajeRol").textContent =
+                            "No tienes permisos para editar eventos.";
+                    }
+                });
+
+            // 2. Cargar datos del evento
+            function cargarEvento() {
+                fetch(`https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/eventos/${eventoId}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        const e = data.data;
+
+                        document.getElementById("nombre").value = e.nombre;
+                        document.getElementById("descripcion").value = e.descripcion;
+                        document.getElementById("ubicacion").value = e.ubicacion;
+                        document.getElementById("fecha").value = e.fecha;
+                        document.getElementById("entradas_totales").value = e.entradas_totales;
+                        document.getElementById("entradas_disponibles").value = e.entradas_disponibles;
+
+                        if (e.imagen) {
+                            document.getElementById("imagenActual").src =
+                                "https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public" + e.imagen;
+                        }
+                    });
+            }
+
+            // 3. Guardar cambios del evento
+            function guardarCambios() {
+                const data = {
+                    nombre: document.getElementById("nombre").value,
+                    descripcion: document.getElementById("descripcion").value,
+                    ubicacion: document.getElementById("ubicacion").value,
+                    fecha: document.getElementById("fecha").value,
+                    entradas_totales: document.getElementById("entradas_totales").value,
+                    entradas_disponibles: document.getElementById("entradas_disponibles").value
+                };
+
+                fetch(`https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/eventos/${eventoId}`, {
+                    method: "PUT",
+                    credentials: "include",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(data)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.id || data.success || !data.error) {
+                            alert("Cambios guardados con éxito");
+                        }
+                        document.getElementById("resultado").textContent =
+                            JSON.stringify(data, null, 2);
+                    });
+            }
+
+            // 4. Subir imagen del evento
+            function subirImagen() {
+                const archivo = document.getElementById("nuevaImagen").files[0];
+                if (!archivo) {
+                    alert("Selecciona una imagen");
                     return;
                 }
 
-                usuarioRol = data.rol;
+                const formData = new FormData();
+                formData.append("imagen", archivo);
 
-                if (usuarioRol === "admin") {
-                    document.getElementById("soloAdmin").style.display = "block";
-                    cargarEvento();
-                } else {
-                    document.getElementById("mensajeRol").textContent =
-                        "No tienes permisos para editar eventos.";
-                }
-            });
-
-        // 2. Cargar datos del evento
-        function cargarEvento() {
-            fetch(`https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/eventos/${eventoId}`)
-                .then(res => res.json())
-                .then(data => {
-                    const e = data.data;
-
-                    document.getElementById("nombre").value = e.nombre;
-                    document.getElementById("descripcion").value = e.descripcion;
-                    document.getElementById("ubicacion").value = e.ubicacion;
-                    document.getElementById("fecha").value = e.fecha;
-                    document.getElementById("entradas_totales").value = e.entradas_totales;
-                    document.getElementById("entradas_disponibles").value = e.entradas_disponibles;
-
-                    if (e.imagen) {
-                        document.getElementById("imagenActual").src =
-                            "https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public" + e.imagen;
-                    }
-                });
-        }
-
-        // 3. Guardar cambios del evento
-        function guardarCambios() {
-            const data = {
-                nombre: document.getElementById("nombre").value,
-                descripcion: document.getElementById("descripcion").value,
-                ubicacion: document.getElementById("ubicacion").value,
-                fecha: document.getElementById("fecha").value,
-                entradas_totales: document.getElementById("entradas_totales").value,
-                entradas_disponibles: document.getElementById("entradas_disponibles").value
-            };
-
-            fetch(`https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/eventos/${eventoId}`, {
-                method: "PUT",
-                credentials: "include",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(data)
-            })
-                .then(res => res.json())
-                .then(data => {
-                    if (data.id || data.success || !data.error) {
-                        alert("Cambios guardados con éxito");
-                    }
-                    document.getElementById("resultado").textContent =
-                        JSON.stringify(data, null, 2);
-                });
-        }
-
-        // 4. Subir imagen del evento
-        function subirImagen() {
-            const archivo = document.getElementById("nuevaImagen").files[0];
-            if (!archivo) {
-                alert("Selecciona una imagen");
-                return;
+                fetch(`https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/eventos/${eventoId}/imagen`, {
+                    method: "POST",
+                    credentials: "include",
+                    body: formData
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        alert("Imagen actualizada correctamente");
+                        cargarEvento();
+                    });
             }
-
-            const formData = new FormData();
-            formData.append("imagen", archivo);
-
-            fetch(`https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/eventos/${eventoId}/imagen`, {
-                method: "POST",
-                credentials: "include",
-                body: formData
-            })
-                .then(res => res.json())
-                .then(data => {
-                    alert("Imagen actualizada correctamente");
-                    cargarEvento();
-                });
-        }
-    </script>
-
+        </script>
+    </main>
+    <footer>
+        <div class="footer-content content-container">
+            <p>&copy; 2026 Venta de Entradas. Todos los derechos reservados.</p>
+            <div class="social-icons">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
 </body>
 
 </html>

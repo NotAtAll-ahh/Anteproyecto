@@ -207,48 +207,62 @@
         </div>
         <div class="header-center">
             <div class="search-bar">
-                <input type="text" placeholder="BARRA DE BÚSQUEDA">
+                <input type="text" placeholder="BARRA DE BÚSQUEDA" aria-label="Buscar eventos">
                 <i class="fas fa-search"></i>
             </div>
         </div>
         <div class="header-right">
-            <div class="user-icon-circle">
+            <div class="user-icon-circle" aria-label="Perfil">
                 <i class="fas fa-user"></i>
             </div>
         </div>
     </header>
 
-    <div class="contenedor">
-        <h2><i class="fas fa-plus-circle"></i> Crear Evento</h2>
+    <main>
+        <div class="contenedor">
+            <h2><i class="fas fa-plus-circle"></i> Crear Evento</h2>
 
-        <p id="mensajeRol" style="color:#ff3366;"></p>
+            <p id="mensajeRol" style="color:#ff3366;"></p>
 
-        <div id="soloAdmin">
-            <label><i class="fas fa-tag"></i> Nombre del evento</label>
-            <input type="text" id="nombre" placeholder="Ej: Concierto de Rock">
+            <div id="soloAdmin">
+                <label><i class="fas fa-tag"></i> Nombre del evento</label>
+                <input type="text" id="nombre" placeholder="Ej: Concierto de Rock" aria-label="Nombre del evento">
 
-            <label><i class="fas fa-align-left"></i> Descripción</label>
-            <textarea id="descripcion" placeholder="Escribe los detalles del evento..."></textarea>
+                <label><i class="fas fa-align-left"></i> Descripción</label>
+                <textarea id="descripcion" placeholder="Escribe los detalles del evento..."
+                    aria-label="Descripción del evento"></textarea>
 
-            <label><i class="fas fa-map-marker-alt"></i> Ubicación</label>
-            <input type="text" id="ubicacion" placeholder="Estadio o Recinto">
+                <label><i class="fas fa-map-marker-alt"></i> Ubicación</label>
+                <input type="text" id="ubicacion" placeholder="Estadio o Recinto" aria-label="Ubicación del evento">
 
-            <label><i class="fas fa-calendar-alt"></i> Fecha</label>
-            <input type="date" id="fecha">
+                <label><i class="fas fa-calendar-alt"></i> Fecha</label>
+                <input type="date" id="fecha" aria-label="Fecha del evento">
 
-            <label><i class="fas fa-ticket-alt"></i> Entradas totales (máximo 155)</label>
-            <input type="number" id="entradas_totales" min="1" max="155" required placeholder="0">
+                <label><i class="fas fa-ticket-alt"></i> Entradas totales (máximo 155)</label>
+                <input type="number" id="entradas_totales" min="1" max="155" required placeholder="0"
+                    aria-label="Entradas totales">
 
-            <hr>
+                <hr>
 
-            <h3><i class="fas fa-image"></i> Imagen del evento</h3>
-            <input type="file" id="imagen">
+                <h3><i class="fas fa-image"></i> Imagen del evento</h3>
+                <input type="file" id="imagen" aria-label="Seleccionar imagen del evento">
 
-            <button onclick="crearEvento()">Crear evento</button>
+                <button onclick="crearEvento()">Crear evento</button>
 
-            <p id="resultado"></p>
+                <p id="resultado"></p>
+            </div>
         </div>
-    </div>
+    </main>
+    <footer>
+        <div class="footer-content content-container">
+            <p>&copy; 2026 Venta de Entradas. Todos los derechos reservados.</p>
+            <div class="social-icons">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
 
     <script>
         // Esta función es solo para que puedas visualizar el formulario en esta demo
@@ -310,10 +324,10 @@
                 },
                 body: JSON.stringify(data)
             })
-            
+
 
                 .then(res => res.json())
-                
+
                 .then(async data => {
                     if (data.id) {
                         document.getElementById("resultado").textContent =

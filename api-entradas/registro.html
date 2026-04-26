@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <link rel="stylesheet" href="styleLogin.css">
     <!-- iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -25,12 +25,12 @@
         </div>
         <div class="header-center">
             <div class="search-bar">
-                <input type="text" placeholder="BARRA DE BÚSQUEDA">
+                <input type="text" placeholder="BARRA DE BÚSQUEDA" aria-label="Barra de Búsqueda">
                 <i class="fas fa-search"></i>
             </div>
         </div>
         <div class="header-right">
-            <a href="../perfil.html" class="user-icon-circle">
+            <a href="../perfil.html" class="user-icon-circle" aria-label="Perfil">
                 <i class="fas fa-user"></i>
             </a>
         </div>
@@ -49,22 +49,27 @@
             <form>
                 <div class="personal-data-grid">
                     <div class="form-inputs">
-                        <input id="nombre" type="text" class="custom-input" placeholder="Nombre">
-                        <input id="email" type="text" class="custom-input" placeholder="Email">
-                        <input id="password" type="password" class="custom-input" placeholder="Contraseña">
-                        <input id="foto_perfil" type="file" class="subir-archivo">
+                        <input id="nombre" type="text" class="custom-input" placeholder="Nombre" aria-label="Nombre">
+                        <input id="email" type="text" class="custom-input" placeholder="Email" aria-label="Email">
+                        <input id="password" type="password" class="custom-input" placeholder="Contraseña"
+                            aria-label="Contraseña">
+                        <input id="foto_perfil" type="file" class="subir-archivo" aria-label="Subir foto de perfil">
                     </div>
                     <div class="">
                         <div class="perfil-img">
-                            <img id="foto-perfil" src="../api-entradas/public/uploads/usuarios/foto-perfil-placeholder-_1_.webp" alt="foto-perfil">
+                            <img id="foto-perfil"
+                                src="../api-entradas/public/uploads/usuarios/foto-perfil-placeholder-_1_.webp"
+                                alt="foto-perfil">
                         </div>
                     </div>
-                    <button type="button" onclick="registrarUsuario()" class="modificar-btn">Registrar</button>
+                    <button type="button" onclick="registrarUsuario()" class="modificar-btn" aria-label="Registrar">
+                        Registrar
+                    </button>
                     <pre id="resultadoUsuario"></pre>
                 </div>
             </form>
 
-        
+
 
 
             <script>
@@ -164,6 +169,17 @@
             </script>
         </section>
     </main>
+
+    <footer>
+        <div class="footer-content content-container">
+            <p>&copy; 2026 Venta de Entradas. Todos los derechos reservados.</p>
+            <div class="social-icons">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
 
 </body>
 

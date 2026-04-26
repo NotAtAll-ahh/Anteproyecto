@@ -19,6 +19,7 @@ function setRandomUnavailableSeats(numSeats) {
         if (img) {
             img.src = UNAVAILABLE_SEAT_IMG;
             seat.classList.add('unavailable');
+            img.alt = 'Asiento no disponible';
         }
     });
 }
@@ -38,6 +39,7 @@ function appendSeats(numSeats, rowClass) {
         seat.dataset.seatId = String(seatCounter);
         const img = document.createElement('img');
         img.src = AVAILABLE_SEAT_IMG;
+        img.alt = 'Asiento disponible';
         seat.appendChild(img);
         row.appendChild(seat);
     }
@@ -90,6 +92,7 @@ function selectSeats() {
             if (s.classList.contains('selected')) {
                 s.classList.remove('selected');
                 img.src = AVAILABLE_SEAT_IMG;
+                img.alt = 'Asiento disponible';
                 return;
             }
 
@@ -108,6 +111,7 @@ function selectSeats() {
 
             s.classList.add('selected');
             img.src = SELECTED_SEAT_IMG;
+            img.alt = 'Asiento seleccionado';
         });
     });
 }
