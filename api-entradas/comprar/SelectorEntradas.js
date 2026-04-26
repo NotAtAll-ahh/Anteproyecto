@@ -233,6 +233,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 }
                 if (nombreEventoH4 && evento && evento.nombre) {
                     nombreEventoH4.textContent = evento.nombre;
+                    document.title = "Comprar entradas para" + evento.nombre;
                 }
                 if (fechaEventoP && evento && evento.fecha) {
                     const fecha = new Date(evento.fecha);

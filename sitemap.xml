@@ -9,13 +9,4 @@
         <priority>1.0</priority>
     </url>
 
-    <!-- Categorías de eventos -->
-    <url>
-        <loc>https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/SelectorEntradas.html</loc>
-        <lastmod>2026-04-25</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    
-
 </urlset>

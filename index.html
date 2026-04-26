@@ -38,7 +38,7 @@
     <main>
     <section class="banner content-container">
         <div class="banner-contenido">
-            <h1 class="banner-titulo">EVENTOS</h1>
+            <h1 class="banner-titulo">Entradas para eventos en España 2026</h1>
             <div class="banner-texto">
                 Descubre los mejores conciertos en España 2026. Compra entradas online, consulta fechas y reserva tus eventos favoritos de forma rápida y segura.
             </div>
@@ -51,7 +51,7 @@
     </section>
 
     <!-- Filtro y Buscar -->
-    <section class="filtros-section">
+    <div class="filtros-section">
         <div class="container">
             <p class="filtro-label">Encuentra tu evento</p>
 
@@ -73,14 +73,14 @@
                 </div>
             </form>
         </div>
-    </section>
+    </div>
 
     <!-- Conciertos-->
     <section class="concerts-section content-container">
         <div class="section-header-line">
-            <h2>CONCIERTOS</h2>
+            <h2>Próximos conciertos y estrenos de cine</h2>
             <div class="expand-control">
-                <span>DESPLIEGA LA SECCIÓN</span>
+                <span></span>
                 <i class="fas fa-chevron-down" onclick="displayEventos(); cargarEventos();"></i>
             </div>
         </div>
@@ -152,7 +152,7 @@
                         img.src = evento.imagen
                             ? "https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public" + evento.imagen
                             : "https://via.placeholder.com/600x300?text=Sin+imagen";
-                        img.alt = "Imagen del evento";
+                        img.alt = "Imagen del evento: " + evento.nombre;
 
                         cardImg.appendChild(img);
 

@@ -228,6 +228,7 @@ main {
 .option-content {
     display: flex;
     flex-direction: column;
+    text-align: center;
     align-items: center;
     justify-content: center;
     padding: 1.5rem;
@@ -240,9 +241,11 @@ main {
 
 .option-content i {
     font-size: 1.8rem;
+    padding-bottom: 8px;
 }
 
 .option-content span {
+    
     font-weight: 600;
     font-size: 0.9rem;
 }
