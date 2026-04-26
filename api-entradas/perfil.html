@@ -19,7 +19,7 @@
 
     <header class="main-header">
         <div class="header-left">
-            <a href="../index.html">
+            <a href="../">
                 <div class="logo-box">LOGO</div>
             </a>
         </div>
@@ -126,7 +126,7 @@
             .then(data => {
                 if (!data.logueado) {
                     alert("Debes iniciar sesión");
-                    window.location.href = "login.html";
+                    window.location.href = "login";
                     return;
                 }
 
@@ -445,7 +445,7 @@
             })
                 .then(() => {
                     alert("Sesión cerrada");
-                    window.location.href = "login.html";
+                    window.location.href = "login";
                 });
         }
 

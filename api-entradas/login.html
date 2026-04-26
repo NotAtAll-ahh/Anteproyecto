@@ -18,7 +18,7 @@
 
     <header class="main-header">
         <div class="header-left">
-            <div class="logo-box"><a href="Home-Page.html">LOGO</a></div>
+            <div class="logo-box"><a href="../">LOGO</a></div>
         </div>
         <div class="header-center">
             <div class="search-bar">
@@ -96,7 +96,7 @@
                             console.log(loginData);
                             document.getElementById("resultadoUsuario").textContent = JSON.stringify(loginData.usuario, null, 2);
                             setTimeout(() => {
-                                window.location.href = "perfil.html";
+                                window.location.href = "perfil";
                             }, 2200);
                         })
                         .catch(error => {

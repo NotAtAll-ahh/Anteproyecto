@@ -197,7 +197,7 @@ window.addEventListener('DOMContentLoaded', () => {
         buyBtn.addEventListener('click', () => {
             const totalEntradas = getMaxSeleccionables();
             const asientosSeleccionados = getAsientosSeleccionados();
-            const destino = new URL('DatosFacturacion.html', window.location.href);
+            const destino = new URL('DatosFacturacion', window.location.href);
 
             if (totalEntradas === 0) {
                 alert('Debes seleccionar al menos una entrada.');
