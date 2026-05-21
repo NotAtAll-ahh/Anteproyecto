@@ -30,7 +30,7 @@
             </div>
         </div>
         <div class="header-right">
-            <a href="../perfil.html" class="user-icon-circle" aria-label="Perfil">
+            <a href="/api-entradas/perfil" class="user-icon-circle" aria-label="Perfil">
                 <i class="fas fa-user"></i>
             </a>
         </div>
@@ -84,7 +84,7 @@
 
                     const resultado = document.getElementById("resultadoUsuario");
 
-                    fetch("https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/usuarios", {
+                    fetch("/api-entradas/public/api/usuarios", {
                         method: "POST",
                         headers: { 'Content-Type': 'application/json; charset=UTF-8' },
                         credentials: "include",
@@ -125,7 +125,7 @@
                                 const formData = new FormData();
                                 formData.append("imagen", archivoFoto);
 
-                                return fetch(`https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/usuarios/${datos.id}/foto`, {
+                                return fetch(`/api-entradas/public/api/usuarios/${datos.id}/foto`, {
                                     method: "POST",
                                     credentials: "include",
                                     body: formData

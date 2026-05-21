@@ -36,7 +36,7 @@
             </form>
         </div>
         <div class="header-right">
-            <a href="./perfil.html" class="user-icon-circle" aria-label="Perfil">
+            <a href="api-entradas/perfil" class="user-icon-circle" aria-label="Perfil">
                 <i class="fas fa-user"></i>
             </a>
         </div>
@@ -183,7 +183,7 @@
             controlPopulares.style.transform = "rotate(180deg)";
 
              // Comprueba el rol UNA sola vez
-             fetch("http://localhost/api-entradas/public/api/sesion", {
+             fetch("/api-entradas/public/api/sesion", {
                 method: "GET",
                 credentials: "include"
             })
@@ -254,7 +254,7 @@
                 return;
             }
 
-            fetch(`http://localhost/api-entradas/public/api/eventos/${id}`, {
+            fetch(`/api-entradas/public/api/eventos/${id}`, {
                 method: "DELETE",
                 credentials: "include"
             })
@@ -283,7 +283,7 @@
             controlTodos.style.transform = "rotate(180deg)";
 
             // Comprueba el rol UNA sola vez
-            fetch("http://localhost/api-entradas/public/api/sesion", {
+            fetch("/api-entradas/public/api/sesion", {
                 method: "GET",
                 credentials: "include"
             })
@@ -312,7 +312,7 @@
                         cardImg.className = "card-img";
                         const img = document.createElement("img");
                         img.src = evento.imagen
-                            ? "http://localhost/api-entradas/public" + evento.imagen
+                            ? "/api-entradas/public" + evento.imagen
                             : "https://via.placeholder.com/600x300?text=Sin+imagen";
                         img.alt = "Imagen del evento";
                         cardImg.appendChild(img);
@@ -359,10 +359,10 @@
         }
 
         // Cada función simplemente llama a la genérica
-        function cargarEventos() { cargarEventosEnLista("http://localhost/api-entradas/public/api/eventos", "conciertos"); }
-        function cargarConciertosDestacados() { cargarEventosEnLista("http://localhost/api-entradas/public/api/eventos/destacados", "conciertos-destacados"); }
-        function cargarCine() { cargarEventosEnLista("http://localhost/api-entradas/public/api/eventos/cine", "cine-eventos"); }
-        function cargarEventosPopulares() { cargarEventosEnLista("http://localhost/api-entradas/public/api/eventos/populares", "eventos-populares"); }
+        function cargarEventos() { cargarEventosEnLista("/api-entradas/public/api/eventos", "conciertos"); }
+        function cargarConciertosDestacados() { cargarEventosEnLista("/api-entradas/public/api/eventos/destacados", "conciertos-destacados"); }
+        function cargarCine() { cargarEventosEnLista("/api-entradas/public/api/eventos/cine", "cine-eventos"); }
+        function cargarEventosPopulares() { cargarEventosEnLista("/api-entradas/public/api/eventos/populares", "eventos-populares"); }
 
     </script>
 </body>

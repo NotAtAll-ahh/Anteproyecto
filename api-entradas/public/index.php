@@ -5,7 +5,11 @@ error_reporting(0);
 session_start();
 
 $allowed_origins = [
-    'https://tarea-proyecto-seo-victoria-dani.free.nf'
+    'https://tarea-proyecto-seo-victoria-dani.free.nf',
+    'http://localhost',
+    'http://127.0.0.1',
+    'http://localhost:8080',
+    'http://127.0.0.1:8080'
 ];
 $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
 if (in_array($origin, $allowed_origins)) {
