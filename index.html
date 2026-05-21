@@ -5,11 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Entradas para conciertos y eventos en España 2026</title>
-    <link rel="stylesheet" href="api-entradas/styleHome.css">
+    <link rel="stylesheet" href="./styleHome.css">
     <!--iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <meta name="description" content="Compra entradas para los mejores conciertos y eventos en España 2026. Consulta fechas, artistas y recintos. Reserva tus eventos favoritos de forma rápida y segura.">
-    <meta name="keywords" content="entradas conciertos España 2026, comprar entradas conciertos, fechas conciertos España, artistas conciertos España, recintos conciertos España, reservar entradas conciertos">
+    <meta name="description"
+        content="Compra entradas para los mejores conciertos y eventos en España 2026. Consulta fechas, artistas y recintos. Reserva tus eventos favoritos de forma rápida y segura.">
+    <meta name="keywords"
+        content="entradas conciertos España 2026, comprar entradas conciertos, fechas conciertos España, artistas conciertos España, recintos conciertos España, reservar entradas conciertos">
 </head>
 
 <body>
@@ -17,18 +19,24 @@
     <!--Header-->
     <header class="main-header">
         <div class="header-left">
-            <a href="/">
+            <a href="./index.html">
                 <div class="logo-box">LOGO</div>
             </a>
         </div>
         <div class="header-center">
+            <form action="api-entradas/resultados" method="GET" class="search-form">
             <div class="search-bar">
-                <input type="text" placeholder="BARRA DE BÚSQUEDA">
+                
+                <input type="text" placeholder="BARRA DE BÚSQUEDA" aria-label="Buscar eventos" id="search-input">
+                
                 <i class="fas fa-search"></i>
+                
+                
             </div>
+            </form>
         </div>
         <div class="header-right">
-            <a href="api-entradas/perfil.html" class="user-icon-circle" aria-label="Perfil">
+            <a href="./perfil.html" class="user-icon-circle" aria-label="Perfil">
                 <i class="fas fa-user"></i>
             </a>
         </div>
@@ -36,66 +44,110 @@
 
     <!--Banner-->
     <main>
-    <section class="banner content-container">
-        <div class="banner-contenido">
-            <h1 class="banner-titulo">Entradas para eventos en España 2026</h1>
-            <div class="banner-texto">
-                Descubre los mejores conciertos en España 2026. Compra entradas online, consulta fechas y reserva tus eventos favoritos de forma rápida y segura.
-            </div>
-            <button class="banner-comprar-btn">Comprar entradas</button>
-        </div>
-        <!-- Flecha Carrusel-->
-        <div class="carrusel-flecha">
-            <i class="fas fa-chevron-right"></i>
-        </div>
-    </section>
-
-    <!-- Filtro y Buscar -->
-    <div class="filtros-section">
-        <div class="container">
-            <p class="filtro-label">Encuentra tu evento</p>
-
-            <!--Form Buscar-->
-            <form action="api-entradas/resultados" method="GET" class="search-filtro-bar">
-
-                <!-- Buscar por Nombre-->
-                <div class="filtro-item">
-                    <div class="filtro-texto">
-                        <span class="main-label">BUSCAR</span>
-                        <input id="nombre-input" type="text" name="nombre" placeholder="Artista, Evento o Recinto">
-
-                    </div>
-
-                    <!-- Submit -->
-                    <button type="submit" class="search-submit-btn" aria-label="Buscar Eventos">
-                        <i class="fas fa-search"></i>
-                    </button>
+        <section class="banner">
+            <div class="banner-contenido">
+                <h1 class="banner-titulo">Entradas para eventos en España 2026</h1>
+                <div class="banner-texto">
+                    Descubre los mejores conciertos en España 2026. Compra entradas online, consulta fechas y reserva
+                    tus eventos favoritos de forma rápida y segura.
                 </div>
-            </form>
-        </div>
-    </div>
+                <button class="banner-comprar-btn">Comprar entradas</button>
+            </div>
+            <!-- Flecha Carrusel-->
+            <div class="carrusel-flecha">
+                <i class="fas fa-chevron-right"></i>
+            </div>
+        </section>
 
-    <!-- Conciertos-->
-    <section class="concerts-section content-container">
-        <div class="section-header-line">
-            <h2>Próximos conciertos y estrenos de cine</h2>
-            <div class="expand-control">
-                <span></span>
-                <i class="fas fa-chevron-down" onclick="displayEventos(); cargarEventos();"></i>
+        <!-- Filtro y Buscar -->
+        <div class="filtros-section">
+            <div class="container">
+                <p class="filtro-label">Encuentra tu evento</p>
+
+                <!--Form Buscar-->
+                <form action="api-entradas/resultados" method="GET" class="search-filtro-bar">
+
+                    <!-- Buscar por Nombre-->
+                    <div class="filtro-item">
+                        <div class="filtro-texto">
+                            <span class="main-label">BUSCAR</span>
+                            <input id="nombre-input" type="text" name="nombre" placeholder="Artista, Evento o Recinto">
+
+                        </div>
+
+                        <!-- Submit -->
+                        <button type="submit" class="search-submit-btn" aria-label="Buscar Eventos">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
 
-        <div class="lista-eventos" id="conciertos">
+        <!-- Próximos conciertos y estrenos de cine -->
+        <section class="concerts-section content-container">
+            <div class="section-header-line">
+                <h2>Próximos conciertos y estrenos de cine</h2>
+                <div class="expand-control">
+                    <span></span>
+                    <i class="fas fa-chevron-down" onclick="displayEventos(); cargarEventos();"></i>
+                </div>
+            </div>
 
-        </div>
+            <div class="lista-eventos" id="conciertos">
 
-        <div class="solo-admin">
-        <button type="button" id="crear-evento" class="crear-evento" onclick="window.location.href = 'api-entradas/crear_evento'">Crear Evento</button>
-        </div>
+            </div>
 
-    </section>
-    <!-- Botones solo admin -->
+            <div class="solo-admin">
+                <button type="button" id="crear-evento" class="crear-evento"
+                    onclick="window.location.href = './crear_evento.html'">Crear Evento</button>
+            </div>
+
+        </section>
+        <!-- Sección de Conciertos -->
+        <section class="concerts-section content-container">
+            <div class="section-header-line">
+                <h2>Conciertos destacados</h2>
+                <div class="expand-control">
+                    <span></span>
+                    <i class="fas fa-chevron-down"
+                        onclick="displayEventosDestacados(); cargarConciertosDestacados();"></i>
+                </div>
+            </div>
+
+            <div class="lista-eventos" id="conciertos-destacados">
+            </div>
+        </section>
+
+        <!-- Sección de Cine -->
+        <section class="concerts-section content-container">
+            <div class="section-header-line">
+                <h2>Estrenos de cine y eventos especiales</h2>
+                <div class="expand-control">
+                    <span></span>
+                    <i class="fas fa-chevron-down" onclick="displayCine(); cargarCine();"></i>
+                </div>
+            </div>
+            <div class="lista-eventos" id="cine-eventos">
+
+            </div>
+        </section>
+
+        <!-- Sección de Eventos Populares -->
+        <section class="concerts-section content-container">
+            <div class="section-header-line">
+                <h2>Eventos más populares en España</h2>
+                <div class="expand-control">
+                    <span></span>
+                    <i class="fas fa-chevron-down" onclick="displayEventosPopulares(); cargarEventosPopulares();"></i>
+                </div>
+            </div>
+
+            <div class="lista-eventos" id="eventos-populares">
+            </div>
+
     </main>
+
 
     <!--Footer-->
     <footer>
@@ -108,148 +160,209 @@
             </div>
         </div>
     </footer>
-
     <!--Script-->
     <script>
 
         let usuarioRol = null;
         let usuarioId = null;
         let conciertos = document.getElementById("conciertos");
-        let control = document.getElementsByClassName("expand-control")[0].getElementsByTagName("i")[0];
+        let controlTodos = document.getElementsByClassName("expand-control")[0].getElementsByTagName("i")[0];
+        let controlDestacados = document.getElementsByClassName("expand-control")[1].getElementsByTagName("i")[0];
+        let controlCine = document.getElementsByClassName("expand-control")[2].getElementsByTagName("i")[0];
+        let controlPopulares = document.getElementsByClassName("expand-control")[3].getElementsByTagName("i")[0];
+
+
         window.onload = function () {
             conciertos.style.display = "none"; // Oculta la sección al cargar la página
-            control.style.transform = "rotate(180deg)"; // Rota el icono al cargar la página
+            conciertosDestacados.style.display = "none";
+            cineEventos.style.display = "none";
+            eventosPopulares.style.display = "none";
+            controlTodos.style.transform = "rotate(180deg)"; // Rota el icono al cargar la página
+            controlDestacados.style.transform = "rotate(180deg)";
+            controlCine.style.transform = "rotate(180deg)";
+            controlPopulares.style.transform = "rotate(180deg)";
+
+             // Comprueba el rol UNA sola vez
+             fetch("http://localhost/api-entradas/public/api/sesion", {
+                method: "GET",
+                credentials: "include"
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.logueado) {
+                        usuarioRol = data.rol;
+                        usuarioId = data.usuario_id;
+                    }
+                });
         };
+        // Función para mostrar u ocultar la sección de conciertos
         function displayEventos() {
 
             //al hacer click en el control, se muestra u oculta la sección de conciertos y se rota el icono
             if (conciertos.style.display === "none") {
                 conciertos.style.display = "flex";
-                control.style.transform = "rotate(0deg)";
+                controlTodos.style.transform = "rotate(0deg)";
             } else {
                 conciertos.style.display = "none";
-                control.style.transform = "rotate(180deg)";
+                controlTodos.style.transform = "rotate(180deg)";
+            }
+        }
+        // Funciones para mostrar u ocultar las secciones de conciertos destacados, cine y eventos populares
+        function displayEventosDestacados() {
+            const destacados = document.getElementById("conciertos-destacados");
+            if (destacados.style.display === "none" || destacados.style.display === "") {
+                destacados.style.display = "flex";
+                controlDestacados.style.transform = "rotate(0deg)";
+            } else {
+                destacados.style.display = "none";
+                controlDestacados.style.transform = "rotate(180deg)";
+            }
+        }
+        function displayCine() {
+            const cine = document.getElementById("cine-eventos");
+            if (cine.style.display === "none" || cine.style.display === "") {
+                cine.style.display = "flex";
+                controlCine.style.transform = "rotate(0deg)";
+
+            } else {
+                cine.style.display = "none";
+                controlCine.style.transform = "rotate(180deg)";
+            }
+        }
+        function displayEventosPopulares() {
+            const populares = document.getElementById("eventos-populares");
+            if (populares.style.display === "none" || populares.style.display === "") {
+                populares.style.display = "flex";
+                controlPopulares.style.transform = "rotate(0deg)";
+
+            } else {
+                populares.style.display = "none";
+                controlPopulares.style.transform = "rotate(180deg)";
             }
         }
 
-        //cargar todos los eventos
-        function cargarEventos() {
-            fetch("https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/eventos")
+
+        //funciones eventos:
+
+        //Funciones usuario
+        function editar(id) {
+            window.location.href = "editar_evento.html?id=" + id;
+        }
+
+        function eliminar(id) {
+            if (!confirm("¿Seguro que deseas eliminar este evento? Esta acción no se puede deshacer.")) {
+                return;
+            }
+
+            fetch(`http://localhost/api-entradas/public/api/eventos/${id}`, {
+                method: "DELETE",
+                credentials: "include"
+            })
                 .then(res => res.json())
                 .then(data => {
-                    const listaEventos = document.getElementById("conciertos");
-                    listaEventos.innerHTML = "";
+                    if (data.error) {
+                        alert("Error: " + data.error);
+                    } else {
+                        alert("Evento eliminado correctamente");
+                        cargarEventos(); // refrescar lista
+                    }
+                });
+        }
+
+
+        function reservar(id) {
+            window.location.href = "reservar.html?evento_id=" + encodeURIComponent(id);
+        }
+
+
+        //cargar todos los eventos
+
+        // Una sola llamada a sesión al cargar la página
+        window.onload = function () {
+            conciertos.style.display = "none";
+            controlTodos.style.transform = "rotate(180deg)";
+
+            // Comprueba el rol UNA sola vez
+            fetch("http://localhost/api-entradas/public/api/sesion", {
+                method: "GET",
+                credentials: "include"
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.logueado) {
+                        usuarioRol = data.rol;
+                        usuarioId = data.usuario_id;
+                    }
+                });
+        };
+
+        // Función genérica para renderizar eventos en cualquier lista
+        function cargarEventosEnLista(url, listaId) {
+            fetch(url)
+                .then(res => res.json())
+                .then(data => {
+                    const lista = document.getElementById(listaId);
+                    lista.innerHTML = "";
 
                     data.data.forEach(evento => {
                         const div = document.createElement("div");
                         div.className = "event-card";
 
-                        // Imagen
                         const cardImg = document.createElement("div");
                         cardImg.className = "card-img";
-
                         const img = document.createElement("img");
                         img.src = evento.imagen
-                            ? "https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public" + evento.imagen
+                            ? "http://localhost/api-entradas/public" + evento.imagen
                             : "https://via.placeholder.com/600x300?text=Sin+imagen";
-                        img.alt = "Imagen del evento: " + evento.nombre;
-
+                        img.alt = "Imagen del evento";
                         cardImg.appendChild(img);
 
-                        // Título
                         const titulo = document.createElement("h3");
                         titulo.textContent = evento.nombre;
 
-                        // Fecha
                         const fecha = document.createElement("p");
                         fecha.textContent = "Fecha: " + evento.fecha;
 
-                        // Contenedor de Botones
                         const contenedorBotones = document.createElement("div");
                         contenedorBotones.className = "botones-evento";
 
-                        // Botón Reservar (siempre visible)
                         const btnReservar = document.createElement("button");
                         btnReservar.textContent = "Reservar";
                         btnReservar.onclick = () => reservar(evento.id);
                         btnReservar.className = "reservar";
                         contenedorBotones.appendChild(btnReservar);
 
+                        // Usa la variable global usuarioRol para decidir si mostrar los botones de editar/eliminar
+                        if (usuarioRol === "admin") {
+                            const btnEditar = document.createElement("button");
+                            btnEditar.textContent = "Editar";
+                            btnEditar.className = "editar";
+                            btnEditar.onclick = () => editar(evento.id);
 
-                        //comprobar rol del usuario
-                        fetch("https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/sesion", {
-                            method: "GET",
-                            credentials: "include"
-                        })
-                            .then(res => res.json())
-                            .then(data => {
-                                if (data.logueado) {
-                                    usuarioRol = data.rol;
-                                    usuarioId = data.usuario_id;
+                            const btnEliminar = document.createElement("button");
+                            btnEliminar.textContent = "Eliminar";
+                            btnEliminar.className = "eliminar";
+                            btnEliminar.onclick = () => eliminar(evento.id);
 
-                                    // Botones solo para admin
-                                    if (usuarioRol === "admin") {
+                            contenedorBotones.appendChild(btnEditar);
+                            contenedorBotones.appendChild(btnEliminar);
+                        }
 
-                                        const btnEditar = document.createElement("button");
-                                        btnEditar.textContent = "Editar";
-                                        btnEditar.className = "editar";
-                                        btnEditar.onclick = () => editar(evento.id);
-
-                                        const btnEliminar = document.createElement("button");
-                                        btnEliminar.textContent = "Eliminar";
-                                        btnEliminar.className = "eliminar";
-                                        btnEliminar.onclick = () => eliminar(evento.id);
-
-                                        contenedorBotones.appendChild(btnEditar);
-                                        contenedorBotones.appendChild(btnEliminar);
-                                    }
-
-
-                                }
-
-
-                            });
-
-                        // Agragar elementos al div
                         div.appendChild(cardImg);
                         div.appendChild(titulo);
                         div.appendChild(fecha);
                         div.appendChild(contenedorBotones);
-
-                        listaEventos.appendChild(div);
+                        lista.appendChild(div);
                     });
-                });
-            //Funciones usuario
-            function editar(id) {
-                window.location.href = "api-entradas/editar_evento?id=" + id;
-            }
-
-            function eliminar(id) {
-                if (!confirm("¿Seguro que deseas eliminar este evento? Esta acción no se puede deshacer.")) {
-                    return;
-                }
-
-                fetch(`https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/eventos/${id}`, {
-                    method: "DELETE",
-                    credentials: "include"
                 })
-                    .then(res => res.json())
-                    .then(data => {
-                        if (data.error) {
-                            alert("Error: " + data.error);
-                        } else {
-                            alert("Evento eliminado correctamente");
-                            cargarEventos(); // refrescar lista
-                        }
-                    });
-            }
+                .catch(err => console.error("Error cargando eventos de " + listaId + ":", err));
+        }
 
-
-            function reservar(id) {
-                window.location.href = "api-entradas/comprar/SelectorEntradas?evento_id=" + encodeURIComponent(id);
-            }
-
-        };
+        // Cada función simplemente llama a la genérica
+        function cargarEventos() { cargarEventosEnLista("http://localhost/api-entradas/public/api/eventos", "conciertos"); }
+        function cargarConciertosDestacados() { cargarEventosEnLista("http://localhost/api-entradas/public/api/eventos/destacados", "conciertos-destacados"); }
+        function cargarCine() { cargarEventosEnLista("http://localhost/api-entradas/public/api/eventos/cine", "cine-eventos"); }
+        function cargarEventosPopulares() { cargarEventosEnLista("http://localhost/api-entradas/public/api/eventos/populares", "eventos-populares"); }
 
     </script>
 </body>

@@ -6,12 +6,33 @@ require_once __DIR__ . '/../models/Evento.php';
 class EventoController
 {
 
-    // LISTAR TODOS LOS EVENTOS
+   // LISTAR TODOS LOS EVENTOS
     public static function index()
     {
         global $pdo;
         $eventos = Evento::all($pdo);
         echo json_encode(["status" => "success", "data" => $eventos]);
+    }
+
+public static function destacados()
+{
+    global $pdo;
+    $eventos = Evento::getByCategoria($pdo, 'destacado');
+    echo json_encode(["data" => $eventos]);
+}
+
+    public static function cine()
+    {
+        global $pdo;
+        $eventos = Evento::getByCategoria($pdo, 'cine');
+        echo json_encode(["data" => $eventos]);
+    }
+
+    public static function populares()
+    {
+        global $pdo;
+        $eventos = Evento::getByCategoria($pdo, 'popular');
+        echo json_encode(["data" => $eventos]);
     }
 
     // VER DETALLES DE UN EVENTO

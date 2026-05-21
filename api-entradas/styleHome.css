@@ -7,11 +7,12 @@
 }
 
 body {
-    background-color: #121212;
-    color: white;
-    font-family: sans-serif;
+    background-color: #0f0f0f; 
+    color: #ffffff;
+    font-family: 'Segoe UI', Roboto, Arial, sans-serif;
     text-transform: uppercase;
     margin: 0;
+    line-height: 1.6;
 }
 
 /* Header*/
@@ -19,29 +20,57 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 50px;
+    padding: 15px 50px;
+    background: rgba(18, 18, 18, 0.95); 
+    backdrop-filter: blur(10px); 
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .logo-box {
-    border: 1px solid white;
-    padding: 5px 15px;
-    font-size: 0.8rem;
+    border: 2px solid #ffffff;
+    padding: 5px 20px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    transition: 0.3s ease;
+}
+
+.logo-box:hover {
+    background: #ffffff;
+    color: #000000;
 }
 
 .search-bar {
     display: flex;
     align-items: center;
-    border-bottom: 1px solid white;
-    width: 400px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 5px 20px;
+    width: 350px;
+    transition: 0.3s;
+}
+
+
+
+.search-bar:focus-within {
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
 }
 
 .search-bar input {
     background: transparent;
     border: none;
     color: white;
-    padding: 5px;
+    padding: 8px;
     width: 100%;
+    outline: none;
+    font-size: 0.8rem;
 }
+
+
 
 .search-bar input::placeholder {
     color: white;
@@ -49,14 +78,19 @@ body {
 }
 
 .user-icon-circle {
-    width: 40px;
-    height: 40px;
-    background-color: #3b6182;
+    width: 42px;
+    height: 42px;
+    background: linear-gradient(135deg, #4b6cb7, #1a2a3a);
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+    transition: transform 0.3s ease;
+}
+
+.user-icon-circle:hover {
+    transform: scale(1.1);
 }
 
 /* Layout Container */
@@ -66,56 +100,74 @@ body {
     padding: 40px 20px;
 }
 
-/* --- Banner--- */
-.banner {
-    height: 70vh;
-    background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url("./public/uploads/imgsHTML/image.webp");
+/* --- Banner--- */.banner {
+    height: 80vh;
+    width: 100%;
+    max-width: none !important; /* Esto fuerza a que sea ancho completo */
+    background-image: linear-gradient(to right, rgba(0,0,0,0.8), rgba(0,0,0,0.2)), url("./public/uploads/imgsHTML/fondo\ festival.png");
     background-size: cover;
     background-position: center;
-    position: relative;
     display: flex;
     align-items: center;
-    padding-left: 80px;
+    padding: 0 10%; 
+    box-sizing: border-box;
 }
 
-.banner-contenido{
-    max-width: 700px;
+.banner-contenido {
+    max-width: 750px;
 }
 
 .banner-titulo {
-    font-family: "Kabel";
-    letter-spacing: 20px;
-    font-size: 4rem;
-    font-weight: 800;
-    margin-bottom: 20px;
+    font-family: "Kabel", sans-serif;
+    letter-spacing: 12px;
+    font-size: 4.5rem;
+    font-weight: 900;
+    margin-bottom: 25px;
     line-height: 1;
+    text-shadow: 2px 4px 10px rgba(0,0,0,0.5);
 }
 
-.banner-texto{
-    border: 1px solid white;
-    padding: 10px 20px;
+.banner-texto {
+    border-left: 4px solid #ff3366; 
+    background: rgba(0, 0, 0, 0.5);
+    padding: 15px 25px;
     display: inline-block;
-    font-size: 0.9rem;
-    margin-bottom: 30px;
+    font-size: 1rem;
+    margin-bottom: 35px;
+    text-transform: none; 
 }
 
 .banner-comprar-btn {
     display: block;
-    background: rgba(255, 255, 255, 0.3);
+    background: #ff3366;
     border: none;
-    color: white;
-    padding: 15px 30px;
-    font-size: 1.2rem;
+    color: #ffffff;
+    padding: 18px 40px;
+    font-size: 1rem;
+    font-weight: bold;
     cursor: pointer;
-    backdrop-filter: blur(5px);
+    transition: 0.3s ease;
+    letter-spacing: 2px;
+}
+
+.banner-comprar-btn:hover {
+    background: #ffffff;
+    color: #ff3366;
+    transform: translateY(-3px);
 }
 
 .carrusel-flecha {
     position: absolute;
-    right: 40px;
-    font-size: 3rem;
+    right: 50px;
+    font-size: 3.5rem;
     cursor: pointer;
-    opacity: 0.8;
+    opacity: 0.6;
+    transition: 0.3s;
+}
+
+.carrusel-flecha:hover {
+    opacity: 1;
+    transform: translateX(10px);
 }
 
 /* --- Filtros Section --- */
@@ -137,13 +189,22 @@ body {
 }
 
 /* Formulario búsqueda */
+.filtros-section {
+    background-color: #1a1a1a;
+    padding: 50px 0;
+    margin-top: -30px; 
+    position: relative;
+    z-index: 5;
+}
+
 .search-filtro-bar {
-    border: 1px solid white;
-    border-radius: 50px;
+    background: #252525;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
     display: flex;
     align-items: center;
-    padding: 5px 10px 5px 30px;
-    margin-bottom: 20px;
+    padding: 10px 20px 10px 30px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
 }
 
 .filtro-item {
@@ -159,11 +220,6 @@ body {
     width: 100%;
 }
 
-.calendar-icon {
-    font-size: 1.8rem;
-    margin-right: 15px;
-}
-
 .filtro-texto {
     display: flex;
     flex-direction: column;
@@ -171,34 +227,26 @@ body {
 }
 
 .main-label {
+    color: #ff3366;
     font-weight: bold;
-    font-size: 0.75rem;
-    letter-spacing: 1px;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
 }
 
 /* Filtro Fecha*/
-.select-fecha, #nombre-input {
+#nombre-input {
     background: transparent;
     border: none;
-    color: white;
-    outline: none;
-    font-size: 0.85rem;
+    color: #ffffff;
+    font-size: 1.1rem;
     width: 100%;
-    appearance: none; /* Removes default browser arrow */
-    cursor: pointer;
+    outline: none;
+    margin-top: 5px;
 }
 
-.select-fecha option {
-    background-color: #1a2a3a;
-    color: white;
-}
 
-.filtro-divider {
-    width: 1px;
-    height: 35px;
-    background: rgba(255, 255, 255, 0.3);
-    margin: 0 20px;
-}
+
+
 
 /*Buscar Botón */
 .search-submit-btn {
@@ -272,24 +320,17 @@ body {
     
 }
 .lista-eventos::-webkit-scrollbar {
-    width: 30%;
-    height: 10px;
-    
-   
+    height: 8px;
 }
-.lista-eventos::-webkit-scrollbar-track{
-    background: transparent;
-    border: 1px solid white;
+
+.lista-eventos::-webkit-scrollbar-track {
+    background: #1a1a1a;
     border-radius: 10px;
-    margin-top: 40px;
-    overflow: hidden;
-    
 }
 
 .lista-eventos::-webkit-scrollbar-thumb {
-    background: linear-gradient(90deg, #4b6cb7, #9b59b6);
+    background: linear-gradient(90deg, #4b6cb7, #ff3366);
     border-radius: 10px;
-    height: 10px;
 }
 
 
@@ -363,8 +404,22 @@ body {
     margin-right: 10px;
 }
 
-.crear-evento{
+.crear-evento {
     width: 100%;
+    background: transparent;
+    border: 1px dashed #4b6cb7;
+    color: #4b6cb7;
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.crear-evento:hover {
+    background: rgba(75, 108, 183, 0.1);
+    border-style: solid;
 }
 a{
     color: white;

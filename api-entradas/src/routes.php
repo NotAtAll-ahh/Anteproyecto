@@ -9,6 +9,7 @@ $uri = str_replace($basePath, '', $uri);
 $method = $_SERVER['REQUEST_METHOD'];
 
 //Incluir los controladores
+require_once __DIR__ . '/database/connection.php';
 require_once __DIR__ . '/controllers/EventoController.php';
 require_once __DIR__ . '/controllers/UsuarioController.php';
 require_once __DIR__ . '/controllers/ReservaController.php';
@@ -19,6 +20,18 @@ switch (true) {
     //Lista todos los eventos
     case $uri === '/api/eventos' && $method === 'GET':
         EventoController::index();
+        break;
+    // EVENTOS DESTACADOS
+    case $uri === '/api/eventos/destacados' && $method === 'GET':
+        EventoController::destacados();
+        break;
+
+    case $uri === '/api/eventos/cine' && $method === 'GET':
+        EventoController::cine();
+        break;
+
+    case $uri === '/api/eventos/populares' && $method === 'GET':
+        EventoController::populares();
         break;
     // Buscar eventos por nombre
     case preg_match('#^/api/eventos/buscar/nombre/(.+)$#', $uri, $matches) && $method === 'GET':

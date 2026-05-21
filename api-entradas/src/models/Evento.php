@@ -3,8 +3,16 @@
 class Evento {
 
 // OBTENER TODOS LOS EVENTOS
-    public static function all($pdo) {
+    public static function all($pdo)
+    {
         $stmt = $pdo->query("SELECT * FROM eventos");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    // OBTENER EVENTOS POR CATEGORÍA
+    public static function getByCategoria($pdo, $categoria)
+    {
+        $stmt = $pdo->prepare("SELECT * FROM eventos WHERE categoria = ?");
+        $stmt->execute([$categoria]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 // OBTENER UN EVENTO POR ID
@@ -22,19 +30,22 @@ class Evento {
 
 
 // CREAR NUEVO EVENTO
-    public static function create($pdo, $data) {
-        $stmt = $pdo->prepare("INSERT INTO eventos (nombre, descripcion, ubicacion, fecha, entradas_totales, entradas_disponibles) VALUES (?, ?, ?, ?, ?, ?)");
-        $stmt->execute([
-            $data["nombre"],
-            $data["descripcion"],
-            $data["ubicacion"],
-            $data["fecha"],
-            $data["entradas_totales"],
-            $data["entradas_disponibles"]
-        ]);
-    }
-// ACTUALIZAR EVENTO
-    public static function update($pdo, $id, $data) {
+public static function create($pdo, $data)
+{
+    $stmt = $pdo->prepare("INSERT INTO eventos (nombre, descripcion, ubicacion, fecha, entradas_totales, entradas_disponibles, categoria) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $stmt->execute([
+        $data["nombre"],
+        $data["descripcion"],
+        $data["ubicacion"],
+        $data["fecha"],
+        $data["entradas_totales"],
+        $data["entradas_disponibles"],
+        $data["categoria"] ?? 'concierto' // valor por defecto si no se envía
+    ]);
+}
+    // ACTUALIZAR EVENTO
+    public static function update($pdo, $id, $data)
+    {
         $stmt = $pdo->prepare("UPDATE eventos SET nombre=?, descripcion=?, ubicacion=?, fecha=?, entradas_totales=?, entradas_disponibles=? WHERE id=?");
         $stmt->execute([
             $data["nombre"],
@@ -43,7 +54,8 @@ class Evento {
             $data["fecha"],
             $data["entradas_totales"],
             $data["entradas_disponibles"],
-            $id
+            $id,
+            $data["categoria"] ?? 'concierto' // valor por defecto si no se envía
         ]);
     }
 //ELIMINAR EVENTO
