@@ -71,6 +71,16 @@
             justify-content: center;
             align-items: center;
             font-size: 1.2rem;
+            color: white;
+            text-decoration: none;
+        }
+
+        .user-icon-circle:visited,
+        .user-icon-circle:hover,
+        .user-icon-circle:active,
+        .user-icon-circle:focus {
+            color: white;
+            text-decoration: none;
         }
 
         .contenedor {
@@ -201,7 +211,7 @@
 
     <header class="main-header">
         <div class="header-left">
-            <a href="../index.html">
+            <a href="/">
                 <div class="logo-box">LOGO</div>
             </a>
         </div>
@@ -212,9 +222,9 @@
             </div>
         </div>
         <div class="header-right">
-            <div class="user-icon-circle" aria-label="Perfil">
+            <a href="/api-entradas/perfil" class="user-icon-circle" aria-label="Perfil">
                 <i class="fas fa-user"></i>
-            </div>
+            </a>
         </div>
     </header>
 
@@ -274,9 +284,10 @@
 
     <script>
         let usuarioRol = null;
+        const API_BASE = `${window.location.origin}/api-entradas/public/api`;
 
         // 1. Comprobar sesión
-        fetch("https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/sesion", {
+        fetch(`${API_BASE}/sesion`, {
             method: "GET",
             credentials: "include"
         })
@@ -316,7 +327,7 @@
                 entradas_totales: entradasTotales
             };
 
-            fetch("https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/eventos", {
+            fetch(`${API_BASE}/eventos`, {
                 method: "POST",
                 credentials: "include",
                 headers: {
@@ -355,7 +366,7 @@
             const formData = new FormData();
             formData.append("imagen", archivo);
 
-            return fetch(`https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/eventos/${eventoId}/imagen`, {
+            return fetch(`${API_BASE}/eventos/${eventoId}/imagen`, {
                 method: "POST",
                 credentials: "include",
                 body: formData

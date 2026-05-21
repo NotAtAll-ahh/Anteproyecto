@@ -202,11 +202,11 @@
             formReserva.style.display = "none";
         } else {
             Promise.all([
-                fetch("https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/sesion", {
+                fetch("/api-entradas/public/api/sesion", {
                     method: "GET",
                     credentials: "include"
                 }).then(leerJsonSeguro),
-                fetch("https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/eventos/" + encodeURIComponent(eventoId))
+                fetch("/api-entradas/public/api/eventos/" + encodeURIComponent(eventoId))
                     .then(leerJsonSeguro)
             ])
                 .then(([sesion, eventoRes]) => {
@@ -253,7 +253,7 @@
                 return;
             }
 
-            fetch("https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/reservas", {
+            fetch("/api-entradas/public/api/reservas", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

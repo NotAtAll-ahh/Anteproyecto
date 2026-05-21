@@ -134,7 +134,7 @@
 
         //cargar todos los eventos
         function cargarEventos() {
-            fetch("https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/eventos")
+            fetch("/api-entradas/public/api/eventos")
                 .then(res => res.json())
                 .then(data => {
                     const listaEventos = document.getElementById("conciertos");
@@ -150,7 +150,7 @@
 
                         const img = document.createElement("img");
                         img.src = evento.imagen
-                            ? "https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public" + evento.imagen
+                            ? "/api-entradas/public" + evento.imagen
                             : "https://via.placeholder.com/600x300?text=Sin+imagen";
                         img.alt = "Imagen del evento: " + evento.nombre;
 
@@ -177,7 +177,7 @@
 
 
                         //comprobar rol del usuario
-                        fetch("https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/sesion", {
+                        fetch("/api-entradas/public/api/sesion", {
                             method: "GET",
                             credentials: "include"
                         })
@@ -229,7 +229,7 @@
                     return;
                 }
 
-                fetch(`https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/eventos/${id}`, {
+                fetch(`/api-entradas/public/api/eventos/${id}`, {
                     method: "DELETE",
                     credentials: "include"
                 })

@@ -27,7 +27,7 @@
             </div>
         </div>
         <div class="header-right">
-            <a href="../perfil.html" class="user-icon-circle" aria-label="Perfil">
+            <a href="/api-entradas/perfil" class="user-icon-circle" aria-label="Perfil">
                 <i class="fas fa-user"></i>
             </a>
         </div>
@@ -207,6 +207,9 @@
 
     <script>
         window.addEventListener("DOMContentLoaded", () => {
+            const API_BASE = "/api-entradas/public/api";
+            const PUBLIC_BASE = "/api-entradas/public";
+
             const nameElement = document.getElementById("eventName");
             const descriptionElement = document.getElementById("eventDescription");
             const imageElement = document.getElementById("eventImage");
@@ -246,17 +249,23 @@
                         return;
                     }
 
-                    fetch("https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/sesion", {
+                    fetch(`${API_BASE}/sesion`, {
                         method: "GET",
                         credentials: "include"
                     })
-                        .then(res => res.json())
+                        .then(async res => {
+                            const data = await res.json().catch(() => ({}));
+                            if (!res.ok) {
+                                throw new Error(data.error || "No se pudo validar la sesion.");
+                            }
+                            return data;
+                        })
                         .then(sesion => {
                             if (!sesion.logueado || !sesion.usuario_id) {
                                 throw new Error("Debes iniciar sesión para completar la compra.");
                             }
 
-                            return fetch("https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/reservas", {
+                            return fetch(`${API_BASE}/reservas`, {
                                 method: "POST",
                                 headers: {
                                     "Content-Type": "application/json"
@@ -270,13 +279,21 @@
                             });
                         })
                         .then(async res => {
-                            const data = await res.json();
+                            const raw = await res.text();
+                            let data = {};
+                            try {
+                                data = raw ? JSON.parse(raw) : {};
+                            } catch (_) {
+                                data = {};
+                            }
+
                             if (!res.ok || data.error) {
-                                throw new Error(data.error || "No se pudo completar la reserva.");
+                                const detalle = data.error || (raw ? `Respuesta inesperada del servidor: ${raw.slice(0, 120)}` : "Sin detalle");
+                                throw new Error(`No se pudo completar la reserva (HTTP ${res.status}). ${detalle}`);
                             }
 
                             alert("Reserva realizada correctamente.");
-                            window.location.href = "../perfil";
+                            window.location.href = "/api-entradas/perfil.html";
                         })
                         .catch(error => {
                             alert(error.message || "Error al procesar el pago.");
@@ -288,7 +305,7 @@
                 return;
             }
 
-            fetch(`https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/eventos/${encodeURIComponent(eventoId)}`)
+            fetch(`${API_BASE}/eventos/${encodeURIComponent(eventoId)}`)
                 .then(res => res.json())
                 .then(data => {
                     const evento = data.data ?? data;
@@ -299,7 +316,7 @@
                         descriptionElement.textContent = evento.descripcion;
                     }
                     if (evento && evento.imagen) {
-                        imageElement.src = "https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public" + evento.imagen;
+                        imageElement.src = PUBLIC_BASE + evento.imagen;
                     }
                 })
                 .catch(() => {

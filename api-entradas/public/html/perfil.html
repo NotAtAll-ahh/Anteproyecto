@@ -106,7 +106,7 @@
         let emailOriginal = "";
 
         // 1. Comprobar si hay sesión activa
-        fetch("https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/sesion", {
+        fetch("/api-entradas/public/api/sesion", {
             method: "GET",
             credentials: "include"
         })
@@ -124,7 +124,7 @@
 
         // 2. Cargar datos del usuario
         function cargarPerfil() {
-            fetch(`https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/usuarios/${usuarioId}`, {
+            fetch(`/api-entradas/public/api/usuarios/${usuarioId}`, {
                 method: "GET",
                 credentials: "include"
             })
@@ -142,7 +142,7 @@
                     const imgElement = document.getElementById("foto");
                     const fallbackElement = document.getElementById("fotoFallback");
                     if (usuario.foto_perfil) {
-                        imgElement.src = "https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public" + usuario.foto_perfil;
+                        imgElement.src = "/api-entradas/public" + usuario.foto_perfil;
                         imgElement.style.display = "block";
                         fallbackElement.style.display = "none";
                     } else {
@@ -204,7 +204,7 @@
 
         function crearHtmlDetalleEvento(evento, reserva) {
             const imagenEvento = evento.imagen
-                ? `https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public${evento.imagen}`
+                ? `/api-entradas/public${evento.imagen}`
                 : "https://via.placeholder.com/140x140?text=Evento";
 
             return `
@@ -235,7 +235,7 @@
                     <div class="ticket">
                         <div class="ticket-img">
                             ${reserva.evento_imagen
-                                ? `<img src="https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public${escaparHtml(reserva.evento_imagen)}" alt="${escaparHtml(reserva.evento_nombre || "Evento")}">`
+                                ? `<img src="/api-entradas/public${escaparHtml(reserva.evento_imagen)}" alt="${escaparHtml(reserva.evento_nombre || "Evento")}">`
                                 : `<span>${escaparHtml((reserva.evento_nombre || "Evento").slice(0, 18))}</span>`}
                         </div>
                         <div class="ticket-info">
@@ -259,7 +259,7 @@
             const ticketsContainer = document.getElementById("ticketsContainer");
             ticketsContainer.innerHTML = '<div class="ticket-empty">Cargando tus entradas...</div>';
 
-            fetch("https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/mis-reservas", {
+            fetch("/api-entradas/public/api/mis-reservas", {
                 method: "GET",
                 credentials: "include"
             })
@@ -317,7 +317,7 @@
                 return;
             }
 
-            fetch(`https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/eventos/${reserva.evento_id}`, {
+            fetch(`/api-entradas/public/api/eventos/${reserva.evento_id}`, {
                 method: "GET",
                 credentials: "include"
             })
@@ -391,7 +391,7 @@
             const formData = new FormData();
             formData.append("imagen", archivo);
 
-            fetch(`https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/usuarios/${usuarioId}/foto`, {
+            fetch(`/api-entradas/public/api/usuarios/${usuarioId}/foto`, {
                 method: "POST",
                 credentials: "include",
                 body: formData
@@ -412,7 +412,7 @@
 
         // 4. Logout
         function logout() {
-            fetch("https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/logout", {
+            fetch("/api-entradas/public/api/logout", {
                 method: "POST",
                 credentials: "include"
             })
@@ -432,7 +432,7 @@
             if (nombre.trim() !== "") data.nombre = nombre;
             if (email.trim() !== "") data.email = email;
 
-            fetch(`https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/usuarios/${usuarioId}`, {
+            fetch(`/api-entradas/public/api/usuarios/${usuarioId}`, {
                 method: "PUT",
                 credentials: "include",
                 headers: {

@@ -174,6 +174,9 @@ function actualizarResumenEntradas() {
 }
 
 window.addEventListener('DOMContentLoaded', () => {
+    const API_BASE = '/api-entradas/public/api';
+    const PUBLIC_BASE = '/api-entradas/public';
+
     appendSeats(17, "front-row-first-front-row");
     appendSeats(19, "front-row-second-front-row");
     appendSeats(84, "middle-row");
@@ -197,7 +200,7 @@ window.addEventListener('DOMContentLoaded', () => {
         buyBtn.addEventListener('click', () => {
             const totalEntradas = getMaxSeleccionables();
             const asientosSeleccionados = getAsientosSeleccionados();
-            const destino = new URL('DatosFacturacion', window.location.href);
+            const destino = new URL('/api-entradas/comprar/DatosFacturacion.html', window.location.origin);
 
             if (totalEntradas === 0) {
                 alert('Debes seleccionar al menos una entrada.');
@@ -214,24 +217,19 @@ window.addEventListener('DOMContentLoaded', () => {
             }
 
             destino.searchParams.set('entradas', String(totalEntradas));
-            destino.searchParams.set('asientos', String(asientosSeleccionados.length));
-            destino.searchParams.set('seats', asientosSeleccionados
-                .map((seat) => seat.dataset.seatId || '')
-                .filter(Boolean)
-                .join(','));
 
             window.location.href = destino.toString();
         });
     }
 
     if (eventoId) {
-        fetch(`https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public/api/eventos/${encodeURIComponent(eventoId)}`)
+        fetch(`${API_BASE}/eventos/${encodeURIComponent(eventoId)}`)
             .then(res => res.json())
             .then(data => {
                 const evento = data.data ?? data;
                 if (img) {
                     img.src = evento && evento.imagen
-                        ? 'https://tarea-proyecto-seo-victoria-dani.free.nf/api-entradas/public' + evento.imagen
+                        ? PUBLIC_BASE + evento.imagen
                         : 'https://via.placeholder.com/300x450?text=Sin+imagen';
                     img.alt = (evento && evento.nombre) || 'Imagen del Evento';
                 }
