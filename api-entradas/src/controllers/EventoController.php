@@ -76,6 +76,12 @@ public static function destacados()
 
         $data = json_decode(file_get_contents("php://input"), true);
 
+        if (!is_array($data)) {
+            http_response_code(400);
+            echo json_encode(["error" => "El cuerpo de la peticion no contiene un JSON valido"]);
+            return;
+        }
+
         // Validación mínima
         $required = ["nombre", "descripcion", "ubicacion", "fecha", "entradas_totales"];
 
@@ -99,16 +105,24 @@ public static function destacados()
         // Entradas disponibles = totales al inicio
         $data["entradas_disponibles"] = $data["entradas_totales"];
 
-        Evento::create($pdo, $data);
+        try {
+            Evento::create($pdo, $data);
 
-        // Obtener ID del último evento creado
-        $id = $pdo->lastInsertId();
+            // Obtener ID del último evento creado
+            $id = $pdo->lastInsertId();
 
-        echo json_encode([
-            "status" => "success",
-            "message" => "Evento creado",
-            "id" => $id
-        ]);
+            echo json_encode([
+                "status" => "success",
+                "message" => "Evento creado",
+                "id" => $id
+            ]);
+        } catch (Throwable $e) {
+            http_response_code(500);
+            echo json_encode([
+                "error" => "No se pudo crear el evento",
+                "detalle" => $e->getMessage()
+            ]);
+        }
     }
 
 
@@ -121,6 +135,40 @@ public static function destacados()
 
         $data = json_decode(file_get_contents("php://input"), true);
 
+        if (!is_array($data)) {
+            http_response_code(400);
+            echo json_encode(["error" => "El cuerpo de la peticion no contiene un JSON valido"]);
+            return;
+        }
+
+        $required = ["nombre", "descripcion", "ubicacion", "fecha", "entradas_totales", "entradas_disponibles"];
+
+        foreach ($required as $campo) {
+            if (!isset($data[$campo]) || $data[$campo] === "") {
+                http_response_code(400);
+                echo json_encode(["error" => "El campo '$campo' es obligatorio"]);
+                return;
+            }
+        }
+
+        $entradasTotales = filter_var($data["entradas_totales"], FILTER_VALIDATE_INT);
+        $entradasDisponibles = filter_var($data["entradas_disponibles"], FILTER_VALIDATE_INT);
+
+        if ($entradasTotales === false || $entradasTotales < 1 || $entradasTotales > 155) {
+            http_response_code(400);
+            echo json_encode(["error" => "Las entradas totales deben estar entre 1 y 155"]);
+            return;
+        }
+
+        if ($entradasDisponibles === false || $entradasDisponibles < 0) {
+            http_response_code(400);
+            echo json_encode(["error" => "Las entradas disponibles deben ser un numero valido"]);
+            return;
+        }
+
+        $data["entradas_totales"] = $entradasTotales;
+        $data["entradas_disponibles"] = $entradasDisponibles;
+
         // Validación básica
         if (isset($data["entradas_totales"]) && isset($data["entradas_disponibles"])) {
             if ($data["entradas_disponibles"] > $data["entradas_totales"]) {
@@ -130,9 +178,16 @@ public static function destacados()
             }
         }
 
-        Evento::update($pdo, $id, $data);
-
-        echo json_encode(["status" => "success", "message" => "Evento actualizado"]);
+        try {
+            Evento::update($pdo, $id, $data);
+            echo json_encode(["status" => "success", "message" => "Evento actualizado"]);
+        } catch (Throwable $e) {
+            http_response_code(500);
+            echo json_encode([
+                "error" => "No se pudo actualizar el evento",
+                "detalle" => $e->getMessage()
+            ]);
+        }
     }
 
 

@@ -200,7 +200,6 @@ window.addEventListener('DOMContentLoaded', () => {
         buyBtn.addEventListener('click', () => {
             const totalEntradas = getMaxSeleccionables();
             const asientosSeleccionados = getAsientosSeleccionados();
-            const destino = new URL('/api-entradas/comprar/DatosFacturacion.html', window.location.origin);
 
             if (totalEntradas === 0) {
                 alert('Debes seleccionar al menos una entrada.');
@@ -212,13 +211,15 @@ window.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
+            const destino = new URLSearchParams();
+
             if (eventoId) {
-                destino.searchParams.set('evento_id', eventoId);
+                destino.set('evento_id', eventoId);
             }
 
-            destino.searchParams.set('entradas', String(totalEntradas));
+            destino.set('entradas', String(totalEntradas));
 
-            window.location.href = destino.toString();
+            window.location.assign('./DatosFacturacion.html?' + destino.toString());
         });
     }
 

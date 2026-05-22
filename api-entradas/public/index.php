@@ -6,7 +6,7 @@ session_start();
 
 $allowed_origins = [
     'https://tarea-proyecto-seo-victoria-dani.free.nf',
-    'http://localhost',
+    'http://localhost/anteproyecto',
     'http://127.0.0.1',
     'http://localhost:8080',
     'http://127.0.0.1:8080'

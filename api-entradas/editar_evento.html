@@ -295,6 +295,24 @@
 
             let usuarioRol = null;
 
+            async function leerJsonSeguro(res) {
+                const texto = await res.text();
+
+                try {
+                    return texto ? JSON.parse(texto) : {};
+                } catch (error) {
+                    throw new Error("El servidor devolvio una respuesta invalida: " + texto);
+                }
+            }
+
+            function normalizarFechaParaInput(valor) {
+                if (!valor) {
+                    return "";
+                }
+
+                return String(valor).slice(0, 10);
+            }
+
             // 1. Comprobar sesión
             fetch("/api-entradas/public/api/sesion", {
                 method: "GET",
@@ -329,7 +347,7 @@
                         document.getElementById("nombre").value = e.nombre;
                         document.getElementById("descripcion").value = e.descripcion;
                         document.getElementById("ubicacion").value = e.ubicacion;
-                        document.getElementById("fecha").value = e.fecha;
+                        document.getElementById("fecha").value = normalizarFechaParaInput(e.fecha);
                         document.getElementById("entradas_totales").value = e.entradas_totales;
                         document.getElementById("entradas_disponibles").value = e.entradas_disponibles;
 
@@ -357,13 +375,24 @@
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(data)
                 })
-                    .then(res => res.json())
-                    .then(data => {
-                        if (data.id || data.success || !data.error) {
+                    .then(async res => {
+                        const responseData = await leerJsonSeguro(res);
+
+                        if (!res.ok) {
+                            throw new Error(responseData.detalle || responseData.error || "No se pudo actualizar el evento.");
+                        }
+
+                        return responseData;
+                    })
+                    .then(responseData => {
+                        if (responseData.id || responseData.success || !responseData.error) {
                             alert("Cambios guardados con éxito");
                         }
                         document.getElementById("resultado").textContent =
-                            JSON.stringify(data, null, 2);
+                            JSON.stringify(responseData, null, 2);
+                    })
+                    .catch(error => {
+                        document.getElementById("resultado").textContent = error.message;
                     });
             }
 

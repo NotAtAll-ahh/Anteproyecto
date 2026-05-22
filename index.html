@@ -102,7 +102,7 @@
 
             <div class="solo-admin">
                 <button type="button" id="crear-evento" class="crear-evento"
-                    onclick="window.location.href = './crear_evento.html'">Crear Evento</button>
+                    onclick="window.location.href = 'api-entradas/crear_evento.html'">Crear Evento</button>
             </div>
 
         </section>
@@ -292,7 +292,7 @@
 
         //Funciones usuario
         function editar(id) {
-            window.location.href = "editar_evento.html?id=" + id;
+              window.location.href = "/api-entradas/editar_evento.html?id=" + id;
         }
 
         function eliminar(id) {
@@ -317,7 +317,7 @@
 
 
         function reservar(id) {
-            window.location.href = "reservar.html?evento_id=" + encodeURIComponent(id);
+              window.location.href = "/api-entradas/comprar/SelectorEntradas.html?evento_id=" + encodeURIComponent(id);
         }
 
 
@@ -360,7 +360,7 @@
                         cardImg.className = "card-img";
                         const img = document.createElement("img");
                         img.src = evento.imagen
-                            ? "http://localhost/api-entradas/public" + evento.imagen
+                            ? "/api-entradas/public" + evento.imagen
                             : "https://via.placeholder.com/600x300?text=Sin+imagen";
                         img.alt = "Imagen del evento: " + evento.nombre;
                         cardImg.appendChild(img);

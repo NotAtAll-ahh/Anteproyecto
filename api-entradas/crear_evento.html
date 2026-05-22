@@ -292,96 +292,128 @@
         let usuarioRol = null;
         const API_BASE = `${window.location.origin}/api-entradas/public/api`;
 
-        // 1. Comprobar sesión
-        fetch(`${API_BASE}/sesion`, {
-            method: "GET",
-            credentials: "include"
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (!data.logueado) {
-                    document.getElementById("mensajeRol").textContent =
-                        "Debes iniciar sesión para crear eventos.";
-                    return;
+            async function leerJsonSeguro(res) {
+                const texto = await res.text();
+
+                try {
+                    return texto ? JSON.parse(texto) : {};
+                } catch (error) {
+                    throw new Error("El servidor devolvio una respuesta invalida: " + texto);
                 }
-
-                usuarioRol = data.rol;
-
-                if (usuarioRol === "admin") {
-                    document.getElementById("soloAdmin").style.display = "block";
-                } else {
-                    document.getElementById("mensajeRol").textContent =
-                        "No tienes permisos para crear eventos (solo administradores).";
-                }
-            });
-
-        // 2. Crear evento
-        function crearEvento() {
-            const entradasTotales = Number(document.getElementById("entradas_totales").value);
-
-            if (!Number.isInteger(entradasTotales) || entradasTotales < 1 || entradasTotales > 155) {
-                document.getElementById("resultado").textContent =
-                    "Las entradas totales deben estar entre 1 y 155.";
-                return;
             }
 
-            const data = {
-                nombre: document.getElementById("nombre").value,
-                descripcion: document.getElementById("descripcion").value,
-                ubicacion: document.getElementById("ubicacion").value,
-                fecha: document.getElementById("fecha").value,
-                entradas_totales: entradasTotales
-            };
-
-            fetch(`${API_BASE}/eventos`, {
-                method: "POST",
-                credentials: "include",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(data)
-            })
-
-
-                .then(res => res.json())
-
-                .then(async data => {
-                    if (data.id) {
-                        document.getElementById("resultado").textContent =
-                            "Evento creado con ID: " + data.id;
-
-                        // Subir imagen si existe
-                        const archivo = document.getElementById("imagen").files[0];
-                        if (archivo) {
-                            await subirImagen(data.id);
-                        }
-
-                        alert("Evento creado correctamente");
-                    } else {
-                        document.getElementById("resultado").textContent =
-                            JSON.stringify(data, null, 2);
-                    }
-                });
-        }
-
-        // 3. Subir imagen del evento
-        function subirImagen(eventoId) {
-            const archivo = document.getElementById("imagen").files[0];
-            if (!archivo) return;
-
-            const formData = new FormData();
-            formData.append("imagen", archivo);
-
-            return fetch(`${API_BASE}/eventos/${eventoId}/imagen`, {
-                method: "POST",
-                credentials: "include",
-                body: formData
+            // 1. Comprobar sesión
+            fetch(`${API_BASE}/sesion`, {
+                method: "GET",
+                credentials: "include"
             })
                 .then(res => res.json())
                 .then(data => {
-                    console.log("Imagen subida:", data);
+                    if (!data.logueado) {
+                        document.getElementById("mensajeRol").textContent =
+                            "Debes iniciar sesión para crear eventos.";
+                        return;
+                    }
+
+                    usuarioRol = data.rol;
+
+                    if (usuarioRol === "admin") {
+                        document.getElementById("soloAdmin").style.display = "block";
+                    } else {
+                        document.getElementById("mensajeRol").textContent =
+                            "No tienes permisos para crear eventos (solo administradores).";
+                    }
                 });
-        }
+
+            // 2. Crear evento
+            function crearEvento() {
+                const entradasTotales = Number(document.getElementById("entradas_totales").value);
+
+                if (!Number.isInteger(entradasTotales) || entradasTotales < 1 || entradasTotales > 155) {
+                    document.getElementById("resultado").textContent =
+                        "Las entradas totales deben estar entre 1 y 155.";
+                    return;
+                }
+
+                const data = {
+                    nombre: document.getElementById("nombre").value,
+                    descripcion: document.getElementById("descripcion").value,
+                    ubicacion: document.getElementById("ubicacion").value,
+                    fecha: document.getElementById("fecha").value,
+                    entradas_totales: entradasTotales
+                };
+
+                fetch(`${API_BASE}/eventos`, {
+                    method: "POST",
+                    credentials: "include",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(data)
+                })
+                    .then(async res => {
+                        const responseData = await leerJsonSeguro(res);
+
+                        if (!res.ok) {
+                            throw new Error(responseData.detalle || responseData.error || "No se pudo crear el evento.");
+                        }
+
+                        return responseData;
+                    })
+                    .then(async responseData => {
+                        if (responseData.id) {
+                            document.getElementById("resultado").textContent =
+                                "Evento creado con ID: " + responseData.id;
+
+                            const archivo = document.getElementById("imagen").files[0];
+                            if (archivo) {
+                                await subirImagen(responseData.id);
+                            }
+
+                            alert("Evento creado correctamente");
+                        } else {
+                            document.getElementById("resultado").textContent =
+                                JSON.stringify(responseData, null, 2);
+                        }
+                    })
+                    .catch(error => {
+                        document.getElementById("resultado").textContent = error.message;
+                    });
+            }
+
+            // 3. Subir imagen del evento
+            function subirImagen(eventoId) {
+                const archivo = document.getElementById("imagen").files[0];
+                if (!archivo) return Promise.resolve();
+
+                const formData = new FormData();
+                formData.append("imagen", archivo);
+
+                return fetch(`${API_BASE}/eventos/${eventoId}/imagen`, {
+                    method: "POST",
+                    credentials: "include",
+                    body: formData
+                })
+                    .then(async res => {
+                        const responseData = await leerJsonSeguro(res);
+
+                        if (!res.ok) {
+                            throw new Error(responseData.error || "No se pudo subir la imagen del evento.");
+                        }
+
+                        return responseData;
+                    })
+                    .then(responseData => {
+                        if (responseData.imagen) {
+                            document.getElementById("resultado").textContent +=
+                                " | Imagen subida correctamente";
+                        }
+                    })
+                    .catch(error => {
+                        document.getElementById("resultado").textContent +=
+                            " | " + error.message;
+                    });
+            }
     </script>
 
 </body>

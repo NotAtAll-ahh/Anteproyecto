@@ -2,6 +2,12 @@
 
 class Evento {
 
+    private static function getExistingColumns($pdo)
+    {
+        $stmt = $pdo->query("SHOW COLUMNS FROM eventos");
+        return $stmt->fetchAll(PDO::FETCH_COLUMN);
+    }
+
 // OBTENER TODOS LOS EVENTOS
     public static function all($pdo)
     {
@@ -32,31 +38,84 @@ class Evento {
 // CREAR NUEVO EVENTO
 public static function create($pdo, $data)
 {
-    $stmt = $pdo->prepare("INSERT INTO eventos (nombre, descripcion, ubicacion, fecha, entradas_totales, entradas_disponibles, categoria) VALUES (?, ?, ?, ?, ?, ?, ?)");
-    $stmt->execute([
-        $data["nombre"],
-        $data["descripcion"],
-        $data["ubicacion"],
-        $data["fecha"],
-        $data["entradas_totales"],
-        $data["entradas_disponibles"],
-        $data["categoria"] ?? 'concierto' // valor por defecto si no se envía
-    ]);
+    $availableColumns = array_flip(self::getExistingColumns($pdo));
+
+    $insertData = [
+        'nombre' => $data['nombre'],
+        'descripcion' => $data['descripcion'],
+        'ubicacion' => $data['ubicacion'],
+        'fecha' => $data['fecha'],
+        'entradas_totales' => $data['entradas_totales'],
+        'entradas_disponibles' => $data['entradas_disponibles'],
+        'categoria' => $data['categoria'] ?? 'concierto'
+    ];
+
+    $columns = [];
+    $values = [];
+    $placeholders = [];
+
+    foreach ($insertData as $column => $value) {
+        if (!isset($availableColumns[$column])) {
+            continue;
+        }
+
+        $columns[] = $column;
+        $values[] = $value;
+        $placeholders[] = '?';
+    }
+
+    if (empty($columns)) {
+        throw new RuntimeException('La tabla eventos no tiene columnas compatibles para crear registros');
+    }
+
+    $sql = sprintf(
+        'INSERT INTO eventos (%s) VALUES (%s)',
+        implode(', ', $columns),
+        implode(', ', $placeholders)
+    );
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute($values);
 }
     // ACTUALIZAR EVENTO
     public static function update($pdo, $id, $data)
     {
-        $stmt = $pdo->prepare("UPDATE eventos SET nombre=?, descripcion=?, ubicacion=?, fecha=?, entradas_totales=?, entradas_disponibles=? WHERE id=?");
-        $stmt->execute([
-            $data["nombre"],
-            $data["descripcion"],
-            $data["ubicacion"],
-            $data["fecha"],
-            $data["entradas_totales"],
-            $data["entradas_disponibles"],
-            $id,
-            $data["categoria"] ?? 'concierto' // valor por defecto si no se envía
-        ]);
+        $availableColumns = array_flip(self::getExistingColumns($pdo));
+
+        $updateData = [
+            'nombre' => $data['nombre'],
+            'descripcion' => $data['descripcion'],
+            'ubicacion' => $data['ubicacion'],
+            'fecha' => $data['fecha'],
+            'entradas_totales' => $data['entradas_totales'],
+            'entradas_disponibles' => $data['entradas_disponibles']
+        ];
+
+        $assignments = [];
+        $values = [];
+
+        foreach ($updateData as $column => $value) {
+            if (!isset($availableColumns[$column])) {
+                continue;
+            }
+
+            $assignments[] = $column . ' = ?';
+            $values[] = $value;
+        }
+
+        if (empty($assignments)) {
+            throw new RuntimeException('La tabla eventos no tiene columnas compatibles para actualizar registros');
+        }
+
+        $values[] = $id;
+
+        $sql = sprintf(
+            'UPDATE eventos SET %s WHERE id = ?',
+            implode(', ', $assignments)
+        );
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute($values);
     }
 //ELIMINAR EVENTO
     public static function delete($pdo, $id)
