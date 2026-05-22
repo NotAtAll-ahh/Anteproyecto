@@ -117,7 +117,9 @@
         input[type="text"],
         input[type="number"],
         input[type="date"],
-        textarea {
+        textarea,
+        select {
+        
             width: 100%;
             padding: 12px 20px;
             margin-top: 5px;
@@ -130,6 +132,25 @@
             font-size: 0.9rem;
             box-sizing: border-box;
         }
+
+        
+        input[type="text"]::placeholder,
+        input[type="number"]::placeholder,
+        input[type="date"]::placeholder,
+        textarea::placeholder
+         {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        select:focus {
+            border-color: #ffffff;
+            box-shadow: 0 0 10px #ffffff;
+          
+        }
+        select option {
+            color: rgb(0, 0, 0);
+        }
+
 
         textarea {
             border-radius: 20px;
@@ -247,6 +268,16 @@
                 <label for="descripcion"><i class="fas fa-align-left"></i> Descripción</label>
                 <textarea id="descripcion" placeholder="Escribe los detalles del evento..."
                     aria-label="Descripción del evento"></textarea>
+
+                <label for="categoría"><i class="fas fa-list"></i> Categoría</label>
+                <select id="categoría" aria-label="Categoría del evento">
+                    <option value="">Selecciona una categoría</option>
+                    <option value="destacado">Destacado</option>
+                    <option value="popular">Popular</option>
+                    <option value="cine">Cine</option>
+                    <option value="concierto">Concierto</option>
+                    <option value="teatro">Teatro</option>
+                </select>
 
                 <label for="ubicacion"><i class="fas fa-map-marker-alt"></i> Ubicación</label>
                 <input type="text" id="ubicacion" placeholder="Estadio o Recinto" aria-label="Ubicación del evento">
