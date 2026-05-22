@@ -128,7 +128,9 @@
         input[type="text"],
         input[type="number"],
         input[type="date"],
-        textarea {
+        textarea,
+        select {
+        
             width: 100%;
             padding: 12px 20px;
             margin-top: 5px;
@@ -142,10 +144,22 @@
             box-sizing: border-box;
         }
 
-        textarea {
-            border-radius: 20px;
-            min-height: 80px;
-            resize: vertical;
+        
+        input[type="text"]::placeholder,
+        input[type="number"]::placeholder,
+        input[type="date"]::placeholder,
+        textarea::placeholder
+         {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        select:focus {
+            border-color: #ffffff;
+            box-shadow: 0 0 10px #ffffff;
+          
+        }
+        select option {
+            color: rgb(0, 0, 0);
         }
 
         input:focus,
@@ -268,6 +282,16 @@
                 <label for="ubicacion"><i class="fas fa-map-marker-alt"></i> Ubicación</label>
                 <input type="text" id="ubicacion" aria-label="Ubicación del evento">
 
+                <label for="categoría"><i class="fas fa-list"></i> Categoría</label>
+                <select id="categoría" aria-label="Categoría del evento">
+                    <option value="">Selecciona una categoría</option>
+                    <option value="destacado">Destacado</option>
+                    <option value="popular">Popular</option>
+                    <option value="cine">Cine</option>
+                    <option value="concierto">Concierto</option>
+                    <option value="teatro">Teatro</option>
+                </select>
+
                 <label for="fecha"><i class="fas fa-calendar-alt"></i> Fecha</label>
                 <input type="date" id="fecha" aria-label="Fecha del evento">
 
@@ -332,7 +356,7 @@
                         document.getElementById("fecha").value = e.fecha;
                         document.getElementById("entradas_totales").value = e.entradas_totales;
                         document.getElementById("entradas_disponibles").value = e.entradas_disponibles;
-
+                        document.getElementById("categoría").value = e.categoría;
                         if (e.imagen) {
                             document.getElementById("imagenActual").src =
                                 "/api-entradas/public" + e.imagen;
@@ -348,7 +372,8 @@
                     ubicacion: document.getElementById("ubicacion").value,
                     fecha: document.getElementById("fecha").value,
                     entradas_totales: document.getElementById("entradas_totales").value,
-                    entradas_disponibles: document.getElementById("entradas_disponibles").value
+                    entradas_disponibles: document.getElementById("entradas_disponibles").value,
+                    categoría: document.getElementById("categoría").value
                 };
 
                 fetch(`/api-entradas/public/api/eventos/${eventoId}`, {
