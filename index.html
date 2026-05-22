@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Entradas para conciertos y eventos en España 2026</title>
-    <link rel="stylesheet" href="./styleHome.css">
+    <link rel="stylesheet" href="./api-entradas/styleHome.css">
     <!--iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <meta name="description"
@@ -51,7 +51,7 @@
                     Descubre los mejores conciertos en España 2026. Compra entradas online, consulta fechas y reserva
                     tus eventos favoritos de forma rápida y segura.
                 </div>
-                <button class="banner-comprar-btn">Comprar entradas</button>
+                <button class="banner-comprar-btn" id="saltar-al-contenido"><a href="#filtros" >Comprar entradas</a></button>
             </div>
             <!-- Flecha Carrusel-->
             <div class="carrusel-flecha">
@@ -60,7 +60,7 @@
         </section>
 
         <!-- Filtro y Buscar -->
-        <div class="filtros-section">
+        <div class="filtros-section" id="filtros">
             <div class="container">
                 <p class="filtro-label">Encuentra tu evento</p>
 
@@ -70,10 +70,11 @@
                     <!-- Buscar por Nombre-->
                     <div class="filtro-item">
                         <div class="filtro-texto">
-                            <span class="main-label">BUSCAR</span>
+                            <label class="main-label" for="nombre-input">BUSCAR</label>
                             <input id="nombre-input" type="text" name="nombre" placeholder="Artista, Evento o Recinto">
 
                         </div>
+
 
                         <!-- Submit -->
                         <button type="submit" class="search-submit-btn" aria-label="Buscar Eventos">
@@ -85,13 +86,14 @@
         </div>
 
         <!-- Próximos conciertos y estrenos de cine -->
-        <section class="concerts-section content-container">
+               <section class="concerts-section content-container">
             <div class="section-header-line">
                 <h2>Próximos conciertos y estrenos de cine</h2>
-                <div class="expand-control">
+                <div class="expand-control" >
                     <span></span>
-                    <i class="fas fa-chevron-down" onclick="displayEventos(); cargarEventos();"></i>
+                    <i class="fas fa-chevron-down" id="proximos" aria-label="Desplegar próximos conciertos y estrenos de cine" tabindex="0"></i>
                 </div>
+                    
             </div>
 
             <div class="lista-eventos" id="conciertos">
@@ -108,10 +110,9 @@
         <section class="concerts-section content-container">
             <div class="section-header-line">
                 <h2>Conciertos destacados</h2>
-                <div class="expand-control">
+                <div class="expand-control" >
                     <span></span>
-                    <i class="fas fa-chevron-down"
-                        onclick="displayEventosDestacados(); cargarConciertosDestacados();"></i>
+                    <i class="fas fa-chevron-down" id="destacados" aria-label="Desplegar Conciertos Destacados" tabindex="0"></i>
                 </div>
             </div>
 
@@ -123,9 +124,9 @@
         <section class="concerts-section content-container">
             <div class="section-header-line">
                 <h2>Estrenos de cine y eventos especiales</h2>
-                <div class="expand-control">
+                <div class="expand-control" id="cine">
                     <span></span>
-                    <i class="fas fa-chevron-down" onclick="displayCine(); cargarCine();"></i>
+                    <i class="fas fa-chevron-down" id="cine" aria-label="Desplegar Estrenos de Cine" tabindex="0"></i>
                 </div>
             </div>
             <div class="lista-eventos" id="cine-eventos">
@@ -137,14 +138,15 @@
         <section class="concerts-section content-container">
             <div class="section-header-line">
                 <h2>Eventos más populares en España</h2>
-                <div class="expand-control">
+                <div class="expand-control" id ="populares">
                     <span></span>
-                    <i class="fas fa-chevron-down" onclick="displayEventosPopulares(); cargarEventosPopulares();"></i>
+                    <i class="fas fa-chevron-down" id="populares" aria-label="Desplegar Eventos Populares" tabindex="0"></i>
                 </div>
             </div>
 
             <div class="lista-eventos" id="eventos-populares">
             </div>
+        </section>
 
     </main>
 
@@ -154,14 +156,58 @@
         <div class="footer-content content-container">
             <p>&copy; 2026 Venta de Entradas. Todos los derechos reservados.</p>
             <div class="social-icons">
-                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com/?locale=es_ES" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://instagram.com" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
             </div>
         </div>
     </footer>
     <!--Script-->
     <script>
+
+
+        let proximos = document.getElementById("proximos");
+        let destacados = document.getElementById("destacados");
+        let cine = document.getElementById("cine");
+        let populares = document.getElementById("populares");
+
+        proximos.addEventListener("click", function () {
+            displayEventos();
+            cargarEventos();
+        });
+        proximos.addEventListener("keypress", function (e) {
+            if (e.key === "Enter" || e.key === " ") {
+                displayEventos();
+                cargarEventos();
+            }
+        });
+        destacados.addEventListener("click", function () {
+            displayEventosDestacados();
+            cargarConciertosDestacados();
+        });
+        destacados.addEventListener("keypress", function (e) {
+            if (e.key === "Enter" || e.key === " ") {
+                displayEventosDestacados();
+                cargarConciertosDestacados();
+            }
+        });
+        cine.addEventListener("click", function () {
+            displayCine();
+            cargarCine();
+        });
+        cine.addEventListener("keypress", function (e) {
+            if (e.key === "Enter" || e.key === " ") {
+                displayCine();
+                cargarCine();
+            }
+        });
+        populares.addEventListener("keypress", function (e) {
+            if (e.key === "Enter" || e.key === " ") {
+                displayEventosPopulares();
+                cargarEventosPopulares();
+            }
+        });
+
 
         let usuarioRol = null;
         let usuarioId = null;
@@ -304,17 +350,19 @@
                     const lista = document.getElementById(listaId);
                     lista.innerHTML = "";
 
+                  
                     data.data.forEach(evento => {
                         const div = document.createElement("div");
                         div.className = "event-card";
+                        div.setAttribute("aria-label", "Evento: " + evento.nombre + ", Fecha: " + evento.fecha);
 
                         const cardImg = document.createElement("div");
                         cardImg.className = "card-img";
                         const img = document.createElement("img");
                         img.src = evento.imagen
-                            ? "/api-entradas/public" + evento.imagen
+                            ? "http://localhost/api-entradas/public" + evento.imagen
                             : "https://via.placeholder.com/600x300?text=Sin+imagen";
-                        img.alt = "Imagen del evento";
+                        img.alt = "Imagen del evento: " + evento.nombre;
                         cardImg.appendChild(img);
 
                         const titulo = document.createElement("h3");

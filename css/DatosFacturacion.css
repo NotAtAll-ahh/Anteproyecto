@@ -214,11 +214,18 @@ main {
     grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
     margin-bottom: 2rem;
+
+    
 }
 
 .payment-option {
     position: relative;
     cursor: pointer;
+}
+
+.payment-option:hover:checked .option-content {
+    border-color: #5b4d9e;
+    background: #151a33;
 }
 
 .payment-option input[type="radio"] {

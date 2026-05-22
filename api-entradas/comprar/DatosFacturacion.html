@@ -71,10 +71,10 @@
                     </div>
 
                     <!-- Sección Método de Pago -->
-                    <div class="payment-method-section">
-                        <h2>MÉTODO DE PAGO</h2>
+                    <fieldset class="payment-method-section">
+                        <legend></legend><h2>MÉTODO DE PAGO</h2></legend>
                         
-                        <div class="payment-options">
+                        <section class="payment-options">
                             <div class="option-content">
                             <label class="payment-option">
                                 <input type="radio" name="payment" value="card" checked>
@@ -103,7 +103,7 @@
                                     <span>Apple Pay</span>
                             </label>
                             </div>
-                        </div>
+                        </section>
 
                         <div class="payment-form">
                             <div class="form-group">
@@ -119,7 +119,7 @@
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="expiry-month">Fecha Caducidad</label>
-                                    <select id="expiry-month" name="expiry-month">
+                                    <select id="expiry-month" name="expiry-month" aria-label="mes">
                                         <option value="">MM</option>
                                         <option value="01">01</option>
                                         <option value="02">02</option>
@@ -137,7 +137,7 @@
                                 </div>
 
                                 <div class="form-group no-label-align">
-                                    <select id="expiry-year" name="expiry-year">
+                                    <select id="expiry-year" name="expiry-year" aria-label="año">
                                         <option value="">YYYY</option>
                                         <option value="2025">2025</option>
                                         <option value="2026">2026</option>
@@ -154,7 +154,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </fieldset>
                 </div>
 
                 <!-- Sección Derecha: Resumen de Compra -->

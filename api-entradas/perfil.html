@@ -52,22 +52,24 @@
                     <input id="nombre" type="text" class="custom-input" readonly>
                     <label for="email">Email</label>
                     <input id="email" type="text" class="custom-input" readonly>
-                    <label for="rol" aria-hidden="true">Rol</label>
+                    <label for="rol">Rol</label>
                     <input id="rol" type="text" class="custom-input" readonly>
                 </div>
                 <div class="perfil-container">
                     <div class="perfil-img">
                         <img id="foto" src="/api-entradas/public/uploads/usuarios/foto-perfil-placeholder-_1_.webp"
                             alt="foto de perfil">
-                        <div class="foto-fallback" id="fotoFallback" style="display: none;"><i class="fas fa-user"></i>
+                        <div class="foto-fallback" id="fotoFallback" role="img"
+                            aria-label="Foto de perfil no disponible">
                         </div>
                     </div>
-                    <button type="button" class="editar-foto-btn" onclick="document.getElementById('inputFoto').click()"
-                        title="Editar foto de perfil">
-                        <i class="fas fa-camera"></i> Cambiar foto
-                    </button>
-                    <input type="file" id="inputFoto" accept="image/*" style="display: none;"
-                        onchange="subirFoto(event)">
+
+                    <label for="inputFoto" class="editar-foto-btn">
+                        <i class="fas fa-camera"></i>
+                        <span>Cambiar foto</span>
+                    </label>
+
+                    <input type="file" id="inputFoto" accept="image/*" style="display:none" onchange="subirFoto(event)">
                 </div>
             </div>
 

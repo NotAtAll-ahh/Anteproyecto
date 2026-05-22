@@ -12,11 +12,12 @@
 
 <body>
     <section class="concerts-section content-container">
+        <h1>Resultados de Búsqueda</h1>
         <div class="section-header-line">
-            <h2>Resultados de Búsqueda</h2>
+            <h2>Resultados de Búsqueda para <span id="nombre-busqueda"></span></h2>
             <div class="expand-control">
                 <span>DESPLIEGA LA SECCIÓN</span>
-                <i class="fas fa-chevron-down" onclick="displayEventos()"></i>
+                <i class="fas fa-chevron-down" id="resultados"></i>
             </div>
         </div>
 
@@ -32,13 +33,26 @@
         <div class="footer-content content-container">
             <p>&copy; 2026 Venta de Entradas. Todos los derechos reservados.</p>
             <div class="social-icons">
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com/?locale=es_ES" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://instagram.com" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
             </div>
         </div>
     </footer>
     <script>
+
+        let resultados = document.getElementById("resultados");
+
+        resultados.addEventListener("click", function () {
+            displayEventos();
+            cargarEventos();
+        });
+        resultados.addEventListener("keypress", function (e) {
+            if (e.key === "Enter" || e.key === " ") {
+                displayEventos();
+                cargarEventos();
+            }
+        });
 
         function displayEventos() {
             let control = document.getElementsByClassName("expand-control")[0].getElementsByTagName("i")[0];
@@ -59,6 +73,8 @@
             const params = new URLSearchParams(window.location.search);
 
             const nombre = params.get("nombre") || "";
+
+            document.getElementById("nombre-busqueda").textContent = nombre;
 
             buscarEventos(nombre);
         };
@@ -101,7 +117,7 @@
                         img.src = evento.imagen
                             ? "/api-entradas/public" + evento.imagen
                             : "https://via.placeholder.com/600x300?text=Sin+imagen";
-                        img.alt = "Imagen del evento";
+                        img.alt = "Imagen del evento: " + evento.nombre;
 
                         cardImg.appendChild(img);
 

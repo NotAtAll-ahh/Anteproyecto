@@ -433,3 +433,36 @@ body {
 .footer-links a{
     color: white;
 }
+
+@media screen and (max-width: 768px) {
+
+    .content-container {
+        flex-direction: column;
+        align-items: center;
+        padding: 80px 20px 0;
+    }
+
+    .poster-area {
+        margin-bottom: 30px;
+    }
+
+    .title {
+        font-size: 3.5rem;
+        text-align: center;
+    }
+
+    .categories {
+        text-align: center;
+    }
+
+    .details-grid {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .description-box {
+        max-width: 100%;
+    }
+    
+}

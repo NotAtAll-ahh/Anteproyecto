@@ -18,18 +18,24 @@
     <!--Header-->
     <header class="main-header">
         <div class="header-left">
-            <a href="../../">
+            <a href="./index.html">
                 <div class="logo-box">LOGO</div>
-            </a> 
+            </a>
         </div>
         <div class="header-center">
+            <form action="api-entradas/resultados" method="GET" class="search-form">
             <div class="search-bar">
-                <input type="text" placeholder="BARRA DE BÚSQUEDA">
+                
+                <input type="text" placeholder="BARRA DE BÚSQUEDA" aria-label="Buscar eventos" id="search-input">
+                
                 <i class="fas fa-search"></i>
+                
+                
             </div>
+            </form>
         </div>
         <div class="header-right">
-            <a href="/api-entradas/perfil" class="user-icon-circle">
+            <a href="api-entradas/perfil" class="user-icon-circle" aria-label="Perfil">
                 <i class="fas fa-user"></i>
             </a>
         </div>

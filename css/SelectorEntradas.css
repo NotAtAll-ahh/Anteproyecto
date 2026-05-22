@@ -86,7 +86,7 @@ body {
     align-items: center;
     gap: 0.55rem;
     color: var(--text-soft);
-    font-size: 0.73rem;
+    font-size: 1rem;
     text-transform: uppercase;
     letter-spacing: 0.06em;
 }
@@ -100,11 +100,10 @@ body {
     align-items: center;
     min-height: 42px;
     padding: 0.55rem 0.85rem;
-    border: 1px solid var(--line);
     text-transform: uppercase;
     letter-spacing: 0.04em;
     color: var(--text-soft);
-    font-size: 0.7rem;
+    font-size: 1rem;
 }
 
 .detalles {
@@ -121,7 +120,7 @@ body {
 }
 
 .cuest label {
-    font-size: 0.62rem;
+    font-size: 1rem;
     color: var(--text-soft);
     text-transform: uppercase;
     letter-spacing: 0.06em;
@@ -140,7 +139,7 @@ body {
     align-items: center;
     padding: 0.5rem 0.85rem;
     gap: 0.5rem;
-    font-size: 0.55rem;
+    font-size: 1rem;
     text-transform: uppercase;
     color: var(--text-soft);
     letter-spacing: 0.05em;
@@ -169,7 +168,7 @@ body {
     margin: 0;
     text-transform: uppercase;
     letter-spacing: 0.04em;
-    font-size: 0.73rem;
+    font-size: 1rem;
 }
 
 .ticket-stepper {
@@ -180,7 +179,7 @@ body {
 
 .ticket-stepper > p {
     color: var(--text-soft);
-    font-size: 0.68rem;
+    font-size: 1rem;
 }
 
 .selector-cantidad {
@@ -195,7 +194,7 @@ body {
 }
 
 .selector-cantidad span {
-    font-size: 0.75rem;
+    font-size: 1rem;
     min-width: 1ch;
     text-align: center;
 }
@@ -204,7 +203,7 @@ body {
     background: transparent;
     border: none;
     color: var(--text);
-    font-size: 0.95rem;
+    font-size: 1rem;
     cursor: pointer;
 }
 
@@ -320,7 +319,7 @@ body {
     color: var(--text-soft);
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    font-size: 0.68rem;
+    font-size: 1rem;
     cursor: pointer;
 }
 
@@ -340,7 +339,7 @@ body {
 }
 
 .resumen-head {
-    font-size: 0.62rem;
+    font-size: 1rem;
     color: var(--text-soft);
     text-transform: uppercase;
     letter-spacing: 0.06em;
@@ -348,7 +347,7 @@ body {
 }
 
 .resumen-linea {
-    font-size: 0.73rem;
+    font-size: 1rem;
     border-bottom: 1px solid var(--line-soft);
     padding: 0.45rem 0;
 }
@@ -356,7 +355,7 @@ body {
 .resumen-total {
     padding-top: 0.65rem;
     margin-top: 0.35rem;
-    font-size: 0.8rem;
+    font-size: 1rem;
 }
 
 .resumen-total span:last-child {

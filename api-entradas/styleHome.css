@@ -139,7 +139,7 @@ body {
 
 .banner-comprar-btn {
     display: block;
-    background: #ff3366;
+    background: #033788;
     border: none;
     color: #ffffff;
     padding: 18px 40px;
@@ -152,8 +152,12 @@ body {
 
 .banner-comprar-btn:hover {
     background: #ffffff;
-    color: #ff3366;
+    color: #033788;
     transform: translateY(-3px);
+}
+.banner-comprar-btn a{
+    color: inherit;
+    text-decoration: none;
 }
 
 .carrusel-flecha {
@@ -227,9 +231,9 @@ body {
 }
 
 .main-label {
-    color: #ff3366;
+   color: #ffffff;
     font-weight: bold;
-    font-size: 0.7rem;
+    font-size: 1rem;
     letter-spacing: 2px;
 }
 
@@ -407,8 +411,8 @@ body {
 .crear-evento {
     width: 100%;
     background: transparent;
-    border: 1px dashed #4b6cb7;
-    color: #4b6cb7;
+    border: 1px dashed #ffffff;
+    color: #ffffff;
     padding: 15px;
     margin-top: 20px;
     border-radius: 8px;

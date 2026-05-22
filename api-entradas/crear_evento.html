@@ -93,8 +93,8 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
-        h2,
-        h3 {
+        h1,
+        h2,h3 {
             font-family: "Kabel";
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -211,18 +211,24 @@
 
     <header class="main-header">
         <div class="header-left">
-            <a href="/">
+            <a href="./index.html">
                 <div class="logo-box">LOGO</div>
             </a>
         </div>
         <div class="header-center">
+            <form action="api-entradas/resultados" method="GET" class="search-form">
             <div class="search-bar">
-                <input type="text" placeholder="BARRA DE BÚSQUEDA" aria-label="Buscar eventos">
+                
+                <input type="text" placeholder="BARRA DE BÚSQUEDA" aria-label="Buscar eventos" id="search-input">
+                
                 <i class="fas fa-search"></i>
+                
+                
             </div>
+            </form>
         </div>
         <div class="header-right">
-            <a href="/api-entradas/perfil" class="user-icon-circle" aria-label="Perfil">
+            <a href="api-entradas/perfil" class="user-icon-circle" aria-label="Perfil">
                 <i class="fas fa-user"></i>
             </a>
         </div>
@@ -230,31 +236,31 @@
 
     <main>
         <div class="contenedor">
-            <h2><i class="fas fa-plus-circle"></i> Crear Evento</h2>
+            <h1><i class="fas fa-plus-circle"></i> Crear Evento</h1>
 
             <p id="mensajeRol" style="color:#ff3366;"></p>
 
             <div id="soloAdmin">
-                <label><i class="fas fa-tag"></i> Nombre del evento</label>
+                <label for="nombre"><i class="fas fa-tag"></i> Nombre del evento</label>
                 <input type="text" id="nombre" placeholder="Ej: Concierto de Rock" aria-label="Nombre del evento">
 
-                <label><i class="fas fa-align-left"></i> Descripción</label>
+                <label for="descripcion"><i class="fas fa-align-left"></i> Descripción</label>
                 <textarea id="descripcion" placeholder="Escribe los detalles del evento..."
                     aria-label="Descripción del evento"></textarea>
 
-                <label><i class="fas fa-map-marker-alt"></i> Ubicación</label>
+                <label for="ubicacion"><i class="fas fa-map-marker-alt"></i> Ubicación</label>
                 <input type="text" id="ubicacion" placeholder="Estadio o Recinto" aria-label="Ubicación del evento">
 
-                <label><i class="fas fa-calendar-alt"></i> Fecha</label>
+                <label for="fecha"><i class="fas fa-calendar-alt"></i> Fecha</label>
                 <input type="date" id="fecha" aria-label="Fecha del evento">
 
-                <label><i class="fas fa-ticket-alt"></i> Entradas totales (máximo 155)</label>
+                <label for="entradas_totales"><i class="fas fa-ticket-alt"></i> Entradas totales (máximo 155)</label>
                 <input type="number" id="entradas_totales" min="1" max="155" required placeholder="0"
                     aria-label="Entradas totales">
 
                 <hr>
 
-                <h3><i class="fas fa-image"></i> Imagen del evento</h3>
+                <h2><i class="fas fa-image"></i> Imagen del evento</h2>
                 <input type="file" id="imagen" aria-label="Seleccionar imagen del evento">
 
                 <button onclick="crearEvento()">Crear evento</button>
