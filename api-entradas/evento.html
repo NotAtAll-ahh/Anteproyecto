@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles del Evento - <span id="event-name">Nombre del Evento</span></title>
+    <link rel="stylesheet" href="styleHome.css">
+    <link rel="stylesheet" href="styleEvento.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="main-header">
+        <div class="header-left">
+            <a href="./index.html">
+                <div class="logo-box">LOGO</div>
+            </a>
+        </div>
+        <div class="header-center">
+            <div class="search-bar">
+                <input type="text" placeholder="BARRA DE BÚSQUEDA">
+                <i class="fas fa-search"></i>
+            </div>
+        </div>
+        <div class="header-right">
+            <a href="#" class="user-icon-circle"><i class="fas fa-user"></i></a>
+        </div>
+    </header>
+
+    <!--  Banner -->
+    <section class="event-hero"
+        style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1350&q=80');">
+        <div class="hero-content">
+            <div class="play-teaser">
+                <i class="fas fa-play-circle"></i>
+                <span>REPRODUCIR TEASER</span>
+            </div>
+
+            <div class="hero-bottom">
+                <h1 class="hero-event-name">NOMBRE DEL EVENTO</h1>
+                <div class="hero-actions">
+                    <div class="availability-badge">
+                        <span class="dot green"></span> Disponibilidad
+                    </div>
+                    <button class="buy-tickets-top">Comprar Tickets</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main class="content-container main-grid">
+        <!-- Columna Izquierda: Poster y Acciones rápidas -->
+        <aside class="event-sidebar">
+            <div class="event-poster">FOTO EVENTO</div>
+            <div class="sidebar-buttons">
+                <button class="btn-buy-main">Comprar Tickets</button>
+            </div>
+        </aside>
+
+        <!-- Columna Derecha: Información -->
+        <section class="event-info">
+            <div class="title-row">
+                <h2>NOMBRE DEL EVENTO</h2>
+                <span class="age-tag">+18</span>
+            </div>
+            <p class="short-desc">Breve descripción del evento que capte la atención del usuario de forma inmediata.</p>
+
+            <!-- Stats Bar -->
+            <div class="stats-bar">
+                <div class="stat"><i class="fas fa-eye"></i> Aforo</div>
+                <div class="stat"><i class="fas fa-star"></i> Rating</div>
+                <div class="stat"><i class="fas fa-clock"></i> Duración</div>
+                <div class="stat"><i class="fas fa-closed-captioning"></i> Subtítulos</i></div>
+            </div>
+
+            <div class="details-host-grid">
+                <div class="details-box">
+                    <h3>DETALLES</h3>
+                    <div class="info-content">
+                        Aquí habrá detalles importantes del evento y complementos.
+                    </div>
+                </div>
+                <div class="host-box">
+                    <h3>HOST</h3>
+                    <ul class="host-list">
+                        <li>
+                            <div class="avatar"></div> Nombre
+                        </li>
+                       
+                        <li class="see-more"><i class="fas fa-plus-circle"></i> ver más</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Descripción larga -->
+            <div class="full-description">
+                <h3>DESCRIPCIÓN DEL EVENTO</h3>
+                <div class="desc-content">
+                    Texto más largo con detalles e información importante sobre el evento, condiciones de entrada y lo
+                    que el usuario necesita saber.
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Eventos Similares -->
+
+    <section class="content-container">
+        <div class="section-header-line">
+            <h2>EVENTOS SIMILARES</h2>
+            <div class="expand-control">
+                <span></span>
+                <i class="fas fa-chevron-down" id="similares" aria-label="Desplegar Eventos Similares" tabindex="0"></i>
+            </div>
+        </div>
+
+        <div class="lista-eventos" id="conciertos-destacados">
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="event-footer">
+        <div class="footer-info content-container">
+            <div class="info-item">
+                <span>CORREO</span>
+                <p>info@logo.com</p>
+            </div>
+            <div class="info-item">
+                <span>NUMERO DE TELEFONO</span>
+                <p>+34 640 89 29 46</p>
+            </div>
+            <div class="info-item">
+                <span>UBICACION</span>
+                <p>Calle Ejemplo, 23 28939 Madrid</p>
+            </div>
+        </div>
+
+        <div class="footer-links">
+            <a href="#">ENLACE</a>
+            <a href="#">ENLACE</a>
+            <a href="#">ENLACE</a>
+            <a href="#">ENLACE</a>
+        </div>
+
+        <div class="footer-social">
+            <p>Síguenos</p>
+            <div class="social-icons-footer">
+                <i class="fab fa-facebook-f"></i>
+                <i class="fab fa-whatsapp"></i>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© DESIGNED BY <strong>DAW</strong> 2025 . Todos los derechos reservados</p>
+        </div>
+    </footer>
+
+    <script>
+        //Obtener Evento desde la url
+        function obtenerIdEventoDesdeURL() {
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get("evento_id");
+
+            // Validación básica
+            if (!id || isNaN(id)) {
+                console.error("No se encontró un evento_id válido en la URL.");
+                return null;
+            }
+
+            return id;
+        }
+        //cargar detalles del evento
+        function cargarDetallesEvento(id) {
+            fetch(`http://localhost/api-entradas/public/api/eventos/${id}`)
+                .then(res => res.json())
+                .then(data => {
+                    if (!data || !data.data) {
+                        console.error("No se encontraron datos del evento.");
+                        return;
+                    }
+
+                    const evento = data.data;
+                    pintarDetallesEnPantalla(evento);
+                })
+                .catch(error => {
+                    console.error("Error al cargar los detalles del evento:", error);
+                });
+        }
+        //rellenar la página con los detalles del evento
+        function pintarDetallesEnPantalla(evento) {
+
+            // 1. Banner principal (nombre + fondo)
+            let heroName = document.getElementsByClassName("hero-event-name")[0];
+            heroName.textContent = evento.nombre;
+
+            let banner = document.getElementsByClassName("event-hero")[0];
+            if (evento.imagen) {
+                banner.style.backgroundImage =
+                    "linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.8)), url('" + evento.imagen + "')";
+            }
+
+            // 2. Título principal dentro del contenido
+            let titleRow = document.getElementsByClassName("title-row")[0]
+                .getElementsByTagName("h2")[0];
+            titleRow.textContent = evento.nombre;
+
+            // 3. Descripción corta
+            /*let shortDesc = document.getElementsByClassName("short-desc")[0];
+            shortDesc.textContent = evento.descripcion_corta || "Sin descripción disponible.";*/
+
+            // 4. Descripción larga
+            let longDesc = document.getElementsByClassName("desc-content")[0];
+            longDesc.textContent = evento.descripcion || "Sin información adicional.";
+
+            // 5. Poster lateral
+            let poster = document.getElementsByClassName("event-poster")[0];
+            if (evento.imagen) {
+                poster.style.backgroundImage = "url('" + evento.imagen + "')";
+                poster.style.backgroundSize = "cover";
+                poster.style.backgroundPosition = "center";
+            } else {
+                poster.textContent = "Sin imagen";
+            }
+
+            // 6. Aforo (stat bar)
+            let stats = document.getElementsByClassName("stats-bar")[0]
+                .getElementsByClassName("stat");
+
+            // Aforo
+            stats[0].innerHTML = '<i class="fas fa-eye"></i> Aforo: ' + evento.disponibilidad;
+
+            // Duración (si existe)
+            stats[2].innerHTML = '<i class="fas fa-clock"></i> Duración: ' + (evento.duracion || "2 horas");
+
+
+            // 7. Disponibilidad
+            actualizarDisponibilidad(evento);
+
+            // 8. Botones de compra
+            configurarBotonesComprar(evento.id);
+        }
+
+        //actualizar colores disponibilidad
+        function actualizarDisponibilidad(evento) {
+            const badge = document.getElementsByClassName("availability-badge")[0];
+            const dot = badge.getElementsByClassName("dot")[0];
+
+            const disponibles = parseInt(evento.entradas_disponibles);
+            const totales = parseInt(evento.entradas_totales);
+
+            // Si faltan datos, mostramos estado desconocido
+            if (isNaN(disponibles) || isNaN(totales)) {
+                dot.style.backgroundColor = "red";
+                badge.textContent = "Sin datos";
+                badge.insertBefore(dot, badge.firstChild);
+                return;
+            }
+
+            const porcentaje = (disponibles / totales) * 100;
+
+            // Reset visual
+            dot.style.backgroundColor = "";
+
+            // Lógica de disponibilidad
+            if (disponibles <= 0) {
+                dot.style.backgroundColor = "red";
+                badge.textContent = "Agotado";
+            }
+            else if (porcentaje < 30) {
+                dot.style.backgroundColor = "yellow";
+                badge.textContent = "Últimas entradas";
+            }
+            else {
+                dot.style.backgroundColor = "green";
+                badge.textContent = "Disponible";
+            }
+
+            // Volvemos a insertar el puntito al inicio del texto
+            badge.insertBefore(dot, badge.firstChild);
+        }
+
+        //botones comprar
+        function configurarBotonesComprar(id) {
+            // Botón del banner superior
+            const btnTop = document.getElementsByClassName("buy-tickets-top")[0];
+            if (btnTop) {
+                btnTop.onclick = function () {
+                    window.location.href = "reservar.html?evento_id=" + encodeURIComponent(id);
+                };
+            }
+
+            // Botón del sidebar (columna izquierda)
+            const btnSidebar = document.getElementsByClassName("btn-buy-main")[0];
+            if (btnSidebar) {
+                btnSidebar.onclick = function () {
+                    window.location.href = "reservar.html?evento_id=" + encodeURIComponent(id);
+                };
+            }
+        }
+
+        //cargar eventos similares
+
+        let conciertos = document.getElementById("conciertos-destacados");
+        let controlTodos = document.getElementById("similares");
+
+        // Función para mostrar/ocultar y rotar
+        function displayEventos() {
+            if (conciertos.style.display === "none" || conciertos.style.display === "") {
+                conciertos.style.display = "flex";
+                controlTodos.style.transform = "rotate(0deg)";
+            } else {
+                conciertos.style.display = "none";
+                controlTodos.style.transform = "rotate(180deg)";
+            }
+        }
+
+        // Estado inicial
+        window.onload = function () {
+            conciertos.style.display = "none";
+            controlTodos.style.transform = "rotate(180deg)";
+        };
+
+        // Eventos de click y teclado
+        controlTodos.addEventListener("click", function () {
+            displayEventos();
+        });
+
+        controlTodos.addEventListener("keypress", function (e) {
+            if (e.key === "Enter" || e.key === " ") {
+                displayEventos();
+            }
+        });
+        function cargarEventosEnLista(url, listaId) {
+            fetch(url)
+                .then(res => res.json())
+                .then(data => {
+                    const lista = document.getElementById(listaId);
+                    lista.innerHTML = "";
+
+
+                    data.data.forEach(evento => {
+                        const div = document.createElement("div");
+                        div.className = "event-card";
+                        div.setAttribute("aria-label", "Evento: " + evento.nombre + ", Fecha: " + evento.fecha);
+
+                        const cardImg = document.createElement("div");
+                        cardImg.className = "card-img";
+                        const img = document.createElement("img");
+                        img.src = evento.imagen
+                            ? "http://localhost/api-entradas/public" + evento.imagen
+                            : "https://via.placeholder.com/600x300?text=Sin+imagen";
+                        img.alt = "Imagen del evento: " + evento.nombre;
+                        cardImg.appendChild(img);
+
+                        const titulo = document.createElement("h3");
+                        titulo.textContent = evento.nombre;
+
+                        const fecha = document.createElement("p");
+                        fecha.textContent = "Fecha: " + evento.fecha;
+
+                        const contenedorBotones = document.createElement("div");
+                        contenedorBotones.className = "botones-evento";
+
+                        const btnReservar = document.createElement("button");
+                        btnReservar.textContent = "Reservar";
+                        btnReservar.onclick = () => reservar(evento.id);
+                        btnReservar.className = "reservar";
+                        contenedorBotones.appendChild(btnReservar);
+
+                        div.appendChild(cardImg);
+                        div.appendChild(titulo);
+                        div.appendChild(fecha);
+                        lista.appendChild(div);
+                    });
+                })
+                .catch(err => console.error("Error cargando eventos de " + listaId + ":", err));
+        }
+
+        function cargarEventos() { cargarEventosEnLista("/api-entradas/public/api/eventos", "conciertos"); }
+
+       
+
+    </script>
+
+</body>
+
+</html>
