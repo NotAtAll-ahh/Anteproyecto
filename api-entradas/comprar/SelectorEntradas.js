@@ -217,9 +217,8 @@ window.addEventListener('DOMContentLoaded', () => {
                 destino.set('evento_id', eventoId);
             }
 
-            destino.set('entradas', String(totalEntradas));
-
-            window.location.assign('./DatosFacturacion.html?' + destino.toString());
+            sessionStorage.setItem('compraEntradasSeleccionadas', String(totalEntradas));
+            window.location.assign('/api-entradas/comprar/DatosFacturacion.html?' + destino.toString());
         });
     }
 

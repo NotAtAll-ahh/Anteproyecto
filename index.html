@@ -100,7 +100,7 @@
 
             </div>
 
-            <div class="solo-admin">
+            <div class="solo-admin" id="crear-evento-container" style="display: none;">
                 <button type="button" id="crear-evento" class="crear-evento"
                     onclick="window.location.href = 'api-entradas/crear_evento.html'">Crear Evento</button>
             </div>
@@ -212,24 +212,32 @@
         let usuarioRol = null;
         let usuarioId = null;
         let conciertos = document.getElementById("conciertos");
+        let conciertosDestacados = document.getElementById("conciertos-destacados");
+        let cineEventos = document.getElementById("cine-eventos");
+        let eventosPopulares = document.getElementById("eventos-populares");
+        let crearEventoContainer = document.getElementById("crear-evento-container");
         let controlTodos = document.getElementsByClassName("expand-control")[0].getElementsByTagName("i")[0];
         let controlDestacados = document.getElementsByClassName("expand-control")[1].getElementsByTagName("i")[0];
         let controlCine = document.getElementsByClassName("expand-control")[2].getElementsByTagName("i")[0];
         let controlPopulares = document.getElementsByClassName("expand-control")[3].getElementsByTagName("i")[0];
 
+        function actualizarAccionesAdmin() {
+            crearEventoContainer.style.display = usuarioRol === "admin" ? "block" : "none";
+        }
 
-        window.onload = function () {
-            conciertos.style.display = "none"; // Oculta la sección al cargar la página
-            conciertosDestacados.style.display = "none";
-            cineEventos.style.display = "none";
-            eventosPopulares.style.display = "none";
-            controlTodos.style.transform = "rotate(180deg)"; // Rota el icono al cargar la página
-            controlDestacados.style.transform = "rotate(180deg)";
-            controlCine.style.transform = "rotate(180deg)";
-            controlPopulares.style.transform = "rotate(180deg)";
+        function abrirTodasLasCategorias() {
+            conciertos.style.display = "flex";
+            conciertosDestacados.style.display = "flex";
+            cineEventos.style.display = "flex";
+            eventosPopulares.style.display = "flex";
+            controlTodos.style.transform = "rotate(0deg)";
+            controlDestacados.style.transform = "rotate(0deg)";
+            controlCine.style.transform = "rotate(0deg)";
+            controlPopulares.style.transform = "rotate(0deg)";
+        }
 
-             // Comprueba el rol UNA sola vez
-             fetch("/api-entradas/public/api/sesion", {
+        function cargarSesion() {
+            return fetch("/api-entradas/public/api/sesion", {
                 method: "GET",
                 credentials: "include"
             })
@@ -238,9 +246,26 @@
                     if (data.logueado) {
                         usuarioRol = data.rol;
                         usuarioId = data.usuario_id;
+                    } else {
+                        usuarioRol = null;
+                        usuarioId = null;
                     }
+
+                    actualizarAccionesAdmin();
+                })
+                .catch(() => {
+                    usuarioRol = null;
+                    usuarioId = null;
+                    actualizarAccionesAdmin();
                 });
-        };
+        }
+
+        function cargarTodasLasCategorias() {
+            cargarEventos();
+            cargarConciertosDestacados();
+            cargarCine();
+            cargarEventosPopulares();
+        }
         // Función para mostrar u ocultar la sección de conciertos
         function displayEventos() {
 
@@ -320,26 +345,13 @@
               window.location.href = "/api-entradas/comprar/SelectorEntradas.html?evento_id=" + encodeURIComponent(id);
         }
 
-
         //cargar todos los eventos
 
-        // Una sola llamada a sesión al cargar la página
         window.onload = function () {
-            conciertos.style.display = "none";
-            controlTodos.style.transform = "rotate(180deg)";
-
-            // Comprueba el rol UNA sola vez
-            fetch("/api-entradas/public/api/sesion", {
-                method: "GET",
-                credentials: "include"
-            })
-                .then(res => res.json())
-                .then(data => {
-                    if (data.logueado) {
-                        usuarioRol = data.rol;
-                        usuarioId = data.usuario_id;
-                    }
-                });
+            abrirTodasLasCategorias();
+            cargarSesion().then(() => {
+                cargarTodasLasCategorias();
+            });
         };
 
         // Función genérica para renderizar eventos en cualquier lista

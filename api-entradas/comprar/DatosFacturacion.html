@@ -16,7 +16,7 @@
     <!--Header-->
     <header class="main-header">
         <div class="header-left">
-            <a href="../../">
+            <a href="/index.html">
                 <div class="logo-box">LOGO</div>
             </a>
         </div>
@@ -27,7 +27,7 @@
             </div>
         </div>
         <div class="header-right">
-            <a href="/api-entradas/perfil" class="user-icon-circle" aria-label="Perfil">
+            <a href="/api-entradas/perfil.html" class="user-icon-circle" aria-label="Perfil">
                 <i class="fas fa-user"></i>
             </a>
         </div>
@@ -225,7 +225,8 @@
 
             const params = new URLSearchParams(window.location.search);
             const eventoId = params.get("evento_id");
-            const entradas = parseInt(params.get("entradas") || "0", 10) || 0;
+            const entradasGuardadas = sessionStorage.getItem("compraEntradasSeleccionadas");
+            const entradas = parseInt(entradasGuardadas || params.get("entradas") || "0", 10) || 0;
 
             function formatEuro(value) {
                 return value.toFixed(2) + " €";
@@ -293,6 +294,7 @@
                             }
 
                             alert("Reserva realizada correctamente.");
+                            sessionStorage.removeItem("compraEntradasSeleccionadas");
                             window.location.href = "/api-entradas/perfil.html";
                         })
                         .catch(error => {

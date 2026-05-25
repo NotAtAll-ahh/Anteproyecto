@@ -17,6 +17,12 @@ class Evento {
     // OBTENER EVENTOS POR CATEGORÍA
     public static function getByCategoria($pdo, $categoria)
     {
+        $availableColumns = array_flip(self::getExistingColumns($pdo));
+
+        if (!isset($availableColumns['categoria'])) {
+            return [];
+        }
+
         $stmt = $pdo->prepare("SELECT * FROM eventos WHERE categoria = ?");
         $stmt->execute([$categoria]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
