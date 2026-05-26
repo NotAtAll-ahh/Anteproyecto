@@ -44,6 +44,7 @@ class Evento {
 // CREAR NUEVO EVENTO
 public static function create($pdo, $data)
 {
+    // Verificar que la tabla eventos tiene las columnas necesarias para crear el registro
     $availableColumns = array_flip(self::getExistingColumns($pdo));
 
     $insertData = [
@@ -56,6 +57,7 @@ public static function create($pdo, $data)
         'categoria' => $data['categoria'] ?? 'concierto'
     ];
 
+    // Filtrar solo las columnas que existen en la tabla eventos
     $columns = [];
     $values = [];
     $placeholders = [];
@@ -65,6 +67,7 @@ public static function create($pdo, $data)
             continue;
         }
 
+    // Solo agregar columnas que existen en la tabla eventos
         $columns[] = $column;
         $values[] = $value;
         $placeholders[] = '?';
@@ -74,6 +77,7 @@ public static function create($pdo, $data)
         throw new RuntimeException('La tabla eventos no tiene columnas compatibles para crear registros');
     }
 
+    // Construir la consulta SQL dinámicamente basada en las columnas disponibles
     $sql = sprintf(
         'INSERT INTO eventos (%s) VALUES (%s)',
         implode(', ', $columns),
@@ -95,7 +99,8 @@ public static function create($pdo, $data)
             'ubicacion' => $data['ubicacion'],
             'fecha' => $data['fecha'],
             'entradas_totales' => $data['entradas_totales'],
-            'entradas_disponibles' => $data['entradas_disponibles']
+            'entradas_disponibles' => $data['entradas_disponibles'],
+            'categoria' => $data['categoria']
         ];
 
         $assignments = [];
