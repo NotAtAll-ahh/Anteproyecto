@@ -19,20 +19,26 @@
 
     <header class="main-header">
         <div class="header-left">
-            <a href="../">
-                <div class="logo-box">LOGO</div>
+            <a href="/Anteproyecto3" class="logo-link" aria-label="Página principal">
+                <div class="logo-box">DVD</div>
             </a>
         </div>
         <div class="header-center">
-            <div class="search-bar">
-                <input type="text" placeholder="BARRA DE BÚSQUEDA" aria-label="Barra de Búsqueda">
-                <i class="fas fa-search"></i>
-            </div>
+            <form action="/Anteproyecto3/api-entradas/resultados" method="GET" class="search-form">
+                <div class="search-bar">
+
+                    <input type="text" placeholder="BARRA DE BÚSQUEDA" aria-label="Buscar eventos" id="search-input">
+
+                    <i class="fas fa-search"></i>
+
+
+                </div>
+            </form>
         </div>
         <div class="header-right">
-            <div class="user-icon-circle">
-                <i class="fas fa-user" aria-label="Perfil"></i>
-            </div>
+            <a href="/Anteproyecto3/api-entradas/perfil" class="user-icon-circle" aria-label="Perfil">
+                <i class="fas fa-user"></i>
+            </a>
         </div>
     </header>
 
@@ -57,7 +63,7 @@
                 </div>
                 <div class="perfil-container">
                     <div class="perfil-img">
-                        <img id="foto" src="/api-entradas/public/uploads/usuarios/foto-perfil-placeholder-_1_.webp"
+                        <img id="foto" src="/Anteproyecto3/api-entradas/public/uploads/usuarios/foto-perfil-placeholder-_1_.webp"
                             alt="foto de perfil">
                         <div class="foto-fallback" id="fotoFallback" role="img"
                             aria-label="Foto de perfil no disponible">
@@ -101,16 +107,43 @@
             </div>
         </section>
     </main>
-    <footer>
-        <div class="footer-content content-container">
-            <p>&copy; 2026 Venta de Entradas. Todos los derechos reservados.</p>
-            <div class="social-icons">
-                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            </div>
+    <footer class="event-footer">
+    <div class="footer-info content-container">
+        <div class="info-item">
+            <span>CORREO</span>
+            <p>contacto@dvdtickets.com</p>
         </div>
-    </footer>
+        <div class="info-item">
+            <span>NÚMERO DE TELÉFONO</span>
+            <p>+34 912 45 78 90</p>
+        </div>
+        <div class="info-item">
+            <span>UBICACIÓN</span>
+            <p>Hemmings Avenue, 12 · 28045 Madrid</p>
+        </div>
+    </div>
+
+    <div class="footer-links">
+        <a href="#">Términos y Condiciones</a>
+        <a href="#">Política de Privacidad</a>
+        <a href="#">Atención al Cliente</a>
+        <a href="#">Preguntas Frecuentes</a>
+    </div>
+
+    <div class="footer-social">
+        <p>Síguenos</p>
+        <div class="social-icons-footer">
+            <i class="fab fa-facebook-f"></i>
+            <i class="fab fa-instagram"></i>
+            <i class="fab fa-whatsapp"></i>
+            <i class="fab fa-twitter"></i>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2025 DVD TICKETS · Todos los derechos reservados</p>
+    </div>
+</footer>
 
 
     <script>
@@ -120,7 +153,7 @@
         let emailOriginal = "";
 
         // 1. Comprobar si hay sesión activa
-        fetch("/api-entradas/public/api/sesion", {
+        fetch("/Anteproyecto3/api-entradas/public/api/sesion", {
             method: "GET",
             credentials: "include"
         })
@@ -138,7 +171,7 @@
 
         // 2. Cargar datos del usuario
         function cargarPerfil() {
-            fetch(`/api-entradas/public/api/usuarios/${usuarioId}`, {
+            fetch(`/Anteproyecto3/api-entradas/public/api/usuarios/${usuarioId}`, {
                 method: "GET",
                 credentials: "include"
             })
@@ -157,7 +190,7 @@
                     imgElement.alt = usuario.nombre ? `Foto de perfil de ${usuario.nombre}` : "Foto de perfil";
                     const fallbackElement = document.getElementById("fotoFallback");
                     if (usuario.foto_perfil) {
-                        imgElement.src = "/api-entradas/public" + usuario.foto_perfil;
+                        imgElement.src = "/Anteproyecto3/api-entradas/public" + usuario.foto_perfil;
                         imgElement.style.display = "block";
                         fallbackElement.style.display = "none";
                     } else {
@@ -219,7 +252,7 @@
 
         function crearHtmlDetalleEvento(evento, reserva) {
             const imagenEvento = evento.imagen
-                ? `/api-entradas/public${evento.imagen}`
+                ? `/Anteproyecto3/api-entradas/public${evento.imagen}`
                 : "https://via.placeholder.com/140x140?text=Evento";
 
             return `
@@ -267,12 +300,12 @@
             reservas.forEach((reserva) => {
                 const ticketImgDiv = document.getElementById(`ticket-img-${reserva.id}`);
                 if (ticketImgDiv && reserva.evento_id) {
-                    fetch(`/api-entradas/public/api/eventos/${encodeURIComponent(reserva.evento_id)}`)
+                    fetch(`/Anteproyecto3/api-entradas/public/api/eventos/${encodeURIComponent(reserva.evento_id)}`)
                         .then(res => res.json())
                         .then(data => {
                             const evento = data.data ?? data;
                             if (evento && evento.imagen) {
-                                ticketImgDiv.innerHTML = `<img src="/api-entradas/public${escaparHtml(evento.imagen)}" alt="${escaparHtml(evento.nombre || "Evento")}" style="width:100%; height:100%; object-fit:cover;">`;
+                                ticketImgDiv.innerHTML = `<img src="/Anteproyecto3/api-entradas/public${escaparHtml(evento.imagen)}" alt="${escaparHtml(evento.nombre || "Evento")}" style="width:100%; height:100%; object-fit:cover;">`;
                             }
                         })
                         .catch(() => { });
@@ -288,7 +321,7 @@
             const ticketsContainer = document.getElementById("ticketsContainer");
             ticketsContainer.innerHTML = '<div class="ticket-empty">Cargando tus entradas...</div>';
 
-            fetch("/api-entradas/public/api/mis-reservas", {
+            fetch("/Anteproyecto3/api-entradas/public/api/mis-reservas", {
                 method: "GET",
                 credentials: "include"
             })
@@ -346,7 +379,7 @@
                 return;
             }
 
-            fetch(`/api-entradas/public/api/eventos/${reserva.evento_id}`, {
+            fetch(`/Anteproyecto3/api-entradas/public/api/eventos/${reserva.evento_id}`, {
                 method: "GET",
                 credentials: "include"
             })
@@ -420,7 +453,7 @@
             const formData = new FormData();
             formData.append("imagen", archivo);
 
-            fetch(`/api-entradas/public/api/usuarios/${usuarioId}/foto`, {
+            fetch(`/Anteproyecto3/api-entradas/public/api/usuarios/${usuarioId}/foto`, {
                 method: "POST",
                 credentials: "include",
                 body: formData
@@ -441,7 +474,7 @@
 
         // 4. Logout
         function logout() {
-            fetch("/api-entradas/public/api/logout", {
+            fetch("/Anteproyecto3/api-entradas/public/api/logout", {
                 method: "POST",
                 credentials: "include"
             })
@@ -461,7 +494,7 @@
             if (nombre.trim() !== "") data.nombre = nombre;
             if (email.trim() !== "") data.email = email;
 
-            fetch(`/api-entradas/public/api/usuarios/${usuarioId}`, {
+            fetch(`/Anteproyecto3/api-entradas/public/api/usuarios/${usuarioId}`, {
                 method: "PUT",
                 credentials: "include",
                 headers: {

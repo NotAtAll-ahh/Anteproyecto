@@ -18,24 +18,24 @@
     <!--Header-->
     <header class="main-header">
         <div class="header-left">
-            <a href="/index.html">
-                <div class="logo-box">LOGO</div>
+            <a href="/Anteproyecto3" class="logo-link" aria-label="Página principal">
+                <div class="logo-box">DVD</div>
             </a>
         </div>
         <div class="header-center">
-            <form action="/api-entradas/resultados.html" method="GET" class="search-form">
-            <div class="search-bar">
-                
-                <input type="text" placeholder="BARRA DE BÚSQUEDA" aria-label="Buscar eventos" id="search-input">
-                
-                <i class="fas fa-search"></i>
-                
-                
-            </div>
+            <form action="/Anteproyecto3/api-entradas/resultados" method="GET" class="search-form">
+                <div class="search-bar">
+
+                    <input type="text" placeholder="BARRA DE BÚSQUEDA" aria-label="Buscar eventos" id="search-input">
+
+                    <i class="fas fa-search"></i>
+
+
+                </div>
             </form>
         </div>
         <div class="header-right">
-            <a href="/api-entradas/perfil.html" class="user-icon-circle" aria-label="Perfil">
+            <a href="/Anteproyecto3/api-entradas/perfil" class="user-icon-circle" aria-label="Perfil">
                 <i class="fas fa-user"></i>
             </a>
         </div>
@@ -72,9 +72,9 @@
                 <div class="cuest">
                     <label for="hora">Hora</label>
                     <select id="hora" name="hora">
-                        <option value="21">21:00</option>
-                        <option value="22">22:00</option>
-                        <option value="23">23:00</option>
+                        <option value="general">21:00</option>
+                        <option value="vip">22:00</option>
+                        <option value="balcon">23:00</option>
                     </select>
                 </div>
                 <div class="tipos">
@@ -157,6 +157,43 @@
         </section>
 
     </main>
+    <footer class="event-footer">
+    <div class="footer-info content-container">
+        <div class="info-item">
+            <span>CORREO</span>
+            <p>contacto@dvdtickets.com</p>
+        </div>
+        <div class="info-item">
+            <span>NÚMERO DE TELÉFONO</span>
+            <p>+34 912 45 78 90</p>
+        </div>
+        <div class="info-item">
+            <span>UBICACIÓN</span>
+            <p>Hemmings Avenue, 12 · 28045 Madrid</p>
+        </div>
+    </div>
+
+    <div class="footer-links">
+        <a href="#">Términos y Condiciones</a>
+        <a href="#">Política de Privacidad</a>
+        <a href="#">Atención al Cliente</a>
+        <a href="#">Preguntas Frecuentes</a>
+    </div>
+
+    <div class="footer-social">
+        <p>Síguenos</p>
+        <div class="social-icons-footer">
+            <i class="fab fa-facebook-f"></i>
+            <i class="fab fa-instagram"></i>
+            <i class="fab fa-whatsapp"></i>
+            <i class="fab fa-twitter"></i>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2025 DVD TICKETS · Todos los derechos reservados</p>
+    </div>
+</footer>
 
 </body>
 </html>

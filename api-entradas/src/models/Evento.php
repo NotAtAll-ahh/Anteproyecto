@@ -86,6 +86,7 @@ public static function create($pdo, $data)
     // ACTUALIZAR EVENTO
     public static function update($pdo, $id, $data)
     {
+        // Verificar que la tabla eventos tiene las columnas necesarias para actualizar el registro
         $availableColumns = array_flip(self::getExistingColumns($pdo));
 
         $updateData = [
