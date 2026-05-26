@@ -201,6 +201,10 @@
                 cargarCine();
             }
         });
+        populares.addEventListener("click", function () {
+            displayEventosPopulares();
+            cargarEventosPopulares();
+        });
         populares.addEventListener("keypress", function (e) {
             if (e.key === "Enter" || e.key === " ") {
                 displayEventosPopulares();

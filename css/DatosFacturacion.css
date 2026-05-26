@@ -219,11 +219,12 @@ main {
 }
 
 .payment-option {
+    display: block;
     position: relative;
     cursor: pointer;
 }
 
-.payment-option:hover:checked .option-content {
+.payment-option:hover .option-content {
     border-color: #5b4d9e;
     background: #151a33;
 }

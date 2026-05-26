@@ -36,7 +36,8 @@
     <main id="main-content">
         <section class="billing-section">
             <h1>DATOS DE FACTURACIÓN</h1>
-            
+
+            <form id="billingForm" novalidate>
             <div class="billing-container">
                 <div class="billing-left-column">
                     <!-- Sección Izquierda: Datos del Comprador -->
@@ -45,27 +46,27 @@
                         
                         <div class="form-group">
                             <label for="nombre">Nombre</label>
-                            <input type="text" id="nombre" name="nombre" placeholder="Nombre">
+                            <input type="text" id="nombre" name="nombre" placeholder="Nombre" required>
                         </div>
 
                         <div class="form-group">
                             <label for="apellidos">Apellidos</label>
-                            <input type="text" id="apellidos" name="apellidos" placeholder="Primer y Segundo Apellido">
+                            <input type="text" id="apellidos" name="apellidos" placeholder="Primer y Segundo Apellido" required>
                         </div>
 
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" id="email" name="email" placeholder="danieltatagata@gmail.com">
+                            <input type="email" id="email" name="email" placeholder="danieltatagata@gmail.com" required>
                         </div>
 
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="descuento">Descuento</label>
-                                <input type="text" id="descuento" name="descuento" placeholder="0000 0000 0000 XXXX">
+                                <input type="text" id="descuento" name="descuento" placeholder="0000 0000 0000 XXXX" required>
                             </div>
                             <div class="form-group">
                                 <label for="telefono">Número de Teléfono</label>
-                                <input type="tel" id="telefono" name="telefono" placeholder="+34">
+                                <input type="tel" id="telefono" name="telefono" placeholder="+34" required>
                             </div>
                         </div>
                     </div>
@@ -75,34 +76,27 @@
                         <legend></legend><h2>MÉTODO DE PAGO</h2></legend>
                         
                         <section class="payment-options">
-                            <div class="option-content">
                             <label class="payment-option">
                                 <input type="radio" name="payment" value="card" checked>
-                                
+                                <div class="option-content">
                                     <i class="fas fa-credit-card"></i>
-                                    <br>
                                     <span>Tarjeta</span>
-                                
+                                </div>
                             </label>
-                            </div>
-                            <div class="option-content">
                             <label class="payment-option">
                                 <input type="radio" name="payment" value="wallet">
-                                
+                                <div class="option-content">
                                     <i class="fas fa-wallet"></i>
-                                    <br>
                                     <span>Wallet</span>
-                                
+                                </div>
                             </label>
-                            </div>
-                            <div class="option-content">
                             <label class="payment-option">
                                 <input type="radio" name="payment" value="applepay">
+                                <div class="option-content">
                                     <i class="fab fa-apple"></i>
-                                    <br>
                                     <span>Apple Pay</span>
+                                </div>
                             </label>
-                            </div>
                         </section>
 
                         <div class="payment-form">
@@ -188,9 +182,10 @@
                         </div>
                     </div>
 
-                    <button class="pay-button">PAGAR</button>
+                    <button class="pay-button" type="submit">PAGAR</button>
                 </div>
             </div>
+            </form>
 
         </section>
     </main>
@@ -217,7 +212,7 @@
             const ivaAmount = document.getElementById("ivaAmount");
             const descuentoAmount = document.getElementById("descuentoAmount");
             const totalAmount = document.getElementById("totalAmount");
-            const payButton = document.querySelector(".pay-button");
+            const billingForm = document.getElementById("billingForm");
 
             if (!nameElement || !descriptionElement || !imageElement) {
                 return;
@@ -243,8 +238,14 @@
             if (descuentoAmount) descuentoAmount.textContent = formatEuro(descuento);
             if (totalAmount) totalAmount.textContent = formatEuro(total);
 
-            if (payButton) {
-                payButton.addEventListener("click", () => {
+            if (billingForm) {
+                billingForm.addEventListener("submit", event => {
+                    event.preventDefault();
+
+                    if (!billingForm.reportValidity()) {
+                        return;
+                    }
+
                     if (!eventoId || entradas <= 0) {
                         alert("Faltan datos de la compra. Vuelve a seleccionar las entradas.");
                         return;
