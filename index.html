@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Entradas para conciertos y eventos en España 2026</title>
-    <link rel="stylesheet" href="/Anteproyecto3/api-entradas/styleHome.css">
+    <link rel="stylesheet" href="./api-entradas/styleHome.css">
     <!--iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <meta name="description"
@@ -19,12 +19,12 @@
     <!--Header-->
     <header class="main-header">
         <div class="header-left">
-            <a href="/Anteproyecto3" class="logo-link" aria-label="Página principal">
+            <a href="./index.html" class="logo-link" aria-label="Página principal">
                 <div class="logo-box">DVD</div>
             </a>
         </div>
         <div class="header-center">
-            <form action="/Anteproyecto3/api-entradas/resultados" method="GET" class="search-form">
+            <form action="./api-entradas/resultados.html" method="GET" class="search-form">
             <div class="search-bar">
                 
                 <input type="text" placeholder="BARRA DE BÚSQUEDA" aria-label="Buscar eventos" id="search-input">
@@ -36,7 +36,7 @@
             </form>
         </div>
         <div class="header-right">
-            <a href="/Anteproyecto3/api-entradas/perfil" class="user-icon-circle" aria-label="Perfil">
+            <a href="./api-entradas/perfil.html" class="user-icon-circle" aria-label="Perfil">
                 <i class="fas fa-user"></i>
             </a>
         </div>
@@ -65,7 +65,7 @@
                 <p class="filtro-label">Encuentra tu evento</p>
 
                 <!--Form Buscar-->
-                <form action="/Anteproyecto3/api-entradas/resultados" method="GET" class="search-filtro-bar">
+                <form action="./api-entradas/resultados.html" method="GET" class="search-filtro-bar">
 
                     <!-- Buscar por Nombre-->
                     <div class="filtro-item">
@@ -102,7 +102,7 @@
 
             <div class="solo-admin" id="crear-evento-container" style="display: none;">
                 <button type="button" id="crear-evento" class="crear-evento"
-                    onclick="window.location.href = '/Anteproyecto3/api-entradas/crear_evento.html'">Crear Evento</button>
+                    onclick="window.location.href = './api-entradas/crear_evento.html'">Crear Evento</button>
             </div>
 
         </section>
@@ -268,7 +268,7 @@
         }
 
         function cargarSesion() {
-            return fetch("/Anteproyecto3/api-entradas/public/api/sesion", {
+            return fetch("./api-entradas/public/api/sesion", {
                 method: "GET",
                 credentials: "include"
             })
@@ -348,7 +348,7 @@
 
         //Funciones usuario
         function editar(id) {
-              window.location.href = "/Anteproyecto3/api-entradas/editar_evento.html?id=" + id;
+              window.location.href = "./api-entradas/editar_evento.html?id=" + id;
         }
 
         function eliminar(id) {
@@ -356,7 +356,7 @@
                 return;
             }
 
-            fetch(`/Anteproyecto3/api-entradas/public/api/eventos/${id}`, {
+            fetch(`./api-entradas/public/api/eventos/${id}`, {
                 method: "DELETE",
                 credentials: "include"
             })
@@ -373,7 +373,7 @@
 
 
         function reservar(id) {
-              window.location.href = "/Anteproyecto3/api-entradas/evento.html?evento_id=" + encodeURIComponent(id);
+              window.location.href = "./api-entradas/evento.html?evento_id=" + encodeURIComponent(id);
         }
 
         //cargar todos los eventos
@@ -403,7 +403,7 @@
                         cardImg.className = "card-img";
                         const img = document.createElement("img");
                         img.src = evento.imagen
-                            ? "/Anteproyecto3/api-entradas/public" + evento.imagen
+                            ? "./api-entradas/public" + evento.imagen
                             : "https://via.placeholder.com/600x300?text=Sin+imagen";
                         img.alt = "Imagen del evento: " + evento.nombre;
                         cardImg.appendChild(img);
@@ -450,12 +450,13 @@
         }
 
         // Cada función simplemente llama a la genérica
-        function cargarEventos() { cargarEventosEnLista("/Anteproyecto3/api-entradas/public/api/eventos", "conciertos"); }
-        function cargarConciertosDestacados() { cargarEventosEnLista("/Anteproyecto3/api-entradas/public/api/eventos/destacados", "conciertos-destacados"); }
-        function cargarCine() { cargarEventosEnLista("/Anteproyecto3/api-entradas/public/api/eventos/cine", "cine-eventos"); }
-        function cargarEventosPopulares() { cargarEventosEnLista("/Anteproyecto3/api-entradas/public/api/eventos/populares", "eventos-populares"); }
+        function cargarEventos() { cargarEventosEnLista("./api-entradas/public/api/eventos", "conciertos"); }
+        function cargarConciertosDestacados() { cargarEventosEnLista("./api-entradas/public/api/eventos/destacados", "conciertos-destacados"); }
+        function cargarCine() { cargarEventosEnLista("./api-entradas/public/api/eventos/cine", "cine-eventos"); }
+        function cargarEventosPopulares() { cargarEventosEnLista("./api-entradas/public/api/eventos/populares", "eventos-populares"); }
 
     </script>
+    <script src="./api-entradas/shared-header-user.js" defer></script>
 </body>
 
 

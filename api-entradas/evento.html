@@ -15,12 +15,12 @@
     <!-- Header -->
     <header class="main-header">
         <div class="header-left">
-            <a href="/Anteproyecto3" class="logo-link" aria-label="Página principal">
+            <a href="../index.html" class="logo-link" aria-label="Página principal">
                 <div class="logo-box">DVD</div>
             </a>
         </div>
         <div class="header-center">
-            <form action="/Anteproyecto3/api-entradas/resultados" method="GET" class="search-form">
+            <form action="./resultados.html" method="GET" class="search-form">
                 <div class="search-bar">
 
                     <input type="text" placeholder="BARRA DE BÚSQUEDA" aria-label="Buscar eventos" id="search-input">
@@ -32,7 +32,7 @@
             </form>
         </div>
         <div class="header-right">
-            <a href="/Anteproyecto3/api-entradas/perfil" class="user-icon-circle" aria-label="Perfil">
+            <a href="./perfil.html" class="user-icon-circle" aria-label="Perfil">
                 <i class="fas fa-user"></i>
             </a>
         </div>
@@ -157,7 +157,6 @@
 
 
     <script>
-
         console.log("SEARCH:", window.location.search);
         console.log("HASH:", window.location.hash);
         console.log("URL COMPLETA:", window.location.href);
@@ -193,7 +192,7 @@
         }
         //cargar detalles del evento
         function cargarDetallesEvento(id) {
-            fetch(`/Anteproyecto3/api-entradas/public/api/eventos/${id}`)
+            fetch(`/api-entradas/public/api/eventos/${id}`)
                 .then(res => res.json())
                 .then(data => {
                     if (!data || !data.data) {
@@ -218,7 +217,7 @@
             let banner = document.getElementsByClassName("event-hero")[0];
             if (evento.imagen) {
                 banner.style.backgroundImage =
-                    "linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.8)), url('" + "/Anteproyecto3/api-entradas/public" + evento.imagen + "')";
+                    "linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.8)), url('" + "/api-entradas/public" + evento.imagen + "')";
             }
 
             // 2. Título principal dentro del contenido
@@ -238,7 +237,7 @@
             if (evento.imagen) {
                 const img = document.createElement("img");
                 img.src = evento.imagen
-                    ? "/Anteproyecto3/api-entradas/public" + evento.imagen
+                    ? "/api-entradas/public" + evento.imagen
                     : "https://via.placeholder.com/600x300?text=Sin+imagen";
                 img.alt = "Imagen del evento: " + evento.nombre;
                 poster.appendChild(img);
@@ -309,7 +308,7 @@
             const btnTop = document.getElementsByClassName("buy-tickets-top")[0];
             if (btnTop) {
                 btnTop.onclick = function () {
-                    window.location.href = "/Anteproyecto3/api-entradas/comprar/SelectorEntradas.html?evento_id=" + encodeURIComponent(id);
+                    window.location.href = "/api-entradas/comprar/SelectorEntradas.html?evento_id=" + encodeURIComponent(id);
                 };
             }
 
@@ -318,7 +317,7 @@
             if (btnSidebar) {
                 btnSidebar.onclick = function () {
 
-                    window.location.href = "/Anteproyecto3/api-entradas/comprar/SelectorEntradas.html?evento_id=" + encodeURIComponent(id);
+                    window.location.href = "/api-entradas/comprar/SelectorEntradas.html?evento_id=" + encodeURIComponent(id);
                 }
 
             }
@@ -369,7 +368,7 @@
                         cardImg.className = "card-img";
                         const img = document.createElement("img");
                         img.src = evento.imagen
-                            ? "/Anteproyecto3/api-entradas/public" + evento.imagen
+                            ? "/api-entradas/public" + evento.imagen
                             : "https://via.placeholder.com/600x300?text=Sin+imagen";
                         img.alt = "Imagen del evento: " + evento.nombre;
                         cardImg.appendChild(img);
@@ -384,7 +383,7 @@
                         contenedorBotones.className = "botones-evento";
 
                         function reservar(id) {
-                            window.location.href = "/Anteproyecto3/api-entradas/evento.html?evento_id=" + encodeURIComponent(id);
+                            window.location.href = "/api-entradas/evento.html?evento_id=" + encodeURIComponent(id);
                         }
 
                         const btnReservar = document.createElement("button");
@@ -403,12 +402,10 @@
                 .catch(err => console.error("Error cargando eventos de " + listaId + ":", err));
         }
 
-        function cargarEventos() { cargarEventosEnLista("/Anteproyecto3/api-entradas/public/api/eventos", "conciertos-destacados"); }
-
-
+        function cargarEventos() { cargarEventosEnLista("/api-entradas/public/api/eventos", "conciertos-destacados"); }
 
     </script>
-
+    <script src="./shared-header-user.js" defer></script>
 </body>
 
 </html>

@@ -13,12 +13,12 @@
 <body>
     <header class="main-header">
         <div class="header-left">
-            <a href="/Anteproyecto3" class="logo-link" aria-label="Página principal">
+            <a href="/" class="logo-link" aria-label="Página principal">
                 <div class="logo-box">DVD</div>
             </a>
         </div>
         <div class="header-center">
-            <form action="/Anteproyecto3/api-entradas/resultados" method="GET" class="search-form">
+            <form action="/api-entradas/resultados" method="GET" class="search-form">
                 <div class="search-bar">
 
                     <input type="text" placeholder="BARRA DE BÚSQUEDA" aria-label="Buscar eventos" id="search-input">
@@ -30,7 +30,7 @@
             </form>
         </div>
         <div class="header-right">
-            <a href="/Anteproyecto3/api-entradas/perfil" class="user-icon-circle" aria-label="Perfil">
+            <a href="/api-entradas/perfil" class="user-icon-circle" aria-label="Perfil">
                 <i class="fas fa-user"></i>
             </a>
         </div>
@@ -104,6 +104,7 @@
                 cargarEventos();
             }
         });
+                <script src="./shared-header-user.js" defer></script>
 
         function displayEventos() {
             let control = document.getElementsByClassName("expand-control")[0].getElementsByTagName("i")[0];
@@ -133,7 +134,7 @@
         //Buscar eventos por nombre
         function buscarEventos(nombre) {
 
-            let url = "/Anteproyecto3/api-entradas/public/api/eventos/buscar/";
+            let url = "/api-entradas/public/api/eventos/buscar/";
             console.log("Parámetro recibido:", nombre);
 
             // Añadir nombre si existe
@@ -166,7 +167,7 @@
 
                         const img = document.createElement("img");
                         img.src = evento.imagen
-                            ? "/Anteproyecto3/api-entradas/public" + evento.imagen
+                            ? "/api-entradas/public" + evento.imagen
                             : "https://via.placeholder.com/600x300?text=Sin+imagen";
                         img.alt = "Imagen del evento: " + evento.nombre;
 

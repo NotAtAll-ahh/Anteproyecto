@@ -18,24 +18,20 @@
 
     <header class="main-header">
         <div class="header-left">
-            <a href="/Anteproyecto3" class="logo-link" aria-label="Página principal">
+            <a href="../index.html" class="logo-link" aria-label="Página principal">
                 <div class="logo-box">DVD</div>
             </a>
         </div>
         <div class="header-center">
-            <form action="/Anteproyecto3/api-entradas/resultados" method="GET" class="search-form">
+            <form action="./resultados.html" method="GET" class="search-form">
                 <div class="search-bar">
-
                     <input type="text" placeholder="BARRA DE BÚSQUEDA" aria-label="Buscar eventos" id="search-input">
-
                     <i class="fas fa-search"></i>
-
-
                 </div>
             </form>
         </div>
         <div class="header-right">
-            <a href="/Anteproyecto3/api-entradas/perfil" class="user-icon-circle" aria-label="Perfil">
+            <a href="./perfil.html" class="user-icon-circle" aria-label="Perfil">
                 <i class="fas fa-user"></i>
             </a>
         </div>
@@ -75,58 +71,10 @@
                 <h2>¿NO ESTÁS REGISTRADO?</h2>
             </div>
 
-            <button type="button" class="modificar-btn" onclick="window.location.href='registro'"
+            <button type="button" class="modificar-btn" onclick="window.location.href='./registro.html'"
                 aria-label="Registrarse">
                 REGISTRATE
             </button>
-
-            <script>
-
-                function iniciarSesionUsuario() {
-                    const data = {
-                        email: document.getElementById("emailU").value,
-                        password: document.getElementById("passwordU").value
-                    };
-
-                    fetch("/Anteproyecto3/api-entradas/public/api/login", {
-                        method: "POST",
-                        headers: { 'Content-Type': 'application/json; charset=UTF-8' },
-                        credentials: "include", // IMPORTANTE: permite enviar cookies de sesión
-                        body: JSON.stringify(data)
-                    })
-                        .then((respuesta) => {
-                            if (respuesta.ok) return respuesta.json();
-                            return respuesta.json().then((error) => {
-                                throw new Error(error.error || 'Error en el login');
-                            });
-                        })
-                        .then((loginData) => {
-                            console.log(loginData);
-                            document.getElementById("resultadoUsuario").textContent = JSON.stringify(loginData.usuario, null, 2);
-                            setTimeout(() => {
-                                window.location.href = "perfil";
-                            }, 2200);
-                        })
-                        .catch(error => {
-                            console.error("Error ", error);
-                            document.getElementById("resultadoUsuario").textContent = error.message;
-                        });
-                }
-                function verSesion() {
-                    fetch("/Anteproyecto3/api-entradas/public/api/sesion", {
-                        method: "GET",
-                        credentials: "include"
-                    })
-                        .then(res => res.json())
-                        .then(data => {
-                            document.getElementById("resultadoUsuario").textContent = JSON.stringify(data, null, 2);
-                        });
-                }
-
-
-
-            </script>
-
         </section>
     </main>
     <footer class="event-footer">
@@ -166,7 +114,68 @@
         <p>© 2025 DVD TICKETS · Todos los derechos reservados</p>
     </div>
 </footer>
+        <script>
+            const API_BASE = "./public/api";
+            const PERFIL_PAGE = "./perfil.html";
+            const resultadoUsuario = document.getElementById("resultadoUsuario");
 
+            async function leerJsonSeguro(respuesta) {
+                const texto = await respuesta.text();
+
+                try {
+                    return texto ? JSON.parse(texto) : {};
+                } catch (error) {
+                    throw new Error("El servidor devolvio una respuesta invalida.");
+                }
+            }
+
+            async function iniciarSesionUsuario() {
+                const data = {
+                    email: document.getElementById("emailU").value,
+                    password: document.getElementById("passwordU").value
+                };
+
+                try {
+                    const respuesta = await fetch(`${API_BASE}/login`, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json; charset=UTF-8" },
+                        credentials: "include",
+                        body: JSON.stringify(data)
+                    });
+
+                    const loginData = await leerJsonSeguro(respuesta);
+
+                    if (!respuesta.ok) {
+                        throw new Error(loginData.error || "Error en el login");
+                    }
+
+                    console.log(loginData);
+                    resultadoUsuario.textContent = JSON.stringify(loginData.usuario, null, 2);
+
+                    setTimeout(() => {
+                        window.location.href = PERFIL_PAGE;
+                    }, 2200);
+                } catch (error) {
+                    console.error("Error", error);
+                    resultadoUsuario.textContent = error.message;
+                }
+            }
+
+            async function verSesion() {
+                try {
+                    const respuesta = await fetch(`${API_BASE}/sesion`, {
+                        method: "GET",
+                        credentials: "include"
+                    });
+
+                    const data = await leerJsonSeguro(respuesta);
+                    resultadoUsuario.textContent = JSON.stringify(data, null, 2);
+                } catch (error) {
+                    resultadoUsuario.textContent = error.message;
+                }
+            }
+        </script>
+        <script src="./shared-header-user.js" defer></script>
 </body>
 
 </html>

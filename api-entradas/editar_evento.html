@@ -285,15 +285,16 @@
             document.getElementById('soloAdmin').style.display = 'block';
         }
     </script>
+    <script src="./shared-header-user.js" defer></script>
 
     <header class="main-header">
         <div class="header-left">
-            <a href="/Anteproyecto3" class="logo-link" aria-label="Página principal">
+            <a href="../index.html" class="logo-link" aria-label="Página principal">
                 <div class="logo-box">DVD</div>
             </a>
         </div>
         <div class="header-center">
-            <form action="/Anteproyecto3/api-entradas/resultados" method="GET" class="search-form">
+            <form action="./resultados.html" method="GET" class="search-form">
                 <div class="search-bar">
 
                     <input type="text" placeholder="BARRA DE BÚSQUEDA" aria-label="Buscar eventos" id="search-input">
@@ -305,7 +306,7 @@
             </form>
         </div>
         <div class="header-right">
-            <a href="/Anteproyecto3/api-entradas/perfil" class="user-icon-circle" aria-label="Perfil">
+            <a href="./perfil.html" class="user-icon-circle" aria-label="Perfil">
                 <i class="fas fa-user"></i>
             </a>
         </div>
@@ -317,7 +318,7 @@
             <p id="mensajeRol" style="color:#ff3366;"></p>
 
             <div id="soloAdmin">
-                <img id="imagenActual" src="/Anteproyecto3/api-entradas/public/uploads/imgsHTML/Fondo-Evento-Placeholder.webp"
+                <img id="imagenActual" src="/api-entradas/public/uploads/imgsHTML/Fondo-Evento-Placeholder.webp"
                     alt="Imagen del evento: " + evento.nombre>
                 <hr>
 
@@ -386,7 +387,7 @@
             }
 
             // 1. Comprobar sesión
-            fetch("/Anteproyecto3/api-entradas/public/api/sesion", {
+            fetch("/api-entradas/public/api/sesion", {
                 method: "GET",
                 credentials: "include"
             })
@@ -411,7 +412,7 @@
 
             // 2. Cargar datos del evento
             function cargarEvento() {
-                fetch(`/Anteproyecto3/api-entradas/public/api/eventos/${eventoId}`)
+                fetch(`/api-entradas/public/api/eventos/${eventoId}`)
                     .then(res => res.json())
                     .then(data => {
                         const e = data.data;
@@ -425,7 +426,7 @@
                         document.getElementById("categoria").value = e.categoria;
                         if (e.imagen) {
                             document.getElementById("imagenActual").src =
-                                "/Anteproyecto3/api-entradas/public" + e.imagen;
+                                "/api-entradas/public" + e.imagen;
                         }
                     });
             }
@@ -442,7 +443,7 @@
                     categoria: document.getElementById("categoria").value
                 };
 
-                fetch(`/Anteproyecto3/api-entradas/public/api/eventos/${eventoId}`, {
+                fetch(`/api-entradas/public/api/eventos/${eventoId}`, {
                     method: "PUT",
                     credentials: "include",
                     headers: { "Content-Type": "application/json" },
@@ -480,7 +481,7 @@
                 const formData = new FormData();
                 formData.append("imagen", archivo);
 
-                fetch(`/Anteproyecto3/api-entradas/public/api/eventos/${eventoId}/imagen`, {
+                fetch(`/api-entradas/public/api/eventos/${eventoId}/imagen`, {
                     method: "POST",
                     credentials: "include",
                     body: formData

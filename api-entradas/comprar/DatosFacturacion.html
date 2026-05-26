@@ -16,12 +16,12 @@
     <!--Header-->
     <header class="main-header">
         <div class="header-left">
-            <a href="/Anteproyecto3" class="logo-link" aria-label="Página principal">
+            <a href="../../index.html" class="logo-link" aria-label="Página principal">
                 <div class="logo-box">DVD</div>
             </a>
         </div>
         <div class="header-center">
-            <form action="/Anteproyecto3/api-entradas/resultados" method="GET" class="search-form">
+            <form action="../resultados.html" method="GET" class="search-form">
                 <div class="search-bar">
 
                     <input type="text" placeholder="BARRA DE BÚSQUEDA" aria-label="Buscar eventos" id="search-input">
@@ -33,7 +33,7 @@
             </form>
         </div>
         <div class="header-right">
-            <a href="/Anteproyecto3/api-entradas/perfil" class="user-icon-circle" aria-label="Perfil">
+            <a href="../perfil.html" class="user-icon-circle" aria-label="Perfil">
                 <i class="fas fa-user"></i>
             </a>
         </div>
@@ -68,7 +68,7 @@
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="descuento">Descuento</label>
-                                <input type="text" id="descuento" name="descuento" placeholder="0000 0000 0000 XXXX" required>
+                                <input type="text" id="descuento" name="descuento" placeholder="0000 0000 0000 XXXX">
                             </div>
                             <div class="form-group">
                                 <label for="telefono">Número de Teléfono</label>
@@ -235,8 +235,8 @@
 
     <script>
         window.addEventListener("DOMContentLoaded", () => {
-            const API_BASE = "/Anteproyecto3/api-entradas/public/api";
-            const PUBLIC_BASE = "/Anteproyecto3/api-entradas/public";
+            const API_BASE = "/api-entradas/public/api";
+            const PUBLIC_BASE = "/api-entradas/public";
 
             const nameElement = document.getElementById("eventName");
             const descriptionElement = document.getElementById("eventDescription");
@@ -329,7 +329,7 @@
 
                             alert("Reserva realizada correctamente.");
                             sessionStorage.removeItem("compraEntradasSeleccionadas");
-                            window.location.href = "/Anteproyecto3/api-entradas/perfil.html";
+                            window.location.href = "/api-entradas/perfil.html";
                         })
                         .catch(error => {
                             alert(error.message || "Error al procesar el pago.");
@@ -360,6 +360,7 @@
                 });
         });
     </script>
+    <script src="../shared-header-user.js" defer></script>
 
 </body>
 </html>
