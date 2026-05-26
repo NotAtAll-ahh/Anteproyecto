@@ -1,13 +1,12 @@
-
 @font-face {
-  font-family: 'Kabel';
+    font-family: 'Kabel';
     src: url("./public/uploads/fonts/Semplicita%20Light.otf");
-  font-weight: normal;
-  font-style: normal;
+    font-weight: normal;
+    font-style: normal;
 }
 
 body {
-    background-color: #0f0f0f; 
+    background-color: #050b14;
     color: #ffffff;
     font-family: 'Segoe UI', Roboto, Arial, sans-serif;
     text-transform: uppercase;
@@ -21,8 +20,8 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 15px 50px;
-    background: rgba(18, 18, 18, 0.95); 
-    backdrop-filter: blur(10px); 
+    background: rgba(5, 11, 20, 0.95);
+    backdrop-filter: blur(10px);
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -46,7 +45,7 @@ body {
 .search-bar {
     display: flex;
     align-items: center;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(180, 210, 255, 0.06);
     border-radius: 20px;
     padding: 5px 20px;
     width: 350px;
@@ -100,49 +99,60 @@ body {
     padding: 40px 20px;
 }
 
-/* --- Banner--- */.banner {
+/* --- Banner--- */
+/* --- Banner Principal --- */
+.banner {
     height: 80vh;
     width: 100%;
-    max-width: none !important; /* Esto fuerza a que sea ancho completo */
-    background-image: linear-gradient(to right, rgba(0,0,0,0.8), rgba(0,0,0,0.2)), url("./public/uploads/imgsHTML/fondo%20festival.png");
+    max-width: none !important;
+    background-image:
+        linear-gradient(rgba(5, 11, 20, 0.65),
+            rgba(5, 11, 20, 0.65)),
+        url("./public/uploads/imgsHTML/guitar.jpeg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     display: flex;
     align-items: center;
-    padding: 0 10%; 
+    padding: 0 10%;
     box-sizing: border-box;
+    color: white;
 }
 
 .banner-contenido {
-    max-width: 750px;
+    max-width: 600px;
 }
 
 .banner-titulo {
     font-family: "Kabel", sans-serif;
-    letter-spacing: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
     font-size: 4.5rem;
     font-weight: 900;
     margin-bottom: 25px;
     line-height: 1;
-    text-shadow: 2px 4px 10px rgba(0,0,0,0.5);
+    text-shadow: 2px 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 .banner-texto {
-    border-left: 4px solid #ff3366; 
-    background: rgba(0, 0, 0, 0.5);
-    padding: 15px 25px;
-    display: inline-block;
-    font-size: 1rem;
-    margin-bottom: 35px;
-    text-transform: none; 
+    border-left: none;
+    background: none;
+    padding: 0;
+    display: block;
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    line-height: 1.4;
+    font-weight: 300;
+    text-transform: none;
+    max-width: 90%;
 }
 
 .banner-comprar-btn {
     display: block;
-    background: #033788;
+    background: transparent;
     border: none;
     color: #ffffff;
+    border: 2px solid white;
     padding: 18px 40px;
     font-size: 1rem;
     font-weight: bold;
@@ -156,24 +166,31 @@ body {
     color: #033788;
     transform: translateY(-3px);
 }
-.banner-comprar-btn a{
+
+.banner-comprar-btn a {
     color: inherit;
     text-decoration: none;
 }
 
+/* Ajuste para la flecha */
 .carrusel-flecha {
     position: absolute;
-    right: 50px;
-    font-size: 3.5rem;
+    right: 5%;
+    font-size: 3rem;
+    color: rgba(255, 255, 255, 0.5);
     cursor: pointer;
-    opacity: 0.6;
     transition: 0.3s;
+    width: 6px;
+    height: 160px;
+    background: white;
 }
 
 .carrusel-flecha:hover {
-    opacity: 1;
-    transform: translateX(10px);
+    color: white;
+    transform: translateX(5px);
 }
+
+
 
 /* --- Filtros Section --- */
 .filtros-section {
@@ -195,21 +212,21 @@ body {
 
 /* Formulario búsqueda */
 .filtros-section {
-    background-color: #1a1a1a;
+    background-color: #09111d;
     padding: 50px 0;
-    margin-top: -30px; 
+    margin-top: -30px;
     position: relative;
     z-index: 5;
 }
 
 .search-filtro-bar {
-    background: #252525;
+    background: #0d1624;
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 12px;
     display: flex;
     align-items: center;
     padding: 10px 20px 10px 30px;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
 }
 
 .filtro-item {
@@ -232,7 +249,7 @@ body {
 }
 
 .main-label {
-   color: #ffffff;
+    color: #ffffff;
     font-weight: bold;
     font-size: 1rem;
     letter-spacing: 2px;
@@ -317,13 +334,14 @@ body {
     display: none;
 }
 
-.lista-eventos{
+.lista-eventos {
     display: none;
     gap: 20px;
     overflow-x: auto;
     padding-bottom: 20px;
-    
+
 }
+
 .lista-eventos::-webkit-scrollbar {
     height: 8px;
 }
@@ -357,7 +375,8 @@ body {
     margin-bottom: 15px;
     overflow: hidden;
 }
-.card-img img{
+
+.card-img img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -391,13 +410,16 @@ body {
 
 /*Botones*/
 
-.botones.evento{
+.botones.evento {
     display: flex;
     flex-wrap: wrap;
-    gap:100px;
+    gap: 100px;
 }
 
-.reservar, .editar, .eliminar, .crear-evento {
+.reservar,
+.editar,
+.eliminar,
+.crear-evento {
     background: transparent;
     border: 1px solid white;
     color: white;
@@ -426,24 +448,29 @@ body {
     background: rgba(75, 108, 183, 0.1);
     border-style: solid;
 }
-a{
+
+a {
     color: white;
     text-decoration: none;
 }
 
-.reservar:hover, .crear-evento:hover, .crear-evento:hover > a{
+.reservar:hover,
+.crear-evento:hover,
+.crear-evento:hover>a {
     background: white;
     color: black;
 }
- 
-.editar:hover{
+
+.editar:hover {
     border: 1px solid rgb(27, 153, 29);
     color: rgb(34, 211, 37);
 }
-.eliminar:hover{
+
+.eliminar:hover {
     border: 1px solid rgb(232, 14, 14);
     color: rgb(212, 24, 24);
 }
+
 /* --- FOOTER  --- */
 .event-footer {
     background: #000;
@@ -470,6 +497,7 @@ a{
     margin: 30px 0;
     font-weight: bold;
 }
+
 .footer-links a {
     color: #888;
     transition: 0.3s;
@@ -491,9 +519,18 @@ a{
 
 /* Responsivo rápido */
 @media (max-width: 900px) {
-    .main-grid, .details-host-grid {
+
+    .main-grid,
+    .details-host-grid {
         grid-template-columns: 1fr;
     }
-    .hero-event-name { font-size: 2rem; }
-    .hero-bottom { flex-direction: column; align-items: flex-start; }
+
+    .hero-event-name {
+        font-size: 2rem;
+    }
+
+    .hero-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 }

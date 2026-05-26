@@ -8,9 +8,11 @@
 
 body {
     
-    background: url("./public/uploads/imgsHTML/declan-sun-rCQ4LlLzqFk-unsplash.jpg"), linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5));
+    background: linear-gradient(rgba(5, 11, 20, 0.541),
+            rgba(5, 11, 20, 0.596)), url("./public/uploads/imgsHTML/image\ \(1\).webp") ;
     background-size: cover;
-    background-position: center;
+    background-position: top;
+    
     background-attachment: fixed;
     color: white;
     text-transform: uppercase;
