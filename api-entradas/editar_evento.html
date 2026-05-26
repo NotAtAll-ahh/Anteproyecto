@@ -225,6 +225,54 @@
         #soloAdmin {
             display: none;
         }
+        /* --- FOOTER  --- */
+.event-footer {
+    background: #000;
+    padding: 60px 0 20px 0;
+    margin-top: 100px;
+    text-align: center;
+}
+
+.footer-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
+
+.info-item span {
+    font-size: 0.7rem;
+    color: #888;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin: 30px 0;
+    font-weight: bold;
+}
+
+.footer-social i {
+    font-size: 1.5rem;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.footer-bottom {
+    margin-top: 40px;
+    font-size: 0.7rem;
+    border-top: 1px solid #222;
+    padding-top: 20px;
+}
+
+/* Responsivo rápido */
+@media (max-width: 900px) {
+    .main-grid, .details-host-grid {
+        grid-template-columns: 1fr;
+    }
+    .hero-event-name { font-size: 2rem; }
+    .hero-bottom { flex-direction: column; align-items: flex-start; }
+}
     </style>
 </head>
 
@@ -240,24 +288,24 @@
 
     <header class="main-header">
         <div class="header-left">
-            <a href="/index.html">
-                <div class="logo-box">LOGO</div>
+            <a href="/Anteproyecto3" class="logo-link" aria-label="Página principal">
+                <div class="logo-box">DVD</div>
             </a>
         </div>
         <div class="header-center">
-            <form action="/api-entradas/resultados.html" method="GET" class="search-form">
-            <div class="search-bar">
-                
-                <input type="text" placeholder="BARRA DE BÚSQUEDA" aria-label="Buscar eventos" id="search-input">
-                
-                <i class="fas fa-search"></i>
-                
-                
-            </div>
+            <form action="/Anteproyecto3/api-entradas/resultados" method="GET" class="search-form">
+                <div class="search-bar">
+
+                    <input type="text" placeholder="BARRA DE BÚSQUEDA" aria-label="Buscar eventos" id="search-input">
+
+                    <i class="fas fa-search"></i>
+
+
+                </div>
             </form>
         </div>
         <div class="header-right">
-            <a href="/api-entradas/perfil.html" class="user-icon-circle" aria-label="Perfil">
+            <a href="/Anteproyecto3/api-entradas/perfil" class="user-icon-circle" aria-label="Perfil">
                 <i class="fas fa-user"></i>
             </a>
         </div>
@@ -269,7 +317,7 @@
             <p id="mensajeRol" style="color:#ff3366;"></p>
 
             <div id="soloAdmin">
-                <img id="imagenActual" src="/api-entradas/public/uploads/imgsHTML/Fondo-Evento-Placeholder.webp"
+                <img id="imagenActual" src="/Anteproyecto3/api-entradas/public/uploads/imgsHTML/Fondo-Evento-Placeholder.webp"
                     alt="Imagen del evento: " + evento.nombre>
                 <hr>
 
@@ -282,8 +330,8 @@
                 <label for="ubicacion"><i class="fas fa-map-marker-alt"></i> Ubicación</label>
                 <input type="text" id="ubicacion" aria-label="Ubicación del evento">
 
-                <label for="categoría"><i class="fas fa-list"></i> Categoría</label>
-                <select id="categoría" aria-label="Categoría del evento">
+                <label for="categoria"><i class="fas fa-list"></i> Categoría</label>
+                <select id="categoria" aria-label="Categoría del evento">
                     <option value="">Selecciona una categoría</option>
                     <option value="destacado">Destacado</option>
                     <option value="popular">Popular</option>
@@ -338,7 +386,7 @@
             }
 
             // 1. Comprobar sesión
-            fetch("/api-entradas/public/api/sesion", {
+            fetch("/Anteproyecto3/api-entradas/public/api/sesion", {
                 method: "GET",
                 credentials: "include"
             })
@@ -363,7 +411,7 @@
 
             // 2. Cargar datos del evento
             function cargarEvento() {
-                fetch(`/api-entradas/public/api/eventos/${eventoId}`)
+                fetch(`/Anteproyecto3/api-entradas/public/api/eventos/${eventoId}`)
                     .then(res => res.json())
                     .then(data => {
                         const e = data.data;
@@ -374,10 +422,10 @@
                         document.getElementById("fecha").value = normalizarFechaParaInput(e.fecha);
                         document.getElementById("entradas_totales").value = e.entradas_totales;
                         document.getElementById("entradas_disponibles").value = e.entradas_disponibles;
-                        document.getElementById("categoría").value = e.categoría;
+                        document.getElementById("categoria").value = e.categoria;
                         if (e.imagen) {
                             document.getElementById("imagenActual").src =
-                                "/api-entradas/public" + e.imagen;
+                                "/Anteproyecto3/api-entradas/public" + e.imagen;
                         }
                     });
             }
@@ -391,10 +439,10 @@
                     fecha: document.getElementById("fecha").value,
                     entradas_totales: document.getElementById("entradas_totales").value,
                     entradas_disponibles: document.getElementById("entradas_disponibles").value,
-                    categoría: document.getElementById("categoría").value
+                    categoria: document.getElementById("categoria").value
                 };
 
-                fetch(`/api-entradas/public/api/eventos/${eventoId}`, {
+                fetch(`/Anteproyecto3/api-entradas/public/api/eventos/${eventoId}`, {
                     method: "PUT",
                     credentials: "include",
                     headers: { "Content-Type": "application/json" },
@@ -432,7 +480,7 @@
                 const formData = new FormData();
                 formData.append("imagen", archivo);
 
-                fetch(`/api-entradas/public/api/eventos/${eventoId}/imagen`, {
+                fetch(`/Anteproyecto3/api-entradas/public/api/eventos/${eventoId}/imagen`, {
                     method: "POST",
                     credentials: "include",
                     body: formData
@@ -445,16 +493,43 @@
             }
         </script>
     </main>
-    <footer>
-        <div class="footer-content content-container">
-            <p>&copy; 2026 Venta de Entradas. Todos los derechos reservados.</p>
-            <div class="social-icons">
-                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            </div>
+    <footer class="event-footer">
+    <div class="footer-info content-container">
+        <div class="info-item">
+            <span>CORREO</span>
+            <p>contacto@dvdtickets.com</p>
         </div>
-    </footer>
+        <div class="info-item">
+            <span>NÚMERO DE TELÉFONO</span>
+            <p>+34 912 45 78 90</p>
+        </div>
+        <div class="info-item">
+            <span>UBICACIÓN</span>
+            <p>Hemmings Avenue, 12 · 28045 Madrid</p>
+        </div>
+    </div>
+
+    <div class="footer-links">
+        <a href="#">Términos y Condiciones</a>
+        <a href="#">Política de Privacidad</a>
+        <a href="#">Atención al Cliente</a>
+        <a href="#">Preguntas Frecuentes</a>
+    </div>
+
+    <div class="footer-social">
+        <p>Síguenos</p>
+        <div class="social-icons-footer">
+            <i class="fab fa-facebook-f"></i>
+            <i class="fab fa-instagram"></i>
+            <i class="fab fa-whatsapp"></i>
+            <i class="fab fa-twitter"></i>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2025 DVD TICKETS · Todos los derechos reservados</p>
+    </div>
+</footer>
 </body>
 
 </html>

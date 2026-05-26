@@ -174,8 +174,8 @@ function actualizarResumenEntradas() {
 }
 
 window.addEventListener('DOMContentLoaded', () => {
-    const API_BASE = '/api-entradas/public/api';
-    const PUBLIC_BASE = '/api-entradas/public';
+    const API_BASE = '/Anteproyecto3/api-entradas/public/api';
+    const PUBLIC_BASE = '/Anteproyecto3/api-entradas/public';
 
     appendSeats(17, "front-row-first-front-row");
     appendSeats(19, "front-row-second-front-row");
@@ -218,7 +218,7 @@ window.addEventListener('DOMContentLoaded', () => {
             }
 
             sessionStorage.setItem('compraEntradasSeleccionadas', String(totalEntradas));
-            window.location.assign('/api-entradas/comprar/DatosFacturacion.html?' + destino.toString());
+            window.location.assign('/Anteproyecto3/api-entradas/comprar/DatosFacturacion.html?' + destino.toString());
         });
     }
 

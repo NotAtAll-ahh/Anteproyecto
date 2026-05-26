@@ -15,29 +15,32 @@
     <!-- Header -->
     <header class="main-header">
         <div class="header-left">
-            <a href="./index.html">
-                <div class="logo-box">LOGO</div>
+            <a href="/Anteproyecto3" class="logo-link" aria-label="Página principal">
+                <div class="logo-box">DVD</div>
             </a>
         </div>
         <div class="header-center">
-            <div class="search-bar">
-                <input type="text" placeholder="BARRA DE BÚSQUEDA">
-                <i class="fas fa-search"></i>
-            </div>
+            <form action="/Anteproyecto3/api-entradas/resultados" method="GET" class="search-form">
+                <div class="search-bar">
+
+                    <input type="text" placeholder="BARRA DE BÚSQUEDA" aria-label="Buscar eventos" id="search-input">
+
+                    <i class="fas fa-search"></i>
+
+
+                </div>
+            </form>
         </div>
         <div class="header-right">
-            <a href="#" class="user-icon-circle"><i class="fas fa-user"></i></a>
+            <a href="/Anteproyecto3/api-entradas/perfil" class="user-icon-circle" aria-label="Perfil">
+                <i class="fas fa-user"></i>
+            </a>
         </div>
     </header>
 
     <!--  Banner -->
-    <section class="event-hero"
-        style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1350&q=80');">
+    <section class="event-hero">
         <div class="hero-content">
-            <div class="play-teaser">
-                <i class="fas fa-play-circle"></i>
-                <span>REPRODUCIR TEASER</span>
-            </div>
 
             <div class="hero-bottom">
                 <h1 class="hero-event-name">NOMBRE DEL EVENTO</h1>
@@ -54,7 +57,7 @@
     <main class="content-container main-grid">
         <!-- Columna Izquierda: Poster y Acciones rápidas -->
         <aside class="event-sidebar">
-            <div class="event-poster">FOTO EVENTO</div>
+            <div class="event-poster" aria-label="foto del evento"></div>
             <div class="sidebar-buttons">
                 <button class="btn-buy-main">Comprar Tickets</button>
             </div>
@@ -70,8 +73,8 @@
 
             <!-- Stats Bar -->
             <div class="stats-bar">
-                <div class="stat"><i class="fas fa-eye"></i> Aforo</div>
-                <div class="stat"><i class="fas fa-star"></i> Rating</div>
+                <div class="stat"><i class="fas fa-calendar-alt"></i> Fecha</div>
+                <div class="stat"><i class="fas fa-map-marker-alt"></i> Ubicación</div>
                 <div class="stat"><i class="fas fa-clock"></i> Duración</div>
                 <div class="stat"><i class="fas fa-closed-captioning"></i> Subtítulos</i></div>
             </div>
@@ -89,20 +92,12 @@
                         <li>
                             <div class="avatar"></div> Nombre
                         </li>
-                       
+
                         <li class="see-more"><i class="fas fa-plus-circle"></i> ver más</li>
                     </ul>
                 </div>
             </div>
 
-            <!-- Descripción larga -->
-            <div class="full-description">
-                <h3>DESCRIPCIÓN DEL EVENTO</h3>
-                <div class="desc-content">
-                    Texto más largo con detalles e información importante sobre el evento, condiciones de entrada y lo
-                    que el usuario necesita saber.
-                </div>
-            </div>
         </section>
     </main>
 
@@ -126,42 +121,67 @@
         <div class="footer-info content-container">
             <div class="info-item">
                 <span>CORREO</span>
-                <p>info@logo.com</p>
+                <p>contacto@dvdtickets.com</p>
             </div>
             <div class="info-item">
-                <span>NUMERO DE TELEFONO</span>
-                <p>+34 640 89 29 46</p>
+                <span>NÚMERO DE TELÉFONO</span>
+                <p>+34 912 45 78 90</p>
             </div>
             <div class="info-item">
-                <span>UBICACION</span>
-                <p>Calle Ejemplo, 23 28939 Madrid</p>
+                <span>UBICACIÓN</span>
+                <p>Hemmings Avenue, 12 · 28045 Madrid</p>
             </div>
         </div>
 
         <div class="footer-links">
-            <a href="#">ENLACE</a>
-            <a href="#">ENLACE</a>
-            <a href="#">ENLACE</a>
-            <a href="#">ENLACE</a>
+            <a href="#">Términos y Condiciones</a>
+            <a href="#">Política de Privacidad</a>
+            <a href="#">Atención al Cliente</a>
+            <a href="#">Preguntas Frecuentes</a>
         </div>
 
         <div class="footer-social">
             <p>Síguenos</p>
             <div class="social-icons-footer">
                 <i class="fab fa-facebook-f"></i>
+                <i class="fab fa-instagram"></i>
                 <i class="fab fa-whatsapp"></i>
+                <i class="fab fa-twitter"></i>
             </div>
         </div>
+
         <div class="footer-bottom">
-            <p>© DESIGNED BY <strong>DAW</strong> 2025 . Todos los derechos reservados</p>
+            <p>© 2025 DVD TICKETS · Todos los derechos reservados</p>
         </div>
     </footer>
 
+
     <script>
+
+        console.log("SEARCH:", window.location.search);
+        console.log("HASH:", window.location.hash);
+        console.log("URL COMPLETA:", window.location.href);
+
+        window.onload = function () {
+            const eventoId = obtenerIdEventoDesdeURL();
+
+            console.log("ID FINAL:", eventoId);
+
+            if (eventoId) {
+                cargarDetallesEvento(eventoId);
+            }
+
+            conciertos.style.display = "none";
+            controlTodos.style.transform = "rotate(180deg)";
+
+            cargarEventos();
+        };
         //Obtener Evento desde la url
+
         function obtenerIdEventoDesdeURL() {
             const params = new URLSearchParams(window.location.search);
             const id = params.get("evento_id");
+            console.log(id);
 
             // Validación básica
             if (!id || isNaN(id)) {
@@ -173,7 +193,7 @@
         }
         //cargar detalles del evento
         function cargarDetallesEvento(id) {
-            fetch(`http://localhost/api-entradas/public/api/eventos/${id}`)
+            fetch(`/Anteproyecto3/api-entradas/public/api/eventos/${id}`)
                 .then(res => res.json())
                 .then(data => {
                     if (!data || !data.data) {
@@ -198,7 +218,7 @@
             let banner = document.getElementsByClassName("event-hero")[0];
             if (evento.imagen) {
                 banner.style.backgroundImage =
-                    "linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.8)), url('" + evento.imagen + "')";
+                    "linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.8)), url('" + "/Anteproyecto3/api-entradas/public" + evento.imagen + "')";
             }
 
             // 2. Título principal dentro del contenido
@@ -207,19 +227,21 @@
             titleRow.textContent = evento.nombre;
 
             // 3. Descripción corta
-            /*let shortDesc = document.getElementsByClassName("short-desc")[0];
-            shortDesc.textContent = evento.descripcion_corta || "Sin descripción disponible.";*/
+            let shortDesc = document.getElementsByClassName("short-desc")[0];
+            shortDesc.textContent = evento.descripcion || "Sin descripción disponible.";
 
-            // 4. Descripción larga
-            let longDesc = document.getElementsByClassName("desc-content")[0];
-            longDesc.textContent = evento.descripcion || "Sin información adicional.";
 
             // 5. Poster lateral
             let poster = document.getElementsByClassName("event-poster")[0];
+            poster.className = "card-img";
+            console.log("Imagen del evento:", evento.imagen);
             if (evento.imagen) {
-                poster.style.backgroundImage = "url('" + evento.imagen + "')";
-                poster.style.backgroundSize = "cover";
-                poster.style.backgroundPosition = "center";
+                const img = document.createElement("img");
+                img.src = evento.imagen
+                    ? "/Anteproyecto3/api-entradas/public" + evento.imagen
+                    : "https://via.placeholder.com/600x300?text=Sin+imagen";
+                img.alt = "Imagen del evento: " + evento.nombre;
+                poster.appendChild(img);
             } else {
                 poster.textContent = "Sin imagen";
             }
@@ -228,8 +250,8 @@
             let stats = document.getElementsByClassName("stats-bar")[0]
                 .getElementsByClassName("stat");
 
-            // Aforo
-            stats[0].innerHTML = '<i class="fas fa-eye"></i> Aforo: ' + evento.disponibilidad;
+            // Fecha
+            stats[0].innerHTML = '<i class="fas fa-calendar-alt"></i> Fecha: ' + evento.fecha;
 
             // Duración (si existe)
             stats[2].innerHTML = '<i class="fas fa-clock"></i> Duración: ' + (evento.duracion || "2 horas");
@@ -287,7 +309,7 @@
             const btnTop = document.getElementsByClassName("buy-tickets-top")[0];
             if (btnTop) {
                 btnTop.onclick = function () {
-                    window.location.href = "reservar.html?evento_id=" + encodeURIComponent(id);
+                    window.location.href = "/Anteproyecto3/api-entradas/comprar/SelectorEntradas.html?evento_id=" + encodeURIComponent(id);
                 };
             }
 
@@ -295,10 +317,12 @@
             const btnSidebar = document.getElementsByClassName("btn-buy-main")[0];
             if (btnSidebar) {
                 btnSidebar.onclick = function () {
-                    window.location.href = "reservar.html?evento_id=" + encodeURIComponent(id);
-                };
+
+                    window.location.href = "/Anteproyecto3/api-entradas/comprar/SelectorEntradas.html?evento_id=" + encodeURIComponent(id);
+                }
+
             }
-        }
+        };
 
         //cargar eventos similares
 
@@ -316,11 +340,7 @@
             }
         }
 
-        // Estado inicial
-        window.onload = function () {
-            conciertos.style.display = "none";
-            controlTodos.style.transform = "rotate(180deg)";
-        };
+
 
         // Eventos de click y teclado
         controlTodos.addEventListener("click", function () {
@@ -349,7 +369,7 @@
                         cardImg.className = "card-img";
                         const img = document.createElement("img");
                         img.src = evento.imagen
-                            ? "http://localhost/api-entradas/public" + evento.imagen
+                            ? "/Anteproyecto3/api-entradas/public" + evento.imagen
                             : "https://via.placeholder.com/600x300?text=Sin+imagen";
                         img.alt = "Imagen del evento: " + evento.nombre;
                         cardImg.appendChild(img);
@@ -363,6 +383,10 @@
                         const contenedorBotones = document.createElement("div");
                         contenedorBotones.className = "botones-evento";
 
+                        function reservar(id) {
+                            window.location.href = "/Anteproyecto3/api-entradas/evento.html?evento_id=" + encodeURIComponent(id);
+                        }
+
                         const btnReservar = document.createElement("button");
                         btnReservar.textContent = "Reservar";
                         btnReservar.onclick = () => reservar(evento.id);
@@ -371,6 +395,7 @@
 
                         div.appendChild(cardImg);
                         div.appendChild(titulo);
+                        div.appendChild(contenedorBotones);
                         div.appendChild(fecha);
                         lista.appendChild(div);
                     });
@@ -378,9 +403,9 @@
                 .catch(err => console.error("Error cargando eventos de " + listaId + ":", err));
         }
 
-        function cargarEventos() { cargarEventosEnLista("/api-entradas/public/api/eventos", "conciertos"); }
+        function cargarEventos() { cargarEventosEnLista("/Anteproyecto3/api-entradas/public/api/eventos", "conciertos-destacados"); }
 
-       
+
 
     </script>
 

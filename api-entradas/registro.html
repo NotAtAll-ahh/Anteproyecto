@@ -19,18 +19,24 @@
 
     <header class="main-header">
         <div class="header-left">
-            <a href="../">
-                <div class="logo-box">LOGO</div>
+            <a href="/Anteproyecto3" class="logo-link" aria-label="Página principal">
+                <div class="logo-box">DVD</div>
             </a>
         </div>
         <div class="header-center">
-            <div class="search-bar">
-                <input type="text" placeholder="BARRA DE BÚSQUEDA" aria-label="Barra de Búsqueda">
-                <i class="fas fa-search"></i>
-            </div>
+            <form action="/Anteproyecto3/api-entradas/resultados" method="GET" class="search-form">
+                <div class="search-bar">
+
+                    <input type="text" placeholder="BARRA DE BÚSQUEDA" aria-label="Buscar eventos" id="search-input">
+
+                    <i class="fas fa-search"></i>
+
+
+                </div>
+            </form>
         </div>
         <div class="header-right">
-            <a href="/api-entradas/perfil" class="user-icon-circle" aria-label="Perfil">
+            <a href="/Anteproyecto3/api-entradas/perfil" class="user-icon-circle" aria-label="Perfil">
                 <i class="fas fa-user"></i>
             </a>
         </div>
@@ -58,7 +64,7 @@
                     <div class="">
                         <div class="perfil-img">
                             <img id="foto-perfil"
-                                src="../api-entradas/public/uploads/usuarios/foto-perfil-placeholder-_1_.webp"
+                                src="/Anteproyecto3/api-entradas/public/uploads/usuarios/foto-perfil-placeholder-_1_.webp"
                                 alt="foto-perfil">
                         </div>
                     </div>
@@ -84,7 +90,7 @@
 
                     const resultado = document.getElementById("resultadoUsuario");
 
-                    fetch("/api-entradas/public/api/usuarios", {
+                    fetch("/Anteproyecto3/api-entradas/public/api/usuarios", {
                         method: "POST",
                         headers: { 'Content-Type': 'application/json; charset=UTF-8' },
                         credentials: "include",
@@ -125,7 +131,7 @@
                                 const formData = new FormData();
                                 formData.append("imagen", archivoFoto);
 
-                                return fetch(`/api-entradas/public/api/usuarios/${datos.id}/foto`, {
+                                return fetch(`/Anteproyecto3/api-entradas/public/api/usuarios/${datos.id}/foto`, {
                                     method: "POST",
                                     credentials: "include",
                                     body: formData
@@ -170,16 +176,43 @@
         </section>
     </main>
 
-    <footer>
-        <div class="footer-content content-container">
-            <p>&copy; 2026 Venta de Entradas. Todos los derechos reservados.</p>
-            <div class="social-icons">
-                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            </div>
+    <footer class="event-footer">
+    <div class="footer-info content-container">
+        <div class="info-item">
+            <span>CORREO</span>
+            <p>contacto@dvdtickets.com</p>
         </div>
-    </footer>
+        <div class="info-item">
+            <span>NÚMERO DE TELÉFONO</span>
+            <p>+34 912 45 78 90</p>
+        </div>
+        <div class="info-item">
+            <span>UBICACIÓN</span>
+            <p>Hemmings Avenue, 12 · 28045 Madrid</p>
+        </div>
+    </div>
+
+    <div class="footer-links">
+        <a href="#">Términos y Condiciones</a>
+        <a href="#">Política de Privacidad</a>
+        <a href="#">Atención al Cliente</a>
+        <a href="#">Preguntas Frecuentes</a>
+    </div>
+
+    <div class="footer-social">
+        <p>Síguenos</p>
+        <div class="social-icons-footer">
+            <i class="fab fa-facebook-f"></i>
+            <i class="fab fa-instagram"></i>
+            <i class="fab fa-whatsapp"></i>
+            <i class="fab fa-twitter"></i>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2025 DVD TICKETS · Todos los derechos reservados</p>
+    </div>
+</footer>
 
 </body>
 

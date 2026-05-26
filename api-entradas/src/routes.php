@@ -3,7 +3,7 @@
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
 // Normalizar ruta (para pode accedes desde el navegador desde /public)
-$basePath = '/api-entradas/public';
+$basePath = '/Anteproyecto3/api-entradas/public';
 $uri = str_replace($basePath, '', $uri);
 
 $method = $_SERVER['REQUEST_METHOD'];
