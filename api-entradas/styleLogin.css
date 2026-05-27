@@ -18,51 +18,6 @@ body {
     text-transform: uppercase;
 }
 
-/* Header Styles */
-.main-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 50px;
-}
-
-.logo-box {
-    border: 1px solid white;
-    padding: 5px 15px;
-    font-size: 0.8rem;
-}
-
-.search-bar {
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid white;
-    width: 400px;
-}
-
-.search-bar input {
-    background: transparent;
-    border: none;
-    color: white;
-    padding: 5px;
-    width: 100%;
-}
-
-
-input::placeholder {
-    color: white;
-    opacity: 0.7;
-}
-
-.user-icon-circle {
-    width: 40px;
-    height: 40px;
-    background-color: #3b6182;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.2rem;
-}
 
 /* Layout Container */
 .content-container {

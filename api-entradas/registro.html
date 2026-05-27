@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="styleLogin.css">
+    <link rel="stylesheet" href="styleHome.css">
     <!-- iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <title>Crear cuenta | Reservar entradas para conciertos</title>
@@ -17,21 +18,20 @@
 
 <body>
 
-    <header class="main-header">
+        <header class="main-header">
         <div class="header-left">
             <a href="/Anteproyecto3" class="logo-link" aria-label="Página principal">
                 <div class="logo-box">DVD</div>
             </a>
         </div>
         <div class="header-center">
-            <form action="/Anteproyecto3/api-entradas/resultados" method="GET" class="search-form">
+             <form action="/Anteproyecto3/api-entradas/resultados" method="GET" class="search-form">
                 <div class="search-bar">
 
-                    <input type="text" placeholder="BARRA DE BÚSQUEDA" aria-label="Buscar eventos" id="search-input">
+                    <input type="text" placeholder="BARRA DE BÚSQUEDA" aria-label="Buscar eventos" id="search-input" name="nombre">
 
                     <i class="fas fa-search"></i>
-
-
+                    
                 </div>
             </form>
         </div>

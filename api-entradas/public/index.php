@@ -2,8 +2,10 @@
 ini_set('display_errors', 0);
 error_reporting(0);
 
+// Iniciar sesión para manejar autenticación y permisos
 session_start();
 
+// Configurar CORS para permitir solicitudes desde el frontend
 $allowed_origins = [
     'https://tarea-proyecto-seo-victoria-dani.free.nf',
     'http://localhost',

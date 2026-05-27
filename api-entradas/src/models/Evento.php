@@ -17,6 +17,7 @@ class Evento {
     // OBTENER EVENTOS POR CATEGORÍA
     public static function getByCategoria($pdo, $categoria)
     {
+        // Verificar que la tabla eventos tiene la columna categoria antes de ejecutar la consulta
         $availableColumns = array_flip(self::getExistingColumns($pdo));
 
         if (!isset($availableColumns['categoria'])) {

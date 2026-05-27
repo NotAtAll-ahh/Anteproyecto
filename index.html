@@ -253,6 +253,9 @@
         let controlPopulares = document.getElementsByClassName("expand-control")[3].getElementsByTagName("i")[0];
 
         function actualizarAccionesAdmin() {
+            //si el usuario es admin, se muestra el botón de crear evento, si no se oculta. 
+            // Esto se llama cada vez que se carga la sesión para asegurarnos de que el estado del botón es correcto 
+            // según el rol del usuario.
             crearEventoContainer.style.display = usuarioRol === "admin" ? "block" : "none";
         }
 
