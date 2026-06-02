@@ -13,7 +13,7 @@
 <body>
 
     <!-- Header -->
-    <header class="main-header">
+        <header class="main-header">
         <div class="header-left">
             <a href="../index.html" class="logo-link" aria-label="Página principal">
                 <div class="logo-box">DVD</div>
@@ -107,7 +107,7 @@
                     <h3>HOST</h3>
                     <ul class="host-list">
                         <li>
-                            <div class="avatar"></div> Nombre
+                            <div class="avatar"></div> Umbrella Productions
                         </li>
 
                         <li class="see-more"><i class="fas fa-plus-circle"></i> ver más</li>
@@ -271,6 +271,13 @@
 
             // Duración (si existe)
             stats[2].innerHTML = '<i class="fas fa-clock"></i> Duración: ' + (evento.duracion || "2 horas");
+
+            //Ubicación
+            stats[1].innerHTML = '<i class="fas fa-map-marker-alt"></i> Ubicación: ' + (evento.ubicacion || "No especificada");
+            host = document.getElementsByClassName("host-box")[0].getElementsByClassName("avatar")[0];
+            host.style.backgroundImage = "url('/Anteproyecto3/api-entradas/public/uploads/eventos/floyd.jpg')";
+            host.style.backgroundSize = "cover";  
+        
 
 
             // 7. Disponibilidad

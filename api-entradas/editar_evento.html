@@ -6,6 +6,7 @@
     <title>Editar Evento</title>
     <!-- Incluimos Font Awesome para los iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styleHome.css">
     <style>
         @font-face {
             font-family: 'Kabel';
@@ -164,7 +165,7 @@
         input[type="date"],
         textarea,
         select {
-        
+
             width: 100%;
             padding: 12px 20px;
             margin-top: 5px;
@@ -178,20 +179,20 @@
             box-sizing: border-box;
         }
 
-        
+
         input[type="text"]::placeholder,
         input[type="number"]::placeholder,
         input[type="date"]::placeholder,
-        textarea::placeholder
-         {
+        textarea::placeholder {
             color: rgba(255, 255, 255, 0.7);
         }
 
         select:focus {
             border-color: #ffffff;
             box-shadow: 0 0 10px #ffffff;
-          
+
         }
+
         select option {
             color: rgb(0, 0, 0);
         }
@@ -259,19 +260,20 @@
         #soloAdmin {
             display: none;
         }
-        /* --- FOOTER  --- */
-.event-footer {
-    background: #000;
-    padding: 60px 0 20px 0;
-    margin-top: 100px;
-    text-align: center;
-}
 
-.footer-info {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 40px;
-}
+        /* --- FOOTER  --- */
+        .event-footer {
+            background: #000;
+            padding: 60px 0 20px 0;
+            margin-top: 100px;
+            text-align: center;
+        }
+
+        .footer-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
 
 .content-container {
     max-width: 1200px;
@@ -284,13 +286,13 @@
     color: #888;
 }
 
-.footer-links {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    margin: 30px 0;
-    font-weight: bold;
-}
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 30px 0;
+            font-weight: bold;
+        }
 
 .footer-links a {
     color: #888;
@@ -308,21 +310,30 @@
     cursor: pointer;
 }
 
-.footer-bottom {
-    margin-top: 40px;
-    font-size: 0.7rem;
-    border-top: 1px solid #222;
-    padding-top: 20px;
-}
+        .footer-bottom {
+            margin-top: 40px;
+            font-size: 0.7rem;
+            border-top: 1px solid #222;
+            padding-top: 20px;
+        }
 
-/* Responsivo rápido */
-@media (max-width: 900px) {
-    .main-grid, .details-host-grid {
-        grid-template-columns: 1fr;
-    }
-    .hero-event-name { font-size: 2rem; }
-    .hero-bottom { flex-direction: column; align-items: flex-start; }
-}
+        /* Responsivo rápido */
+        @media (max-width: 900px) {
+
+            .main-grid,
+            .details-host-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-event-name {
+                font-size: 2rem;
+            }
+
+            .hero-bottom {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
     </style>
 </head>
 
@@ -356,7 +367,12 @@
             <p id="mensajeRol" style="color:#ff3366;"></p>
 
             <div id="soloAdmin">
+<<<<<<< HEAD
                 <img id="imagenActual" src="/api-entradas/public/uploads/imgsHTML/Fondo-Evento-Placeholder.webp"
+=======
+                <img id="imagenActual"
+                    src="/Anteproyecto3/api-entradas/public/uploads/imgsHTML/Fondo-Evento-Placeholder.webp"
+>>>>>>> c3d33b21d1256652ae3d53482c3ac6c77317a688
                     alt="Imagen del evento: " + evento.nombre>
                 <hr>
 
@@ -533,42 +549,42 @@
         </script>
     </main>
     <footer class="event-footer">
-    <div class="footer-info content-container">
-        <div class="info-item">
-            <span>CORREO</span>
-            <p>contacto@dvdtickets.com</p>
+        <div class="footer-info content-container">
+            <div class="info-item">
+                <span>CORREO</span>
+                <p>contacto@dvdtickets.com</p>
+            </div>
+            <div class="info-item">
+                <span>NÚMERO DE TELÉFONO</span>
+                <p>+34 912 45 78 90</p>
+            </div>
+            <div class="info-item">
+                <span>UBICACIÓN</span>
+                <p>Hemmings Avenue, 12 · 28045 Madrid</p>
+            </div>
         </div>
-        <div class="info-item">
-            <span>NÚMERO DE TELÉFONO</span>
-            <p>+34 912 45 78 90</p>
-        </div>
-        <div class="info-item">
-            <span>UBICACIÓN</span>
-            <p>Hemmings Avenue, 12 · 28045 Madrid</p>
-        </div>
-    </div>
 
-    <div class="footer-links">
-        <a href="#">Términos y Condiciones</a>
-        <a href="#">Política de Privacidad</a>
-        <a href="#">Atención al Cliente</a>
-        <a href="#">Preguntas Frecuentes</a>
-    </div>
-
-    <div class="footer-social">
-        <p>Síguenos</p>
-        <div class="social-icons-footer">
-            <i class="fab fa-facebook-f"></i>
-            <i class="fab fa-instagram"></i>
-            <i class="fab fa-whatsapp"></i>
-            <i class="fab fa-twitter"></i>
+        <div class="footer-links">
+            <a href="#">Términos y Condiciones</a>
+            <a href="#">Política de Privacidad</a>
+            <a href="#">Atención al Cliente</a>
+            <a href="#">Preguntas Frecuentes</a>
         </div>
-    </div>
 
-    <div class="footer-bottom">
-        <p>© 2025 DVD TICKETS · Todos los derechos reservados</p>
-    </div>
-</footer>
+        <div class="footer-social">
+            <p>Síguenos</p>
+            <div class="social-icons-footer">
+                <i class="fab fa-facebook-f"></i>
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-whatsapp"></i>
+                <i class="fab fa-twitter"></i>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2025 DVD TICKETS · Todos los derechos reservados</p>
+        </div>
+    </footer>
 </body>
 
 </html>

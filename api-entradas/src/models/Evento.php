@@ -17,6 +17,7 @@ class Evento {
     // OBTENER EVENTOS POR CATEGORÍA
     public static function getByCategoria($pdo, $categoria)
     {
+        // Verificar que la tabla eventos tiene la columna categoria antes de ejecutar la consulta
         $availableColumns = array_flip(self::getExistingColumns($pdo));
 
         if (!isset($availableColumns['categoria'])) {
@@ -44,6 +45,7 @@ class Evento {
 // CREAR NUEVO EVENTO
 public static function create($pdo, $data)
 {
+    // Verificar que la tabla eventos tiene las columnas necesarias para crear el registro
     $availableColumns = array_flip(self::getExistingColumns($pdo));
 
     $insertData = [
@@ -56,6 +58,7 @@ public static function create($pdo, $data)
         'categoria' => $data['categoria'] ?? 'concierto'
     ];
 
+    // Filtrar solo las columnas que existen en la tabla eventos
     $columns = [];
     $values = [];
     $placeholders = [];
@@ -65,6 +68,7 @@ public static function create($pdo, $data)
             continue;
         }
 
+    // Solo agregar columnas que existen en la tabla eventos
         $columns[] = $column;
         $values[] = $value;
         $placeholders[] = '?';
@@ -74,6 +78,7 @@ public static function create($pdo, $data)
         throw new RuntimeException('La tabla eventos no tiene columnas compatibles para crear registros');
     }
 
+    // Construir la consulta SQL dinámicamente basada en las columnas disponibles
     $sql = sprintf(
         'INSERT INTO eventos (%s) VALUES (%s)',
         implode(', ', $columns),
