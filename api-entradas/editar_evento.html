@@ -29,7 +29,13 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 50px;
+            padding: 15px 50px;
+            background: rgba(5, 11, 20, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .header-left a {
@@ -38,24 +44,42 @@
         }
 
         .logo-box {
-            border: 1px solid white;
-            padding: 5px 15px;
-            font-size: 0.8rem;
+            border: 2px solid #ffffff;
+            padding: 5px 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            transition: 0.3s ease;
+        }
+
+        .logo-box:hover {
+            background: #ffffff;
+            color: #000000;
         }
 
         .search-bar {
             display: flex;
             align-items: center;
-            border-bottom: 1px solid white;
-            width: 400px;
+            background: rgba(180, 210, 255, 0.06);
+            border-radius: 20px;
+            padding: 5px 20px;
+            width: 350px;
+            transition: 0.3s;
+        }
+
+        .search-bar:focus-within {
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
         }
 
         .search-bar input {
             background: transparent;
             border: none;
             color: white;
-            padding: 5px;
+            padding: 8px;
             width: 100%;
+            outline: none;
+            font-size: 0.8rem;
         }
 
         .search-bar input::placeholder {
@@ -63,25 +87,35 @@
             opacity: 0.7;
         }
 
+        .search-icon-button {
+            background: transparent;
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
         .user-icon-circle {
-            width: 40px;
-            height: 40px;
-            background-color: #3b6182;
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, #4b6cb7, #1a2a3a);
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: white;
             text-decoration: none;
+            transition: transform 0.3s ease;
         }
 
-        .user-icon-circle:visited,
         .user-icon-circle:hover,
         .user-icon-circle:active,
         .user-icon-circle:focus {
-            color: white;
-            text-decoration: none;
+            transform: scale(1.1);
         }
 
         .contenedor {
@@ -239,6 +273,12 @@
     margin-bottom: 40px;
 }
 
+.content-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
 .info-item span {
     font-size: 0.7rem;
     color: #888;
@@ -250,6 +290,16 @@
     gap: 40px;
     margin: 30px 0;
     font-weight: bold;
+}
+
+.footer-links a {
+    color: #888;
+    transition: 0.3s;
+    text-decoration: none;
+}
+
+.footer-links a:hover {
+    color: #ffffff;
 }
 
 .footer-social i {
@@ -292,18 +342,6 @@
             <a href="../index.html" class="logo-link" aria-label="Página principal">
                 <div class="logo-box">DVD</div>
             </a>
-        </div>
-        <div class="header-center">
-            <form action="./resultados.html" method="GET" class="search-form">
-                <div class="search-bar">
-
-                    <input type="text" placeholder="BARRA DE BÚSQUEDA" aria-label="Buscar eventos" id="search-input">
-
-                    <i class="fas fa-search"></i>
-
-
-                </div>
-            </form>
         </div>
         <div class="header-right">
             <a href="./perfil.html" class="user-icon-circle" aria-label="Perfil">

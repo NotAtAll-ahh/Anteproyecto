@@ -26,12 +26,10 @@
         <div class="header-center">
             <form action="./api-entradas/resultados.html" method="GET" class="search-form">
                 <div class="search-bar">
-
-                    <input type="text" placeholder="BARRA DE BÚSQUEDA" aria-label="Buscar eventos" id="search-input">
-
-                    <i class="fas fa-search"></i>
-
-
+                    <input type="text" name="nombre" placeholder="BARRA DE BÚSQUEDA" aria-label="Buscar eventos" id="search-input">
+                    <button type="submit" class="search-icon-button" aria-label="Buscar eventos">
+                        <i class="fas fa-search"></i>
+                    </button>
                 </div>
             </form>
         </div>
@@ -104,12 +102,7 @@
 
             <div class="solo-admin" id="crear-evento-container" style="display: none;">
                 <button type="button" id="crear-evento" class="crear-evento"
-<<<<<<< HEAD
                     onclick="window.location.href = './api-entradas/crear_evento.html'">Crear Evento</button>
-=======
-                    onclick="window.location.href = '/Anteproyecto3/api-entradas/crear_evento.html'">Crear
-                    Evento</button>
->>>>>>> efda20843db056b7e97f5dc54c9c9d496c5a03a3
             </div>
 
         </section>
@@ -357,11 +350,7 @@
 
         //Funciones usuario
         function editar(id) {
-<<<<<<< HEAD
               window.location.href = "./api-entradas/editar_evento.html?id=" + id;
-=======
-            window.location.href = "/Anteproyecto3/api-entradas/editar_evento.html?id=" + id;
->>>>>>> efda20843db056b7e97f5dc54c9c9d496c5a03a3
         }
 
         function eliminar(id) {
@@ -386,11 +375,7 @@
 
 
         function reservar(id) {
-<<<<<<< HEAD
               window.location.href = "./api-entradas/evento.html?evento_id=" + encodeURIComponent(id);
-=======
-            window.location.href = "/Anteproyecto3/api-entradas/evento.html?evento_id=" + encodeURIComponent(id);
->>>>>>> efda20843db056b7e97f5dc54c9c9d496c5a03a3
         }
 
         //cargar todos los eventos

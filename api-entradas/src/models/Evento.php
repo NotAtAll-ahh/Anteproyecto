@@ -95,7 +95,8 @@ public static function create($pdo, $data)
             'ubicacion' => $data['ubicacion'],
             'fecha' => $data['fecha'],
             'entradas_totales' => $data['entradas_totales'],
-            'entradas_disponibles' => $data['entradas_disponibles']
+            'entradas_disponibles' => $data['entradas_disponibles'],
+            'categoria' => $data['categoria'] ?? 'concierto'
         ];
 
         $assignments = [];

@@ -13,35 +13,35 @@ class ReservaController {
         try {
             $data = json_decode(file_get_contents("php://input"), true);
 
-        // Validación mínima
-        if (!isset($data["usuario_id"]) || !isset($data["evento_id"]) || !isset($data["cantidad"])) {
-            http_response_code(400);
-            echo json_encode(["error" => "Faltan datos para la reserva"]);
-            return;
-        }
+            // Validación mínima
+            if (!isset($data["usuario_id"]) || !isset($data["evento_id"]) || !isset($data["cantidad"])) {
+                http_response_code(400);
+                echo json_encode(["error" => "Faltan datos para la reserva"]);
+                return;
+            }
 
-        // Comprobar disponibilidad del evento
-        $evento = Evento::find($pdo, $data["evento_id"]);
+            // Comprobar disponibilidad del evento
+            $evento = Evento::find($pdo, $data["evento_id"]);
 
-        if (!$evento) {
-            http_response_code(404);
-            echo json_encode(["error" => "Evento no encontrado"]);
-            return;
-        }
+            if (!$evento) {
+                http_response_code(404);
+                echo json_encode(["error" => "Evento no encontrado"]);
+                return;
+            }
 
-        if ($evento["entradas_disponibles"] < $data["cantidad"]) {
-            http_response_code(400);
-            echo json_encode(["error" => "No hay suficientes entradas disponibles"]);
-            return;
-        }
+            if ($evento["entradas_disponibles"] < $data["cantidad"]) {
+                http_response_code(400);
+                echo json_encode(["error" => "No hay suficientes entradas disponibles"]);
+                return;
+            }
 
-        // Crear reserva
-        Reserva::create($pdo, $data);
+            // Crear reserva
+            Reserva::create($pdo, $data);
 
-        // Actualizar disponibilidad
-        $nuevasDisponibles = $evento["entradas_disponibles"] - $data["cantidad"];
-        $stmt = $pdo->prepare("UPDATE eventos SET entradas_disponibles = ? WHERE id = ?");
-        $stmt->execute([$nuevasDisponibles, $evento["id"]]);
+            // Actualizar disponibilidad
+            $nuevasDisponibles = $evento["entradas_disponibles"] - $data["cantidad"];
+            $stmt = $pdo->prepare("UPDATE eventos SET entradas_disponibles = ? WHERE id = ?");
+            $stmt->execute([$nuevasDisponibles, $evento["id"]]);
 
             echo json_encode(["status" => "success", "message" => "Reserva realizada"]);
         } catch (Exception $e) {
@@ -64,13 +64,4 @@ class ReservaController {
         echo json_encode(["status" => "success", "data" => $reservas]);
     }
 
-
-    // LISTAR RESERVAS DE UN USUARIO
-    public static function reservasUsuario($usuario_id) {
-        global $pdo;
-
-        $reservas = Reserva::findByUser($pdo, $usuario_id);
-
-        echo json_encode(["status" => "success", "data" => $reservas]);
-    }
 }
